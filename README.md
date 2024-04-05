@@ -1,1 +1,12 @@
-# ltw-project-2024-ltw04g04
+# SecondCharm: LTW Project
+
+
+
+Project made by:
+- Bernardo Costa
+- Sofia Gonçalves
+- Teresa Mascarenhas
+
+
+# Mockups
+![](docs/mockups/mockups.png)
