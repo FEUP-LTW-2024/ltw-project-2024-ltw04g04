@@ -1,4 +1,4 @@
-/* Importações */
+/* Imports */
 @import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Actor&family=Sulphur+Point:wght@300;400;700&display=swap');
 
@@ -30,6 +30,11 @@ header {
     margin: 0 10px;
 }
 
+#logo {
+    width: 100px;
+    height: 80px;
+}
+
 #search {
     flex-grow: 1;
     input[type="text"] {
@@ -42,10 +47,22 @@ header {
     }
 }
 
-nav#account, nav#favourite, nav#cart {
-    text-align: right;
+#search img {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
 }
 
+#searchbar {
+    position: relative;
+}
+
+#searchbar input{
+    padding-left: 40px;
+}
 
 body>header a:link, body>header a:visited {
     text-decoration: none;
