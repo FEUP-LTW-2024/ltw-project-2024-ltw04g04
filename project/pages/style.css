@@ -23,11 +23,6 @@ body>header a:link, body>header a:visited {
     color: white
 }
 
-nav#menu li{
-    text-align: center;
-    padding : 1em;
-}
-
 nav#menu li:hover{
     list-style-type: none;
     transition: .5s;
@@ -38,6 +33,7 @@ nav#menu li:hover{
 nav#menu {
     background-color: #f8f8f8;
     padding: 10px;
+
     a {
         text-decoration: none;
         color: black;
@@ -45,36 +41,38 @@ nav#menu {
         font-family: "Sulphur Point", sans-serif;
         font-weight: 400;
     }
-}
 
-nav#menu ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav#menu ul li {
-    display: inline;
-    margin-right: 10px;
+    ul {
+        list-style-type: none;
+        padding: 0;
+    
+        li {
+            display: inline;
+            margin-right: 10px;
+            text-align: center;
+            padding : 1em;
+        }
+    
+    }
 }
 
 main {
-    padding: 20px;
-}
+    img {
+        width: 100%;
+        height: auto;
+    }
 
-main img {
-    width: 100%;
-    height: auto;
-}
-
-main section {
-    width: 20em;
-    position: absolute;
-    top: 16em;
-    left: 14em;
-    margin: 1em;
-    align-content: center;
-    h1 {
-        font-family: "Sulphur Point", sans-serif;
+    section {
+        width: 20em;
+        position: absolute;
+        top: 16em;
+        left: 14em;
+        margin: 1em;
+        text-align: center;
+        
+        h1 {
+            font-family: "Sulphur Point", sans-serif;
+        }
     }
 }
 
@@ -83,13 +81,13 @@ main section {
 }
 
 
-
 footer {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 6px;
-    text-align: center;
+    text-align: left;
     border: 1px solid #656363;
+
     button {
         font-family: "Sulphur Point", sans-serif;
         color: #656363;
