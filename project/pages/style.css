@@ -2,6 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Actor&family=Sulphur+Point:wght@300;400;700&display=swap');
 
+/* HTML */
+html {
+    margin: 0.3em;
+}
+
 /* Body */
 body {
     font-family: "Actor", sans-serif;
@@ -27,8 +32,6 @@ header {
 
 #search {
     flex-grow: 1;
-    text-align: center;
-
     input[type="text"] {
         font-family: "Sulphur Point", sans-serif;
         width: 80%; 
@@ -89,16 +92,19 @@ main img {
 }
 
 main section {
-    width: 20em;
+    width: 23em;
+    margin-bottom: 0em;
     position: absolute;
     top: 16em;
-    left: 14em;
-    margin: 1em;
+    left: 7em;
     text-align: center;
 }
 
 main section h1 {
     font-family: "Sulphur Point", sans-serif;
+    font-weight: 700;
+    margin-bottom: 0;
+    font-size: xx-large;
 }
 
 #jewels {
@@ -119,9 +125,7 @@ footer button {
     color: #656363;
     padding: 10px 20px;
     background-color: #BBE4F1;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     border: 1px solid #000000;
 }
-  
-  
