@@ -1,26 +1,78 @@
+/* Importações */
 @import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Actor&family=Sulphur+Point:wght@300;400;700&display=swap');
 
+/* Body */
 body {
     font-family: "Actor", sans-serif;
 }
 
+/* Estilos do Header */
 header {
-    display: flex;
-    justify-content: space-between;
     padding: 20px;
     background-color: #BBE4F1;
     border-bottom: 1px solid #e7e7e7;
 }
 
-nav#navbar div {
-    display: inline;
-    margin-right: 10px;
+/* Navbar */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+#navbar div {
+    margin: 0 10px;
+}
+
+#search {
+    flex-grow: 1;
+    text-align: center;
+
+    input[type="text"] {
+        font-family: "Sulphur Point", sans-serif;
+        width: 80%; 
+        height: 30px; 
+        border-radius: 12px;
+        background-color:rgb(189, 181, 181);    
+        border: 1px solid #ffffff;
+    }
+}
+
+nav#account, nav#favourite, nav#cart {
+    text-align: right;
+}
+
 
 body>header a:link, body>header a:visited {
     text-decoration: none;
     color: white
+}
+
+/* Menu */
+nav#menu {
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+
+nav#menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 1em;
+    font-family: "Sulphur Point", sans-serif;
+    font-weight: 400;
+}
+
+nav#menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav#menu li {
+    display: inline;
+    margin-right: 10px;
+    text-align: center;
+    padding : 1em;
 }
 
 nav#menu li:hover{
@@ -30,76 +82,46 @@ nav#menu li:hover{
     border-color: #A4DAEA;
 }
 
-nav#menu {
-    background-color: #f8f8f8;
-    padding: 10px;
-
-    a {
-        text-decoration: none;
-        color: black;
-        font-size: 1em;
-        font-family: "Sulphur Point", sans-serif;
-        font-weight: 400;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    
-        li {
-            display: inline;
-            margin-right: 10px;
-            text-align: center;
-            padding : 1em;
-        }
-    
-    }
+/* Main */
+main img {
+    width: 100%;
+    height: auto;
 }
 
-main {
-    img {
-        width: 100%;
-        height: auto;
-    }
+main section {
+    width: 20em;
+    position: absolute;
+    top: 16em;
+    left: 14em;
+    margin: 1em;
+    text-align: center;
+}
 
-    section {
-        width: 20em;
-        position: absolute;
-        top: 16em;
-        left: 14em;
-        margin: 1em;
-        text-align: center;
-        
-        h1 {
-            font-family: "Sulphur Point", sans-serif;
-        }
-    }
+main section h1 {
+    font-family: "Sulphur Point", sans-serif;
 }
 
 #jewels {
     position: relative;
 }
 
-
+/* Footer */
 footer {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 6px;
     text-align: left;
     border: 1px solid #656363;
-
-    button {
-        font-family: "Sulphur Point", sans-serif;
-        color: #656363;
-        padding: 10px 20px;
-        background-color: #BBE4F1;
-        border-radius: 5px;
-        cursor: pointer;
-        border: 1px solid #000000;
-    }
 }
 
-
-
+footer button {
+    font-family: "Sulphur Point", sans-serif;
+    color: #656363;
+    padding: 10px 20px;
+    background-color: #BBE4F1;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #000000;
+}
   
   
