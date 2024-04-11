@@ -64,11 +64,6 @@ header {
     padding-left: 40px;
 }
 
-nav#account, nav#favourite, nav#cart {
-    text-align: right;
-}
-
-
 body>header a:link, body>header a:visited {
     text-decoration: none;
     color: white
