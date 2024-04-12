@@ -24,6 +24,11 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .cart, .account, .favourite {
+        width: 30px;  
+        height: 30px;
+    }
 }
 
 #navbar div {
