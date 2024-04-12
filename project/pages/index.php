@@ -42,7 +42,7 @@
         </section>
     </main>
     <footer>
-        <p>SecondCharm to your liking with a touch of elegance. Follow your favorite brands and discover the items that match your style.</p>
+        <p><br>SecondCharm to your liking with a touch of elegance.</br> Follow your favorite brands and discover the items that match your style.</p>
         <button>Customize</button>
     </footer>
 </body>
