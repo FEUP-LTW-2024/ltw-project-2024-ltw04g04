@@ -35,8 +35,12 @@ p {
     font-size: 14px;
 }
 
-p:first-of-type {
+.account-p{
     margin-bottom: 8em; 
+}
+
+.sign-p{
+    margin-bottom: 2em; 
 }
 
 input[type="text"],

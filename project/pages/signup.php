@@ -1,14 +1,19 @@
 <?php
     session_start();
     if(isset($_POST['submit'])){
+        $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
+        $reenterPassword = $_POST['reenter_password'];
 
+        // TODO: Add your own registration logic here, including password matching and validation
+
+        // If registration is successful
         if(true){ 
             $_SESSION['email'] = $email;
-            header("Location: welcome.php"); 
+            header("Location: account.php"); 
         } else {
-            echo "Invalid email or password";
+            echo "Registration failed";
         }
     }
 ?>
@@ -22,15 +27,17 @@
         </head>
         <div class="container">
             <h2>Welcome to SecondCharm!</h2>
-            <p class="account-p">Log in to continue</p>
+            <p class="sign-p">Sign up to continue</p>
 
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+                Your name: <input type="text" name="name"><br>
                 Email: <input type="text" name="email"><br>
                 Password: <input type="password" name="password"><br>
+                Re-enter password: <input type="password" name="reenter_password"><br>
                 <input type="submit" name="submit" value="Continue">
             </form>
 
-            <p>Don’t have an account? <a href="signup.php">Sign up</a>.</p>
+            <p>Already have an account? <a href="account.php">Log in</a>.</p>
         </div>
     </body>
 </html>
