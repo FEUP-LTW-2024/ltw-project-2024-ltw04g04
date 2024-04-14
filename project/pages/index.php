@@ -35,7 +35,7 @@
       </nav>
     <main>
         <img id="jewels" src="imgs/jewels.jpg" alt="Jewelry">
-        <section>
+        <section class = "productinfo">
             <h1 class= "jewel">Jewels</h1>
             <br>SecondCharm is an online platform for buying, selling and exchanging second-hand jewellery and accessories.</br>
             <br>The platform allows users to create listings for items they want to sell or trade, interact with other members of the community, make purchases, and be both sellers and customers at the same time.</br>

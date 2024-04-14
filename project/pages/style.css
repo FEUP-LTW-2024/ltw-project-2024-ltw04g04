@@ -110,16 +110,12 @@ nav#menu li:hover{
 
 /* Main */
 
-main {
-    display: flex;
-}
-
 main img {
     width: 100%;
     height: auto;
 }
 
-main section {
+main .productinfo {
     width: 23em;
     margin-bottom: 0em;
     position: absolute;
@@ -128,7 +124,7 @@ main section {
     text-align: center;
 }
 
-main section h1 {
+main .productinfo  h1 {
     font-family: "Sulphur Point", sans-serif;
     font-weight: 700;
     margin-bottom: 0;
@@ -172,23 +168,20 @@ footer button {
 #myCart, #myFavs {
     font-family: "Sulphur Point", sans-serif;
     font-weight: 400;
+    font-size: x-large;
     padding-left: 1em;
     border-bottom: 1px solid #000; 
 }
 
 #shoppingCart {
-    display: flex;
-    flex:1;
-    justify-content: space-between;
     padding: 20px;
 }
 
 #summary {
-    width: 60%; 
-    grid-column: 1; grid-row: 1;
+    float: right;
+    text-align: center;
+    width: 25%; 
     border: 1px solid #000;
-    flex: 1;
-    margin-left: 20px;
     padding: 20px; 
 
     h1 {
@@ -200,23 +193,21 @@ footer button {
 }
 
 #items {
-    grid-column: 2; grid-row: 1;
-}
-
-#summary p, #summary button {
-    margin-bottom: 20px; 
+    float: left;
+    width: 75%; 
 }
 
 #summary button {
+    font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
-    padding: 10px 20px; 
+    padding: 2px 100px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 20px;
     border-width: 1px;
 }
 
