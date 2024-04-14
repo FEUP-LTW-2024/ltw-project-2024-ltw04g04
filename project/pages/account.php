@@ -20,7 +20,7 @@
             <link rel="stylesheet" type="text/css" href="style-reg.css">
             <link rel="icon" type="image/x-icon" href="imgs/logo.png">
         </head>
-        <div class="container">
+        <section class="container">
             <h2>Welcome to SecondCharm!</h2>
             <p class="account-p">Log in to continue</p>
 
@@ -31,6 +31,6 @@
             </form>
 
             <p>Don’t have an account? <a href="signup.php">Sign up</a>.</p>
-        </div>
+        </section>
     </body>
 </html>
