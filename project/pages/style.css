@@ -109,6 +109,11 @@ nav#menu li:hover{
 }
 
 /* Main */
+
+main {
+    display: flex;
+}
+
 main img {
     width: 100%;
     height: auto;
@@ -172,8 +177,8 @@ footer button {
 }
 
 #shoppingCart {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: flex;
+    flex:1;
     justify-content: space-between;
     padding: 20px;
 }
@@ -182,6 +187,8 @@ footer button {
     width: 60%; 
     grid-column: 1; grid-row: 1;
     border: 1px solid #000;
+    flex: 1;
+    margin-left: 20px;
     padding: 20px; 
 
     h1 {
