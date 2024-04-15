@@ -1,0 +1,79 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Actor&family=Sulphur+Point:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Slabo+13px&display=swap');
+
+/* Body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Actor", sans-serif;
+    background-color: #dddddd; 
+}
+
+.container {
+    background-color: white;
+    padding: 1em 3em 2em 3em;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, p, input[type="text"], input[type="password"], input[type="submit"], .signup {
+    text-align: left;
+}
+
+h2 {
+    font-family: "Slabo 13px", serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 10px; 
+}
+
+p {
+    font-size: 14px;
+}
+
+.account-p{
+    margin-bottom: 8em; 
+}
+
+.sign-p{
+    margin-bottom: 2em; 
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    color: white;
+    background-color: #BBE4F1;
+    border: 1px solid black;
+    border-radius: 20px;
+    border-width: 1px;
+    padding: 8px 35px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto; 
+}
+
+input[type="submit"]:hover {
+    background-color: #2092b5;
+}
+
+.signup {
+    margin-top: 10px;
+}
+
+.signup a {
+    text-decoration: underline;
+}
+
+
