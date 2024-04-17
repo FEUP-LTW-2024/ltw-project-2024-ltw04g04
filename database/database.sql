@@ -98,3 +98,15 @@ CREATE TABLE WishList (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+
+
+/*******************************************************************************
+   Populate Tables
+********************************************************************************/
+
+INSERT INTO Category (CategoryName) VALUES ('Beads and bracelets');
+INSERT INTO Category (CategoryName) VALUES ('Earrings');
+INSERT INTO Category (CategoryName) VALUES ('Rings');
+INSERT INTO Category (CategoryName) VALUES ('BNecklaces');
+INSERT INTO Category (CategoryName) VALUES ('Accessories');
+INSERT INTO Category (CategoryName) VALUES ('Clocks');
