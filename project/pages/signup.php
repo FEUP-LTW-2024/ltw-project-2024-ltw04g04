@@ -1,4 +1,5 @@
 <?php
+
     session_start();
     if(isset($_POST['submit'])){
         $name = $_POST['name'];
@@ -8,6 +9,17 @@
 
         // TODO: Add your own registration logic here, including password matching and validation
 
+        
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            // INVALID EMAIL
+        } else if (strlen($password) < 5) {
+            // INVALID PASSWORD - 5 chars min
+        } else if ($password !== $reenterPassword) {
+            // INVALID REENTER PASSWORD
+        } else {
+            // VALID -> REGISTER
+        }
+        
         // If registration is successful
         if(true){ 
             $_SESSION['email'] = $email;
