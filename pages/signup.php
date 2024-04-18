@@ -1,5 +1,15 @@
 <?php
+    declare(strict_types = 1);
 
+    require_once(__DIR__ . '/../database/connectDB.php');
+    try {
+        $db = getDatabaseConnection();
+        //echo "Connecting to database successfull!";
+    } catch (PDOException $e) {
+        echo "Error connecting to database: " . $e->getMessage();
+    }
+
+    require_once(__DIR__ . '/../database/user.class.php');
     session_start();
     if(isset($_POST['submit'])){
         $name = $_POST['name'];
@@ -7,9 +17,6 @@
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
 
-        // TODO: Add your own registration logic here, including password matching and validation
-
-        
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             // INVALID EMAIL
         } else if (strlen($password) < 5) {
@@ -18,6 +25,7 @@
             // INVALID REENTER PASSWORD
         } else {
             // VALID -> REGISTER
+            User::registerUser($db, $name, $email, $password);
         }
         
         // If registration is successful
