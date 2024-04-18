@@ -1,18 +1,18 @@
-<!-- navigation.php -->
-
 <?php
+declare(strict_types = 1);
 require_once(__DIR__ . '/../database/connectDB.php');
 
 try {
     $db = getDatabaseConnection();
-    echo "Connecting to database successfull!";
+    //echo "Connecting to database successfull!";
 } catch (PDOException $e) {
     echo "Error connecting to database: " . $e->getMessage();
 }
 
+
 // Query para obter as categorias da base de dados
-//$stmt = $db->query('SELECT CategoryName FROM Category');
-//$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $db->query('SELECT CategoryName FROM Category');
+$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -42,14 +42,11 @@ try {
         </nav>
     </header>
     <nav id="menu">
-        <ul>
-          <li><a href="index.html">Beads and bracelets</a></li>
-          <li><a href="index.html">Earrings</a></li>
-          <li><a href="index.html">Rings</a></li>
-          <li><a href="index.html">Necklaces</a></li>
-          <li><a href="index.html">Accessories</a></li>
-          <li><a href="index.html">Clocks</a></li>
-        </ul>
-      </nav>
+    <ul>
+        <?php foreach ($categories as $category) : ?>
+            <li><a href="index.html"><?php echo $category['CategoryName']; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</nav>
 </body>
 </html>

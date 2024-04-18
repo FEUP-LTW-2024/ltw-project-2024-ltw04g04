@@ -26,7 +26,7 @@
     }
 
 
-    function registerUser(PDO $db, string $name, string $email, string $password) {
+    static function registerUser(PDO $db, string $name, string $email, string $password) {
       $stmt = $db->prepare('
         INSERT INTO User (Name_, Email, Password_)
         VALUES (?, ?, ?)

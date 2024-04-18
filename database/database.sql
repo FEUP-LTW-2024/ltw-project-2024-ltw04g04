@@ -107,6 +107,6 @@ CREATE TABLE WishList (
 INSERT INTO Category (CategoryName) VALUES ('Beads and bracelets');
 INSERT INTO Category (CategoryName) VALUES ('Earrings');
 INSERT INTO Category (CategoryName) VALUES ('Rings');
-INSERT INTO Category (CategoryName) VALUES ('BNecklaces');
+INSERT INTO Category (CategoryName) VALUES ('Necklaces');
 INSERT INTO Category (CategoryName) VALUES ('Accessories');
 INSERT INTO Category (CategoryName) VALUES ('Clocks');
