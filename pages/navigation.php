@@ -1,7 +1,5 @@
-<?php
 
-function generateNavigationMenu(array $categories) {
-    ?>
+<?php function generateNavigationMenu(array $categories) { ?>
     <!DOCTYPE html>
     <html>
     <head>
@@ -36,6 +34,5 @@ function generateNavigationMenu(array $categories) {
         </nav>
     </body>
     </html>
-    <?php
-}
-?>
+    
+<?php } ?>

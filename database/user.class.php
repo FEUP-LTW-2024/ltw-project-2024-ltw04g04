@@ -12,8 +12,7 @@
     public string $postalCode;
     
 
-    public function __construct(int $userId, string $name, string $email, string $password, string $address, string $city, string $country, string $postalcode)
-    {
+    public function __construct(int $userId, string $name, string $email, string $password, string $address, string $city, string $country, string $postalcode) {
       $this->userId = $userId;
       $this->name = $name;
       $this->email = $email;
