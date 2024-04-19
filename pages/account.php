@@ -8,7 +8,7 @@
 
         try {
             $db = getDatabaseConnection();
-            
+         
             if (User::emailExists($db, $email)) {
                 $user = User::loginUser($db, $email, $password);
                 

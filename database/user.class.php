@@ -37,26 +37,30 @@
 
     static function loginUser(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
-        SELECT UserId, Name_, Email, Password_, Adress, City, Country, PostalCode
-        FROM User
-        WHERE lower(email) = ? AND password = ?
+          SELECT UserId, Name_, Email, Password_, Adress, City, Country, PostalCode
+          FROM User
+          WHERE Email = ? AND Password_ = ?
       ');
-
+  
       $stmt->execute(array(strtolower($email), sha1($password)));
   
-      if ($user = $stmt->fetch()) {
-        return new User(
-          $user['UserId'],
-          $user['Name_'],
-          $user['Email'],
-          $user['Password_'],
-          $user['Address'] !== null ? $user['Address'] : "",
-          $user['City'] !== null ? $user['City'] : "",
-          $user['Country'] !== null ? $user['Country'] : "",
-          $user['PostalCode'] !== null ? $user['PostalCode'] : ""
-        );
-      } else return null;
-    }
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+      if ($user) {
+          return new User(
+              $user['UserId'],
+              $user['Name_'],
+              $user['Email'],
+              $user['Password_'],
+              $user['Adress'] ?? "",
+              $user['City'] ?? "",
+              $user['Country'] ?? "",
+              $user['PostalCode'] ?? ""
+          );
+      } else {
+          return null;
+      }
+  }  
 
 
     static function getUserWithId(PDO $db, int $id) : User {
