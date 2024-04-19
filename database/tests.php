@@ -1,14 +1,14 @@
 <?php
 
 // test connection to database: was successful
-/*require_once 'connectDB.php';
+require_once 'connectDB.php';
 
 try {
     // Get a PDO instance by calling the function
     $db = getDatabaseConnection();
 
     // Example query to fetch data
-    $stmt = $db->query('SELECT * FROM Item');
+    $stmt = $db->query('SELECT * FROM User');
     
     // Fetch the results
     $results = $stmt->fetchAll();
@@ -19,7 +19,7 @@ try {
 } catch (PDOException $e) {
     // If an exception is thrown, display the error message
     echo 'Connection failed: ' . $e->getMessage();
-}*/
+}
 
 
 // test fetching item, but db still empty
@@ -55,6 +55,7 @@ echo json_encode($itemDetails);
     // If item ID or action is not provided, respond with an error message
     echo json_encode(array('error' => 'Item ID or action not provided'));
 }*/
+
 
 
 ?>
