@@ -4,15 +4,27 @@
     require_once(__DIR__ . '/../actions/actions.php');
 
     session_start();
-    if(isset($_POST['submit'])){
+    $error = ''; 
+
+    if(isset($_POST['submit'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
-
-        signUp($name, $email, $password, $reenterPassword);
+        $error = signUp($name, $email, $password, $reenterPassword);
     }
+
+    // If registration is successful
+    if($error == ''){ 
+        $_SESSION['email'] = $email;
+        //header("Location: account.php");
+        //exit();  
+    } else {
+        $_SESSION['error'] = $error;
+    }
+    
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -25,6 +37,15 @@
             <h2>Welcome to SecondCharm!</h2>
             <p class="sign-p">Sign up to continue</p>
 
+            <div class="error-popup" id="error-popup">
+                <?php 
+                    if(isset($_SESSION['error'])) {
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                    }
+                ?>
+            </div>
+
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 Your name: <input type="text" name="name"><br>
                 Email: <input type="text" name="email"><br>
@@ -32,8 +53,8 @@
                 Re-enter password: <input type="password" name="reenter_password"><br>
                 <input type="submit" name="submit" value="Continue">
             </form>
-
             <p>Already have an account? <a href="account.php">Log in</a>.</p>
         </section>
+        <script src="script.js"></script>
     </body>
 </html>

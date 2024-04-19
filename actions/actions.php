@@ -11,35 +11,34 @@ function getDatabaseConnection() : PDO {
 }
 
 
-function signUp(string $name, string $email, string $password, string $reenterPassword) {
+function signUp(string $name, string $email, string $password, string $reenterPassword): string {
     try {
         $db = getDatabaseConnection();
         //echo "Connecting to database successfull!";
     } catch (PDOException $e) {
         echo "Error connecting to database: " . $e->getMessage();
     }
-     
+
+    $error = ''; 
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // INVALID EMAIL
+        $error = 'Invalid email address.';
     } else if (User::emailExists($db, $email)) {
         // EMAIL ALREADY USED
-        echo "aaa";
+        $error = 'Email was already used.';
     } else if (strlen($password) < 5) {
         // INVALID PASSWORD - 5 chars min
+        $error = 'Password must be at least 5 characters long.';
     } else if ($password !== $reenterPassword) {
         // INVALID REENTER PASSWORD
+        $error = 'Passwords do not match.';
     } else {
         // VALID -> REGISTER
         User::registerUser($db, $name, $email, $password);
     }
-    
-    // If registration is successful
-    if(true){ 
-        $_SESSION['email'] = $email;
-        //header("Location: account.php"); 
-    } else {
-        echo "Registration failed";
-    }
+
+    return $error;
 }
 
 
