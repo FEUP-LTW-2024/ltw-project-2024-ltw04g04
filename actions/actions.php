@@ -21,6 +21,9 @@ function signUp(string $name, string $email, string $password, string $reenterPa
      
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // INVALID EMAIL
+    } else if (User::emailExists($db, $email)) {
+        // EMAIL ALREADY USED
+        echo "aaa";
     } else if (strlen($password) < 5) {
         // INVALID PASSWORD - 5 chars min
     } else if ($password !== $reenterPassword) {

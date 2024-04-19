@@ -82,5 +82,13 @@
       } else return null;
     }
 
+    
+    static function emailExists(PDO $db, string $email) {
+      $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(Email) = ?');
+      $stmt->execute([strtolower($email)]);
+      $count = $stmt->fetchColumn();
+      return $count > 0;
+    }
+
   }
 ?>
