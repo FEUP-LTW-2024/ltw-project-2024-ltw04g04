@@ -1,6 +1,6 @@
 <?php
     session_start();
-    require_once(__DIR__ . '/../database/connectDB.php');
+    require_once(__DIR__ . '/../actions/actions.php');
 
     if(isset($_POST['submit'])){
         $email = $_POST['email'];

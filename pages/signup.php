@@ -1,40 +1,28 @@
 <?php
     declare(strict_types = 1);
 
-    require_once(__DIR__ . '/../database/connectDB.php');
-    try {
-        $db = getDatabaseConnection();
-    } catch (PDOException $e) {
-        echo "Error connecting to database: " . $e->getMessage();
-    }
+    require_once(__DIR__ . '/../actions/actions.php');
 
-    require_once(__DIR__ . '/../database/user.class.php');
     session_start();
     $error = ''; 
 
-    if(isset($_POST['submit'])){
+    if(isset($_POST['submit'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $error = 'Invalid email address.';
-            $_SESSION['error'] = $error; 
-        } else if (strlen($password) < 5) {
-            $error = 'Password must be at least 5 characters long.';
-            $_SESSION['error'] = $error; 
-        } else if ($password !== $reenterPassword) {
-            $error = 'Passwords do not match.';
-            $_SESSION['error'] = $error;
-        } else {
-            User::registerUser($db, $name, $email, $password);
-
-            $_SESSION['email'] = $email;
-            header("Location: account.php"); 
-            exit(); 
-        }
+        $error = signUp($name, $email, $password, $reenterPassword);
     }
+
+    // If registration is successful
+    if($error == ''){ 
+        $_SESSION['email'] = $email;
+        //header("Location: account.php");
+        //exit();  
+    } else {
+        $_SESSION['error'] = $error;
+    }
+    
 ?>
 
 
