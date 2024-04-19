@@ -8,16 +8,21 @@
 
         try {
             $db = getDatabaseConnection();
-            $stmt = $db->prepare("SELECT * FROM User WHERE Email = ?");
-            $stmt->execute([$email]);
-            $user = $stmt->fetch();
-
-            if ($user && password_verify($password, $user['password'])) { 
-                $_SESSION['email'] = $email;
-                header("Location: welcome.php"); 
-                exit();
+            
+            if (User::emailExists($db, $email)) {
+                $user = User::loginUser($db, $email, $password);
+                
+                if ($user !== null) {
+                    $_SESSION['email'] = $email;
+                    header("Location: welcome.php"); 
+                    exit();
+                } else {
+                    $_SESSION['error'] = "Invalid email or password";
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
+                }
             } else {
-                $_SESSION['error'] = "Invalid email or password";
+                $_SESSION['error'] = "Email does not exist";
                 header("Location: " . $_SERVER['PHP_SELF']);
                 exit();
             }
@@ -26,6 +31,7 @@
         }
     }
 ?>
+
 
 <!DOCTYPE html>
 <html>

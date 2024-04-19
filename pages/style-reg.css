@@ -79,19 +79,21 @@ input[type="submit"]:hover {
 /*Error message*/
 
 .error-button {
-    background-color: rgb(255, 70, 70);
+    background-color: rgb(252, 151, 151);
     font-family: "Actor", sans-serif;
     color: white;
-    padding: 10px 10px;
-    border: 2px solid white;
-    border-radius: 8px;
+    padding: 10px 20px; 
+    border: 1.5px solid rgb(165, 43, 43);
+    border-radius: 14px;
     cursor: pointer;
     position: fixed;
-    top: 20px;
-    right: 20px;
+    left: 44%;
+    transform: translateX(-50%);
+    top: 50px; 
     z-index: 9999;
     animation: slideIn 0.5s ease-in-out forwards;
 }
+
 
 @keyframes slideIn {
     0% {
@@ -104,7 +106,7 @@ input[type="submit"]:hover {
     }
 }
 
-#error-popup {
+.error-popup  {
     display: none;
 }
 
