@@ -4,13 +4,14 @@
     require_once(__DIR__ . '/../database/connectDB.php');
     try {
         $db = getDatabaseConnection();
-        //echo "Connecting to database successfull!";
     } catch (PDOException $e) {
         echo "Error connecting to database: " . $e->getMessage();
     }
 
     require_once(__DIR__ . '/../database/user.class.php');
     session_start();
+    $error = ''; 
+
     if(isset($_POST['submit'])){
         $name = $_POST['name'];
         $email = $_POST['email'];
@@ -18,25 +19,24 @@
         $reenterPassword = $_POST['reenter_password'];
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            // INVALID EMAIL
+            $error = 'Invalid email address.';
+            $_SESSION['error'] = $error; 
         } else if (strlen($password) < 5) {
-            // INVALID PASSWORD - 5 chars min
+            $error = 'Password must be at least 5 characters long.';
+            $_SESSION['error'] = $error; 
         } else if ($password !== $reenterPassword) {
-            // INVALID REENTER PASSWORD
+            $error = 'Passwords do not match.';
+            $_SESSION['error'] = $error;
         } else {
-            // VALID -> REGISTER
             User::registerUser($db, $name, $email, $password);
-        }
-        
-        // If registration is successful
-        if(true){ 
+
             $_SESSION['email'] = $email;
             header("Location: account.php"); 
-        } else {
-            echo "Registration failed";
+            exit(); 
         }
     }
 ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -49,6 +49,15 @@
             <h2>Welcome to SecondCharm!</h2>
             <p class="sign-p">Sign up to continue</p>
 
+            <div class="error-popup" id="error-popup">
+                <?php 
+                    if(isset($_SESSION['error'])) {
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                    }
+                ?>
+            </div>
+
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 Your name: <input type="text" name="name"><br>
                 Email: <input type="text" name="email"><br>
@@ -56,8 +65,8 @@
                 Re-enter password: <input type="password" name="reenter_password"><br>
                 <input type="submit" name="submit" value="Continue">
             </form>
-
             <p>Already have an account? <a href="account.php">Log in</a>.</p>
         </section>
+        <script src="script.js"></script>
     </body>
 </html>
