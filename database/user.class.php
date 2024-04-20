@@ -83,7 +83,7 @@
           $user['Name_'],
           $user['Email'],
           $user['Password_'],
-          $user['Address'] !== null ? $user['Address'] : "",
+          $user['Adress'] !== null ? $user['Adress'] : "",
           $user['City'] !== null ? $user['City'] : "",
           $user['Country'] !== null ? $user['Country'] : "",
           $user['PostalCode'] !== null ? $user['PostalCode'] : ""
@@ -104,6 +104,15 @@
       $stmt->execute([strtolower($userName)]);
       $count = $stmt->fetchColumn();
       return $count > 0;
+    }
+
+    function saveData($db) {
+      $stmt = $db->prepare('
+        UPDATE User SET Username = ?, Name = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
+        WHERE UserId = ?
+      ');
+
+      $stmt->execute(array($this->userName, $this->name, $this->address, $this->city, $this->country, $this->postalcode, $this->id));
     }
 
   }
