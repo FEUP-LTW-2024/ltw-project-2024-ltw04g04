@@ -12,13 +12,7 @@ function getDatabaseConnection() : PDO {
 
 
 function signUp(string $name, string $email, string $password, string $reenterPassword): string {
-    try {
-        $db = getDatabaseConnection();
-        //echo "Connecting to database successfull!";
-    } catch (PDOException $e) {
-        echo "Error connecting to database: " . $e->getMessage();
-    }
-
+    $db = getDatabaseConnection();
     $error = ''; 
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -42,17 +36,45 @@ function signUp(string $name, string $email, string $password, string $reenterPa
 }
 
 
-function getCategories() : array {
-    try {
-        $db = getDatabaseConnection();
-        //echo "Connecting to database successfull!";
-    } catch (PDOException $e) {
-        echo "Error connecting to database: " . $e->getMessage();
+function login(string $email, string $password): string {
+    $db = getDatabaseConnection();
+    $error = '';
+  
+    if (User::emailExists($db, $email)) {
+        $user = User::loginUser($db, $email, $password);
+
+        if ($user !== null) {
+            session_start();
+            $_SESSION['email'] = $email;
+            header("Location: welcome.php"); 
+            exit();
+        } else {
+            $error = 'Invalid email or password';  
+        }
+    } else {
+        $error = 'Email does not exist';
     }
+
+    return $error;
+}
+
+
+function getCategories() : array {
+    $db = getDatabaseConnection();
 
     /* Query para obter as categorias da base de dados */
     $stmt = $db->query('SELECT CategoryName FROM Category');
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     return $categories;
 }
+
+
+/*
+try {
+        $db = getDatabaseConnection();
+        //echo "Connecting to database successfull!";
+    } catch (PDOException $e) {
+        echo "Error connecting to database: " . $e->getMessage();
+    }
+    */
 ?>

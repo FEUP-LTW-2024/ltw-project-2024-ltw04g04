@@ -31,7 +31,7 @@
         VALUES (?, ?, ?)
       ');
 
-      $stmt->execute(array($name, $email, $password));
+      $stmt->execute(array($name, strtolower($email), sha1($password)));
     }
     
 
@@ -47,6 +47,7 @@
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
       if ($user) {
+        echo 'ENTROU';
           return new User(
               $user['UserId'],
               $user['Name_'],
