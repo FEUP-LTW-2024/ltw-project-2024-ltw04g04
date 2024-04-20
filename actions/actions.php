@@ -11,7 +11,7 @@ function getDatabaseConnection() : PDO {
 }
 
 
-function signUp(string $name, string $email, string $password, string $reenterPassword): string {
+function signUp(string $name, string $username, string $email, string $password, string $reenterPassword): string {
     $db = getDatabaseConnection();
     $error = ''; 
 
@@ -21,6 +21,9 @@ function signUp(string $name, string $email, string $password, string $reenterPa
     } else if (User::emailExists($db, $email)) {
         // EMAIL ALREADY USED
         $error = 'Email was already used.';
+    } else if (User::usernameExists($db, $username)) {
+        // USERNAME ALREADY USED
+        $error = 'Username was already used.';
     } else if (strlen($password) < 5) {
         // INVALID PASSWORD - 5 chars min
         $error = 'Password must be at least 5 characters long.';
@@ -29,7 +32,7 @@ function signUp(string $name, string $email, string $password, string $reenterPa
         $error = 'Passwords do not match.';
     } else {
         // VALID -> REGISTER
-        User::registerUser($db, $name, $email, $password);
+        User::registerUser($db, $name, $username, $email, $password);
     }
 
     return $error;

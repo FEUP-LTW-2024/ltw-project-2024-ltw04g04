@@ -30,10 +30,10 @@
     static function registerUser(PDO $db, string $userName, string $name, string $email, string $password) {
       $stmt = $db->prepare('
         INSERT INTO User (UserName, Name_, Email, Password_)
-        VALUES (?, ?, ?)
+        VALUES (?, ?, ?, ?)
       ');
 
-      $stmt->execute(array($name, strtolower($email), sha1($password)));
+      $stmt->execute(array( $userName, $name, strtolower($email), sha1($password)));
     }
     
 
@@ -95,6 +95,13 @@
     static function emailExists(PDO $db, string $email) {
       $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(Email) = ?');
       $stmt->execute([strtolower($email)]);
+      $count = $stmt->fetchColumn();
+      return $count > 0;
+    }
+
+    static function usernameExists(PDO $db, string $userName) {
+      $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(UserName) = ?');
+      $stmt->execute([strtolower($userName)]);
       $count = $stmt->fetchColumn();
       return $count > 0;
     }
