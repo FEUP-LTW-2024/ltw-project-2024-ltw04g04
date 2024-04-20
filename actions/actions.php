@@ -49,7 +49,7 @@ function login(string $email, string $password): string {
         if ($user !== null) {
             session_start();
             $_SESSION['email'] = $email;
-            header("Location: welcome.php"); 
+            header("Location: user.php"); 
             exit();
         } else {
             $error = 'Invalid email or password';  
