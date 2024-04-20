@@ -4,6 +4,7 @@
  
     if(isset($_POST['submit'])) {
         $name = $_POST['name'];
+        $username = $_POST['username'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
@@ -42,6 +43,7 @@
 
             <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 Your name: <input type="text" name="name"><br>
+                Username: <input type="text" name="username"><br>
                 Email: <input type="text" name="email"><br>
                 Password: <input type="password" name="password"><br>
                 Re-enter password: <input type="password" name="reenter_password"><br>

@@ -3,6 +3,7 @@
 
   class User {
     public int $userId;
+    public string $userName;
     public string $name;
     public string $email;
     public string $password;
@@ -12,8 +13,9 @@
     public string $postalCode;
     
 
-    public function __construct(int $userId, string $name, string $email, string $password, string $address, string $city, string $country, string $postalcode) {
+    public function __construct(int $userId, string $userName, string $name, string $email, string $password, string $address, string $city, string $country, string $postalcode) {
       $this->userId = $userId;
+      $this->userName = $userName;
       $this->name = $name;
       $this->email = $email;
       $this->password = $password;
@@ -25,9 +27,9 @@
     }
 
 
-    static function registerUser(PDO $db, string $name, string $email, string $password) {
+    static function registerUser(PDO $db, string $userName, string $name, string $email, string $password) {
       $stmt = $db->prepare('
-        INSERT INTO User (Name_, Email, Password_)
+        INSERT INTO User (UserName, Name_, Email, Password_)
         VALUES (?, ?, ?)
       ');
 
@@ -37,7 +39,7 @@
 
     static function loginUser(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
-          SELECT UserId, Name_, Email, Password_, Adress, City, Country, PostalCode
+          SELECT UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode
           FROM User
           WHERE Email = ? AND Password_ = ?
       ');
@@ -50,6 +52,7 @@
         echo 'ENTROU';
           return new User(
               $user['UserId'],
+              $user['UserName'],
               $user['Name_'],
               $user['Email'],
               $user['Password_'],
@@ -66,7 +69,7 @@
 
     static function getUserWithId(PDO $db, int $id) : User {
       $stmt = $db->prepare('
-        SELECT UserId, Name_, Email, Password_, Adress, City, Country, PostalCode
+        SELECT UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode
         FROM User
         WHERE UserId = ?
       ');
@@ -76,6 +79,7 @@
       if ($user = $stmt->fetch()) {
         return new User(
           $user['UserId'],
+          $user['UserName'],
           $user['Name_'],
           $user['Email'],
           $user['Password_'],
