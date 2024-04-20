@@ -1,28 +1,22 @@
 <?php
     declare(strict_types = 1);
-
     require_once(__DIR__ . '/../actions/actions.php');
-
-    session_start();
-    $error = ''; 
-
+ 
     if(isset($_POST['submit'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
         $error = signUp($name, $email, $password, $reenterPassword);
-    }
-
-    // If registration is successful
-    if($error == ''){ 
-        $_SESSION['email'] = $email;
-        //header("Location: account.php");
-        //exit();  
-    } else {
-        $_SESSION['error'] = $error;
-    }
     
+        // If registration is successful
+        if($error == '') { 
+            header("Location: account.php");
+            exit();  
+        } else {
+            $_SESSION['error'] = $error;
+        }
+    }
 ?>
 
 

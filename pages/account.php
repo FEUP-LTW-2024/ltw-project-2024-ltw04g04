@@ -1,35 +1,17 @@
 <?php
-    session_start();
+    declare(strict_types = 1);
     require_once(__DIR__ . '/../actions/actions.php');
 
+    $error = ''; 
     if(isset($_POST['submit'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
-
-        try {
-            $db = getDatabaseConnection();
-         
-            if (User::emailExists($db, $email)) {
-                $user = User::loginUser($db, $email, $password);
-                
-                if ($user !== null) {
-                    $_SESSION['email'] = $email;
-                    header("Location: welcome.php"); 
-                    exit();
-                } else {
-                    $_SESSION['error'] = "Invalid email or password";
-                    header("Location: " . $_SERVER['PHP_SELF']);
-                    exit();
-                }
-            } else {
-                $_SESSION['error'] = "Email does not exist";
-                header("Location: " . $_SERVER['PHP_SELF']);
-                exit();
-            }
-        } catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
+        $error = login($email, $password);
     }
+
+    // If login is not successful
+    if($error !== '') 
+        $_SESSION['error'] = $error;
 ?>
 
 
