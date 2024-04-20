@@ -25,12 +25,20 @@
       return isset($_SESSION['name']) ? $_SESSION['name'] : null;
     }
 
+    public function getUserEmail() : ?string {
+      return isset($_SESSION['email']) ? $_SESSION['email'] : null;
+    }
+
     public function setUserId(int $id) {
       $_SESSION['id'] = $id;
     }
 
     public function setUserName(string $name) {
       $_SESSION['name'] = $name;
+    }
+
+    public function setUserEmail(string $email){
+      $_SESSION['email'] = $email;
     }
 
     public function addMessage(string $type, string $text) {
