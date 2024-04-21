@@ -22,7 +22,7 @@
         <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
         <div id="userInfo">
             <h1><?= $user->name ?></h1>
-            <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : '' ?>">
+            <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
                 <h2>Profile</h2>
                 <?php if ($editMode) : ?>
                     <label for="userName">Username</label>
@@ -33,14 +33,12 @@
                     <input type="email" id="email_" name="email_" value="<?= $user->email ?>">
                     <label for="city">Location</label>
                     <input type="text" id="city_" name="city_" value="<?= $user->city ?>">
-                    <!-- Add more fields as necessary -->
                     <button type="submit" id="editButton">Save</button>
                 <?php else : ?>
                     <p><strong>Username:</strong> <?= $user->userName ?></p>
                     <p><strong>Name:</strong> <?= $user->name ?></p>
                     <p><strong>Email:</strong> <?= $user->email ?></p>
                     <p><strong>Location:</strong> <?= $user->city ?></p>
-                    <!-- Display more fields as necessary -->
                     <a href="?edit" id="editButton">Edit</a>
                 <?php endif; ?>
             </form>

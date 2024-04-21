@@ -12,7 +12,7 @@ function getDatabaseConnection() : PDO {
 }
 
 
-function signUp(string $name, string $username, string $email, string $password, string $reenterPassword): string {
+function signUp(string $userName, string $name, string $email, string $password, string $reenterPassword): string {
     $db = getDatabaseConnection();
     $error = ''; 
 
@@ -33,7 +33,7 @@ function signUp(string $name, string $username, string $email, string $password,
         $error = 'Passwords do not match.';
     } else {
         // VALID -> REGISTER
-        User::registerUser($db, $name, $username, $email, $password);
+        User::registerUser($db, $userName, $name, $email, $password);
     }
 
     return $error;
