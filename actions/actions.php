@@ -1,6 +1,7 @@
 <?php
 declare(strict_types = 1);
 require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../utils/session.php');
 
 function getDatabaseConnection() : PDO {
     $db = new PDO('sqlite:' . __DIR__ . '/../database/database.db');
@@ -39,7 +40,8 @@ function signUp(string $name, string $username, string $email, string $password,
 }
 
 
-function login(string $email, string $password): string {
+function login(Session $session, string $email, string $password): string {
+
     $db = getDatabaseConnection();
     $error = '';
   
@@ -47,10 +49,16 @@ function login(string $email, string $password): string {
         $user = User::loginUser($db, $email, $password);
 
         if ($user !== null) {
-            session_start();
-            $_SESSION['email'] = $email;
+
+            $session->setUserId($user->userId);
+            $session->setUserEmail($user->email);
+            $session->setUserName($user->name);
+            $session->setUserUserName($user->userName);
+            $session->setPassword($user->password);
+
             header("Location: user.php"); 
             exit();
+
         } else {
             $error = 'Invalid email or password';  
         }
@@ -60,6 +68,7 @@ function login(string $email, string $password): string {
 
     return $error;
 }
+
 
 
 function getCategories() : array {

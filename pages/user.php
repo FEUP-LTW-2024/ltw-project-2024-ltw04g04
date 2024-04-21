@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
 <?php 
-include 'navigation.php'; 
+    include 'navigation.php'; 
 
-require_once(__DIR__ . '/../utils/session.php');
-require_once(__DIR__ . '/../actions/actions.php');
+    require_once(__DIR__ . '/../utils/session.php');
+    require_once(__DIR__ . '/../actions/actions.php');
 
-$session = new Session();
+    $session = new Session();
 
-$categories = getCategories();
+    $categories = getCategories();
 
-generateNavigationMenu($categories);
+    generateNavigationMenu($categories);
 
 
-if (!$session->isLogin()) die(header('Location: /'));
+    if (!$session->isLogin()) die(header('Location: /'));
 
-$db = getDatabaseConnection();
-$user = User::getUserWithId($db, $session->getUserId());
-$editMode = isset($_GET['edit']);
+    $db = getDatabaseConnection();
+    $user = User::getUserWithId($db, $session->getUserId());
+
+    $editMode = isset($_GET['edit']);
 ?>
 <main>
     <section id="profile">

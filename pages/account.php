@@ -1,17 +1,22 @@
 <?php
     declare(strict_types = 1);
     require_once(__DIR__ . '/../actions/actions.php');
+    require_once(__DIR__ . '/../utils/session.php');
+
+    $session = new Session();
 
     $error = ''; 
     if(isset($_POST['submit'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $error = login($email, $password);
+        $error = login($session, $email, $password);
     }
 
     // If login is not successful
-    if($error !== '') 
-        $_SESSION['error'] = $error;
+    if($error !== '') {
+        $_SESSION['error'] = $error; 
+    }
+
 ?>
 
 

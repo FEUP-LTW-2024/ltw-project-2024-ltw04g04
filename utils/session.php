@@ -10,7 +10,7 @@
     }
 
     public function isLogin() : bool {
-      return isset($_SESSION['id']);    
+      return getUserId() !==  null;    
     }
 
     public function logout() {
@@ -18,7 +18,7 @@
     }
 
     public function getUserId() : ?int {
-      return isset($_SESSION['id']) ? $_SESSION['id'] : null;    
+      return isset($_SESSION['userId']) ? $_SESSION['userId'] : null;    
     }
 
     public function getUserName() : ?string {
@@ -33,12 +33,20 @@
       $_SESSION['id'] = $id;
     }
 
+    public function setUserUserName(string $userName) {
+      $_SESSION['userName'] = $userName;
+    }
+
     public function setUserName(string $name) {
       $_SESSION['name'] = $name;
     }
 
     public function setUserEmail(string $email){
       $_SESSION['email'] = $email;
+    }
+
+    public function setPassword(string $password) {
+      $_SESSION['password'] = $password;
     }
 
     public function addMessage(string $type, string $text) {

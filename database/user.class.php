@@ -49,7 +49,6 @@
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
       if ($user) {
-        echo 'ENTROU';
           return new User(
               $user['UserId'],
               $user['UserName'],
