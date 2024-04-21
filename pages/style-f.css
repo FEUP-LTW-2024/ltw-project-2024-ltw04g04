@@ -1,0 +1,40 @@
+/* Imports */
+@import url('https://fonts.googleapis.com/css2?family=Sulphur+Point:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Actor&family=Sulphur+Point:wght@300;400;700&display=swap');
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Actor", sans-serif;
+    background-color: #dddddd; 
+}
+
+.filter-container {
+    background-color: white;
+    padding: 1em 3em 2em 3em;
+    border-radius: 5px;
+    width: 300px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] {
+    color: white;
+    background-color: #BBE4F1;
+    border: 1px solid black;
+    border-radius: 20px;
+    border-width: 1px;
+    padding: 8px 35px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto; 
+}
+
+.filter-category, .filter-size, .filter-model {
+    margin-bottom: 10px; /* Adjust the value as needed */
+}
+.filter-brand {
+    margin-bottom: 30px;
+}
