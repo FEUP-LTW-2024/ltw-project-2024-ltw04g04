@@ -18,12 +18,16 @@ generateNavigationMenu($categories);
                 <button type="button" id="addItemToCart">Add to shopping cart</button>
 
                 <nav id="details">
+                    <input type="checkbox" id="hamburger"> 
+
                     <div id="bar">
                     <h3>Product details</h3>
-                    <input type="checkbox" id="hamburger"> 
                     <label class="hamburger" for="hamburger"></label>
                     </div>
-
+                    
+                    <p class="detail"> Brand: </p>       <!-- CHANGE -->
+                    <p class="detail"> Model: </p>       <!-- CHANGE -->
+                    <p class="detail"> Condition: </p>       <!-- CHANGE -->
                     <p class="detail"> Category: </p>       <!-- CHANGE -->
                     <p class="detail"> Size: </p>       <!-- CHANGE -->
                     <!-- ADD THE OTHERS -->

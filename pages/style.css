@@ -389,7 +389,7 @@ nav#details {
         content:'+';
     }
     
-    #hamburger:checked + .hamburger:before {
+    #hamburger:checked ~ #bar .hamburger:before {
         font-size: 1.5em;
         content:'\2715';
     }
@@ -397,10 +397,14 @@ nav#details {
     #hamburger:checked ~ .detail{ 
         max-height: 1.5em;
         opacity: 1;
+        padding: 0.5em;
+        margin: 0.5em;
     }
     .detail {
         max-height: 0;
         opacity: 0;
+        padding: 0;
+        margin: 0 0 0.2em;
         transition: all .3s ease-in;
     }
 }
