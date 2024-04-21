@@ -3,6 +3,7 @@
 
   class User {
     public int $userId;
+    public string $userName;
     public string $name;
     public string $email;
     public string $password;
@@ -12,8 +13,9 @@
     public string $postalCode;
     
 
-    public function __construct(int $userId, string $name, string $email, string $password, string $address, string $city, string $country, string $postalcode) {
+    public function __construct(int $userId, string $userName, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode) {
       $this->userId = $userId;
+      $this->userName = $userName;
       $this->name = $name;
       $this->email = $email;
       $this->password = $password;
@@ -21,23 +23,23 @@
       $this->city = $city;
       $this->state = $state;
       $this->country = $country;
-      $this->postalcode = $postalcode;
+      $this->postalCode = $postalCode;
     }
 
 
-    static function registerUser(PDO $db, string $name, string $email, string $password) {
+    static function registerUser(PDO $db, string $userName, string $name, string $email, string $password) {
       $stmt = $db->prepare('
-        INSERT INTO User (Name_, Email, Password_)
-        VALUES (?, ?, ?)
+        INSERT INTO User (UserName, Name_, Email, Password_)
+        VALUES (?, ?, ?, ?)
       ');
 
-      $stmt->execute(array($name, strtolower($email), sha1($password)));
+      $stmt->execute(array( $userName, $name, strtolower($email), sha1($password)));
     }
     
 
     static function loginUser(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
-          SELECT UserId, Name_, Email, Password_, Adress, City, Country, PostalCode
+          SELECT UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode
           FROM User
           WHERE Email = ? AND Password_ = ?
       ');
@@ -47,9 +49,9 @@
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
       if ($user) {
-        echo 'ENTROU';
           return new User(
               $user['UserId'],
+              $user['UserName'],
               $user['Name_'],
               $user['Email'],
               $user['Password_'],
@@ -66,7 +68,7 @@
 
     static function getUserWithId(PDO $db, int $id) : User {
       $stmt = $db->prepare('
-        SELECT UserId, Name_, Email, Password_, Adress, City, Country, PostalCode
+        SELECT UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode
         FROM User
         WHERE UserId = ?
       ');
@@ -76,10 +78,11 @@
       if ($user = $stmt->fetch()) {
         return new User(
           $user['UserId'],
+          $user['UserName'],
           $user['Name_'],
           $user['Email'],
           $user['Password_'],
-          $user['Address'] !== null ? $user['Address'] : "",
+          $user['Adress'] !== null ? $user['Adress'] : "",
           $user['City'] !== null ? $user['City'] : "",
           $user['Country'] !== null ? $user['Country'] : "",
           $user['PostalCode'] !== null ? $user['PostalCode'] : ""
@@ -93,6 +96,22 @@
       $stmt->execute([strtolower($email)]);
       $count = $stmt->fetchColumn();
       return $count > 0;
+    }
+
+    static function usernameExists(PDO $db, string $userName) {
+      $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(UserName) = ?');
+      $stmt->execute([strtolower($userName)]);
+      $count = $stmt->fetchColumn();
+      return $count > 0;
+    }
+
+    function saveData($db) {
+      $stmt = $db->prepare('
+        UPDATE User SET Username = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
+        WHERE UserId = ?
+      ');
+
+      $stmt->execute(array($this->userName, $this->name, $this->address, $this->city, $this->country, $this->postalCode, $this->id));
     }
 
   }

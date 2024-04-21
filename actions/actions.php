@@ -1,6 +1,7 @@
 <?php
 declare(strict_types = 1);
 require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../utils/session.php');
 
 function getDatabaseConnection() : PDO {
     $db = new PDO('sqlite:' . __DIR__ . '/../database/database.db');
@@ -11,7 +12,7 @@ function getDatabaseConnection() : PDO {
 }
 
 
-function signUp(string $name, string $email, string $password, string $reenterPassword): string {
+function signUp(string $userName, string $name, string $email, string $password, string $reenterPassword): string {
     $db = getDatabaseConnection();
     $error = ''; 
 
@@ -21,6 +22,9 @@ function signUp(string $name, string $email, string $password, string $reenterPa
     } else if (User::emailExists($db, $email)) {
         // EMAIL ALREADY USED
         $error = 'Email was already used.';
+    } else if (User::usernameExists($db, $username)) {
+        // USERNAME ALREADY USED
+        $error = 'Username was already used.';
     } else if (strlen($password) < 5) {
         // INVALID PASSWORD - 5 chars min
         $error = 'Password must be at least 5 characters long.';
@@ -29,14 +33,15 @@ function signUp(string $name, string $email, string $password, string $reenterPa
         $error = 'Passwords do not match.';
     } else {
         // VALID -> REGISTER
-        User::registerUser($db, $name, $email, $password);
+        User::registerUser($db, $userName, $name, $email, $password);
     }
 
     return $error;
 }
 
 
-function login(string $email, string $password): string {
+function login(Session $session, string $email, string $password): string {
+
     $db = getDatabaseConnection();
     $error = '';
   
@@ -44,10 +49,16 @@ function login(string $email, string $password): string {
         $user = User::loginUser($db, $email, $password);
 
         if ($user !== null) {
-            session_start();
-            $_SESSION['email'] = $email;
-            header("Location: welcome.php"); 
+
+            $session->setUserId($user->userId);
+            $session->setUserEmail($user->email);
+            $session->setUserName($user->name);
+            $session->setUserUserName($user->userName);
+            $session->setPassword($user->password);
+
+            header("Location: user.php"); 
             exit();
+
         } else {
             $error = 'Invalid email or password';  
         }
@@ -57,6 +68,7 @@ function login(string $email, string $password): string {
 
     return $error;
 }
+
 
 
 function getCategories() : array {
