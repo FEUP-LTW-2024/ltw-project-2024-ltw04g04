@@ -337,9 +337,9 @@ footer button {
 }
 
 #itemContainer h3 {
+    font-size: 1.4em;
     text-align: center;
-    border-bottom: 1px solid #000;
-    padding: 1em 1em 0.5em 1em;
+    padding: 1em 1em 0em 1em;
 }
 
 #itemContainer p {
@@ -350,13 +350,15 @@ footer button {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
+    font-size: 1.2em;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
     cursor: pointer;
     border-radius: 20px;
     border-width: 1px;
+    padding: 0.6em 3em 0.6em 3em;   /* alterar para o responsivo!! */
+    margin: 1em 0 1em 0;
 }
 
 #sellerContainer{
@@ -367,4 +369,53 @@ footer button {
 
 #sellerImg {
     width: 5em;
+}
+
+
+nav#details {
+    [type = checkbox] {
+        display: none;
+    }
+}
+
+#details {
+    .hamburger {
+        display: block;
+        padding: 1em;
+    }
+
+    .hamburger:before {
+        font-size: 2em;
+        content:'+';
+    }
+    
+    #hamburger:checked + .hamburger:before {
+        font-size: 1.5em;
+        content:'\2715';
+    }
+
+    #hamburger:checked ~ .detail{ 
+        max-height: 1.5em;
+        opacity: 1;
+    }
+    .detail {
+        max-height: 0;
+        opacity: 0;
+        transition: all .3s ease-in;
+    }
+}
+
+#bar {
+    display: flex; 
+    align-items: center;
+    border-bottom: 1px solid #000;
+}
+
+#bar h3 {
+    flex: 4;
+}
+
+#bar label {
+    margin-top: 15px;
+    flex: 1;
 }
