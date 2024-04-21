@@ -298,3 +298,43 @@ footer button {
     border: 1px solid #ccc;
     margin-bottom: 15px;
 }
+
+
+/* Item - repetido dos anteriores??? */
+#item {
+    font-family: "Sulphur Point", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+
+    .editForm {
+        border: 1px solid #000;
+        padding: 2em;
+        margin: 1em;
+    }
+}
+
+#itemContainer {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+#itemContainer h2 {
+    text-align: center;
+            border-bottom: 1px solid #000;
+}
+
+#addItemToCart {
+    font-family: "Sulphur Point", sans-serif;
+    background-color: #BBE4F1;
+    color: #656363;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    border-width: 1px;
+}
