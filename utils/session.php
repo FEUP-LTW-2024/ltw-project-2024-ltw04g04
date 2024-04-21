@@ -10,7 +10,7 @@
     }
 
     public function isLogin() : bool {
-      return getUserId() !==  null;    
+      return isset($_SESSION['id']);    
     }
 
     public function logout() {
@@ -18,7 +18,7 @@
     }
 
     public function getUserId() : ?int {
-      return isset($_SESSION['userId']) ? $_SESSION['userId'] : null;    
+      return isset($_SESSION['id']) ? $_SESSION['id'] : null;    
     }
 
     public function getUserName() : ?string {
@@ -30,7 +30,7 @@
     }
 
     public function setUserId(int $id) {
-      $_SESSION['id'] = $id;
+       $_SESSION['id'] = $id;
     }
 
     public function setUserUserName(string $userName) {

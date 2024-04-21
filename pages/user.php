@@ -8,17 +8,14 @@
 
     $session = new Session();
 
-    $categories = getCategories();
-
-    generateNavigationMenu($categories);
-
-
     if (!$session->isLogin()) die(header('Location: /'));
 
     $db = getDatabaseConnection();
     $user = User::getUserWithId($db, $session->getUserId());
-
     $editMode = isset($_GET['edit']);
+
+    $categories = getCategories();
+    generateNavigationMenu($categories);
 ?>
 <main>
     <section id="profile">

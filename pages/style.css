@@ -215,6 +215,7 @@ footer button {
 }
 
 /* Profile Section */
+/* Profile Section */
 #profile {
     font-family: "Sulphur Point", sans-serif;
     display: flex;
@@ -222,21 +223,21 @@ footer button {
     align-items: center;
     padding: 20px;
     border-bottom: 1px solid #ccc;
+}
 
-    h1 {
-        font-size: xx-large;
-    }
+#profile h1 {
+    font-size: xx-large;
+}
 
-    .editForm {
-        border: 1px solid #000;
-        padding: 2em;
-        margin: 1em;
+.editForm {
+    border: 1px solid #000;
+    padding: 2em;
+    margin: 1em;
+}
 
-        h2 {
-            text-align: center;
-            border-bottom: 1px solid #000;
-        }
-    }
+.editForm h2 {
+    text-align: center;
+    border-bottom: 1px solid #000;
 }
 
 #editButton {
@@ -286,10 +287,11 @@ footer button {
     margin-bottom: 20px;
 }
 
-.articleImage {
+.articleItem img {
     width: 100%;
     height: auto;
 }
+
 
 /* Notification */
 .notification { 
