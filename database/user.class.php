@@ -13,7 +13,7 @@
     public string $postalCode;
     
 
-    public function __construct(int $userId, string $userName, string $name, string $email, string $password, string $address, string $city, string $country, string $postalcode) {
+    public function __construct(int $userId, string $userName, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode) {
       $this->userId = $userId;
       $this->userName = $userName;
       $this->name = $name;
@@ -23,7 +23,7 @@
       $this->city = $city;
       $this->state = $state;
       $this->country = $country;
-      $this->postalcode = $postalcode;
+      $this->postalCode = $postalCode;
     }
 
 
@@ -107,11 +107,11 @@
 
     function saveData($db) {
       $stmt = $db->prepare('
-        UPDATE User SET Username = ?, Name = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
+        UPDATE User SET Username = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
         WHERE UserId = ?
       ');
 
-      $stmt->execute(array($this->userName, $this->name, $this->address, $this->city, $this->country, $this->postalcode, $this->id));
+      $stmt->execute(array($this->userName, $this->name, $this->address, $this->city, $this->country, $this->postalCode, $this->id));
     }
 
   }

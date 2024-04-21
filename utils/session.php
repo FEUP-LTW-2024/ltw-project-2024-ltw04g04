@@ -30,7 +30,7 @@
     }
 
     public function setUserId(int $id) {
-       $_SESSION['id'] = $id;
+      $_SESSION['id'] = $id;
     }
 
     public function setUserUserName(string $userName) {
@@ -47,6 +47,22 @@
 
     public function setPassword(string $password) {
       $_SESSION['password'] = $password;
+    }
+
+    public function setCountry(string $country) {
+      $_SESSION['country'] = $country;
+    }
+
+    public function setCity(string $city) {
+      $_SESSION['city'] = $city;
+    }
+
+    public function setAddress(string $address) {
+      $_SESSION['address'] = $address;
+    }
+
+    public function setPostalCode(string $postalCode) {
+      $_SESSION['postalCode'] = $postalCode;
     }
 
     public function addMessage(string $type, string $text) {
