@@ -300,7 +300,7 @@ footer button {
 }
 
 
-/* Item - repetido dos anteriores??? */
+/* Item */
 #item {
     font-family: "Sulphur Point", sans-serif;
     display: flex;
@@ -322,7 +322,7 @@ footer button {
     margin: 2em 2em 2em 1em;
 }
 
-#itemContainer {
+#itemContainer, #sellerContainer{
     flex-grow: 1;
     margin-left: 20px;
     text-align: center;
@@ -336,6 +336,16 @@ footer button {
     border-bottom: 1px solid #000;
 }
 
+#itemContainer h3 {
+    text-align: center;
+    border-bottom: 1px solid #000;
+    padding: 1em 1em 0.5em 1em;
+}
+
+#itemContainer p {
+    text-align: left;
+}
+
 #addItemToCart {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
@@ -347,4 +357,14 @@ footer button {
     cursor: pointer;
     border-radius: 20px;
     border-width: 1px;
+}
+
+#sellerContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sellerImg {
+    width: 5em;
 }
