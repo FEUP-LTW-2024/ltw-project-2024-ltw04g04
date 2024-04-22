@@ -1,25 +1,9 @@
 <?php
     declare(strict_types = 1);
-    require_once(__DIR__ . '/../actions/actions.php');
- 
-    if(isset($_POST['submit'])) {
-        $name = $_POST['name'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $reenterPassword = $_POST['reenter_password'];
-        $error = signUp($username, $name, $email, $password, $reenterPassword);
-    
-        // If registration is successful
-        if($error == '') { 
-            header("Location: account.php");
-            exit();  
-        } else {
-            $_SESSION['error'] = $error;
-        }
-    }
-?>
+    require_once(__DIR__ . '/../utils/session.php');
 
+    $session = new Session();
+?>
 
 <!DOCTYPE html>
 <html>
@@ -41,7 +25,7 @@
                 ?>
             </div>
 
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <form action="../actions/action_sign_up.php" method="post">
                 Your name: <input type="text" name="name"><br>
                 Username: <input type="text" name="username"><br>
                 Email: <input type="text" name="email"><br>
