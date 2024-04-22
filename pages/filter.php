@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Items</title>
-    <link rel="stylesheet" type="text/css" href="style-f.css">
+    <link rel="stylesheet" type="text/css" href="../css/style-f.css">
 </head>
 <body>
     <div class="filter-container">

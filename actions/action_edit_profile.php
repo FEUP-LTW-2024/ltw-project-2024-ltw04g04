@@ -16,7 +16,7 @@
     $new_country = $_POST['country'];
     $new_postalCode = $_POST['postal_code'];
     
-    User::saveData($db, $new_username, $new_name, $new_adress, $new_city, $new_country, $new_postalCode, $user->userId);
+    User::upgradeUser($db, $new_username, $new_name, $new_adress, $new_city, $new_country, $new_postalCode, $user->userId);
 
     $session->setUserName($user->name);
     $session->setUserUsername($user->username);

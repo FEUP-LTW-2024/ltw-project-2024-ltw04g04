@@ -10,7 +10,7 @@
 <html>
     <body>
         <head>
-            <link rel="stylesheet" type="text/css" href="style-reg.css">
+            <link rel="stylesheet" type="text/css" href="../css/style-reg.css">
             <link rel="icon" type="image/x-icon" href="imgs/logo.png">
         </head>
         <section class="container">

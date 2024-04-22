@@ -105,7 +105,7 @@
       return $count > 0;
     }
 
-    static function saveData(PDO $db, string $username_, string $name_, string $address_, string $city_, string $country_, string $postalCode_, int $id_) {
+    static function upgradeUser(PDO $db, string $username_, string $name_, string $address_, string $city_, string $country_, string $postalCode_, int $id_) {
       $stmt = $db->prepare('
         UPDATE User SET Username = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
         WHERE UserId = ?
