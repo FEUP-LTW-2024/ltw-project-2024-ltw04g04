@@ -8,7 +8,7 @@
         $email = $_POST['email'];
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
-        $error = signUp($userName, $name, $email, $password, $reenterPassword);
+        $error = signUp($username, $name, $email, $password, $reenterPassword);
     
         // If registration is successful
         if($error == '') { 
