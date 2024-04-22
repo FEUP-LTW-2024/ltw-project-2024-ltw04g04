@@ -15,7 +15,7 @@
     $editMode = isset($_GET['edit']);
 
     $categories = getCategories();
-    generateNavigationMenu($categories);
+    generateNavigationMenu($session,$categories);
 ?>
 <main>
     <section id="profile">
