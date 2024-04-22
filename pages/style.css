@@ -311,3 +311,128 @@ a#editButton {
     border: 1px solid #ccc;
     margin-bottom: 15px;
 }
+
+
+/* Item */
+#item {
+    font-family: "Sulphur Point", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+#itemImg {
+    flex: 1;
+    margin: 2em 1em 2em 2em;
+}
+
+#containers {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 2em 2em 2em 1em;
+}
+
+#itemContainer, #sellerContainer{
+    flex-grow: 1;
+    margin-left: 20px;
+    text-align: center;
+    border: 1px solid #000;
+    padding: 2em;
+    margin: 1em;
+}
+
+#itemContainer h2 {
+    text-align: center;
+    border-bottom: 1px solid #000;
+}
+
+#itemContainer h3 {
+    font-size: 1.4em;
+    text-align: center;
+    padding: 1em 1em 0em 1em;
+}
+
+#itemContainer p {
+    text-align: left;
+}
+
+#addItemToCart {
+    font-family: "Sulphur Point", sans-serif;
+    background-color: #BBE4F1;
+    color: #656363;
+    font-size: 1.2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 20px;
+    border-width: 1px;
+    padding: 0.6em 3em 0.6em 3em;   /* alterar para o responsivo!! */
+    margin: 1em 0 1em 0;
+}
+
+#sellerContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#sellerImg {
+    width: 5em;
+}
+
+
+nav#details {
+    [type = checkbox] {
+        display: none;
+    }
+}
+
+#details {
+    .hamburger {
+        display: block;
+        padding: 1em;
+    }
+
+    .hamburger:before {
+        font-size: 2em;
+        content:'+';
+    }
+    
+    #hamburger:checked ~ #bar .hamburger:before {
+        font-size: 1.5em;
+        content:'\2715';
+    }
+
+    #hamburger:checked ~ .detail{ 
+        max-height: 1.5em;
+        opacity: 1;
+        padding: 0.5em;
+        margin: 0.5em;
+    }
+    .detail {
+        max-height: 0;
+        opacity: 0;
+        padding: 0;
+        margin: 0 0 0.2em;
+        transition: all .3s ease-in;
+    }
+}
+
+#bar {
+    display: flex; 
+    align-items: center;
+    border-bottom: 1px solid #000;
+}
+
+#bar h3 {
+    flex: 4;
+}
+
+#bar label {
+    margin-top: 15px;
+    flex: 1;
+}
