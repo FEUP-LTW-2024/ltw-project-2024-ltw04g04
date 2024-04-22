@@ -31,6 +31,8 @@
     $session->setCity($user->city);
     $session->setCountry($user->country);
     $session->setPostalCode($user->postalCode);
+
+    
   }
 
   header('Location: ../pages/user.php');
