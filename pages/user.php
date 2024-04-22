@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
 <?php 
+    declare(strict_types = 1);
     include 'navigation.php'; 
 
     require_once(__DIR__ . '/../utils/session.php');
@@ -17,6 +16,8 @@
     $categories = getCategories();
     generateNavigationMenu($session,$categories);
 ?>
+<!DOCTYPE html>
+<html>
 <main>
     <section id="profile">
         <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
@@ -26,20 +27,21 @@
                 <h2>Profile</h2>
                 <?php if ($editMode) : ?>
                     <label for="username">Username</label>
-                    <input type="text" id="userName_" name="userName_" value="<?= $user->username ?>">
+                    <input type="text" id="username" name="username" value="<?= $user->username ?>">
                     <label for="name">Name</label>
-                    <input type="text" id="name_" name="name_" value="<?= $user->name ?>">
+                    <input type="text" id="name" name="name" value="<?= $user->name ?>">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email_" name="email_" value="<?= $user->email ?>">
+                    <input type="email" id="email" name="email" value="<?= $user->email ?>">
                     <label for="city">City</label>
-                    <input type="text" id="city_" name="city_" value="<?= $user->city ?>" >
+                    <input type="text" id="city" name="city" value="<?= $user->city ?>" >
                     <label for="address">Address</label>
-                    <input type="text" id="address_" name="address_" value="<?= $user->address ?>">
+                    <input type="text" id="address" name="address" value="<?= $user->address ?>">
                     <label for="country">Country</label>
-                    <input type="text" id="country_" name="country_" value="<?= $user->country ?>">
+                    <input type="text" id="country" name="country" value="<?= $user->country ?>">
                     <label for="postal_code">Postal Code</label>
-                    <input type="text" id="postal_code_" name="postal_code_" value="<?= $user->postalCode ?>">
+                    <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
                     <button type="submit" id="editButton">Save</button>
+                    
                 <?php else : ?>
                     <p><strong>Username:</strong> <?= $user->username ?></p>
                     <p><strong>Name:</strong> <?= $user->name ?></p>

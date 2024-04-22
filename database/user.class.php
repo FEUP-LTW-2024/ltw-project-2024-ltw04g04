@@ -3,7 +3,7 @@
 
   class User {
     public int $userId;
-    public string $userName;
+    public string $username;
     public string $name;
     public string $email;
     public string $password;
@@ -105,13 +105,13 @@
       return $count > 0;
     }
 
-    function saveData($db) {
+    static function saveData(PDO $db, string $username_, string $name_, string $address_, string $city_, string $country_, string $postalCode_, int $id_) {
       $stmt = $db->prepare('
         UPDATE User SET UserName = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
         WHERE UserId = ?
       ');
 
-      $stmt->execute(array($this->username, $this->name, $this->address, $this->city, $this->country, $this->postalCode, $this->id));
+      $stmt->execute(array($username_, $name_, $address_, $city_, $country_, $postalCode_, $id_));
     }
 
   }
