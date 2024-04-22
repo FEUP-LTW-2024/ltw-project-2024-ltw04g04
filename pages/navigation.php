@@ -1,5 +1,10 @@
+<?php 
+  declare(strict_types = 1); 
 
-<?php function generateNavigationMenu(array $categories) { ?>
+  require_once(__DIR__ . '/../utils/session.php');
+?>
+
+<?php function generateNavigationMenu(Session $session, array $categories) { ?>
     <!DOCTYPE html>
     <html>
     <head>
@@ -20,7 +25,11 @@
                 </div>
               
                 <div id="filter"><a href="filter.php"><img src="imgs/filter-icon.png" class="filter" alt="Filter"></a></div>
-                <div id="account"><a href="account.php"><img src="imgs/user-icon.png" class ="account" alt="Account"></a></div>
+                <div id="account">
+                    <a href="<?php echo $session->isLogin() ? 'user.php' : 'account.php'; ?>">
+                        <img src="imgs/user-icon.png" class="account" alt="Account">
+                    </a>
+                </div>
                 <div id="favourite"><a href="favourite.php"><img src="imgs/heart-icon.png" class ="favourite" alt="Favourite"></a></div>
                 <div id="cart"><a href="cart.php"><img src="imgs/cart-icon.jpg" class ="cart"  alt="Cart"></a></div>
 

@@ -13,9 +13,9 @@
     public string $postalCode;
     
 
-    public function __construct(int $userId, string $userName, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode) {
+    public function __construct(int $userId, string $username, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode) {
       $this->userId = $userId;
-      $this->userName = $userName;
+      $this->username = $username;
       $this->name = $name;
       $this->email = $email;
       $this->password = $password;
@@ -27,13 +27,13 @@
     }
 
 
-    static function registerUser(PDO $db, string $userName, string $name, string $email, string $password) {
+    static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
       $stmt = $db->prepare('
         INSERT INTO User (UserName, Name_, Email, Password_)
         VALUES (?, ?, ?, ?)
       ');
 
-      $stmt->execute(array( $userName, $name, strtolower($email), sha1($password)));
+      $stmt->execute(array( $username, $name, strtolower($email), sha1($password)));
     }
     
 
@@ -98,20 +98,20 @@
       return $count > 0;
     }
 
-    static function usernameExists(PDO $db, string $userName) {
+    static function usernameExists(PDO $db, string $username) {
       $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(UserName) = ?');
-      $stmt->execute([strtolower($userName)]);
+      $stmt->execute([strtolower($username)]);
       $count = $stmt->fetchColumn();
       return $count > 0;
     }
 
     function saveData($db) {
       $stmt = $db->prepare('
-        UPDATE User SET Username = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
+        UPDATE User SET UserName = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
         WHERE UserId = ?
       ');
 
-      $stmt->execute(array($this->userName, $this->name, $this->address, $this->city, $this->country, $this->postalCode, $this->id));
+      $stmt->execute(array($this->username, $this->name, $this->address, $this->city, $this->country, $this->postalCode, $this->id));
     }
 
   }
