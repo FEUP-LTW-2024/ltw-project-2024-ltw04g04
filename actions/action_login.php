@@ -19,7 +19,7 @@
                 $session->setUserId($user->userId);
                 $session->setUserEmail($user->email);
                 $session->setUserName($user->name);
-                $session->setUserUserName($user->username);
+                $session->setUserUsername($user->username);
                 $session->setPassword($user->password);
             } else {
                 $error = 'Invalid email or password';  
@@ -33,13 +33,13 @@
         $error = 'Login was not sucessfull, try again.'; 
     }
 
-    
+
     if($error !== '') {
         $_SESSION['error'] = $error;
-        header("Location: ../pages/account.php"); 
+        header("Location: ../pages/login.php"); 
         exit(); 
     } else {
-        header("Location: ../pages/user.php"); 
+        header("Location: ../pages/account.php"); 
         exit();
     }
 ?>

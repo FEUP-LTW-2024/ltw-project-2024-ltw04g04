@@ -29,7 +29,7 @@
 
     static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
       $stmt = $db->prepare('
-        INSERT INTO User (UserName, Name_, Email, Password_)
+        INSERT INTO User (Username, Name_, Email, Password_)
         VALUES (?, ?, ?, ?)
       ');
 
@@ -39,7 +39,7 @@
 
     static function loginUser(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
-          SELECT UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode
+          SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode
           FROM User
           WHERE Email = ? AND Password_ = ?
       ');
@@ -51,7 +51,7 @@
       if ($user) {
           return new User(
               $user['UserId'],
-              $user['UserName'],
+              $user['Username'],
               $user['Name_'],
               $user['Email'],
               $user['Password_'],
@@ -68,7 +68,7 @@
 
     static function getUserWithId(PDO $db, int $id) : User {
       $stmt = $db->prepare('
-        SELECT UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode
+        SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode
         FROM User
         WHERE UserId = ?
       ');
@@ -78,7 +78,7 @@
       if ($user = $stmt->fetch()) {
         return new User(
           $user['UserId'],
-          $user['UserName'],
+          $user['Username'],
           $user['Name_'],
           $user['Email'],
           $user['Password_'],
@@ -99,7 +99,7 @@
     }
 
     static function usernameExists(PDO $db, string $username) {
-      $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(UserName) = ?');
+      $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(Username) = ?');
       $stmt->execute([strtolower($username)]);
       $count = $stmt->fetchColumn();
       return $count > 0;
@@ -107,7 +107,7 @@
 
     static function saveData(PDO $db, string $username_, string $name_, string $address_, string $city_, string $country_, string $postalCode_, int $id_) {
       $stmt = $db->prepare('
-        UPDATE User SET UserName = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
+        UPDATE User SET Username = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
         WHERE UserId = ?
       ');
 

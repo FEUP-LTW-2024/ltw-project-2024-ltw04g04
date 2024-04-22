@@ -16,7 +16,6 @@
     function getCategories() : array {
         $db = getDatabaseConnection();
 
-        /* Query para obter as categorias da base de dados */
         $stmt = $db->query('SELECT CategoryName FROM Category');
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $categories;
@@ -25,7 +24,6 @@
     function getSizes() : array {
         $db = getDatabaseConnection();
 
-        /* Query para obter todos os tamanhos*/
         $stmt = $db->query('SELECT DISTINCT Size_ FROM Item');
         $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $sizes;
@@ -34,7 +32,6 @@
     function getBrands() : array {
         $db = getDatabaseConnection();
 
-        /* Query para obter todos os tamanhos*/
         $stmt = $db->query('SELECT DISTINCT Brand FROM Item');
         $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $brands;
@@ -43,10 +40,9 @@
     function getModels() : array {
         $db = getDatabaseConnection();
 
-        /* Query para obter todos os tamanhos*/
         $stmt = $db->query('SELECT DISTINCT Model FROM Item');
         $models = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $models;
     }
-
+    
 ?>

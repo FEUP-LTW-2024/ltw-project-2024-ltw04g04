@@ -5,6 +5,7 @@
     $session = new Session();
 ?>
 
+
 <!DOCTYPE html>
 <html>
     <body>
@@ -14,7 +15,7 @@
         </head>
         <section class="container">
             <h2>Welcome to SecondCharm!</h2>
-            <p class="sign-p">Sign up to continue</p>
+            <p class="account-p">Log in to continue</p>
 
             <div class="error-popup" id="error-popup">
                 <?php 
@@ -25,15 +26,13 @@
                 ?>
             </div>
 
-            <form action="../actions/action_sign_up.php" method="post">
-                Your name: <input type="text" name="name"><br>
-                Username: <input type="text" name="username"><br>
+            <form action="../actions/action_login.php" method="post">
                 Email: <input type="text" name="email"><br>
                 Password: <input type="password" name="password"><br>
-                Re-enter password: <input type="password" name="reenter_password"><br>
                 <input type="submit" name="submit" value="Continue">
             </form>
-            <p>Already have an account? <a href="login.php">Log in</a>.</p>
+
+            <p>Don’t have an account? <a href="signup.php">Sign up</a>.</p>
         </section>
         <script src="script.js"></script>
     </body>

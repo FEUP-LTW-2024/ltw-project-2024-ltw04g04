@@ -42,7 +42,7 @@
         header("Location: ../pages/signup.php");
         exit();  
     } else {
-        header("Location: ../pages/account.php");
+        header("Location: ../pages/login.php");
         exit();  
     }
 ?>

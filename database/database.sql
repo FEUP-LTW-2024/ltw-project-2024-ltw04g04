@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS WishList;
 CREATE TABLE User
 (
     UserId INTEGER,
-    UserName NVARCHAR(160)  NOT NULL,
+    Username NVARCHAR(160)  NOT NULL,
     Name_ NVARCHAR(160)  NOT NULL,
     Email NVARCHAR(160)  NOT NULL,
     Password_ NVARCHAR(160)  NOT NULL,
@@ -114,13 +114,13 @@ INSERT INTO Category (CategoryName) VALUES ('Clocks');
 
 
 -- Populate User table
-INSERT INTO User (UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode)
+INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode)
 VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', 'password123', '123 Main St', 'Anytown', 'USA', '12345');
-INSERT INTO User (UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode)
+INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode)
 VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', 'password456', '456 Elm St', 'Othertown', 'USA', '67890');
-INSERT INTO User (UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode)
+INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode)
 VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', 'password789', '789 Oak St', 'Another Town', 'USA', '45678');
-INSERT INTO User (UserId, UserName, Name_, Email, Password_, Adress, City, Country, PostalCode)
+INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode)
 VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', 'passwordabc', '101 Pine St', 'Someplace', 'USA', '89012');
 
 
