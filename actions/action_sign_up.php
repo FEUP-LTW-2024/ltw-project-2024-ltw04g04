@@ -1,12 +1,12 @@
 <?php
-declare(strict_types = 1);
-require_once(__DIR__ . '/../database/user.class.php');
-require_once(__DIR__ . '/../utils/session.php');
+    declare(strict_types = 1);
+    require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../utils/session.php');
 
-
-function signUp(string $username, string $name, string $email, string $password, string $reenterPassword): string {
     $db = getDatabaseConnection();
     $error = ''; 
+
+    // string $username, string $name, string $email, string $password, string $reenterPassword -----------
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // INVALID EMAIL
@@ -29,16 +29,4 @@ function signUp(string $username, string $name, string $email, string $password,
     }
 
     return $error;
-}
-
-
-
-/*
-try {
-        $db = getDatabaseConnection();
-        //echo "Connecting to database successfull!";
-    } catch (PDOException $e) {
-        echo "Error connecting to database: " . $e->getMessage();
-    }
-    */
 ?>

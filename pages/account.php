@@ -1,22 +1,8 @@
 <?php
     declare(strict_types = 1);
-    require_once(__DIR__ . '/../actions/actions.php');
     require_once(__DIR__ . '/../utils/session.php');
 
     $session = new Session();
-
-    $error = ''; 
-    if(isset($_POST['submit'])){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $error = login($session, $email, $password);
-    }
-
-    // If login is not successful
-    if($error !== '') {
-        $_SESSION['error'] = $error; 
-    }
-
 ?>
 
 
@@ -40,7 +26,7 @@
                 ?>
             </div>
 
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+            <form action="../actions/action_login.php" method="post">
                 Email: <input type="text" name="email"><br>
                 Password: <input type="password" name="password"><br>
                 <input type="submit" name="submit" value="Continue">
