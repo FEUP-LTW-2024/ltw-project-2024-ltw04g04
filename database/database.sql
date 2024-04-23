@@ -68,6 +68,7 @@ CREATE TABLE Category
 CREATE TABLE Item
 (
     ItemId INTEGER NOT NULL,
+    Name_ INTEGER NOT NULL,
     Brand VARCHAR(50) NOT NULL,
     Model VARCHAR(50) NOT NULL,
     Condition VARCHAR(50) NOT NULL,
@@ -125,14 +126,14 @@ VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', 'passwordabc', '101 Pi
 
 
 --Populate Item table
-INSERT INTO Item (ItemId, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (101, 'Brand A', 'Model X', 'New', 'Beads and bracelets', NULL, 7);
-INSERT INTO Item (ItemId, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (102, 'Brand B', 'Model Y', 'Used', 'Earrings', NULL, 8);
-INSERT INTO Item (ItemId, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (103, 'Brand C', 'Model Z', 'New', 'Rings', NULL, 9);
-INSERT INTO Item (ItemId, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (104, 'Brand D', 'Model W', 'Used', 'Necklaces', NULL, 10);
+INSERT INTO Item (ItemId, Name_, Brand, Model, Condition, Category, Image_, Size_)
+VALUES (101, 'Name1', 'Brand A', 'Model X', 'New', 'Beads and bracelets', NULL, 7);
+INSERT INTO Item (ItemId, Name_, Brand, Model, Condition, Category, Image_, Size_)
+VALUES (102, 'Name2', 'Brand B', 'Model Y', 'Used', 'Earrings', NULL, 8);
+INSERT INTO Item (ItemId, Name_, Brand, Model, Condition, Category, Image_, Size_)
+VALUES (103, 'Name3', 'Brand C', 'Model Z', 'New', 'Rings', NULL, 9);
+INSERT INTO Item (ItemId, Name_, Brand, Model, Condition, Category, Image_, Size_)
+VALUES (104, 'Name4', 'Brand D', 'Model W', 'Used', 'Necklaces', NULL, 10);
 
 
 --Populate SellerItem table
