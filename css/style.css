@@ -214,6 +214,33 @@ footer button {
     padding: 2px 100px; 
 }
 
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    border: 1px solid black;
+    text-decoration: none;
+    margin: 2px;
+}
+
+.dropdown-content a:hover {
+    background-color:  #BBE4F1;
+    color: white;
+}
+
+#account:hover .dropdown-content {
+    display: block;
+}
+
 /* Profile Section */
 
 #profile {

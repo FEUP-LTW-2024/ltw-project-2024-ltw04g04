@@ -26,9 +26,19 @@
               
                 <div id="filter"><a href="filter.php"><img src="imgs/filter-icon.png" class="filter" alt="Filter"></a></div>
                 <div id="account">
-                    <a href="<?php echo $session->isLogin() ? 'account.php' : 'login.php'; ?>">
-                        <img src="imgs/user-icon.png" class="account" alt="Account">
-                    </a>
+                    <?php if ($session->isLogin()) : ?>
+                        <div class="dropdown">
+                            <img src="imgs/user-icon.png" class="account" alt="Account">
+                            <div class="dropdown-content">
+                                <a href="account.php">Profile</a>
+                                <a href="/../actions/action_logout.php">Logout</a>
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <a href="login.php">
+                            <img src="imgs/user-icon.png" class="account" alt="Account">
+                        </a>
+                    <?php endif; ?>
                 </div>
                 <div id="favourite"><a href="favourite.php"><img src="imgs/heart-icon.png" class ="favourite" alt="Favourite"></a></div>
                 <div id="cart"><a href="cart.php"><img src="imgs/cart-icon.jpg" class ="cart"  alt="Cart"></a></div>
