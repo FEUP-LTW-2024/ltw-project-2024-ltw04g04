@@ -8,7 +8,7 @@
     <!DOCTYPE html>
     <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="icon" type="image/x-icon" href="imgs/logo.png">
     </head>
     <body>
@@ -26,7 +26,7 @@
               
                 <div id="filter"><a href="filter.php"><img src="imgs/filter-icon.png" class="filter" alt="Filter"></a></div>
                 <div id="account">
-                    <a href="<?php echo $session->isLogin() ? 'user.php' : 'account.php'; ?>">
+                    <a href="<?php echo $session->isLogin() ? 'account.php' : 'login.php'; ?>">
                         <img src="imgs/user-icon.png" class="account" alt="Account">
                     </a>
                 </div>

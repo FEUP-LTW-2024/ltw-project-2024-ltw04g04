@@ -4,7 +4,7 @@
     include 'navigation.php'; 
     
     require_once(__DIR__ . '/../utils/session.php');
-    require_once(__DIR__ . '/../actions/actions.php');
+    require_once(__DIR__ . '/../database/get_database.php');
 
     $session = new Session();
     $categories = getCategories();
