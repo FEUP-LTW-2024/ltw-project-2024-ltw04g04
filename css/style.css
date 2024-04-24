@@ -214,10 +214,26 @@ footer button {
     padding: 2px 100px; 
 }
 
+#filter img,
+#account img,
+#favourite img,
+#cart img {
+    transition: box-shadow 0.3s ease;  
+    border-radius: 50%;
+    padding : 5px;
+}
+
+filter:hover img,
+#account:hover img,
+#favourite:hover img,
+#cart:hover img {
+    box-shadow: 0 0 20px 10px rgba(250, 250, 250, 0.974);
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #000000;
+    background-color:rgb(189, 181, 181);
     min-width: 120px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     border-radius: 4px;
