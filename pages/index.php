@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <?php 
-    include 'navigation.php'; 
     
     require_once(__DIR__ . '/../utils/session.php');
     require_once(__DIR__ . '/../database/get_database.php');
+    require_once(__DIR__ . '/../templates/navigation.php');
 
     $session = new Session();
     $categories = getCategories();
