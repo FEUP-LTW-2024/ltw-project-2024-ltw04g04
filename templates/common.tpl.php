@@ -23,8 +23,17 @@
                         </div>
                     </form>
                 </div>
-              
-                <div id="filter"><a href="filter.php"><img src="imgs/filter-icon.png" class="filter" alt="Filter"></a></div>
+
+                <div id="filter-container">
+                    <div id="filter">
+                        <span class="arrow">&#9652;</span>
+                    </div>
+
+                    <div id="filter-box">
+                        <?php require_once(__DIR__ . '/../pages/filter.php'); ?>
+                    </div>
+                </div>
+
                 <div id="account">
                     <?php if ($session->isLogin()) : ?>
                         <div class="dropdown">
@@ -52,6 +61,7 @@
                 <?php endforeach; ?>
             </ul>
         </nav>
+        <script src="script.js"></script>
     </body>
     </html>
 <?php } ?>
