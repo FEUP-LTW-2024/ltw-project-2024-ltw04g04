@@ -53,23 +53,60 @@
     </main>
 <?php } ?>
 
-<?php function drawShoppingCart() { ?>
-        <main>
-            <h1 id= "myCart" >My Shopping Cart</h1>
-            <section id="shoppingCart">
-                <section id="items">
+<?php function drawShoppingCart($pdo, $session) { ?>
+    <main>
+        <h1 id="myCart">My Shopping Cart</h1>
+        <section id="shoppingCart">
+            <section id="items">
+                <?php
+                
+                $userId = $session->getUserId();
+
+                if (!$userId) {
+                    echo "<p>Please log in to view your shopping cart.</p>";
+
+                } else {
                     
-                </section>
-                <section id="summary">
-                    <h1>Order Summary</h1>
-                    <p>Subtotal: 0.00$</p>
-                    <button>Checkout</button>   
-                </section>
+                    $stmt = $pdo->prepare('SELECT ShoppingCart.ItemId, Item.Brand, Item.Model, Item.Condition, Item.Image_, Item.Size_, Item.Price 
+                    FROM ShoppingCart JOIN Item ON ShoppingCart.ItemId = Item.ItemId 
+                    WHERE ShoppingCart.BuyerId = :userId');
+                    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+                    $stmt->execute();
+                    $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    if ($items) {
+                        
+                        foreach ($items as $item) {
+                            ?>
+                            <div class="cart-item">
+                                <img src="<?php echo $item['Image_']; ?>" alt="<?php echo $item['Brand'] . ' ' . $item['Model']; ?>">
+                                <div class="item-details">
+                                    <p><?php echo $item['Brand']; ?> <?php echo $item['Model']; ?></p>
+                                    <p>Condition: <?php echo $item['Condition']; ?></p>
+                                    <p>Size: <?php echo $item['Size_']; ?></p>
+                                    <p>Price: $<?php echo $item['Price']; ?></p>
+                                    <button onclick="removeItem(<?php echo $item['ItemId']; ?>)">Remove</button>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        echo "<p>Your shopping cart is empty.</p>";
+                    }
+                }
+                ?>
             </section>
-        </main>
+            <section id="summary">
+                <h1>Order Summary</h1>
+                <p>Subtotal: $0.00</p>
+                <button>Checkout</button>
+            </section>
+        </section>
+    </main>
     </body>
     </html>
 <?php } ?>
+
 
 <?php function drawFavourites() { ?>
         <main>
