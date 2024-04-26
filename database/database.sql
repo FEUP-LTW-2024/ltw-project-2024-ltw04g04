@@ -4,13 +4,14 @@
 PRAGMA FOREIGN_KEYS = ON;
 
 DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Item;
 DROP TABLE IF EXISTS SellerItem;
 DROP TABLE IF EXISTS BuyerItem;
 DROP TABLE IF EXISTS Admi;
-DROP TABLE IF EXISTS Category;
-DROP TABLE IF EXISTS Item;
 DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS WishList;
+DROP TABLE IF EXISTS ChatMessage;
 
 
 /*******************************************************************************
@@ -29,6 +30,28 @@ CREATE TABLE User
     Country NVARCHAR(160),
     PostalCode NVARCHAR(160),
     CONSTRAINT UserId PRIMARY KEY (UserId)
+);
+
+CREATE TABLE Category
+(
+    CategoryId INTEGER,
+    CategoryName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT CategoryId PRIMARY KEY (CategoryId)
+);
+
+CREATE TABLE Item
+(
+    ItemId INTEGER NOT NULL,
+    Name_ INTEGER NOT NULL,
+    Price INTEGER NOT NULL, 
+    Brand VARCHAR(50) NOT NULL,
+    Model VARCHAR(50) NOT NULL,
+    Condition VARCHAR(50) NOT NULL,
+    Category INTEGER NOT NULL,
+    Image_ BLOB,
+    Size_ INTEGER NOT NULL,
+    CONSTRAINT ItemId PRIMARY KEY (ItemId)
+    FOREIGN KEY (Category) REFERENCES Category (CategoryName)
 );
 
 CREATE TABLE SellerItem
@@ -58,34 +81,11 @@ CREATE TABLE Admi
 		ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
-
-CREATE TABLE Category
-(
-    CategoryName VARCHAR(50) NOT NULL,
-    CONSTRAINT CategoryName PRIMARY KEY (CategoryName)
-);
-
-CREATE TABLE Item
-(
-    ItemId INTEGER NOT NULL,
-    Name_ INTEGER NOT NULL,
-    Price INTEGER NOT NULL, 
-    Brand VARCHAR(50) NOT NULL,
-    Model VARCHAR(50) NOT NULL,
-    Condition VARCHAR(50) NOT NULL,
-    Category VARCHAR(50) NOT NULL,
-    Image_ BLOB,
-    Size_ INTEGER NOT NULL,
-    CONSTRAINT ItemId PRIMARY KEY  (ItemId)
-    FOREIGN KEY (Category) REFERENCES Category (CategoryName)
-);
-
-
 CREATE TABLE ShoppingCart (
     ShoppingCartId INTEGER NOT NULL,
     BuyerId INTEGER NOT NULL,
     ItemId INTEGER NOT NULL,
-    FOREIGN KEY (BuyerId) REFERENCES Buyer (UserId)
+    FOREIGN KEY (BuyerId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ItemId) REFERENCES Item (ItemId)
         ON DELETE NO ACTION ON UPDATE NO ACTION
@@ -95,24 +95,36 @@ CREATE TABLE WishList (
     WishListId INTEGER NOT NULL,
     BuyerId INTEGER NOT NULL,
     ItemId INTEGER NOT NULL,
-    FOREIGN KEY (BuyerId) REFERENCES Buyer (UserId)
+    FOREIGN KEY (BuyerId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ItemId) REFERENCES Item (ItemId)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+CREATE TABLE ChatMessage (
+    ChatMessageId INTEGER,
+    SellerId INTEGER NOT NULL,
+    BuyerId INTEGER NOT NULL,
+    message_ TEXT NOT NULL,
+    FOREIGN KEY (BuyerId) REFERENCES User (UserId)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
+    FOREIGN KEY (SellerId) REFERENCES User (UserId)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 
 
 /*******************************************************************************
    Populate Tables
 ********************************************************************************/
 
-INSERT INTO Category (CategoryName) VALUES ('Beads and bracelets');
-INSERT INTO Category (CategoryName) VALUES ('Earrings');
-INSERT INTO Category (CategoryName) VALUES ('Rings');
-INSERT INTO Category (CategoryName) VALUES ('Necklaces');
-INSERT INTO Category (CategoryName) VALUES ('Accessories');
-INSERT INTO Category (CategoryName) VALUES ('Clocks');
+
+-- Populate Category table
+INSERT INTO Category (CategoryId, CategoryName) VALUES (1, 'Beads and bracelets');
+INSERT INTO Category (CategoryId, CategoryName) VALUES (2, 'Earrings');
+INSERT INTO Category (CategoryId, CategoryName) VALUES (3, 'Rings');
+INSERT INTO Category (CategoryId, CategoryName) VALUES (4, 'Necklaces');
+INSERT INTO Category (CategoryId, CategoryName) VALUES (5, 'Accessories');
+INSERT INTO Category (CategoryId, CategoryName) VALUES (6, 'Clocks');
 
 
 -- Populate User table
