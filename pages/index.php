@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html>
 <?php 
-    include 'navigation.php'; 
     
     require_once(__DIR__ . '/../utils/session.php');
     require_once(__DIR__ . '/../database/get_database.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
+    require_once(__DIR__ . '/../templates/index.tpl.php');
 
     $session = new Session();
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
+    drawWelcomePage();
 ?>
-    <main>
-        <img id="jewels" src="imgs/jewels.jpg" alt="Jewelry">
-        <section class = "productinfo">
-            <h1 class= "jewel">Jewels</h1>
-            <br>SecondCharm is an online platform for buying, selling and exchanging second-hand jewellery and accessories.</br>
-            <br>The platform allows users to create listings for items they want to sell or trade, interact with other members of the community, make purchases, and be both sellers and customers at the same time.</br>
-        </section>
-    </main>
-    <footer>
-        <p><br>SecondCharm to your liking with a touch of elegance.</br> Follow your favorite brands and discover the items that match your style.</p>
-        <button>Customize</button>
-    </footer>
-</body>
-</html>
+
