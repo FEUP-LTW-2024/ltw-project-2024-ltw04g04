@@ -44,5 +44,4 @@
         $models = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $models;
     }
-    
 ?>

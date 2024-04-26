@@ -105,7 +105,9 @@ CREATE TABLE ChatMessage (
     ChatMessageId INTEGER,
     SellerId INTEGER NOT NULL,
     BuyerId INTEGER NOT NULL,
-    message_ TEXT NOT NULL,
+    Message_ TEXT NOT NULL,
+    Date_ VARCHAR(50) NOT NULL,
+    Time_ VARCHAR(50) NOT NULL,
     FOREIGN KEY (BuyerId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (SellerId) REFERENCES User (UserId)
