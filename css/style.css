@@ -26,7 +26,7 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    .cart, .account, .favourite, .filter {
+    .cart, .account, .favourite, .filter, .chat {
         width: 30px;  
         height: 30px;
     }
@@ -480,8 +480,87 @@ nav#details {
     flex: 1;
 }
 
-/* Filter */
 
+/* Chat */
+#myMessages {
+    font-family: "Sulphur Point", sans-serif;
+    font-weight: 400;
+    font-size: x-large;
+    padding-left: 1em;
+    border-bottom: 1px solid #000; 
+}
+
+#chat {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.listContainer {
+    width: 30%;
+    padding: 5px 20px 5px 20px;
+    background-color: #F0F0F0;
+}
+
+.listUsers {
+    list-style: none;
+    padding: 0;
+}
+
+.itemUser {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.itemUser:hover {
+    background-color: #e2e1e1;
+}
+
+.messageContainer {
+    width: 65%;
+    padding: 20px;
+}
+
+.messageContainer h2 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.messages {
+    max-height: 330px; 
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.message {
+    clear: both;
+    margin-bottom: 10px;
+}
+
+.userAt {
+    float: right;
+    background-color: #BBE4F1; 
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%; 
+    text-align: right;
+}
+
+.userTo {
+    float: left;
+    background-color: #F0F0F0; 
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%;
+    text-align: left;
+}
+
+
+/* Filter */
 .arrow {
     font-size: 40px;
     color: #000; 
@@ -502,3 +581,4 @@ nav#details {
     padding: 10px;
     z-index: 1;
 }
+
