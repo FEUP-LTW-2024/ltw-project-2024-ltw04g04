@@ -20,7 +20,6 @@
             $this->model = $model;
             $this->condition = $condition;
             $this->category = $category;
-            $this->state = $state;
             $this->imageLink = $imageLink;
             $this->size = $size;
         }
@@ -52,8 +51,6 @@
 
 
         public function getItemDetails(int $item_id, PDO $pdo) {
-
-            // Sanitize the received item ID to prevent SQL injection
             $item_id = filter_var($item_id, FILTER_SANITIZE_NUMBER_INT);
 
             try {
@@ -74,6 +71,38 @@
             } catch (PDOException $e) {
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
+        }
+
+        static function getFilteredItems(PDO $db, array $filters): array {
+            $sql = 'SELECT * FROM Item WHERE 1';
+    
+            $params = [];
+    
+            if (isset($filters['brand']) && $filters['brand'] !== '') {
+                $sql .= ' AND Brand = ?';
+                $params[] = $filters['brand'];
+            }
+    
+            if (isset($filters['model']) && $filters['model'] !== '') {
+                $sql .= ' AND Model = ?';
+                $params[] = $filters['model'];
+            }
+    
+            if (isset($filters['category']) && $filters['category'] !== '') {
+                $sql .= ' AND Category = ?';
+                $params[] = $filters['category'];
+            }
+    
+            if (isset($filters['size']) && is_array($filters['size']) && count($filters['size']) > 0) {
+                $placeholders = implode(',', array_fill(0, count($filters['size']), '?'));
+                $sql .= " AND Size_ IN ($placeholders)"; 
+                $params = array_merge($params, $filters['size']);
+            }
+    
+            $stmt = $db->prepare($sql);
+            $stmt->execute($params);
+    
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
     }

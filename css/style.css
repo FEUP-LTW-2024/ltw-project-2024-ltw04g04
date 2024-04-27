@@ -479,3 +479,26 @@ nav#details {
     margin-top: 15px;
     flex: 1;
 }
+
+/* Filter */
+
+.arrow {
+    font-size: 40px;
+    color: #000; 
+    cursor: pointer;
+}
+
+#filter-container {
+    position: relative; 
+    display: inline-block; 
+}
+
+#filter-box {
+    display: none;
+    position: absolute;
+    position: absolute;
+    top: 100%; 
+    right: 0;
+    padding: 10px;
+    z-index: 1;
+}

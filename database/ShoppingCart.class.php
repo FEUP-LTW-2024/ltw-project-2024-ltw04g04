@@ -8,7 +8,7 @@ class ShoppingCart {
     public int $itemId;
     public int $quantity;
 
-    public function __construct(, int $CartId, int $buyerId, int $itemId, int $quantity) {
+    public function __construct(int $CartId, int $buyerId, int $itemId, int $quantity) {
         $this->CartId = $CartId;
         $this->buyerId = $buyerId;
         $this->itemId = $itemId;
