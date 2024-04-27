@@ -155,6 +155,8 @@ INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, T
 VALUES (1, 1, 4, 'ola!', '25/4/2024', '12h40');
 INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, Time_)
 VALUES (2, 4, 1, 'hey', '25/4/2024', '14h40');
+INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, Time_)
+VALUES (3, 4, 2, 'tudo bem amigo?', '27/4/2024', '19h40');
 
 --Populate SellerItem table
 /*INSERT INTO SellerItem (UserId, ItemId)

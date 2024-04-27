@@ -3,41 +3,42 @@
 
     class Message {
         public int $messageId;
-        public int $sellerId;
-        public int $buyerId;
+        public int $senderId;
+        public int $receiverId;
         public string $message;
         public string $date;
         public string $time;
 
-        public function __construct(int $messageId, int $sellerId, int $buyerId, string $message, string $date, string $time) {
+        public function __construct(int $messageId, int $senderId, int $receiverId, string $message, string $date, string $time) {
             $this->messageId = $messageId;
-            $this->sellerId = $sellerId;
-            $this->buyerId = $buyerId;
+            $this->senderId = $senderId;
+            $this->receiverId = $receiverId;
             $this->message = $message;
             $this->date = $date;
             $this->time = $time;
         }
 
-        static function getMessageWithId(PDO $db, int $userId): Item {
+        static function getMessagesWithUserId(PDO $db, int $userId): array {
+            $messages = [];
             $stmt = $db->prepare('
-                SELECT ChatMessageId, SellerId, BuyerId, Message_, Date_, Time_
+                SELECT ChatMessageId, SenderId, ReceiverId, Message_, Date_, Time_
                 FROM ChatMessage
-                WHERE SellerId = ? OR BuyerId = ?
+                WHERE SenderId = ? OR ReceiverId = ?
             ');
-
-            $stmt->execute(array($itemId));
+            $stmt->execute([$userId, $userId]);
             
-            if ($message = $stmt->fetch()) {
-                return new Message(
-                $item['ChatMessageId'],
-                $item['SellerId'],
-                $item['BuyerId'],
-                $item['Message_'],
-                $item['Date_'],
-                $item['Time_'],
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $message = new Message(
+                    $row['ChatMessageId'],
+                    $row['SenderId'],
+                    $row['ReceiverId'],
+                    $row['Message_'],
+                    $row['Date_'],
+                    $row['Time_']
                 );
-            } else return null;
+                $messages[] = $message;
+            }
+            return $messages;
         }
-
     }
 ?>

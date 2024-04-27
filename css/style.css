@@ -499,7 +499,7 @@ nav#details {
 .listContainer {
     width: 30%;
     padding: 5px 20px 5px 20px;
-    background-color: #f0f0f0;
+    background-color: #F0F0F0;
 }
 
 .listUsers {
@@ -529,29 +529,32 @@ nav#details {
 }
 
 .messages {
-    height: 300px;
+    max-height: 330px; 
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
     background-color: #fff;
 }
 
-/* Estilo para as mensagens 
 .message {
+    clear: both;
     margin-bottom: 10px;
 }
 
-.message .author {
-    font-weight: bold;
-    color: #333;
+.user1 {
+    float: right;
+    background-color: #BBE4F1; /* Cor de fundo para mensagens do usuário 1 */
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%; /* Ajuste conforme necessário */
+    text-align: right;
 }
 
-.message .timestamp {
-    font-size: 0.8em;
-    color: #999;
+.user2 {
+    float: left;
+    background-color: #F0F0F0; /* Cor de fundo para mensagens do usuário 2 */
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 70%; /* Ajuste conforme necessário */
+    text-align: left;
 }
-
-.message .content {
-    margin-left: 20px;
-}
-*/
