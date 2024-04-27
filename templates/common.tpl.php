@@ -51,6 +51,7 @@
                 </div>
                 <div id="favourite"><a href="favourite.php"><img src="imgs/heart-icon.png" class ="favourite" alt="Favourite"></a></div>
                 <div id="cart"><a href="cart.php"><img src="imgs/cart-icon.jpg" class ="cart"  alt="Cart"></a></div>
+                <div id="chat"><a href="chat.php"><img src="imgs/message-icon.png" class ="chat"  alt="Chat"></a></div>
 
             </nav>
         </header>
