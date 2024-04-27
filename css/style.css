@@ -543,18 +543,42 @@ nav#details {
 
 .userAt {
     float: right;
-    background-color: #BBE4F1; /* Cor de fundo para mensagens do usuário 1 */
+    background-color: #BBE4F1; 
     border-radius: 10px;
     padding: 10px;
-    max-width: 70%; /* Ajuste conforme necessário */
+    max-width: 70%; 
     text-align: right;
 }
 
 .userTo {
     float: left;
-    background-color: #F0F0F0; /* Cor de fundo para mensagens do usuário 2 */
+    background-color: #F0F0F0; 
     border-radius: 10px;
     padding: 10px;
-    max-width: 70%; /* Ajuste conforme necessário */
+    max-width: 70%;
     text-align: left;
 }
+
+
+/* Filter */
+.arrow {
+    font-size: 40px;
+    color: #000; 
+    cursor: pointer;
+}
+
+#filter-container {
+    position: relative; 
+    display: inline-block; 
+}
+
+#filter-box {
+    display: none;
+    position: absolute;
+    position: absolute;
+    top: 100%; 
+    right: 0;
+    padding: 10px;
+    z-index: 1;
+}
+

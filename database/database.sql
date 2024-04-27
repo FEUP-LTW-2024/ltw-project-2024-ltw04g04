@@ -85,6 +85,7 @@ CREATE TABLE ShoppingCart (
     ShoppingCartId INTEGER NOT NULL,
     BuyerId INTEGER NOT NULL,
     ItemId INTEGER NOT NULL,
+    Quantity INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (BuyerId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ItemId) REFERENCES Item (ItemId)
@@ -167,3 +168,8 @@ INSERT INTO SellerItem (UserId, ItemId)
 VALUES (3, 103);
 INSERT INTO SellerItem (UserId, ItemId)
 VALUES (4, 104);*/
+
+--Populate ShoppingCart table
+/*INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)
+VALUES (1, 1, 101);*/   
+
