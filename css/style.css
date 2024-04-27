@@ -479,3 +479,79 @@ nav#details {
     margin-top: 15px;
     flex: 1;
 }
+
+
+/* Chat */
+#myMessages {
+    font-family: "Sulphur Point", sans-serif;
+    font-weight: 400;
+    font-size: x-large;
+    padding-left: 1em;
+    border-bottom: 1px solid #000; 
+}
+
+#chat {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.listContainer {
+    width: 30%;
+    padding: 5px 20px 5px 20px;
+    background-color: #f0f0f0;
+}
+
+.listUsers {
+    list-style: none;
+    padding: 0;
+}
+
+.itemUser {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.itemUser:hover {
+    background-color: #e2e1e1;
+}
+
+.messageContainer {
+    width: 65%;
+    padding: 20px;
+}
+
+.messageContainer h2 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.messages {
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+}
+
+/* Estilo para as mensagens 
+.message {
+    margin-bottom: 10px;
+}
+
+.message .author {
+    font-weight: bold;
+    color: #333;
+}
+
+.message .timestamp {
+    font-size: 0.8em;
+    color: #999;
+}
+
+.message .content {
+    margin-left: 20px;
+}
+*/
