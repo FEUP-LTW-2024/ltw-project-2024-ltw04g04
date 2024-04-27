@@ -1,16 +1,19 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawChat(array $messages, int $currentUserId) { 
-    $users = [];
-    foreach ($messages as $message) {
-        if ($message->senderId !== $currentUserId && !in_array($message->senderId, $users)) {
-            $users[] = $message->senderId;
-        }
-        if ($message->receiverId !== $currentUserId && !in_array($message->receiverId, $users)) {
-            $users[] = $message->receiverId;
-        }
-    }
-    ?>
+<?php function getUsersWithUserId(PDO $db, int $userId, array $messages): array {
+            $users = [];
+            foreach ($messages as $message) {
+                if ($message->senderId !== $userId && !in_array($message->senderId, $users)) {
+                    $users[] = $message->senderId;
+                }
+                else if ($message->receiverId !== $userId && !in_array($message->receiverId, $users)) {
+                    $users[] = $message->receiverId;
+                }
+            }
+            return $users;   
+} ?>
+
+<?php function drawChat(array $users, array $messages, int $currentUserId) { ?>
 <body>
     <main>
         <h1 id= "myMessages" >Messages</h1>

@@ -9,8 +9,9 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
 
-    $userId = $session->getUserId();
     $db = getDatabaseConnection();
+    $userId = $session->getUserId();
     $messages = Message::getMessagesWithUserId($db, $userId);
-    drawChat($messages, $userId);
+    $users = getUsersWithUserId($db, $userId, $messages);
+    drawChat($users, $messages, $userId);
 ?>
