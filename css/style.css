@@ -541,7 +541,7 @@ nav#details {
     margin-bottom: 10px;
 }
 
-.user1 {
+.userAt {
     float: right;
     background-color: #BBE4F1; /* Cor de fundo para mensagens do usuário 1 */
     border-radius: 10px;
@@ -550,7 +550,7 @@ nav#details {
     text-align: right;
 }
 
-.user2 {
+.userTo {
     float: left;
     background-color: #F0F0F0; /* Cor de fundo para mensagens do usuário 2 */
     border-radius: 10px;
