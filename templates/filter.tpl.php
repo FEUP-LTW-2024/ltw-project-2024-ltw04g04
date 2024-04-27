@@ -11,7 +11,7 @@
     <body>
         <div class="filter-container">
             <h2>Filter Items</h2>
-            <form id="filter-form" action="search.php" method="get">
+            <form id="filter-form" action="filter.php" method="get"> 
                 <div class="filter-category">
                     <?php 
                     $categories = getCategories();
@@ -38,7 +38,7 @@
                 </div>
                 <div class="filter-model">
                     <?php 
-                    $sizes = getModels();
+                    $models = getModels(); 
                     ?>
                     <label for="model-filter">Model:</label>
                     <select id="model-filter" name="model">
@@ -50,10 +50,10 @@
                 </div>
                 <div class="filter-brand">
                     <?php 
-                    $sizes = getBrands();
+                    $brands = getBrands(); 
                     ?>
                     <label for="brand-filter">Brand:</label>
-                    <select id="brand-filter" name="size">
+                    <select id="brand-filter" name="brand"> <
                         <option value="">Any brand</option>
                         <?php foreach ($brands as $brand) : ?>
                             <option value="<?php echo $brand['Brand']; ?>"><?php echo $brand['Brand']; ?></option>

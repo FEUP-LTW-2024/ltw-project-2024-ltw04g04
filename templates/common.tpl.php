@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     <?php else : ?>
-                        <a href="login.php">
+                        <a href="/../pages/login.php">
                             <img src="imgs/user-icon.png" class="account" alt="Account">
                         </a>
                     <?php endif; ?>
