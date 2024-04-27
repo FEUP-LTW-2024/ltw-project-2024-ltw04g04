@@ -66,3 +66,23 @@
     </body>
     </html>
 <?php } ?>
+
+<?php
+function drawFilteredItemsPage($filteredItems) {
+    echo '<div class="filtered-items-container">';
+    foreach ($filteredItems as $item) {
+        echo '<div class="item">';
+        echo '<img src="' . $item['imageLink'] . '" alt="Item Image">';
+        echo '<h2>' . $item['name'] . '</h2>';
+        echo '<p>Price: ' . $item['price'] . '</p>';
+        echo '<p>Brand: ' . $item['brand'] . '</p>';
+        echo '<p>Model: ' . $item['model'] . '</p>';
+        echo '<p>Condition: ' . $item['condition'] . '</p>';
+        echo '<p>Category: ' . $item['category'] . '</p>';
+        echo '<p>Size: ' . $item['size'] . '</p>';
+        echo '</div>';
+    }
+    echo '</div>';
+}
+?>
+

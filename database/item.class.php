@@ -20,7 +20,6 @@
             $this->model = $model;
             $this->condition = $condition;
             $this->category = $category;
-            $this->state = $state;
             $this->imageLink = $imageLink;
             $this->size = $size;
         }
@@ -83,7 +82,7 @@
                 $sql .= ' AND Brand = ?';
                 $params[] = $filters['brand'];
             }
-
+    
             if (isset($filters['model']) && $filters['model'] !== '') {
                 $sql .= ' AND Model = ?';
                 $params[] = $filters['model'];
@@ -96,7 +95,7 @@
     
             if (isset($filters['size']) && is_array($filters['size']) && count($filters['size']) > 0) {
                 $placeholders = implode(',', array_fill(0, count($filters['size']), '?'));
-                $sql .= " AND Size IN ($placeholders)";
+                $sql .= " AND Size_ IN ($placeholders)"; 
                 $params = array_merge($params, $filters['size']);
             }
     
