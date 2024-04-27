@@ -103,14 +103,14 @@ CREATE TABLE WishList (
 
 CREATE TABLE ChatMessage (
     ChatMessageId INTEGER,
-    SellerId INTEGER NOT NULL,
-    BuyerId INTEGER NOT NULL,
+    SenderId INTEGER NOT NULL,
+    ReceiverId INTEGER NOT NULL,
     Message_ TEXT NOT NULL,
     Date_ VARCHAR(50) NOT NULL,
     Time_ VARCHAR(50) NOT NULL,
-    FOREIGN KEY (BuyerId) REFERENCES User (UserId)
+    FOREIGN KEY (SenderId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
-    FOREIGN KEY (SellerId) REFERENCES User (UserId)
+    FOREIGN KEY (ReceiverId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
@@ -137,8 +137,8 @@ VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', 'password456', '456 El
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode)
 VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', 'password789', '789 Oak St', 'Another Town', 'USA', '45678');
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode)
-VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', 'passwordabc', '101 Pine St', 'Someplace', 'USA', '89012');
-
+VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '963c8b37b3615f3c7f88cbb0f6becff1ffe726f4', '101 Pine St', 'Someplace', 'USA', '89012');
+-- passwordabc
 
 --Populate Item table
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
@@ -150,6 +150,11 @@ VALUES (103, 'Name3', 25, 'Brand C', 'Model Z', 'New', 'Rings', NULL, 9);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
 VALUES (104, 'Name4', 30, 'Brand D', 'Model W', 'Used', 'Necklaces', NULL, 10);
 
+--Populate ChatMessage table
+INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, Time_)
+VALUES (1, 1, 4, 'ola!', '25/4/2024', '12h40');
+INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, Time_)
+VALUES (2, 4, 1, 'hey', '25/4/2024', '14h40');
 
 --Populate SellerItem table
 /*INSERT INTO SellerItem (UserId, ItemId)
