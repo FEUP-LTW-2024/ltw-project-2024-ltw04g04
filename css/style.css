@@ -26,7 +26,7 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    .cart, .account, .favourite, .filter, .chat {
+    .cart, .account, .favourite, .filter, .chatMsg {
         width: 30px;  
         height: 30px;
     }
@@ -217,16 +217,18 @@ footer button {
 #filter img,
 #account img,
 #favourite img,
-#cart img {
+#cart img, 
+#chatMsg img {
     transition: box-shadow 0.3s ease;  
     border-radius: 50%;
     padding : 5px;
 }
 
-filter:hover img,
+#filter:hover img,
 #account:hover img,
 #favourite:hover img,
-#cart:hover img {
+#cart:hover img,
+#chatMsg:hover img {
     box-shadow: 0 0 20px 10px rgba(250, 250, 250, 0.974);
 }
 
@@ -557,6 +559,33 @@ nav#details {
     padding: 10px;
     max-width: 70%;
     text-align: left;
+}
+
+
+#messageForm {
+    display: flex;
+    align-items: center;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#sendMessageButton {
+    padding: 10px 5px 10px 10px;
+}
+
+
+#sendMessageButton img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 
 

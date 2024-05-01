@@ -39,7 +39,15 @@
                                 <p><?= $message->message ?></p>
                             </div>
                         <?php endforeach; ?>
+
+                        
                     </div>
+                    <form id="messageForm">
+                        <input type="text" id="messageInput" placeholder="Digite sua mensagem...">
+                        <button type="submit" id="sendMessageButton">
+                            <img id="sendButton" src="../pages/imgs/send-icon.png" alt="Send message">
+                        </button>
+                    </form>
                 </div>
             </section>
         </main>
