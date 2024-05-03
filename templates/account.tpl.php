@@ -82,7 +82,9 @@
                                 <?php $item = Item::getItemWithId($pdo, $i['ItemId']); ?>
                                 <img src="<?= $item->image ?>" alt="<?= $item->name ?>>">
                                 <div class="item-details">
-                                    <p><?php $item->name; ?></p>
+                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
+                                        <p><?= $item->name ?></p>
+                                    </a>
                                     <p class="detail"><?= $item->price ?></p>  
                                     <p class="detail"> Brand: <?= $item->brand ?></p>      
                                     <p class="detail"> Model: <?= $item->model ?></p>     
