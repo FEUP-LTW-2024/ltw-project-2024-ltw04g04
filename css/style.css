@@ -234,7 +234,8 @@ footer button {
 filter:hover img,
 #account:hover img,
 #favourite:hover img,
-#cart:hover img {
+#cart:hover img,
+#chat:hover img {
     box-shadow: 0 0 20px 10px rgba(250, 250, 250, 0.974);
 }
 
