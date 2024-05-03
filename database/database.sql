@@ -160,8 +160,9 @@ INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, T
 VALUES (3, 4, 2, 'tudo bem amigo?', '27/4/2024', '19h40');
 
 --Populate SellerItem table
-/*INSERT INTO SellerItem (UserId, ItemId)
+INSERT INTO SellerItem (UserId, ItemId)
 VALUES (1, 101);
+/*
 INSERT INTO SellerItem (UserId, ItemId)
 VALUES (2, 102);
 INSERT INTO SellerItem (UserId, ItemId)
@@ -170,6 +171,6 @@ INSERT INTO SellerItem (UserId, ItemId)
 VALUES (4, 104);*/
 
 --Populate ShoppingCart table
-/*INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)
-VALUES (1, 1, 101);*/   
+INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)
+VALUES (1, 4, 101);  
 

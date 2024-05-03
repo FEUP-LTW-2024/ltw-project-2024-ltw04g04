@@ -1,5 +1,25 @@
 <?php declare(strict_types = 1); ?>
 
+<?php
+function getSellerName($pdo, $itemId) {
+    $stmt = $pdo->prepare('SELECT u.Name_ as sellerName FROM User u INNER JOIN SellerItem si ON u.UserId = si.UserId WHERE si.ItemId = :itemId');
+    $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result['sellerName'];
+}
+?>
+
+<?php
+function getSellerId(PDO $pdo, int $itemId): int {
+    $stmt = $pdo->prepare('SELECT UserId FROM SellerItem WHERE ItemId = :itemId');
+    $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return (int)$result['UserId'];
+}
+?>
+
 <?php function drawItem($item) { ?>
 <body>
     <main>
@@ -30,9 +50,13 @@
 
             <div id="sellerContainer">
                 <div id="sellerImg"><img src="imgs/user-icon.png" alt="Image of icon account"></div>
-                <h3>Seller Name</h3>       <!-- CHANGE -->
-                <button type="button" id="accountSeller"> > </button>
+                <h3><?= htmlspecialchars(getSellerName($pdo, $item->itemId), ENT_QUOTES, 'UTF-8') ?></h3>
+                <form action="/../pages/seller.php" method="get">
+                    <input type="hidden" name="id" value="<?= (int)getSellerId($pdo, $item->itemId) ?>">
+                    <button type="submit" id="accountSeller">></button>
+                </form>
             </div>
+
             </div>
 
         </section>
