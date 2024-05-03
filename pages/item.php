@@ -13,9 +13,9 @@ generateNavigationMenu($session, $categories);
 
 if (isset($_GET['id'])) {
     $itemId = (int)$_GET['id'];
-    $db = getDatabaseConnection();
-    $item = Item::getItemWithId($db, $itemId);
-    drawItem($item);
+    $pdo = getDatabaseConnection();
+    $item = Item::getItemWithId($pdo, $itemId);
+    drawItem($pdo, $item);
 } else {
     echo "ID do item não fornecido.";
 }
