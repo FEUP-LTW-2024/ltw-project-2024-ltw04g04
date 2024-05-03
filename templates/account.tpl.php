@@ -93,15 +93,16 @@
                     } else {
                         echo "<p>Your shopping cart is empty.</p>";
                     }
-                }
-                ?>
+
+                    ?>
             </section>
-            <section id="summary">
-                <h1>Order Summary</h1>
-                <p>Subtotal: $0.00</p>
-                <button>Checkout</button>
+                <section id="summary">
+                    <h1>Order Summary</h1>
+                    <p>Subtotal: $0.00</p>
+                    <button>Checkout</button>
+                </section>
             </section>
-        </section>
+            <?php } ?>
     </main>
     </body>
     </html>
