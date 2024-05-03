@@ -14,7 +14,7 @@
     <body>
         <header>
             <nav id="navbar">
-                <div><img id="logo" src="imgs/logo.png"  alt="Logo"></div>
+                <div><a href="index.php"><img id="logo" src="imgs/logo.png"  alt="Logo"></a></div>
                 <div id="search">
                     <form action="search.html" method="get">
                         <div id="searchbar">

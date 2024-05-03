@@ -95,13 +95,13 @@
                     }
 
                     ?>
-            </section>
-                <section id="summary">
-                    <h1>Order Summary</h1>
-                    <p>Subtotal: $0.00</p>
-                    <button>Checkout</button>
                 </section>
-            </section>
+                    <section id="summary">
+                        <h1>Order Summary</h1>
+                        <p>Subtotal: $0.00</p>
+                        <button>Checkout</button>
+                    </section>
+                </section>
             <?php } ?>
     </main>
     </body>
