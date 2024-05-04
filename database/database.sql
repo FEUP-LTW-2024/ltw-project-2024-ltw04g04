@@ -171,5 +171,5 @@ VALUES (4, 104);*/
 
 --Populate ShoppingCart table
 /*INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)
-VALUES (1, 1, 101);*/   
+VALUES (1, 1, 101);  */ 
 

@@ -15,8 +15,32 @@ class ShoppingCart {
         $this->quantity = $quantity;
     }
 
+    // Function to handle actions on cart
+    public function manageCartItem($pdo, $item_id, $action)
+    {
+        try {
+            switch($action) {
+                
+                case 'add':
+                    return $this->addItemToCart($pdo, $item_id);
+                    break;
+
+                case 'remove':
+                    return $this->removeItemFromCart($pdo, $item_id);
+                    break;
+                
+                default:
+                    return array('error' => 'Invalid action');
+                    break;
+            }
+        } catch (PDOException $e) {
+            return array('error' => 'Database error: ' . $e->getMessage());
+        }
+    }
+    
+    
     // Function to add an item to the shopping cart
-    function addItemToCart($pdo, $item_id)
+    private function addItemToCart($pdo, $item_id)
     {
         try {
             // Check if item already in cart
@@ -46,7 +70,7 @@ class ShoppingCart {
 
 
     // Function to remove an item from the shopping cart
-    function removeItemFromCart($pdo, $item_id)
+    private function removeItemFromCart($pdo, $item_id)
     {
         try {
             // Check if item is in cart
