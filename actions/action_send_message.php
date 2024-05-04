@@ -8,7 +8,7 @@ $session = new Session();
 
 $message = $_POST['message'];
 $senderId = $session->getUserId(); 
-$receiverId = 1; // Substitua pelo ID do destinatário da mensagem
+$receiverId = $_POST['user_id2'];
 $date = date('d/m/Y');
 $time = date('H') . 'h' . date('i');
 

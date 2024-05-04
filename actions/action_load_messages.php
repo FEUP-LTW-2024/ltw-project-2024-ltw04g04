@@ -7,7 +7,8 @@ require_once(__DIR__ . '/../database/message.class.php');
 $db = getDatabaseConnection();
 $session = new Session();
 $userId = $session->getUserId();
-$messages = Message::getMessagesWithUserId($db, $userId);
+$userId2 = intval($_GET['user_id2']);
+$messages = Message::getMessagesWithUserId($db, $userId, $userId2);
 
 foreach ($messages as $message) {
     echo '<div class="message">';

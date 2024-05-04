@@ -1,33 +1,16 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function getUsersWithUserId(PDO $db, int $userId, array $messages): array {
-    $users = [];
-    foreach ($messages as $message) {
-        if ($message->senderId !== $userId && !in_array($message->senderId, $users)) {
-            $users[] = $message->senderId;
-        }
-        else if ($message->receiverId !== $userId && !in_array($message->receiverId, $users)) {
-            $users[] = $message->receiverId;
-        }
-    }
-    return $users;
-} ?>
 
-
-<?php function getMessagesWithUserId(int $userId, array $messages): array {
-    $messages_user = [];
-    foreach ($messages as $message) {
-        if ($message->senderId === $userId || $message->receiverId === $userId) {
-            $messages_user[] = $message;
-        }
-    }
-    return $messages_user;   
-} ?>
-
-
-<?php function drawChat(array $users, array $messages, int $currentUserId) { ?>
+<?php function drawChat(PDO $db, int $currentUserId) { ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../templates/chat.js" ></script>
+    
+    <?php 
+        $users = Message::getUsersWithUserId($db, $currentUserId);
+        if (!empty($users)) {
+            echo "<script>changeConversation(" . $users[0] . ");</script>";
+        }
+    ?>
     
     <body>
         <main>

@@ -1,10 +1,27 @@
+var userId2;
+
+function changeConversation(userId) {
+    userId2 = userId;
+    $.ajax({
+        url: '../actions/action_load_messages.php',
+        method: 'GET',
+        data: { user_id2: userId2 },
+        success: function(data) {
+            $('#messages').html(data);
+        }
+    });
+}
+
+
 $(document).ready(function() {
+    
     function loadMessages() {
         $.ajax({
             url: '../actions/action_load_messages.php', 
             type: 'GET',
+            data: { user_id2: userId2 },
             success: function(response) {
-                $('#messages').html(response); // Atualiza o conteúdo da div com as mensagens
+                $('#messages').html(response);  // Atualiza o conteúdo da div com as mensagens
             }
         });
     }
@@ -19,7 +36,7 @@ $(document).ready(function() {
         $.ajax({
             url: '../actions/action_send_message.php', 
             type: 'POST',
-            data: { message: message },
+            data: { message: message, user_id2: userId2 },
             success: function(response) {
                 $('#messageInput').val('');      // Limpa o campo de mensagem após o envio
                 loadMessages();
@@ -29,21 +46,3 @@ $(document).ready(function() {
 
     setInterval(loadMessages, 5000);
 });
-
-/*function changeConversation(userId) {
-    var conversationHeader = document.querySelector('.messageContainer h2');
-    conversationHeader.textContent = "Current Conversation: User " + userId;
-
-    // Ocultar todas as mensagens
-    var allMessages = document.querySelectorAll('.message');
-    allMessages.forEach(function(message) {
-        message.style.display = 'none';
-    });
-
-    // Exibe apenas as mensagens do usuário selecionado
-    var messagesToShow = document.querySelectorAll('[id^="user' + userId + '"]');
-    messagesToShow.forEach(function(message) {
-        message.style.display = 'block';
-    });
-}
-*/
