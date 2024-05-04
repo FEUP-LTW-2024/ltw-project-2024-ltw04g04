@@ -1,15 +1,18 @@
 
-<?php function getUserItems(PDO $pdo, int $userId): array {
-    $stmt = $pdo->prepare('SELECT * FROM Item WHERE ItemId IN (SELECT ItemId FROM SellerItem WHERE UserId = :userId)');
+<?php
+function getUserItemIds(PDO $pdo, int $userId): array {
+    $stmt = $pdo->prepare('SELECT ItemId FROM SellerItem WHERE UserId = :userId');
     $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_OBJ);
+    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $result ? $result : [];
 }
 ?>
 
+
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
-    $items = getUserItems($pdo, $user->userId);
+    $items = getUserItemIds($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">
@@ -54,7 +57,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
             <?php if (count($items) > 0) : ?>
                 <h2>My arcticles</h2>
                 <div class="itemGrid">
-                    <?php foreach ($items as $index => $item) : ?>
+                    <?php foreach ($items as $index => $i) : ?>
+                        <?php $item = Item::getItemWithId($pdo, $i); ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
                             <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
                             <h3><?= $item->name ?></h3>

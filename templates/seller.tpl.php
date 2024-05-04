@@ -1,8 +1,10 @@
 <?php 
-include_once 'account.tpl.php'; ?>
+    include_once 'account.tpl.php'; 
+?>
+
 
 <?php function drawSellerProfile(PDO $pdo, User $user, bool $isCurrentUser) { 
-    $items = getUserItems($pdo, $user->userId);
+    $items = getUserItemIds($pdo, $user->userId);
     ?>
     <main>
         <section id="profile">
@@ -19,11 +21,12 @@ include_once 'account.tpl.php'; ?>
             </div>
         </section>
 
-        <section id="items">
+        <section id="sellerItems">
             <?php if (count($items) > 0) : ?>
                 <h2>Items for Sale</h2>
                 <div class="itemGrid">
-                    <?php foreach ($items as $index => $item) : ?>
+                    <?php foreach ($items as $index => $i) : ?>
+                        <?php $item =Item::getItemWithId($pdo, $i); ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
                             <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
                             <h3><?= $item->name ?></h3>
@@ -34,7 +37,7 @@ include_once 'account.tpl.php'; ?>
                 </div>
             <?php else : ?>
                 <h2>No Items for Sale</h2>
-                <p>This user currently has no items for sale.</p>
+                <p id = "noItems">This user currently has no items for sale.</p>
             <?php endif; ?>
         </section>
     </main>

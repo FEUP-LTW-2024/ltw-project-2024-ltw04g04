@@ -672,14 +672,15 @@ nav#details {
     border: 1px solid black;
     width: 77%;
     margin-left: 14%; 
-    h2 {
-        font-family: "Sulphur Point", sans-serif;
-        text-align: center;
-        position: relative; 
-    }
 }
 
-#articles h2:after {
+#articles h2, #sellerItems h2 {
+    font-family: "Sulphur Point", sans-serif;
+    text-align: center;
+    position: relative; 
+}
+
+#articles h2:after, #sellerItems h2:after {
     content: ''; 
     border-bottom: 1px solid #6c6c6c; 
     position: absolute; 
@@ -687,6 +688,10 @@ nav#details {
     padding-bottom: 1em;
     top: 1em;
     width: 100%; 
+}
+
+#sellerItems h2:after {
+    margin-bottom: 1em;
 }
 
 #addItemButton {
@@ -700,5 +705,29 @@ nav#details {
     border: 1px solid black;
 }
 
+#sellerItems .itemGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; 
+}
+
+#sellerItems .articleItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#sellerItems .articleItem img {
+    max-width: 100%;
+}
+
+
+#sellerItems .articleItem.lastInRow {
+    margin-right: 0; 
+}
+
+#noItems {
+    margin-top: 3em;
+    text-align: center;
+}
 
 
