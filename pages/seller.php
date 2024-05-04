@@ -7,18 +7,18 @@
     require_once(__DIR__ . '/../templates/seller.tpl.php'); 
 
     $session = new Session();
-    $db = getDatabaseConnection();
+    $pdo = getDatabaseConnection();
 
     if (!$session->isLogin()) {
         die(header('Location: /'));
     }
 
     $userId = isset($_GET['id']) ? (int)$_GET['id'] : $session->getUserId();
-    $user = User::getUserWithId($db, $userId);
+    $user = User::getUserWithId($pdo, $userId);
 
     $isCurrentUser = $userId === $session->getUserId();
 
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
-    drawUserProfile($user, $isCurrentUser);
+    drawSellerProfile($pdo, $user, $isCurrentUser);
 ?>

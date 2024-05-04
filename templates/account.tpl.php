@@ -1,5 +1,16 @@
 
-<?php function drawUserPage(User $user, bool $editMode) { ?>
+<?php function getUserItems(PDO $pdo, int $userId): array {
+    $stmt = $pdo->prepare('SELECT * FROM Item WHERE ItemId IN (SELECT ItemId FROM SellerItem WHERE UserId = :userId)');
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+?>
+
+<?php 
+function drawUserPage(PDO $pdo, User $user, bool $editMode) {
+    $items = getUserItems($pdo, $user->userId);
+?>
     <main>
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
@@ -38,20 +49,29 @@
                 </form>
             </div>
         </section>
-        <!-- Articles Section -->
+        
         <section id="articles">
-            <!-- Article 1 -->
-            <article class="articleItem">
-                <!-- Image of article 1 -->
-                <!-- Replace 'article1.jpg' with the actual path of your image -->
-                <img src="imgs/article1.jpg" class="articleImage" alt="Article 1 Image">
-                <!-- Description of article 1-->
-                <!-- <p> Description about this article.</p> -->
-            </article>
-            <!-- Add more articles as necessary -->
+            <?php if (count($items) > 0) : ?>
+                <h2>Items for Sale</h2>
+                <div class="itemGrid">
+                    <?php foreach ($items as $index => $item) : ?>
+                        <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
+                            <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
+                            <h3><?= $item->name ?></h3>
+                            <p>Price: <?= $item->price ?> $</p>
+                            <a href="item.php?id=<?= $item->itemId ?>">View Item</a>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php else : ?>
+                <h2>No Items for Sale</h2>
+                <p>This user currently has no items for sale.</p>
+                <a href="add_item.php" id="addItemButton">Add Items</a>
+            <?php endif; ?>
         </section>
     </main>
 <?php } ?>
+
 
 <?php function drawShoppingCart($pdo, $session) { ?>
     <main>
