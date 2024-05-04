@@ -28,17 +28,32 @@
             $stmt->execute([$userId, $userId]);
             
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $messageId = $row['ChatMessageId'] ?? 0;
+                $senderId = $row['SenderId'] ?? 0;
+                $receiverId = $row['ReceiverId'] ?? 0;
+                $messageContent = $row['Message_'] ?? '';
+                $date = $row['Date_'] ?? '';
+                $time = $row['Time_'] ?? '';
+            
                 $message = new Message(
-                    $row['ChatMessageId'],
-                    $row['SenderId'],
-                    $row['ReceiverId'],
-                    $row['Message_'],
-                    $row['Date_'],
-                    $row['Time_']
+                    $messageId,
+                    $senderId,
+                    $receiverId,
+                    $messageContent,
+                    $date,
+                    $time
                 );
                 $messages[] = $message;
             }
             return $messages;
+        }
+
+        static function saveMessageToDatabase(PDO $db, int $senderId, int $receiverId, string $message, string $date, string $time) {
+            $stmt = $db->prepare('
+                INSERT INTO ChatMessage (SenderId, ReceiverId, Message_, Date_, Time_)
+                VALUES (?, ?, ?, ?, ?)
+            ');
+            $stmt->execute(array($senderId, $receiverId, $message, $date, $time));
         }
     }
 ?>
