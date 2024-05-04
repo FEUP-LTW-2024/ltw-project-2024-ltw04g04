@@ -52,7 +52,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
         
         <section id="articles">
             <?php if (count($items) > 0) : ?>
-                <h2>Items for Sale</h2>
+                <h2>My arcticles</h2>
                 <div class="itemGrid">
                     <?php foreach ($items as $index => $item) : ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
@@ -64,9 +64,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     <?php endforeach; ?>
                 </div>
             <?php else : ?>
-                <h2>No Items for Sale</h2>
-                <p>This user currently has no items for sale.</p>
-                <a href="add_item.php" id="addItemButton">Add Items</a>
+                <h2>My articles</h2>
+                <p>Add items to start selling.</p>
+                <a href="add_item.php" id="addItemButton">Sell now</a>
             <?php endif; ?>
         </section>
     </main>

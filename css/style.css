@@ -204,7 +204,7 @@ footer button {
     width: 75%; 
 }
 
-#summary button, #editButton {
+#summary button, #editButton, #addItemButton {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -659,6 +659,45 @@ nav#details {
 
 .item-details button:hover {
     background-color: #BBE4F1;
+}
+
+/*Itens for salling*/
+
+#articles {
+    display: block; 
+    text-align: center; 
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em; 
+    border: 1px solid black;
+    width: 77%;
+    margin-left: 14%; 
+    h2 {
+        font-family: "Sulphur Point", sans-serif;
+        text-align: center;
+        position: relative; 
+    }
+}
+
+#articles h2:after {
+    content: ''; 
+    border-bottom: 1px solid #6c6c6c; 
+    position: absolute; 
+    right: 0em;
+    padding-bottom: 1em;
+    top: 1em;
+    width: 100%; 
+}
+
+#addItemButton {
+    font-family: "Sulphur Point", sans-serif;
+    color: #656363;
+    background-color: #BBE4F1;
+    padding-top: 0;
+    padding: 0.5em;
+    border-radius: 12px;
+    border-width: 1px;
+    border: 1px solid black;
 }
 
 
