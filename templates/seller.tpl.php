@@ -28,10 +28,11 @@
                     <?php foreach ($items as $index => $i) : ?>
                         <?php $item =Item::getItemWithId($pdo, $i); ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
-                            <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
+                            <a href="item.php?id=<?= $item->itemId ?>">
+                                <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
+                            </a>
                             <h3><?= $item->name ?></h3>
-                            <p>Price: <?= $item->price ?> $</p>
-                            <a href="item.php?id=<?= $item->itemId ?>">View Item</a>
+                            <p><?= $item->price ?> $</p>
                         </article>
                     <?php endforeach; ?>
                 </div>

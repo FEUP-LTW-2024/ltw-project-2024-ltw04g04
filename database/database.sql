@@ -167,8 +167,9 @@ INSERT INTO SellerItem (UserId, ItemId)
 VALUES (2, 102);
 INSERT INTO SellerItem (UserId, ItemId)
 VALUES (3, 103);
+*/
 INSERT INTO SellerItem (UserId, ItemId)
-VALUES (4, 104);*/
+VALUES (4, 104);
 
 --Populate ShoppingCart table
 INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)

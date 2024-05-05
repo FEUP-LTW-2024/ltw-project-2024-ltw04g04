@@ -306,10 +306,13 @@ a#editButton {
     bottom: 18em;
 }
 
-#avatar {
-    width: 100px;
-    height: 100px;
+#avatar img {
+    width: 100%;
+    height: 20em;
+    border-radius: 50%; 
+    border: 2px solid black; 
 }
+
 
 #userInfo {
     flex-grow: 1;
@@ -705,23 +708,20 @@ nav#details {
     border: 1px solid black;
 }
 
-#sellerItems .itemGrid {
+#sellerItems .itemGrid,
+#articles .itemGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
 }
 
-#sellerItems .articleItem {
+#sellerItems .articleItem, #articles .articleItem {
     border: 1px solid #ccc;
     padding: 10px;
 }
 
-#sellerItems .articleItem img {
-    max-width: 100%;
-}
 
-
-#sellerItems .articleItem.lastInRow {
+#sellerItems .articleItem.lastInRow, #articles .articleItem.lastInRow{
     margin-right: 0; 
 }
 
@@ -729,5 +729,44 @@ nav#details {
     margin-top: 3em;
     text-align: center;
 }
+
+
+#sellerItems {
+    margin: 20px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+
+.articleItem {
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+
+.articleImage {
+    text-align: center;
+    width: 100%; 
+    border: 1px solid black;
+    margin: 5%; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.articleImage:hover {
+    border: 3px solid #BBE4F1;
+}
+
+.articleItem h3 {
+    margin-top: 20px;
+}
+
+.articleItem p {
+    margin-bottom: 20px;
+}
+
 
 

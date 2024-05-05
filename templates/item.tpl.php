@@ -19,13 +19,19 @@ function getSellerId(PDO $pdo, int $itemId): int {
 }
 ?>
 
-<?php 
-function drawItem($pdo, $item) { ?>
+<?php
+function drawItem($pdo, $userId, $item) { 
+    $isSeller = (int)getSellerId($pdo, $item->itemId) === $userId;
+
+
+    $sellerProfileURL = $isSeller ? '/../pages/account.php' : '/../pages/seller.php';
+
+    $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
+?>
     <body>
         <main>
             <section id="item">
-                <div id="itemImg"><img src="imgs/itemTemplate.png" alt="Image of item"></div>   <!-- CHANGE -->
-                
+                <div id="itemImg"><img src="imgs/itemTemplate.png" alt="Image of item"></div>  
                 <div id="containers">
                     <div id="itemContainer">
                         <h2><?= $item->name ?></h2>      
@@ -51,8 +57,8 @@ function drawItem($pdo, $item) { ?>
                     <div id="sellerContainer">
                         <div id="sellerImg"><img src="imgs/user-icon.png" alt="Image of icon account"></div>
                         <h3><?= htmlspecialchars(getSellerNamePD($pdo, $item->itemId), ENT_QUOTES, 'UTF-8') ?></h3>
-                        <form action="/../pages/seller.php" method="get">
-                            <input type="hidden" name="id" value="<?= (int)getSellerId($pdo, $item->itemId) ?>">
+                        <form action="<?= $sellerProfileURL ?>" method="get">
+                            <input type="hidden" name="id" value="<?= $sellerIdValue ?>">
                             <button type="submit" id="accountSeller">></button>
                         </form>
                     </div>
@@ -63,3 +69,4 @@ function drawItem($pdo, $item) { ?>
         </main> 
     </body>
 <?php } ?>
+
