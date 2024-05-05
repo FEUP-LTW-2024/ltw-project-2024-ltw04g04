@@ -94,8 +94,7 @@
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>  
-                                    <button onclick="itemReqs(<?php echo $i['ItemId']; ?>, 'remove')">Remove</button>
-                                    <button onclick="itemReqs(<?php echo $i['ItemId']; ?>, 'add')">Add</button>
+                                    <button onclick="itemReqs(<?php echo $item->itemId; ?>, 'remove')">Remove</button>
                                 </div>
                             </div>
                             <?php
@@ -106,11 +105,11 @@
 
                     ?>
                 </section>
-                    <section id="summary">
-                        <h1>Order Summary</h1>
-                        <p>Subtotal: $0.00</p>
-                        <button>Checkout</button>
-                    </section>
+                <section id="summary">
+                    <h1>Order Summary</h1>
+                    <p id="subtotal">Subtotal: $0.00</p>
+                    <button onclick="checkout()">Checkout</button>
+                </section>
                 </section>
             <?php } ?>
     </main>
