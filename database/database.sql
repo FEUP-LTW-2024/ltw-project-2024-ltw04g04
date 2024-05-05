@@ -109,6 +109,7 @@ CREATE TABLE ChatMessage (
     Message_ TEXT NOT NULL,
     Date_ VARCHAR(50) NOT NULL,
     Time_ VARCHAR(50) NOT NULL,
+    CONSTRAINT ChatMessageId PRIMARY KEY (ChatMessageId)
     FOREIGN KEY (SenderId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ReceiverId) REFERENCES User (UserId)
@@ -160,16 +161,19 @@ INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, T
 VALUES (3, 4, 2, 'tudo bem amigo?', '27/4/2024', '19h40');
 
 --Populate SellerItem table
-/*INSERT INTO SellerItem (UserId, ItemId)
+INSERT INTO SellerItem (UserId, ItemId)
 VALUES (1, 101);
+/*
 INSERT INTO SellerItem (UserId, ItemId)
 VALUES (2, 102);
 INSERT INTO SellerItem (UserId, ItemId)
 VALUES (3, 103);
+*/
 INSERT INTO SellerItem (UserId, ItemId)
-VALUES (4, 104);*/
+VALUES (4, 104);
 
 --Populate ShoppingCart table
 /*INSERT INTO ShoppingCart (ItemId, Quantity)
 VALUES (101, 1);*/  
+
 

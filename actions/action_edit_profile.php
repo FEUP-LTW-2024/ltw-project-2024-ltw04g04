@@ -27,3 +27,4 @@
   }
 
   header('Location: ../pages/account.php');
+?>

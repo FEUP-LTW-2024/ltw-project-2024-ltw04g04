@@ -81,6 +81,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     </main>
 <?php } ?>
 
+
 <?php function drawShoppingCart($pdo, $session) { ?>
     
     <script src="../templates/cartOperations.js"></script>
@@ -123,6 +124,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>  
                                     <button onclick="itemReqs(<?php echo $item->itemId; ?>, 'remove')">Remove</button>
+
                                 </div>
                             </div>
                             <?php

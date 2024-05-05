@@ -105,5 +105,21 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        static function getNextItemId(PDO $db): int {
+            $stmt = $db->query('SELECT MAX(ItemId) FROM Item');
+            $maxId = $stmt->fetchColumn();
+            return $maxId + 1;
+        }
+    
+        public function insertIntoDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, string $imageLink, int $size): void {
+            $stmt = $db->prepare('
+                INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ');
+            $stmt->execute([$idItem, $name, $price, $brand, $model, $condition, $category, $imageLink, $size]);
+        }
+        
+
     }
+
 ?>

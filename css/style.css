@@ -9,9 +9,17 @@ html {
 }
 
 /* Body */
-body {
+* {
     font-family: "Actor", sans-serif;
 }
+
+/* Links and references */
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
 
 /* Estilos do Header */
 header {
@@ -26,7 +34,7 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    .cart, .account, .favourite, .filter, .chat {
+    .cart, .account, .favourite, .filter, .chatMsg {
         width: 30px;  
         height: 30px;
     }
@@ -174,15 +182,14 @@ footer button {
 }
 
 #shoppingCart {
-    padding: 20px;
+    display: flex;
+    padding: 1em;
 }
 
 #summary {
-    float: right;
     text-align: center;
-    width: 25%; 
     border: 1px solid #000;
-    padding: 20px; 
+    padding: 15px; 
 
     h1 {
         font-family: "Sulphur Point", sans-serif;
@@ -197,7 +204,7 @@ footer button {
     width: 75%; 
 }
 
-#summary button, #editButton {
+#summary button, #editButton, #addItemButto, .button-create-item {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -217,16 +224,18 @@ footer button {
 #filter img,
 #account img,
 #favourite img,
-#cart img {
+#cart img, 
+#chatMsg img {
     transition: box-shadow 0.3s ease;  
     border-radius: 50%;
     padding : 5px;
 }
 
-filter:hover img,
+#filter:hover img,
 #account:hover img,
 #favourite:hover img,
-#cart:hover img {
+#cart:hover img,
+#chatMsg:hover img {
     box-shadow: 0 0 20px 10px rgba(250, 250, 250, 0.974);
 }
 
@@ -298,10 +307,13 @@ a#editButton {
     bottom: 18em;
 }
 
-#avatar {
-    width: 100px;
-    height: 100px;
+#avatar img {
+    width: 100%;
+    height: 20em;
+    border-radius: 50%; 
+    border: 1px solid black; 
 }
+
 
 #userInfo {
     flex-grow: 1;
@@ -496,13 +508,13 @@ nav#details {
     padding-top: 5px;
 }
 
-.listContainer {
+#listContainer {
     width: 30%;
     padding: 5px 20px 5px 20px;
     background-color: #F0F0F0;
 }
 
-.listUsers {
+#listUsers {
     list-style: none;
     padding: 0;
 }
@@ -517,18 +529,18 @@ nav#details {
     background-color: #e2e1e1;
 }
 
-.messageContainer {
+#messageContainer {
     width: 65%;
     padding: 20px;
 }
 
-.messageContainer h2 {
+#messageContainer h2 {
     padding: 0;
     margin: 0;
     margin-bottom: 15px;
 }
 
-.messages {
+#messages {
     max-height: 330px; 
     overflow-y: auto;
     border: 1px solid #ccc;
@@ -560,6 +572,35 @@ nav#details {
 }
 
 
+#messageForm {
+    display: flex;
+    align-items: center;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+#sendMessageButton {
+    padding: 10px 4px 10px 10px;
+}
+
+
+#sendMessageButton img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+
+
+
 /* Filter */
 .arrow {
     font-size: 40px;
@@ -580,5 +621,244 @@ nav#details {
     right: 0;
     padding: 10px;
     z-index: 1;
+}
+
+/*Cart item*/
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 1em;
+    position: relative; 
+}
+
+
+.cart-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 90%; 
+    height: 0.6px; 
+    background-color: rgb(130, 121, 121);
+}
+
+.cart-item img {
+    width: 12em;
+    height: 12em;
+    margin-right: 30px;
+    border: 1px solid black; 
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.item-details p {
+    margin: 0;
+}
+
+.item-details p:first-child {
+    font-family: "Sulphur Point", sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 13px;
+}
+
+.item-details p:nth-child(2) {
+    text-align: right;
+}
+
+.item-details .detail {
+    font-size: 1em;
+}
+
+.item-details button {
+    margin-top: 10px;
+    font-family: "Sulphur Point", sans-serif;
+    background-color: #9d9d9d;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 20px;
+    border-width: 1px;
+}
+
+.item-details button:hover {
+    background-color: #BBE4F1;
+}
+
+/*Itens for salling*/
+
+#articles {
+    display: block; 
+    text-align: center; 
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em; 
+    border: 1px solid black;
+    width: 77%;
+    margin-left: 14%; 
+}
+
+#articles h2, #sellerItems h2, .creationHeader {
+    font-family: "Sulphur Point", sans-serif;
+    text-align: center;
+    position: relative; 
+}
+
+#articles h2:after, #sellerItems h2:after {
+    content: ''; 
+    border-bottom: 1px solid #6c6c6c; 
+    position: absolute; 
+    right: 0em;
+    padding-bottom: 1em;
+    top: 1em;
+    width: 100%; 
+}
+
+#sellerItems h2:after {
+    margin-bottom: 1em;
+}
+
+#addItemButton {
+    font-family: "Sulphur Point", sans-serif;
+    color: #656363;
+    background-color: #BBE4F1;
+    padding-top: 0;
+    padding: 0.5em;
+    border-radius: 12px;
+    border-width: 1px;
+    border: 1px solid black;
+}
+
+#sellerItems .itemGrid,
+#articles .itemGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+#sellerItems .articleItem, #articles .articleItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+
+#sellerItems .articleItem.lastInRow, #articles .articleItem.lastInRow{
+    margin-right: 0; 
+}
+
+#noItems {
+    margin-top: 3em;
+    text-align: center;
+}
+
+
+#sellerItems {
+    margin: 20px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+
+.articleItem {
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+
+.articleImage {
+    text-align: center;
+    width: 100%; 
+    border: 1px solid black;
+    margin: 5%; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.articleImage:hover {
+    border: 3px solid #BBE4F1;
+}
+
+.articleItem h3 {
+    margin-top: 20px;
+}
+
+.articleItem p {
+    margin-bottom: 20px;
+}
+
+#addItemButtonExtra {
+    width: 2em; 
+    height: 2em; 
+    border-radius: 50%; 
+    background-color: rgb(189, 181, 181); 
+    color: #fff; 
+    font-size: 24px; 
+    border: 1px solid black;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Add item */
+
+.form-container {
+    background-color: #ddd;
+    padding: 2em;
+    padding-right: 3em;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 50em;
+    margin: auto;
+}
+
+.form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container select {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 15px;
+    border: 1px solid rgb(189, 181, 181);
+    border-radius: 5px;
+}
+
+.form-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 50%;
+    padding-right: 20em;
+}
+
+.button-create-item {
+    padding: 0.5em;
+    text-align: center;
+}
+
+.button-create-item:hover {
+    background-color: #2092b5;
+    color: white;
 }
 
