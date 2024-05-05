@@ -76,16 +76,22 @@
 
                     if ($items) {
                         
-                        foreach ($items as $item) {
+                        foreach ($items as $i) {
                             ?>
                             <div class="cart-item">
-                                <img src="<?php echo $item['Image_']; ?>" alt="<?php echo $item['Brand'] . ' ' . $item['Model']; ?>">
+                                <?php $item = Item::getItemWithId($pdo, $i['ItemId']); ?>
+                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>>">
                                 <div class="item-details">
-                                    <p><?php echo $item['Brand']; ?> <?php echo $item['Model']; ?></p>
-                                    <p>Condition: <?php echo $item['Condition']; ?></p>
-                                    <p>Size: <?php echo $item['Size_']; ?></p>
-                                    <p>Price: $<?php echo $item['Price']; ?></p>
-                                    <button onclick="removeItem(<?php echo $item['ItemId']; ?>)">Remove</button>
+                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
+                                        <p><?= $item->name ?></p>
+                                    </a>
+                                    <p class="detail"><?= $item->price ?></p>  
+                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
+                                    <p class="detail"> Model: <?= $item->model ?></p>     
+                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
+                                    <p class="detail"> Category: <?= $item->category ?></p>     
+                                    <p class="detail"> Size: <?= $item->size ?></p>  
+                                    <button onclick="removeItem(<?php echo $i['ItemId']; ?>)">Remove</button>
                                 </div>
                             </div>
                             <?php
