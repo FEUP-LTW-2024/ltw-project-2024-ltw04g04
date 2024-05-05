@@ -10,8 +10,5 @@
     generateNavigationMenu($session, $categories);
 
     $db = getDatabaseConnection();
-    if ($session->isLogin()) {
-        $userId = $session->getUserId();
-        drawChat($db, $userId);
-    }
+    drawChat($db, $session);
 ?>
