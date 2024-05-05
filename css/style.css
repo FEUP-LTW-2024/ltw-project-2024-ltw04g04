@@ -9,7 +9,7 @@ html {
 }
 
 /* Body */
-body {
+* {
     font-family: "Actor", sans-serif;
 }
 
@@ -204,7 +204,7 @@ footer button {
     width: 75%; 
 }
 
-#summary button, #editButton, #addItemButton {
+#summary button, #editButton, #addItemButto, .button-create-item {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -707,7 +707,7 @@ nav#details {
     margin-left: 14%; 
 }
 
-#articles h2, #sellerItems h2 {
+#articles h2, #sellerItems h2, .creationHeader {
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
     position: relative; 
@@ -814,5 +814,51 @@ nav#details {
     justify-content: center;
 }
 
+/*Add item */
 
+.form-container {
+    background-color: #ddd;
+    padding: 2em;
+    padding-right: 3em;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 50em;
+    margin: auto;
+}
+
+.form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container select {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 15px;
+    border: 1px solid rgb(189, 181, 181);
+    border-radius: 5px;
+}
+
+.form-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 50%;
+    padding-right: 20em;
+}
+
+.button-create-item {
+    padding: 0.5em;
+    text-align: center;
+}
+
+.button-create-item:hover {
+    background-color: #2092b5;
+    color: white;
+}
 
