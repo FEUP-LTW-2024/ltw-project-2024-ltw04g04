@@ -76,7 +76,6 @@
                     $stmt->execute();
                     $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
                     if ($items) {
                         
                         foreach ($items as $i) {

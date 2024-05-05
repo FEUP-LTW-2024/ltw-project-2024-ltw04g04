@@ -30,6 +30,11 @@ class ShoppingCart {
                     return self::removeItemFromCart($pdo, $item_id);
                     break;
                 
+                case 'total':
+                    $subtotal = self::calculateCartTotal($pdo);
+                    return array('success' => true, 'subtotal' => $subtotal);
+                    break;
+                
                 default:
                     return array('error' => 'Invalid action');
                     break;
@@ -102,7 +107,7 @@ class ShoppingCart {
     }
 
     // Function to calculate the total price of items in the shopping cart
-    private function calculateCartTotal(PDO $pdo) {
+    private static function calculateCartTotal(PDO $pdo) {
         try {
             // Obrigado chatgpt
             $stmt = $pdo->query("SELECT SUM(i.Price * sc.Quantity) AS total_price 
