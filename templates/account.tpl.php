@@ -1,4 +1,19 @@
-<?php function drawUserPage(User $user, bool $editMode) { ?>
+
+<?php
+function getUserItemIds(PDO $pdo, int $userId): array {
+    $stmt = $pdo->prepare('SELECT ItemId FROM SellerItem WHERE UserId = :userId');
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    return $result ? $result : [];
+}
+?>
+
+
+<?php 
+function drawUserPage(PDO $pdo, User $user, bool $editMode) {
+    $items = getUserItemIds($pdo, $user->userId);
+?>
     <main>
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
@@ -37,17 +52,31 @@
                 </form>
             </div>
         </section>
-        <!-- Articles Section -->
+        
         <section id="articles">
-            <!-- Article 1 -->
-            <article class="articleItem">
-                <!-- Image of article 1 -->
-                <!-- Replace 'article1.jpg' with the actual path of your image -->
-                <img src="imgs/article1.jpg" class="articleImage" alt="Article 1 Image">
-                <!-- Description of article 1-->
-                <!-- <p> Description about this article.</p> -->
-            </article>
-            <!-- Add more articles as necessary -->
+            <?php if (count($items) > 0) : ?>
+                <h2>My arcticles</h2>
+                <div class="itemGrid">
+                    <?php foreach ($items as $index => $i) : ?>
+                        <?php $item = Item::getItemWithId($pdo, $i); ?>
+                        <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
+                            <a href="item.php?id=<?= $item->itemId ?>">
+                                <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
+                            </a>
+                            <h3><?= $item->name ?></h3>
+                            <p><?= $item->price ?> $</p>
+                        </article>
+                    <?php endforeach; ?>
+                    <article class="articleItem">
+                        <a href="/../pages/add_item.php" id="addItemButtonExtra">+</a>
+                        <p>Add item</p>
+                    </article>
+                </div>
+            <?php else : ?>
+                <h2>My articles</h2>
+                <p>Add items to start selling.</p>
+                <a href="/../pages/add_item.php" id="addItemButton">Sell now</a>
+            <?php endif; ?>
         </section>
     </main>
 <?php } ?>
