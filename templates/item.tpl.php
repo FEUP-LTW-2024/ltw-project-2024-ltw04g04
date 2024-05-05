@@ -25,6 +25,8 @@ function drawItem($pdo, $userId, $item) {
     $sellerProfileURL = $isSeller ? '/../pages/account.php' : '/../pages/seller.php';
     $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
 ?>
+
+<script src="../templates/cartOperations.js"></script>
     <body>
         <main>
             <section id="item">
@@ -33,7 +35,7 @@ function drawItem($pdo, $userId, $item) {
                     <div id="itemContainer">
                         <h2><?= $item->name ?></h2>      
                         <p> <?= $item->price ?> $ </p>  
-                        <button type="button" id="addItemToCart">Add to shopping cart</button>
+                        <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
 
                         <nav id="details">
                             <input type="checkbox" id="hamburger"> 

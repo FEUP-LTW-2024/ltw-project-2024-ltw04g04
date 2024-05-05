@@ -4,17 +4,20 @@
 document.addEventListener("DOMContentLoaded", function() {
     var errorPopup = document.getElementById("error-popup");
 
-    if (errorPopup.innerText.trim() !== "") {
-        var errorButton = document.createElement("button");
-        errorButton.classList.add("error-button");
-        errorButton.innerText = errorPopup.innerText;
-        document.body.appendChild(errorButton);
+    if (errorPopup) { // Check if element exists
+        if (errorPopup.innerText.trim() !== "") {
+            var errorButton = document.createElement("button");
+            errorButton.classList.add("error-button");
+            errorButton.innerText = errorPopup.innerText;
+            document.body.appendChild(errorButton);
 
-        setTimeout(function() {
-            errorButton.remove();
-        }, 5000);
+            setTimeout(function() {
+                errorButton.remove();
+            }, 5000);
+        }
     }
 });
+
 
 // Função para mostrar a caixa de filtro e inverter a seta quando o mouse passa por cima
 function showBox() {

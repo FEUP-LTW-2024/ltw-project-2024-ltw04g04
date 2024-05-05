@@ -83,6 +83,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php function drawShoppingCart($pdo, $session) { ?>
+    
+    <script src="../templates/cartOperations.js"></script>
+
     <main>
         <h1 id="myCart">My Shopping Cart</h1>
         <section id="shoppingCart">
@@ -92,7 +95,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                 $userId = $session->getUserId();
 
                 if (!$userId) {
-                    echo "<p>Please log in to view your shopping cart.</p>";
+                    echo "<p>Log in to view your shopping cart.</p>";
 
                 } else {
                     
@@ -120,7 +123,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>  
-                                    <button onclick="removeItem(<?php echo $i['ItemId']; ?>)">Remove</button>
+                                    <button onclick="itemReqs(<?php echo $item->itemId; ?>, 'remove')">Remove</button>
+
                                 </div>
                             </div>
                             <?php
@@ -128,15 +132,16 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     } else {
                         echo "<p>Your shopping cart is empty.</p>";
                     }
-                }
-                ?>
-            </section>
-            <section id="summary">
-                <h1>Order Summary</h1>
-                <p>Subtotal: $0.00</p>
-                <button>Checkout</button>
-            </section>
-        </section>
+
+                    ?>
+                </section>
+                <section id="summary">
+                    <h1>Order Summary</h1>
+                    <p id="subtotal">Subtotal: $0.00</p>
+                    <button onclick="checkout()">Checkout</button>
+                </section>
+                </section>
+            <?php } ?>
     </main>
     </body>
     </html>
@@ -153,3 +158,4 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     </body>
     </html>
 <?php } ?>
+

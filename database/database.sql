@@ -82,8 +82,8 @@ CREATE TABLE Admi
 );
 
 CREATE TABLE ShoppingCart (
-    ShoppingCartId INTEGER NOT NULL,
-    BuyerId INTEGER NOT NULL,
+    ShoppingCartId INTEGER,
+    BuyerId INTEGER,
     ItemId INTEGER NOT NULL,
     Quantity INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (BuyerId) REFERENCES User (UserId)
@@ -173,6 +173,7 @@ INSERT INTO SellerItem (UserId, ItemId)
 VALUES (4, 104);
 
 --Populate ShoppingCart table
-INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)
-VALUES (1, 4, 101);  
+/*INSERT INTO ShoppingCart (ItemId, Quantity)
+VALUES (101, 1);*/  
+
 
