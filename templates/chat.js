@@ -1,5 +1,10 @@
 var userId2;
 
+function scrollToBottom() {
+    var scrollBar = document.getElementById("messages");
+    scrollBar.scrollTop = scrollBar.scrollHeight;
+}
+
 function changeConversation(userId) {
     userId2 = userId;
     $.ajax({
@@ -8,13 +13,13 @@ function changeConversation(userId) {
         data: { user_id2: userId2 },
         success: function(data) {
             $('#messages').html(data);
+            scrollToBottom();
         }
     });
 }
 
 
-$(document).ready(function() {
-    
+$(document).ready(function() {    
     function loadMessages() {
         $.ajax({
             url: '../actions/action_load_messages.php', 

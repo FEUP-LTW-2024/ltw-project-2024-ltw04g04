@@ -11,7 +11,8 @@ $userId2 = intval($_GET['user_id2']);
 $messages = Message::getMessagesWithUserId($db, $userId, $userId2);
 
 foreach ($messages as $message) {
-    echo '<div class="message">';
+    echo '<div class="message ' . ($message->senderId === $userId ? 'userAt' : 'userTo') . '" id="user' 
+                    . ($message->senderId === $userId ? $message->receiverId : $message->senderId) . '">';
     echo '<p>Date: ' . $message->date . '</p>';
     echo '<p>Time: ' . $message->time . '</p>';
     echo '<p>' . $message->message . '</p>';
