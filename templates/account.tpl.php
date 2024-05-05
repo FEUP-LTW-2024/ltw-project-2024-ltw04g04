@@ -67,6 +67,10 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             <p><?= $item->price ?> $</p>
                         </article>
                     <?php endforeach; ?>
+                    <article class="articleItem">
+                        <a href="add_item.php" id="addItemButtonExtra">+</a>
+                        <p>Add item</p>
+                    </article>
                 </div>
             <?php else : ?>
                 <h2>My articles</h2>

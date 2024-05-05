@@ -310,7 +310,7 @@ a#editButton {
     width: 100%;
     height: 20em;
     border-radius: 50%; 
-    border: 2px solid black; 
+    border: 1px solid black; 
 }
 
 
@@ -766,6 +766,22 @@ nav#details {
 
 .articleItem p {
     margin-bottom: 20px;
+}
+
+#addItemButtonExtra {
+    width: 2em; 
+    height: 2em; 
+    border-radius: 50%; 
+    background-color: rgb(189, 181, 181); 
+    color: #fff; 
+    font-size: 24px; 
+    border: 1px solid black;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 
