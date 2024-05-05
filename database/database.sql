@@ -109,6 +109,7 @@ CREATE TABLE ChatMessage (
     Message_ TEXT NOT NULL,
     Date_ VARCHAR(50) NOT NULL,
     Time_ VARCHAR(50) NOT NULL,
+    CONSTRAINT ChatMessageId PRIMARY KEY (ChatMessageId)
     FOREIGN KEY (SenderId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ReceiverId) REFERENCES User (UserId)
