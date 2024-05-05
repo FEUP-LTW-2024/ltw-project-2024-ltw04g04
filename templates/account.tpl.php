@@ -68,14 +68,14 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         </article>
                     <?php endforeach; ?>
                     <article class="articleItem">
-                        <a href="add_item.php" id="addItemButtonExtra">+</a>
+                        <a href="/../pages/add_item.php" id="addItemButtonExtra">+</a>
                         <p>Add item</p>
                     </article>
                 </div>
             <?php else : ?>
                 <h2>My articles</h2>
                 <p>Add items to start selling.</p>
-                <a href="add_item.php" id="addItemButton">Sell now</a>
+                <a href="/../pages/add_item.php" id="addItemButton">Sell now</a>
             <?php endif; ?>
         </section>
     </main>

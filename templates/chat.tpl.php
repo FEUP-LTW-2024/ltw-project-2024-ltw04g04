@@ -1,47 +1,54 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function getUsersWithUserId(PDO $db, int $userId, array $messages): array {
-            $users = [];
-            foreach ($messages as $message) {
-                if ($message->senderId !== $userId && !in_array($message->senderId, $users)) {
-                    $users[] = $message->senderId;
-                }
-                else if ($message->receiverId !== $userId && !in_array($message->receiverId, $users)) {
-                    $users[] = $message->receiverId;
-                }
+
+<?php function drawChat(PDO $db, Session $session) { ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../templates/chat.js" ></script>
+    
+    <?php 
+        $currentUserId = $session->getUserId();
+        if ($session->isLogin()) {
+            echo "<script> isLogin = true; </script>";
+            $users = Message::getUsersWithUserId($db, $currentUserId);
+            if (!empty($users)) {
+                echo "<script>changeConversation(" . $users[0] . ");</script>";
+                $name = User::getUserWithId($db, $users[0])->name;
             }
-            return $users;   
-} ?>
-
-
-<?php function drawChat(array $users, array $messages, int $currentUserId) { ?>
-    <script src="../templates/chat.js"></script>
+        }
+    ?>
+    
     <body>
         <main>
             <h1 id="myMessages">Messages</h1>
+            <?php if (!$session->isLogin()) { ?> <p> Please log in to view your messages. </p>
+            <?php } else if (empty($users)) { ?> <p> You don't have messages </p>
+            <?php } else { ?>
             <section id="chat">
-                <div class="listContainer">
-                    <ul class="listUsers">
+                <div id="listContainer">
+                    <ul id="listUsers">
                         <?php foreach ($users as $user) : ?>
-                            <li class="itemUser" onclick="changeConversation('<?= $user ?>')">User <?= $user ?></li>
+                            <?php $nameUser = User::getUserWithId($db, $user)->name; ?>
+                            <li class="itemUser" onclick="changeConversation('<?= $user ?>', '<?= $nameUser ?>')"> <?= $nameUser ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
 
-                <div class="messageContainer">
-                    <h2>Current Conversation</h2>
-                    <div class="messages">
-                        <?php foreach ($messages as $message) : ?>
-                            <div class="message <?= $message->senderId === $currentUserId ? 'userAt' : 'userTo' ?>"
-                                    id="user<?= $message->senderId === $currentUserId ? $message->receiverId : $message->senderId ?>">
-                                <p>Date: <?= $message->date ?></p>
-                                <p>Time: <?= $message->time ?></p>
-                                <p><?= $message->message ?></p>
-                            </div>
-                        <?php endforeach; ?>
+                <div id="messageContainer">
+                    <h2 id="actualConv"> <?= $name ?> </h2>
+                    <div id ="messages">
+                        <!-- Mensagens carregadas via AJAX -->
                     </div>
+
+                    <form id="messageForm">
+                        <input type="text" id="messageInput" placeholder="Enter your message...">
+                        <button type="submit" id="sendMessageButton">
+                            <img id="sendButton" src="../pages/imgs/send-icon.png" alt="Send message">
+                        </button>
+                    </form>
                 </div>
+                    
             </section>
+            <?php } ?>
         </main>
     </body>
 
