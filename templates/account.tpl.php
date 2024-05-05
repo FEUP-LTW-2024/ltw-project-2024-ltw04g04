@@ -1,4 +1,3 @@
-
 <?php function drawUserPage(User $user, bool $editMode) { ?>
     <main>
         <section id="profile">
@@ -77,6 +76,7 @@
                     $stmt->execute();
                     $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+
                     if ($items) {
                         
                         foreach ($items as $i) {
@@ -128,3 +128,4 @@
     </body>
     </html>
 <?php } ?>
+

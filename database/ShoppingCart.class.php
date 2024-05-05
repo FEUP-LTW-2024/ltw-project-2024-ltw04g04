@@ -129,13 +129,11 @@ if (isset($_POST['itemId']) and isset($_POST['action'])) {
     $action = $_POST['action'];
     $pdo = getDatabaseConnection();
     
-    // Call the removeItemFromCart function with the itemId parameter
     $result = ShoppingCart::manageCartItem($pdo, $itemId, $action);
     
-    // Output the result as JSON
-    echo json_encode($result);
-} else {
-    // Handle invalid requests or missing parameters
+    echo json_encode($result);   
+} 
+else {   
     echo json_encode(array('error' => 'Invalid request'));
 }
 

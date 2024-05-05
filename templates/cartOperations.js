@@ -1,3 +1,17 @@
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var addToCartButton = document.getElementById("addItemToCart");
+    
+    addToCartButton.addEventListener("click", function() {
+        var itemId = this.getAttribute("data-item-id");
+
+        itemReqs(itemId, 'add');
+    });
+
+});
+
+
 function itemReqs(itemId, action) {
     // Make an AJAX request to perform the specified action on the item
     var xhr = new XMLHttpRequest();
@@ -6,13 +20,22 @@ function itemReqs(itemId, action) {
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        // If the operation is successful, reload the page or update the UI as needed
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    // If the operation is successful, reload the page or update the UI as needed
+                    if (action === 'add') {
+                        alert("Item added to cart successfully");
+                    } 
+                    else if (action === 'remove') {
+                        alert("Item added to cart successfully");
                         window.location.reload();
-                    } else {
-                        console.error(response.error);
                     }
+                    else {
+                        window.location.reload();
+                    }
+                } else {
+                    console.error(response.error);
+                }
             } else {
                 console.error("Error: " + xhr.status);
             }
@@ -21,7 +44,8 @@ function itemReqs(itemId, action) {
     xhr.send("itemId=" + itemId + "&action=" + action);
 }
 
-function updateSubtotal() {
+
+/*function updateSubtotal() {
     // Create an XMLHttpRequest object
     var xhr = new XMLHttpRequest();
 
@@ -44,7 +68,4 @@ function updateSubtotal() {
 
     // Send the request
     xhr.send();
-}
-
-
-
+}*/

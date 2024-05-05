@@ -170,6 +170,6 @@ INSERT INTO SellerItem (UserId, ItemId)
 VALUES (4, 104);*/
 
 --Populate ShoppingCart table
-/*INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId)
-VALUES (1, 1, 101);  */ 
+INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
+VALUES (1, 4, 101, 1);  
 

@@ -1,6 +1,8 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawItem($item) { ?>
+
+<script src="../templates/cartOperations.js"></script>
 <body>
     <main>
         <section id="item">
@@ -10,7 +12,7 @@
             <div id="itemContainer">
                 <h2><?= $item->name ?></h2>      
                 <p> <?= $item->price ?> $ </p>  
-                <button type="button" id="addItemToCart">Add to shopping cart</button>
+                <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
 
                 <nav id="details">
                     <input type="checkbox" id="hamburger"> 
