@@ -10,11 +10,11 @@
 
     if (!$session->isLogin()) die(header('Location: /'));
 
-    $db = getDatabaseConnection();
-    $user = User::getUserWithId($db, $session->getUserId());
+    $pdo = getDatabaseConnection();
+    $user = User::getUserWithId($pdo, $session->getUserId());
     $editMode = isset($_GET['edit']);
 
     $categories = getCategories();
     generateNavigationMenu($session,$categories);
-    drawUserPage($user, $editMode);
+    drawUserPage($pdo, $user, $editMode);
 ?>

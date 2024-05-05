@@ -9,7 +9,7 @@ html {
 }
 
 /* Body */
-body {
+* {
     font-family: "Actor", sans-serif;
 }
 
@@ -204,7 +204,7 @@ footer button {
     width: 75%; 
 }
 
-#summary button, #editButton {
+#summary button, #editButton, #addItemButto, .button-create-item {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -307,10 +307,13 @@ a#editButton {
     bottom: 18em;
 }
 
-#avatar {
-    width: 100px;
-    height: 100px;
+#avatar img {
+    width: 100%;
+    height: 20em;
+    border-radius: 50%; 
+    border: 1px solid black; 
 }
+
 
 #userInfo {
     flex-grow: 1;
@@ -691,5 +694,171 @@ nav#details {
     background-color: #BBE4F1;
 }
 
+/*Itens for salling*/
 
+#articles {
+    display: block; 
+    text-align: center; 
+    margin: 0 auto;
+    margin-top: 1em;
+    padding: 2em; 
+    border: 1px solid black;
+    width: 77%;
+    margin-left: 14%; 
+}
+
+#articles h2, #sellerItems h2, .creationHeader {
+    font-family: "Sulphur Point", sans-serif;
+    text-align: center;
+    position: relative; 
+}
+
+#articles h2:after, #sellerItems h2:after {
+    content: ''; 
+    border-bottom: 1px solid #6c6c6c; 
+    position: absolute; 
+    right: 0em;
+    padding-bottom: 1em;
+    top: 1em;
+    width: 100%; 
+}
+
+#sellerItems h2:after {
+    margin-bottom: 1em;
+}
+
+#addItemButton {
+    font-family: "Sulphur Point", sans-serif;
+    color: #656363;
+    background-color: #BBE4F1;
+    padding-top: 0;
+    padding: 0.5em;
+    border-radius: 12px;
+    border-width: 1px;
+    border: 1px solid black;
+}
+
+#sellerItems .itemGrid,
+#articles .itemGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+#sellerItems .articleItem, #articles .articleItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+
+#sellerItems .articleItem.lastInRow, #articles .articleItem.lastInRow{
+    margin-right: 0; 
+}
+
+#noItems {
+    margin-top: 3em;
+    text-align: center;
+}
+
+
+#sellerItems {
+    margin: 20px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+
+.articleItem {
+    margin: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+
+.articleImage {
+    text-align: center;
+    width: 100%; 
+    border: 1px solid black;
+    margin: 5%; 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.articleImage:hover {
+    border: 3px solid #BBE4F1;
+}
+
+.articleItem h3 {
+    margin-top: 20px;
+}
+
+.articleItem p {
+    margin-bottom: 20px;
+}
+
+#addItemButtonExtra {
+    width: 2em; 
+    height: 2em; 
+    border-radius: 50%; 
+    background-color: rgb(189, 181, 181); 
+    color: #fff; 
+    font-size: 24px; 
+    border: 1px solid black;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Add item */
+
+.form-container {
+    background-color: #ddd;
+    padding: 2em;
+    padding-right: 3em;
+    border-radius: 10px;
+    width: 60%;
+    max-width: 50em;
+    margin: auto;
+}
+
+.form-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container select {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 15px;
+    border: 1px solid rgb(189, 181, 181);
+    border-radius: 5px;
+}
+
+.form-container select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 50%;
+    padding-right: 20em;
+}
+
+.button-create-item {
+    padding: 0.5em;
+    text-align: center;
+}
+
+.button-create-item:hover {
+    background-color: #2092b5;
+    color: white;
+}
 
