@@ -13,11 +13,6 @@
     if (isset($_GET['results'])) {
         $results = $_GET['results'];
         drawSearchItems($results);
-        /*
-        foreach ($results as $item) {
-            echo "Nome do item: " . $item['name'];
-        }
-        */
     }
 ?>
 
