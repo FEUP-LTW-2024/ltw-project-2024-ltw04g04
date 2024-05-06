@@ -138,10 +138,12 @@ function drawShoppingCart($pdo, $session) {
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail-quantity"><?= $quantity ?></p>
                                     <div class="buttons-wrapper">
                                         <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
+                                        <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
                                         <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
+
+                                        <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
                                     </div> 
 
                                 </div>

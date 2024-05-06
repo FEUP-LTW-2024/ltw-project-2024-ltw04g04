@@ -2,12 +2,19 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     var increaseButtons = document.querySelectorAll(".increase-button");
+    var decreaseButtons = document.querySelectorAll(".decrease-button");
     var removeButtons = document.querySelectorAll(".remove-button");
     var addToCartButton = document.getElementById("addItemToCart");
 
     increaseButtons.forEach(function(button) {
         button.addEventListener("click", function() {
             handleQuantityChange(this, 'add');
+        });
+    });
+
+    decreaseButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            handleQuantityChange(this, 'decrease');
         });
     });
 

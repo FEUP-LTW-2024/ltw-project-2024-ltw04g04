@@ -23,6 +23,10 @@
                     case 'add':
                         return self::addItemToCart($pdo, $buyerId, $item_id);
                         break;
+                    
+                    case 'decrease':
+                        return self::decreaseItemFromCart($pdo, $item_id);
+                        break;
 
                     case 'remove':
                         return self::removeItemFromCart($pdo, $item_id);
@@ -70,7 +74,7 @@
         }
         
 
-        static function removeItemFromCart($pdo, $item_id) {
+        static function decreaseItemFromCart($pdo, $item_id) {
             try {
                 $stmt = $pdo->prepare("SELECT Quantity FROM ShoppingCart WHERE ItemId = :item_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
@@ -92,7 +96,20 @@
             } catch (PDOException $e) {
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
-        }        
+        }
+
+        static function removeItemFromCart($pdo, $item_id) {
+            try {
+                $stmt = $pdo->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
+                $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+                $stmt->execute();
+        
+                return array('success' => 'Item removed from cart successfully');
+        
+            } catch (PDOException $e) {
+                return array('error' => 'Database error: ' . $e->getMessage());
+            }
+        }       
 
         static function calculateCartTotal(PDO $pdo): float {
             try {
