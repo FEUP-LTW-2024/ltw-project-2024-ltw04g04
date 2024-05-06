@@ -13,6 +13,8 @@
     if (isset($_GET['results'])) {
         $results = $_GET['results'];
         drawSearchItems($results);
+    } else {
+        drawNoSearchItems();
     }
 ?>
 

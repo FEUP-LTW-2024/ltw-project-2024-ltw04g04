@@ -22,3 +22,11 @@
         </main>
     </body>
 <?php } ?>
+
+<?php function drawNoSearchItems() { ?>
+    <body>
+        <main>
+            <p> No items found. </p>
+        </main>
+    </body>
+<?php } ?>

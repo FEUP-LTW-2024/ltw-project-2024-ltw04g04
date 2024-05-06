@@ -126,7 +126,6 @@
 
         static function getFilteredItems(PDO $db, array $filters): array {
             $sql = 'SELECT * FROM Item WHERE 1';
-    
             $params = [];
     
             if (isset($filters['brand']) && $filters['brand'] !== '') {
@@ -162,7 +161,7 @@
             return $maxId + 1;
         }
     
-        public function insertIntoDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, string $imageLink, int $size): void {
+        public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, string $imageLink, int $size): void {
             $stmt = $db->prepare('
                 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
