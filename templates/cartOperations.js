@@ -3,19 +3,19 @@
 document.addEventListener("DOMContentLoaded", function() {
     var addToCartButton = document.getElementById("addItemToCart");
     
-    addToCartButton.addEventListener("click", function() {
-        var itemId = this.getAttribute("data-item-id");
-
-        itemReqs(itemId, 'add');
-    });
-
+    if (addToCartButton) {
+        addToCartButton.addEventListener("click", function() {
+            var itemId = this.getAttribute("data-item-id");
+            itemReqs(itemId, 'add');
+        });
+    }
 });
 
 
+
 function itemReqs(itemId, action) {
-    // Make an AJAX request to perform the specified action on the item
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "../database/ShoppingCart.class.php", true); // Corrected URL
+    xhr.open("POST", "../database/shoppingCart.class.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -45,6 +45,35 @@ function itemReqs(itemId, action) {
     };
     xhr.send("itemId=" + itemId + "&action=" + action);
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    var removeButtons = document.querySelectorAll(".remove-button");
+    
+    removeButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var itemId = this.getAttribute("data-item-id");
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/../actions/action_cart.php", true);
+
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log("Item removed successfully");
+                        window.location.reload();
+                    } else {
+                        console.error("Error: " + xhr.status);
+                    }
+                }
+            };
+
+            xhr.send("itemId=" + itemId + "&action=remove");
+        });
+    });
+});
+
 
 function updateSubtotal(subtotal) {
     var subtotalElement = document.getElementById("subtotal");

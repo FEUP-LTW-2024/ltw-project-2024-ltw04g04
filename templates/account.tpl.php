@@ -81,10 +81,27 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     </main>
 <?php } ?>
 
+<?php
+    function getItemIdsInCart(PDO $pdo, int $userId): array {
+        $stmt = $pdo->prepare('SELECT ShoppingCart.ItemId
+                        FROM ShoppingCart 
+                        WHERE ShoppingCart.BuyerId = :userId');
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $itemIds = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $itemIds[] = $row['ItemId'];
+        }
+        return $itemIds;
+    }
+?>
 
-<?php function drawShoppingCart($pdo, $session) { ?>
-    
-    <script src="../templates/cartOperations.js"></script>
+
+<?php
+function drawShoppingCart($pdo, $session) {
+    ?>
+
+    <script defer src="../templates/cartOperations.js"></script>
 
     <main>
         <h1 id="myCart">My Shopping Cart</h1>
@@ -93,26 +110,22 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                 <?php
                 
                 $userId = $session->getUserId();
-
+                $subTotal = ShoppingCart::calculateCartTotal($pdo);
+                $subTotalFormatted =  number_format($subTotal, 2) . '$';
+                
                 if (!$userId) {
                     echo "<p>Log in to view your shopping cart.</p>";
 
                 } else {
                     
-                    $stmt = $pdo->prepare('SELECT ShoppingCart.ItemId, Item.Brand, Item.Model, Item.Condition, Item.Image_, Item.Size_, Item.Price 
-                    FROM ShoppingCart JOIN Item ON ShoppingCart.ItemId = Item.ItemId 
-                    WHERE ShoppingCart.BuyerId = :userId');
-                    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-                    $stmt->execute();
-                    $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $itemIds = getItemIdsInCart($pdo, $userId);
 
-                    if ($items) {
-                        
-                        foreach ($items as $i) {
-                            ?>
+                    if ($itemIds) { 
+
+                        foreach ($itemIds as $index => $itemId) : 
+                            $item = Item::getItemWithId($pdo, $itemId); ?>
                             <div class="cart-item">
-                                <?php $item = Item::getItemWithId($pdo, $i['ItemId']); ?>
-                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>>">
+                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
                                 <div class="item-details">
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
@@ -123,29 +136,31 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>  
-                                    <button onclick="itemReqs(<?php echo $item->itemId; ?>, 'remove')">Remove</button>
+                                    <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
 
                                 </div>
                             </div>
                             <?php
-                        }
+                        endforeach;
                     } else {
                         echo "<p>Your shopping cart is empty.</p>";
                     }
-
-                    ?>
-                </section>
-                <section id="summary">
-                    <h1>Order Summary</h1>
-                    <p id="subtotal">Subtotal: $0.00</p>
-                    <button onclick="checkout()">Checkout</button>
-                </section>
-                </section>
-            <?php } ?>
+                }
+                ?>
+            </section>
+            <section id="summary">
+                <h1>Order Summary</h1>
+                <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
+                <button onclick="checkout()">Checkout</button>
+            </section>
+        </section>
     </main>
     </body>
     </html>
-<?php } ?>
+    <?php
+}
+?>
+
 
 
 <?php function drawFavourites() { ?>

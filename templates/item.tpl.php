@@ -1,4 +1,5 @@
 <?php declare(strict_types = 1); ?>
+
 <?php
 function getSellerNamePD(PDO $pdo, $itemId) {
     $stmt = $pdo->prepare('SELECT u.Name_ as sellerName FROM User u INNER JOIN SellerItem si ON u.UserId = si.UserId WHERE si.ItemId = :itemId');
@@ -74,7 +75,7 @@ function sellingItem() {
 ?>
    <main>
     <h2 class = "creationHeader">Create New Item</h2>
-        <form action="../actions/create_item.php" method="post" class="form-container">
+        <form action="../actions/action_create_item.php" method="post" class="form-container">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
 
