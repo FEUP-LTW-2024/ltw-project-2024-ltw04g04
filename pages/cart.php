@@ -7,8 +7,6 @@
     require_once(__DIR__ . '/../templates/account.tpl.php');
     require_once(__DIR__ . '/../database/shoppingCart.class.php');
 
-
-
     $session = new Session();
     $pdo = getDatabaseConnection();
     $categories = getCategories();

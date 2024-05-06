@@ -2,7 +2,7 @@
     declare(strict_types = 1);
     require_once(__DIR__ . '/../database/get_database.php');
     require_once(__DIR__ . '/../utils/session.php');
-    require_once(__DIR__ . '/../database/shoppingCart.class.php');
+    require_once(__DIR__ . '/../database/wishList.class.php');
 
     $session = new Session();
     $db = getDatabaseConnection();
@@ -13,10 +13,8 @@
         $action = $_POST['action'];
         $pdo = getDatabaseConnection();
         
-        $result = ShoppingCart::manageCartItem($pdo, $session->getUserId(), $itemId, $action);
-
-        echo json_encode($result); 
-       
+        $result = WishList::manageWishListItem($pdo, $session->getUserId(), $itemId, $action);
+        header('Location: ../pages/item.php');
         exit();    
     } 
 
