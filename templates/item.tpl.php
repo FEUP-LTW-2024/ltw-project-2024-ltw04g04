@@ -6,6 +6,7 @@ function getSellerNamePD(PDO $pdo, $itemId) {
     $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$result) return "No Name";
     return $result['sellerName'];
 }
 ?>

@@ -16,7 +16,7 @@
             <nav id="navbar">
                 <div><a href="index.php"><img id="logo" src="imgs/logo.png"  alt="Logo"></a></div>
                 <div id="search">
-                    <form action="search.html" method="get">
+                    <form action="../actions/action_search.php" method="get">
                         <div id="searchbar">
                             <input type="text" name="query" placeholder="Search...">
                             <img src="imgs/search-icon.svg">
@@ -58,7 +58,7 @@
         <nav id="menu">
             <ul>
                 <?php foreach ($categories as $category) : ?>
-                    <li><a href="index.html"><?php echo $category['CategoryName']; ?></a></li>
+                    <li><a href="../actions/action_items_category.php?category=<?php echo urlencode($category['CategoryName']); ?>"><?php echo $category['CategoryName']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </nav>

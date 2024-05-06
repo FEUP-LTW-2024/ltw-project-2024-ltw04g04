@@ -20,7 +20,7 @@
         $nextItemId = Item::getNextItemId($db);
         $newItem = new Item($nextItemId, $name, $price, $brand, $model, $condition, $category, "", $size);
 
-        $newItem->insertIntoDatabase($db, $nextItemId, $name, $price, $brand, $model, $condition, $category, "", $size);
+        $newItem->insertItemInDatabase($db, $nextItemId, $name, $price, $brand, $model, $condition, $category, "", $size);
 
         $stmt = $db->prepare('
             INSERT INTO SellerItem (UserId, ItemId)

@@ -1,6 +1,5 @@
 <?php declare(strict_types = 1); ?>
 
-
 <?php function drawChat(PDO $db, Session $session) { ?>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../templates/chat.js" ></script>
