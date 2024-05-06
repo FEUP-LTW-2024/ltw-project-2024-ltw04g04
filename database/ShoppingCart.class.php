@@ -16,13 +16,12 @@
             $this->quantity = $quantity;
         }
 
-        public static function manageCartItem($pdo, $item_id, $action)
+        public static function manageCartItem($pdo, $buyerId, $item_id, $action)
         {
             try {
                 switch($action) {
-                    
                     case 'add':
-                        return self::addItemToCart($pdo, $item_id);
+                        return self::addItemToCart($pdo, $buyerId, $item_id);
                         break;
 
                     case 'remove':
@@ -45,31 +44,31 @@
         }
 
         
-        static function addItemToCart($pdo, $item_id)
-        {
+        static function addItemToCart($pdo, $buyerId, $item_id) {
             try {
                 $stmt = $pdo->prepare("SELECT * FROM ShoppingCart WHERE ItemId = :item_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $existing_item = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        
                 if($existing_item) {
                     $stmt = $pdo->prepare("UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE ItemId = :item_id");
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                     $stmt->execute();
                 } else {
-                    $stmt = $pdo->prepare("INSERT INTO ShoppingCart (ItemId, Quantity) VALUES (:item_id, 1)");
+                    $stmt = $pdo->prepare("INSERT INTO ShoppingCart (buyerId, ItemId, Quantity) VALUES (:buyer_id, :item_id, 1)");
+                    $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                     $stmt->execute();
                 }
-
+        
                 return array('success' => 'Item added to cart successfully');
-
+        
             } catch (PDOException $e) {
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
         }
-
+        
 
         static function removeItemFromCart($pdo, $item_id) {
             try {

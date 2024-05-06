@@ -1,20 +1,19 @@
 <?php
-declare(strict_types = 1);
+    declare(strict_types = 1);
 
-require_once(__DIR__ . '/../utils/session.php');
-require_once(__DIR__ . '/../database/get_database.php');
-require_once(__DIR__ . '/../templates/common.tpl.php');
-require_once(__DIR__ . '/../templates/account.tpl.php');
-require_once(__DIR__ . '/../database/shoppingCart.class.php');
+    require_once(__DIR__ . '/../utils/session.php');
+    require_once(__DIR__ . '/../database/get_database.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
+    require_once(__DIR__ . '/../templates/account.tpl.php');
+    require_once(__DIR__ . '/../database/shoppingCart.class.php');
 
 
 
-$session = new Session();
-$pdo = getDatabaseConnection();
-$categories = getCategories();
-generateNavigationMenu($session, $categories);
-drawShoppingCart($pdo, $session);
-
+    $session = new Session();
+    $pdo = getDatabaseConnection();
+    $categories = getCategories();
+    generateNavigationMenu($session, $categories);
+    drawShoppingCart($pdo, $session);
 ?>
 
 
