@@ -49,28 +49,29 @@
         }
 
 
-        static function getItemWithName(PDO $db, string $itemName): Item {
+        static function getItemWithName(PDO $db, string $itemName): array {
+            $items = [];
             $stmt = $db->prepare('
                 SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_
                 FROM Item
                 WHERE Name_ LIKE ?
             ');
-
             $stmt->execute(array($itemName));
             
-            if ($item = $stmt->fetch()) {
-                return new Item(
-                $item['ItemId'],
-                $item['Name_'],
-                $item['Price'],
-                $item['Brand'],
-                $item['Model'],
-                $item['Condition'],
-                $item['Category'],
-                $item['Image_'] ?? "",
-                $item['Size_'],
+            while ($item = $stmt->fetch()) {
+                $items[] = new Item(
+                    $item['ItemId'],
+                    $item['Name_'],
+                    $item['Price'],
+                    $item['Brand'],
+                    $item['Model'],
+                    $item['Condition'],
+                    $item['Category'],
+                    $item['Image_'] ?? "",
+                    $item['Size_']
                 );
-            } else return null;
+            }
+            return $items;
         }
 
 
