@@ -22,9 +22,13 @@
         
         if (!empty($filters)) {
             $filteredItems = Item::getFilteredItems($db, $filters);
+            foreach ($$filteredItems as $item) {
+                echo "a";
+            }
+            echo "oi? ";
             $query_string = http_build_query(['results' => $filteredItems]);
-            //header("Location: ../pages/search.php?" . $query_string); 
-            //exit;
+            header("Location: ../pages/search.php?" . $query_string); 
+            exit;
         }
         
     }

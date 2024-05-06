@@ -127,33 +127,48 @@
         static function getFilteredItems(PDO $db, array $filters): array {
             $sql = 'SELECT * FROM Item WHERE 1';
             $params = [];
-    
+        
             if (isset($filters['brand']) && $filters['brand'] !== '') {
                 $sql .= ' AND Brand = ?';
                 $params[] = $filters['brand'];
             }
-    
+        
             if (isset($filters['model']) && $filters['model'] !== '') {
                 $sql .= ' AND Model = ?';
                 $params[] = $filters['model'];
             }
-    
+        
             if (isset($filters['category']) && $filters['category'] !== '') {
                 $sql .= ' AND Category = ?';
                 $params[] = $filters['category'];
             }
-    
+        
             if (isset($filters['size']) && is_array($filters['size']) && count($filters['size']) > 0) {
                 $placeholders = implode(',', array_fill(0, count($filters['size']), '?'));
-                $sql .= " AND Size_ IN ($placeholders)"; 
+                $sql .= " AND Size_ IN ($placeholders)";
                 $params = array_merge($params, $filters['size']);
             }
-    
+        
             $stmt = $db->prepare($sql);
             $stmt->execute($params);
-    
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+            $items = [];
+            while ($item = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $items[] = new Item(
+                    $item['ItemId'],
+                    $item['Name_'],
+                    $item['Price'],
+                    $item['Brand'],
+                    $item['Model'],
+                    $item['Condition'],
+                    $item['Category'],
+                    $item['Image_'] ?? "",
+                    $item['Size_']
+                );
+            }
+            return $items;
         }
+        
 
         static function getNextItemId(PDO $db): int {
             $stmt = $db->query('SELECT MAX(ItemId) FROM Item');
