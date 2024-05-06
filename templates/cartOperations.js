@@ -74,6 +74,34 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    var increaseButtons = document.querySelectorAll(".increase-button");
+    
+    increaseButtons.forEach(function(button) {
+        button.addEventListener("click", function() {
+            var itemId = this.getAttribute("data-item-id");
+            var xhr = new XMLHttpRequest();
+
+            xhr.open("POST", "/../actions/action_cart.php", true);
+
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log("Item quantity increased successfully");
+                        window.location.reload();
+                    } else {
+                        console.error("Error: " + xhr.status);
+                    }
+                }
+            };
+
+            xhr.send("itemId=" + itemId + "&action=add");
+        });
+    });
+});
+
 
 function updateSubtotal(subtotal) {
     var subtotalElement = document.getElementById("subtotal");

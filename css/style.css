@@ -672,6 +672,22 @@ nav#details {
     text-align: right;
 }
 
+.buttons-wrapper {
+    display: flex;
+    align-items: center;
+    font-family: "Sulphur Point", sans-serif;
+}
+
+.item-details .detail-quantity {
+    margin-left: 25em;
+    padding: 1px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #BBE4F1;
+}
+
 .item-details .detail {
     font-size: 1em;
 }
@@ -687,6 +703,7 @@ nav#details {
     font-size: 12px;
     cursor: pointer;
     border-radius: 20px;
+    margin-left:5px ;
     border-width: 1px;
 }
 

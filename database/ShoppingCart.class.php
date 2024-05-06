@@ -108,6 +108,21 @@
                 return 0.0;
             }
         }
+
+        static function getItemQuantityInCart(PDO $pdo, int $buyerId, int $itemId): int {
+            try {
+                $stmt = $pdo->prepare("SELECT Quantity FROM ShoppingCart WHERE buyerId = :buyerId AND ItemId = :itemId");
+                $stmt->bindParam(':buyerId', $buyerId, PDO::PARAM_INT);
+                $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+                $stmt->execute();
+                $quantity = $stmt->fetchColumn();
+                
+                return $quantity ? (int)$quantity : 0;
+            } catch (PDOException $e) {
+                return 0;
+            }
+        }
+        
         
     }
 
