@@ -16,7 +16,7 @@
             <nav id="navbar">
                 <div><a href="index.php"><img id="logo" src="imgs/logo.png"  alt="Logo"></a></div>
                 <div id="search">
-                    <form action="search.html" method="get">
+                    <form action="../actions/action_search.php" method="get">
                         <div id="searchbar">
                             <input type="text" name="query" placeholder="Search...">
                             <img src="imgs/search-icon.svg">
