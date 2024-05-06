@@ -48,30 +48,16 @@
         
         static function addItemToList($pdo, $userId, $item_id) {
             try {
-                $stmt = $pdo->prepare("SELECT * FROM WishList WHERE userId = :user_id AND ItemId = :item_id");
+                $stmt = $pdo->prepare("INSERT INTO WishList (userId, ItemId) VALUES (:user_id, :item_id)");
                 $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                 $stmt->execute();
-                $existing_item = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-                if($existing_item) {
-                    $stmt = $pdo->prepare("DELETE FROM WishList WHERE userId = :user_id AND ItemId = :item_id");
-                    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-                    $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
-                    $stmt->execute();
-                    return array('success' => 'Item removed from wishlist successfully');
-                } else {
-                    $stmt = $pdo->prepare("INSERT INTO WishList (userId, ItemId) VALUES (:user_id, :item_id)");
-                    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-                    $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
-                    $stmt->execute();
-                    return array('success' => 'Item added to wishlist successfully');
-                }
-        
+                return array('success' => 'Item added to wishlist successfully');
             } catch (PDOException $e) {
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
-        }          
+        }
+          
         
     }
 

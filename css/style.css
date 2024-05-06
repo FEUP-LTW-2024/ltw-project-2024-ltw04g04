@@ -885,4 +885,6 @@ nav#details {
     width: 25px; 
     height: auto; 
     cursor: pointer; 
+    margin-top: 3px;
+    border: none;
 }

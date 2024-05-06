@@ -63,31 +63,28 @@ document.addEventListener("DOMContentLoaded", function() {
     const heartIcon = document.getElementById('heart-icon');
 
     if (heartIcon) {
-        const itemId = heartIcon.parentElement.dataset.itemId; 
-        const initialActive = heartIcon.classList.contains('active');
-
-        if (initialActive) {
-            heartIcon.style.color = 'blue';
-        }
-
         heartIcon.addEventListener('click', function() {
-            const action = heartIcon.classList.contains('active') ? 'remove-from-wishlist' : 'add-to-wishlist';
-
+            const itemId = this.parentElement.dataset.itemId;
+            const action = this.classList.contains('active') ? 'remove-from-wishlist' : 'add-to-wishlist';
             const xhr = new XMLHttpRequest();
+
             xhr.open('POST', '/../actions/action_wish_list.php');
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         console.log("Wishlist item operation successful");
-                        if (action === 'add-to-wishlist') {
-                            heartIcon.classList.add('active');
-                            heartIcon.style.color = 'blue'; 
-                            console.log("SIM");
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.success) {
+                            if (action === 'add-to-wishlist') {
+                                heartIcon.classList.add('active');
+                                heartIcon.style.color = 'blue'; 
+                            } else {
+                                heartIcon.classList.remove('active');
+                                heartIcon.style.color = ''; 
+                            }
                         } else {
-                            heartIcon.classList.remove('active');
-                            heartIcon.style.color = ''; 
-                            console.log("NAO");
+                            console.error("Error:", response.error);
                         }
                     } else {
                         console.error("Error: " + xhr.status);
@@ -100,4 +97,5 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error("Element with ID 'heart-icon' not found");
     }
 });
+
 

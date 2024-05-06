@@ -11,7 +11,7 @@
     <body>
         <div class="filter-container">
             <h2>Filter Items</h2>
-            <form id="filter-form" action="filter.php" method="get"> 
+            <form id="filter-form" action="../actions/action_search_filter.php" method="get"> 
                 <div class="filter-category">
                     <?php 
                     $categories = getCategories();

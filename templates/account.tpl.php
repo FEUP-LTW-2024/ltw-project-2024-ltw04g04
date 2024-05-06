@@ -132,7 +132,7 @@ function drawShoppingCart(PDO $pdo, Session $session) {
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
                                     </a>
-                                    <p class="detail"><?= $item->price ?></p>  
+                                    <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
                                     <p class="detail"> Brand: <?= $item->brand ?></p>      
                                     <p class="detail"> Model: <?= $item->model ?></p>     
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
@@ -210,12 +210,13 @@ function drawShoppingCart(PDO $pdo, Session $session) {
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
                                     </a>
-                                    <p class="detail"><?= $item->price ?></p>  
+                                    <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
                                     <p class="detail"> Brand: <?= $item->brand ?></p>      
                                     <p class="detail"> Model: <?= $item->model ?></p>     
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
+                                    <p class="detail"><img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon"></p>
                                 </div>
                             </div>
                             <?php
