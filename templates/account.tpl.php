@@ -132,7 +132,7 @@ function drawShoppingCart($pdo, $session) {
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
                                     </a>
-                                    <p class="detail"><?= $item->price ?></p>  
+                                    <p class="detail"><?= $item->price ?> $ </p>  
                                     <p class="detail"> Brand: <?= $item->brand ?></p>      
                                     <p class="detail"> Model: <?= $item->model ?></p>     
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      

@@ -5,11 +5,10 @@
 
     $db = getDatabaseConnection();
 
-    if (isset($_GET['query'])) {
-        $search = $db->quote($_GET['query']);
-        $search = trim($search, "'");
-        $search = '%'.$search.'%';
-        $results = Item::getItemsWithName($db, $search);
+    if (isset($_GET['category'])) {
+        $category = $db->quote($_GET['category']);
+        $category= trim($category, "'");
+        $results = Item::getItemsWithCategory($db, $category);
 
         $query_string = http_build_query(['results' => $results]);
         header("Location: ../pages/search.php?" . $query_string); 

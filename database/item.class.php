@@ -49,7 +49,7 @@
         }
 
 
-        static function getItemWithName(PDO $db, string $itemName): array {
+        static function getItemsWithName(PDO $db, string $itemName): array {
             $items = [];
             $stmt = $db->prepare('
                 SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_
@@ -74,6 +74,31 @@
             return $items;
         }
 
+
+        static function getItemsWithCategory(PDO $db, string $itemCategory): array {
+            $items = [];
+            $stmt = $db->prepare('
+                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_
+                FROM Item
+                WHERE Category = ?
+            ');
+            $stmt->execute(array($itemCategory));
+            
+            while ($item = $stmt->fetch()) {
+                $items[] = new Item(
+                    $item['ItemId'],
+                    $item['Name_'],
+                    $item['Price'],
+                    $item['Brand'],
+                    $item['Model'],
+                    $item['Condition'],
+                    $item['Category'],
+                    $item['Image_'] ?? "",
+                    $item['Size_']
+                );
+            }
+            return $items;
+        }
 
 
         public function getItemDetails(int $item_id, PDO $pdo) {

@@ -1,8 +1,6 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawSearchItems(array $items) { ?>
- 
-
     <body>
         <main>
             <?php foreach ($items as $item) { ?>
@@ -23,5 +21,4 @@
             <?php } ?>
         </main>
     </body>
-
 <?php } ?>

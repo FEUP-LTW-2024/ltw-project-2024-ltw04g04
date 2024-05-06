@@ -58,7 +58,7 @@
         <nav id="menu">
             <ul>
                 <?php foreach ($categories as $category) : ?>
-                    <li><a href="index.html"><?php echo $category['CategoryName']; ?></a></li>
+                    <li><a href="../actions/action_items_category.php?category=<?php echo urlencode($category['CategoryName']); ?>"><?php echo $category['CategoryName']; ?></a></li>
                 <?php endforeach; ?>
             </ul>
         </nav>
