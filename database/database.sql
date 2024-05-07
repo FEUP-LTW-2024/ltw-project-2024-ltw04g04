@@ -48,6 +48,7 @@ CREATE TABLE Item
     Model VARCHAR(50) NOT NULL,
     Condition VARCHAR(50) NOT NULL,
     Category INTEGER NOT NULL,
+    Stock INTEGER NOT NULL,
     Image_ BLOB,
     Size_ INTEGER NOT NULL,
     CONSTRAINT ItemId PRIMARY KEY (ItemId)
@@ -143,14 +144,14 @@ VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '963c8b37b3615f3c7f88c
 -- passwordabc
 
 --Populate Item table
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (101, 'Name1', 29, 'Brand A', 'Model X', 'New', 'Beads and bracelets', NULL, 7);
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (102, 'Name2', 5, 'Brand B', 'Model Y', 'Used', 'Earrings', NULL, 8);
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (103, 'Name3', 25, 'Brand C', 'Model Z', 'New', 'Rings', NULL, 9);
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
-VALUES (104, 'Name4', 30, 'Brand D', 'Model W', 'Used', 'Necklaces', NULL, 10);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (101, 'Name1', 29, 'Brand A', 'Model X', 'New', 'Beads and bracelets', 1, NULL, 7);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (102, 'Name2', 5, 'Brand B', 'Model Y', 'Used', 'Earrings', 3, NULL, 8);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (103, 'Name3', 25, 'Brand C', 'Model Z', 'New', 'Rings', 2, NULL, 9);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (104, 'Name4', 30, 'Brand D', 'Model W', 'Used', 'Necklaces', 5, NULL, 10);
 
 --Populate ChatMessage table
 INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, Time_)
@@ -175,6 +176,4 @@ VALUES (4, 104);
 --Populate ShoppingCart table
 INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
 VALUES (1, 4, 101, 2);
-
-
 

@@ -37,6 +37,7 @@ function drawItem($pdo, $userId, $item) {
                     <div id="itemContainer">
                         <h2><?= $item->name ?></h2>      
                         <p> <?= $item->price ?> $ </p>  
+                        <p> Available Stock: <?= $item->stock ?> </p>
                         <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
 
                         <nav id="details">
@@ -51,7 +52,7 @@ function drawItem($pdo, $userId, $item) {
                             <p class="detail"> Model: <?= $item->model ?></p>     
                             <p class="detail"> Condition: <?= $item->condition ?></p>      
                             <p class="detail"> Category: <?= $item->category ?></p>     
-                            <p class="detail"> Size: <?= $item->size ?></p>   
+                            <p class="detail"> Size: <?= $item->size ?></p>     
                         </nav>
                     </div>
 
@@ -105,6 +106,9 @@ function sellingItem() {
 
             <label for="size">Size:</label><br>
             <input type="text" id="size" name="size" required><br><br>
+
+            <label for="stock">Stock:</label><br>
+            <input type="text" id="stock" name="stock" required><br><br>
 
             <input type="submit" value="Create Item" class="button-create-item">
         </form>

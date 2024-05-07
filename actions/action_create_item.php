@@ -15,12 +15,13 @@
         $model = $_POST['model'];
         $condition = $_POST['condition'];
         $category = $_POST['category'];
+        $stock = intval($_POST['stock']);
         $size = intval($_POST['size']);
 
         $nextItemId = Item::getNextItemId($db);
-        $newItem = new Item($nextItemId, $name, $price, $brand, $model, $condition, $category, "", $size);
+        $newItem = new Item($nextItemId, $name, $price, $brand, $model, $condition, $category, $stock, "", $size);
 
-        $newItem->insertItemInDatabase($db, $nextItemId, $name, $price, $brand, $model, $condition, $category, "", $size);
+        $newItem->insertItemInDatabase($db, $nextItemId, $name, $price, $brand, $model, $condition, $category, $stock, "", $size);
 
         $stmt = $db->prepare('
             INSERT INTO SellerItem (UserId, ItemId)
