@@ -884,7 +884,13 @@ nav#details {
 #heart-icon {
     width: 25px; 
     height: auto; 
+    padding: 2px;
     cursor: pointer; 
     margin-top: 3px;
     border: none;
+}
+
+.in-wishlist {
+    background-color: #BBE4F1;
+    border-radius: 50%;
 }

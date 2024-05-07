@@ -58,8 +58,34 @@ function updateSubtotal(subtotal) {
     }
 }
 
+function updateHeartIconStyle(itemId) {
+    let heartIcon = document.getElementById('heart-icon');
+    let isInWishlist = localStorage.getItem('wishlist_' + itemId); 
+    if (isInWishlist === 'true') {
+        heartIcon.classList.add('in-wishlist');
+    } else {
+        heartIcon.classList.remove('in-wishlist');
+    }
+}
 
-// Função para enviar solicitação AJAX para adicionar/remover itens da lista de desejos
+function updateWishlistState(itemId, isInWishlist) {
+    localStorage.setItem('wishlist_' + itemId, isInWishlist); 
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    let heartIcon = document.getElementById('heart-icon');
+    if (heartIcon) {
+        let itemId = heartIcon.dataset.itemId; 
+        updateHeartIconStyle(itemId); 
+        heartIcon.addEventListener('click', function() {
+            let itemId = this.dataset.itemId;
+            toggleWishlist(itemId); 
+        });
+    } else {
+        console.error("Element with ID 'heart-icon' not found");
+    }
+});
+
 function toggleWishlist(itemId) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/../actions/action_wish_list.php', true);
@@ -68,21 +94,20 @@ function toggleWishlist(itemId) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
             if (response.success) {
-                alert(response.success); 
-                let heartIcon = document.getElementById('heart-icon');
-                if (response.isInWishlist) {
-                    heartIcon.style.color = 'blue';
-                } else {
-                    heartIcon.style.color = ''; 
-                }
+                //alert(response.success);
+                updateWishlistState(itemId, response.isInWishlist);
+                updateHeartIconStyle(itemId);
             } else {
                 alert(response.error);
             }
         }
     };
-    console.log(itemId);
     xhr.send('itemId=' + encodeURIComponent(itemId));
-}
+}; 
+
+
+
+
 
 
 

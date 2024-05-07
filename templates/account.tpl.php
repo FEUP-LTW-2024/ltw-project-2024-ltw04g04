@@ -222,6 +222,7 @@ function drawShoppingCart(PDO $pdo, Session $session) {
                                     <p class="detail">
                                         <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
                                     </p>
+
                                 </div>
                             </div>
                             <?php
