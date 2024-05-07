@@ -79,66 +79,20 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php function drawShoppingCart($pdo, $session) { ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../templates/cart.js"></script>
 
     <main>
         <h1 id="myCart">My Shopping Cart</h1>
         <section id="shoppingCart">
             <section id="items">
-                <?php
-                
-                $userId = $session->getUserId();
-                $subTotal = shoppingCart::calculateCartTotal($pdo);
-                $subTotalFormatted =  number_format($subTotal, 2) . '$';
-                
-                if (!$userId) {
-                    echo "<p>Log in to view your shopping cart.</p>";
-
-                } else {
-                    
-                    $itemIds = shoppingCart::getItemIdsInCart($pdo, $userId);
-
-                    if ($itemIds) { 
-
-                        foreach ($itemIds as $index => $itemId) : 
-                            $item = Item::getItemWithId($pdo, $itemId); 
-                            $quantity = shoppingCart::getItemQuantityInCart($pdo, $userId, $itemId);
-                            ?>
-                            <div class="cart-item">
-                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
-                                <div class="item-details">
-                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                                        <p><?= $item->name ?></p>
-                                    </a>
-                                    <p class="detail"><?= $item->price ?> $ </p>  
-                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
-                                    <p class="detail"> Model: <?= $item->model ?></p>     
-                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
-                                    <p class="detail"> Category: <?= $item->category ?></p>          
-                                    <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail"> In stock: <?= $item->stock ?></p>
-                                    <div class="buttons-wrapper">
-                                        <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
-                                        <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
-                                        <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
-
-                                        <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
-                                    </div> 
-
-                                </div>
-                            </div>
-                            <?php
-                        endforeach;
-                    } else {
-                        echo "<p>Your shopping cart is empty.</p>";
-                    }
-                }
-                ?>
+                <!-- Itens carregados via AJAX -->
             </section>
             <section id="summary">
                 <h1>Order Summary</h1>
-                <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
-                <button onclick="checkout()">Checkout</button>
+                <!-- <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
+                <button onclick="checkout()">Checkout</button> -->
             </section>
         </section>
     </main>
