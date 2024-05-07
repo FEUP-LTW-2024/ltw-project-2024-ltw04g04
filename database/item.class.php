@@ -175,6 +175,21 @@
             }
             return $items;
         }
+
+
+        static function getStockWithItemId(PDO $db, int $itemId): int {
+            $stmt = $db->prepare('
+                SELECT Stock
+                FROM Item
+                WHERE ItemId = ?
+            ');
+
+            $stmt->execute(array($itemId));
+            
+            if ($item = $stmt->fetch()) {
+                return $item['Stock'];
+            } else return null;
+        }
         
 
         static function getNextItemId(PDO $db): int {

@@ -1,6 +1,7 @@
 <?php
     declare(strict_types = 1);
     require_once(__DIR__ . '/../database/get_database.php');
+    require_once(__DIR__ . '/../database/item.class.php');
 
     class ShoppingCart {
 
@@ -16,24 +17,24 @@
             $this->quantity = $quantity;
         }
 
-        public static function manageCartItem($pdo, $buyerId, $item_id, $action)
+        public static function manageCartItem($db, $buyerId, $item_id, $action)
         {
             try {
                 switch($action) {
                     case 'add':
-                        return self::addItemToCart($pdo, $buyerId, $item_id);
+                        return self::addItemToCart($db, $buyerId, $item_id);
                         break;
                     
                     case 'decrease':
-                        return self::decreaseItemFromCart($pdo, $item_id);
+                        return self::decreaseItemFromCart($db, $item_id);
                         break;
 
                     case 'remove':
-                        return self::removeItemFromCart($pdo, $item_id);
+                        return self::removeItemFromCart($db, $item_id);
                         break;
                     
                     case 'total':
-                        $subtotal = self::calculateCartTotal($pdo);
+                        $subtotal = self::calculateCartTotal($db);
                         return array('success' => true, 'subtotal' => $subtotal);
                         break;
                     
@@ -48,19 +49,24 @@
         }
 
         
-        static function addItemToCart($pdo, $buyerId, $item_id) {
+        static function addItemToCart($db, $buyerId, $item_id) {
             try {
-                $stmt = $pdo->prepare("SELECT * FROM ShoppingCart WHERE ItemId = :item_id");
+                $stmt = $db->prepare("SELECT * FROM ShoppingCart WHERE ItemId = :item_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $existing_item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                $stock = Item::getStockWithItemId($db, $item_id);
         
                 if($existing_item) {
-                    $stmt = $pdo->prepare("UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE ItemId = :item_id");
-                    $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
-                    $stmt->execute();
+                    $quantity = $existing_item['Quantity'];
+                    if ($quantity < $stock) {
+                        $stmt = $db->prepare("UPDATE ShoppingCart SET Quantity = Quantity + 1 WHERE ItemId = :item_id");
+                        $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
                 } else {
-                    $stmt = $pdo->prepare("INSERT INTO ShoppingCart (buyerId, ItemId, Quantity) VALUES (:buyer_id, :item_id, 1)");
+                    $stmt = $db->prepare("INSERT INTO ShoppingCart (buyerId, ItemId, Quantity) VALUES (:buyer_id, :item_id, 1)");
                     $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                     $stmt->execute();
@@ -74,19 +80,19 @@
         }
         
 
-        static function decreaseItemFromCart($pdo, $item_id) {
+        static function decreaseItemFromCart($db, $item_id) {
             try {
-                $stmt = $pdo->prepare("SELECT Quantity FROM ShoppingCart WHERE ItemId = :item_id");
+                $stmt = $db->prepare("SELECT Quantity FROM ShoppingCart WHERE ItemId = :item_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                 $stmt->execute();
                 $quantity = $stmt->fetchColumn();
         
                 if($quantity > 1) {
-                    $stmt = $pdo->prepare("UPDATE ShoppingCart SET Quantity = Quantity - 1 WHERE ItemId = :item_id");
+                    $stmt = $db->prepare("UPDATE ShoppingCart SET Quantity = Quantity - 1 WHERE ItemId = :item_id");
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                     $stmt->execute();
                 } else {
-                    $stmt = $pdo->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
+                    $stmt = $db->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                     $stmt->execute();
                 }
@@ -98,9 +104,9 @@
             }
         }
 
-        static function removeItemFromCart($pdo, $item_id) {
+        static function removeItemFromCart($db, $item_id) {
             try {
-                $stmt = $pdo->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
+                $stmt = $db->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                 $stmt->execute();
         
@@ -111,9 +117,9 @@
             }
         }       
 
-        static function calculateCartTotal(PDO $pdo): float {
+        static function calculateCartTotal(PDO $db): float {
             try {
-                $stmt = $pdo->prepare("SELECT SUM(i.Price * sc.Quantity) AS total_price 
+                $stmt = $db->prepare("SELECT SUM(i.Price * sc.Quantity) AS total_price 
                                         FROM ShoppingCart sc 
                                         INNER JOIN Item i ON sc.ItemId = i.ItemId");
                 $stmt->execute();
@@ -125,9 +131,9 @@
             }
         }
 
-        static function getItemQuantityInCart(PDO $pdo, int $buyerId, int $itemId): int {
+        static function getItemQuantityInCart(PDO $db, int $buyerId, int $itemId): int {
             try {
-                $stmt = $pdo->prepare("SELECT Quantity FROM ShoppingCart WHERE buyerId = :buyerId AND ItemId = :itemId");
+                $stmt = $db->prepare("SELECT Quantity FROM ShoppingCart WHERE buyerId = :buyerId AND ItemId = :itemId");
                 $stmt->bindParam(':buyerId', $buyerId, PDO::PARAM_INT);
                 $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
                 $stmt->execute();
