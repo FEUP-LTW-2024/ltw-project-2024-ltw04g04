@@ -197,6 +197,15 @@
             $maxId = $stmt->fetchColumn();
             return $maxId + 1;
         }
+
+
+        static function getUserItemIds(PDO $pdo, int $userId): array {
+            $stmt = $pdo->prepare('SELECT ItemId FROM SellerItem WHERE UserId = :userId');
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $result ? $result : [];
+        }
     
 
         public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size): void {

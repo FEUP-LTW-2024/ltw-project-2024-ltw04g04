@@ -1,18 +1,13 @@
-
 <?php
-function getUserItemIds(PDO $pdo, int $userId): array {
-    $stmt = $pdo->prepare('SELECT ItemId FROM SellerItem WHERE UserId = :userId');
-    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    return $result ? $result : [];
-}
+    declare(strict_types = 1);
+    require_once(__DIR__ . '/../database/shoppingCart.class.php');
+    require_once(__DIR__ . '/../database/item.class.php');
 ?>
 
 
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
-    $items = getUserItemIds($pdo, $user->userId);
+    $items = Item::getUserItemIds($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">
@@ -81,26 +76,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     </main>
 <?php } ?>
 
-<?php
-    function getItemIdsInCart(PDO $pdo, int $userId): array {
-        $stmt = $pdo->prepare('SELECT ShoppingCart.ItemId
-                        FROM ShoppingCart 
-                        WHERE ShoppingCart.BuyerId = :userId');
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-        $itemIds = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $itemIds[] = $row['ItemId'];
-        }
-        return $itemIds;
-    }
-?>
 
 
-<?php
-function drawShoppingCart($pdo, $session) {
-    ?>
-
+<?php function drawShoppingCart($pdo, $session) { ?>
     <script defer src="../templates/cartOperations.js"></script>
 
     <main>
@@ -110,7 +88,7 @@ function drawShoppingCart($pdo, $session) {
                 <?php
                 
                 $userId = $session->getUserId();
-                $subTotal = ShoppingCart::calculateCartTotal($pdo);
+                $subTotal = shoppingCart::calculateCartTotal($pdo);
                 $subTotalFormatted =  number_format($subTotal, 2) . '$';
                 
                 if (!$userId) {
@@ -118,13 +96,13 @@ function drawShoppingCart($pdo, $session) {
 
                 } else {
                     
-                    $itemIds = getItemIdsInCart($pdo, $userId);
+                    $itemIds = shoppingCart::getItemIdsInCart($pdo, $userId);
 
                     if ($itemIds) { 
 
                         foreach ($itemIds as $index => $itemId) : 
                             $item = Item::getItemWithId($pdo, $itemId); 
-                            $quantity = ShoppingCart::getItemQuantityInCart($pdo, $userId, $itemId);
+                            $quantity = shoppingCart::getItemQuantityInCart($pdo, $userId, $itemId);
                             ?>
                             <div class="cart-item">
                                 <img src="<?= $item->image ?>" alt="<?= $item->name ?>">

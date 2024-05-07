@@ -13,7 +13,7 @@
         $action = $_POST['action'];
         $pdo = getDatabaseConnection();
         
-        $result = ShoppingCart::manageCartItem($pdo, $session->getUserId(), $itemId, $action);
+        $result = shoppingCart::manageCartItem($pdo, $session->getUserId(), $itemId, $action);
         
         header('Location: ../pages/cart.php');
         exit();    

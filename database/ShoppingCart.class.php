@@ -3,7 +3,7 @@
     require_once(__DIR__ . '/../database/get_database.php');
     require_once(__DIR__ . '/../database/item.class.php');
 
-    class ShoppingCart {
+    class shoppingCart {
 
         public int $CartId;
         public int $buyerId;
@@ -15,6 +15,20 @@
             $this->buyerId = $buyerId;
             $this->itemId = $itemId;
             $this->quantity = $quantity;
+        }
+
+
+        public static function getItemIdsInCart(PDO $db, int $userId): array {
+            $stmt = $db->prepare('SELECT ShoppingCart.ItemId
+                            FROM ShoppingCart 
+                            WHERE ShoppingCart.BuyerId = :userId');
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $itemIds = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $itemIds[] = $row['ItemId'];
+            }
+            return $itemIds;
         }
 
         public static function manageCartItem($db, $buyerId, $item_id, $action)
