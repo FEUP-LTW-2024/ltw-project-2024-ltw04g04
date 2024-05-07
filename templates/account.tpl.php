@@ -83,24 +83,21 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     <script defer src="../templates/cartOperations.js"></script>
     <script defer src="../templates/cart.js"></script>
 
-    <main>
-        <h1 id="myCart">My Shopping Cart</h1>
-        <section id="shoppingCart">
-            <section id="items">
-                <!-- Itens carregados via AJAX -->
+    <body>
+        <main>
+            <h1 id="myCart">My Shopping Cart</h1>
+            <section id="shoppingCart">
+                <section id="items">
+                    <!-- Itens carregados via AJAX -->
+                </section>
+                <section id="summary">
+                    <!-- Summary carregado via AJAX -->
+                </section>
             </section>
-            <section id="summary">
-                <h1>Order Summary</h1>
-                <!-- <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
-                <button onclick="checkout()">Checkout</button> -->
-            </section>
-        </section>
-    </main>
+        </main>
     </body>
-    </html>
-    <?php
-}
-?>
+    
+<?php } ?>
 
 
 
