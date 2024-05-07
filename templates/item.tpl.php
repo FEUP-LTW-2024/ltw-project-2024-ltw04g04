@@ -37,7 +37,10 @@ function drawItem($pdo, $userId, $item) {
                         <h2><?= $item->name ?></h2>      
                         <p> <?= number_format($item->price, 2) ?> $ </p>  
                         <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
-                        <p class="detail"><img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon"> Favourite</p>
+                        <p class = "detail">
+                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                        Favourite</p>
+                        
                         <nav id="details">
                             <input type="checkbox" id="hamburger"> 
 

@@ -100,6 +100,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 <?php
 function drawShoppingCart(PDO $pdo, Session $session) {
     ?>
+    
 
     <script defer src="../templates/cartOperations.js"></script>
 
@@ -126,6 +127,7 @@ function drawShoppingCart(PDO $pdo, Session $session) {
                             $item = Item::getItemWithId($pdo, $itemId); 
                             $quantity = ShoppingCart::getItemQuantityInCart($pdo, $userId, $itemId);
                             ?>
+
                             <div class="cart-item">
                                 <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
                                 <div class="item-details">
@@ -204,6 +206,7 @@ function drawShoppingCart(PDO $pdo, Session $session) {
                         foreach ($itemIds as $index => $itemId) : 
                             $item = Item::getItemWithId($pdo, $itemId); 
                             ?>
+
                             <div class="list-item">
                                 <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
                                 <div class="item-list-details">
@@ -216,7 +219,9 @@ function drawShoppingCart(PDO $pdo, Session $session) {
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail"><img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon"></p>
+                                    <p class="detail">
+                                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                    </p>
                                 </div>
                             </div>
                             <?php
