@@ -1,18 +1,13 @@
-
 <?php
-function getUserItemIds(PDO $pdo, int $userId): array {
-    $stmt = $pdo->prepare('SELECT ItemId FROM SellerItem WHERE UserId = :userId');
-    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    return $result ? $result : [];
-}
+    declare(strict_types = 1);
+    require_once(__DIR__ . '/../database/shoppingCart.class.php');
+    require_once(__DIR__ . '/../database/item.class.php');
 ?>
 
 
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
-    $items = getUserItemIds($pdo, $user->userId);
+    $items = Item::getUserItemIds($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">
@@ -81,93 +76,29 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     </main>
 <?php } ?>
 
-<?php
-    function getItemIdsInCart(PDO $pdo, int $userId): array {
-        $stmt = $pdo->prepare('SELECT ShoppingCart.ItemId
-                        FROM ShoppingCart 
-                        WHERE ShoppingCart.BuyerId = :userId');
-        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
-        $stmt->execute();
-        $itemIds = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $itemIds[] = $row['ItemId'];
-        }
-        return $itemIds;
-    }
-?>
 
 
-<?php
-function drawShoppingCart(PDO $pdo, Session $session) {
-    ?>
-    
-
+<?php function drawShoppingCart($pdo, $session) { ?>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../templates/cart.js"></script>
 
-    <main>
-        <h1 id="myCart">My Shopping Cart</h1>
-        <section id="shoppingCart">
-            <section id="items">
-                <?php
-                
-                $userId = $session->getUserId();
-                $subTotal = ShoppingCart::calculateCartTotal($pdo);
-                $subTotalFormatted =  number_format($subTotal, 2) . '$';
-                
-                if (!$userId) {
-                    echo "<p>Log in to view your shopping cart.</p>";
 
-                } else {
-                    
-                    $itemIds = getItemIdsInCart($pdo, $userId);
-
-                    if ($itemIds) { 
-
-                        foreach ($itemIds as $index => $itemId) : 
-                            $item = Item::getItemWithId($pdo, $itemId); 
-                            $quantity = ShoppingCart::getItemQuantityInCart($pdo, $userId, $itemId);
-                            ?>
-
-                            <div class="cart-item">
-                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
-                                <div class="item-details">
-                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                                        <p><?= $item->name ?></p>
-                                    </a>
-                                    <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
-                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
-                                    <p class="detail"> Model: <?= $item->model ?></p>     
-                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
-                                    <p class="detail"> Category: <?= $item->category ?></p>     
-                                    <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail-quantity"><?= $quantity ?></p>
-                                    <div class="buttons-wrapper">
-                                        <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
-                                        <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
-                                    </div> 
-
-                                </div>
-                            </div>
-                            <?php
-                        endforeach;
-                    } else {
-                        echo "<p>Your shopping cart is empty.</p>";
-                    }
-                }
-                ?>
+    <body>
+        <main>
+            <h1 id="myCart">My Shopping Cart</h1>
+            <section id="shoppingCart">
+                <section id="items">
+                    <!-- Itens carregados via AJAX -->
+                </section>
+                <section id="summary">
+                    <!-- Summary carregado via AJAX -->
+                </section>
             </section>
-            <section id="summary">
-                <h1>Order Summary</h1>
-                <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
-                <button onclick="checkout()">Checkout</button>
-            </section>
-        </section>
-    </main>
+        </main>
     </body>
-    </html>
-    <?php
-}
-?>
+    
+<?php } ?>
 
 <?php
     function getItemIdsInWishList(PDO $pdo, int $userId): array {

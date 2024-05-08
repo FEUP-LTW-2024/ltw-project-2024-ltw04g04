@@ -303,9 +303,9 @@ footer button {
 
 a#editButton {
     align-self: flex-end;
-    position: absolute;
+    position: relative;
     right: 12em;
-    bottom: 18em;
+    bottom: 24em;
 }
 
 #avatar img {

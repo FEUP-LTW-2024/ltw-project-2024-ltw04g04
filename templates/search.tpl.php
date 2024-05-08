@@ -15,6 +15,7 @@
                                 <p class="detail"> Condition: <?= $item['condition'] ?></p>      
                                 <p class="detail"> Category: <?= $item['category'] ?></p>     
                                 <p class="detail"> Size: <?= $item['size'] ?></p>
+                                <p class="detail"> In stock: <?= $item['stock'] ?></p>
                         </div>
                 </div> 
                 </a>

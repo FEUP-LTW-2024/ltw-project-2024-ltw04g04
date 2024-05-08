@@ -8,15 +8,12 @@
     $db = getDatabaseConnection();
 
     if (isset($_POST['itemId']) and isset($_POST['action'])) {
-    
         $itemId = $_POST['itemId'];
         $action = $_POST['action'];
-        $pdo = getDatabaseConnection();
         
-        $result = ShoppingCart::manageCartItem($pdo, $session->getUserId(), $itemId, $action);
-
-        echo json_encode($result); 
-       
+        $result = shoppingCart::manageCartItem($db, $session->getUserId(), $itemId, $action);
+        
+        header('Location: ../pages/cart.php');
         exit();    
     } 
 

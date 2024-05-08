@@ -9,10 +9,11 @@
         public string $model;
         public string $condition;
         public string $category;
+        public int $stock;
         public string $imageLink;
         public int $size;
 
-        public function __construct(int $itemId, string $name, int $price, string $brand, string $model, string $condition, string $category, string $imageLink, int $size) {
+        public function __construct(int $itemId, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size) {
             $this->itemId = $itemId;
             $this->name = $name;
             $this->price = $price;
@@ -20,13 +21,14 @@
             $this->model = $model;
             $this->condition = $condition;
             $this->category = $category;
+            $this->stock = $stock;
             $this->imageLink = $imageLink;
             $this->size = $size;
         }
 
         static function getItemWithId(PDO $db, int $itemId): Item {
             $stmt = $db->prepare('
-                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_
+                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_
                 FROM Item
                 WHERE ItemId = ?
             ');
@@ -42,6 +44,7 @@
                 $item['Model'],
                 $item['Condition'],
                 $item['Category'],
+                $item['Stock'],
                 $item['Image_'] ?? "",
                 $item['Size_'],
                 );
@@ -52,7 +55,7 @@
         static function getItemsWithName(PDO $db, string $itemName): array {
             $items = [];
             $stmt = $db->prepare('
-                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_
+                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_
                 FROM Item
                 WHERE Name_ LIKE ?
             ');
@@ -67,6 +70,7 @@
                     $item['Model'],
                     $item['Condition'],
                     $item['Category'],
+                    $item['Stock'],
                     $item['Image_'] ?? "",
                     $item['Size_']
                 );
@@ -78,7 +82,7 @@
         static function getItemsWithCategory(PDO $db, string $itemCategory): array {
             $items = [];
             $stmt = $db->prepare('
-                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_
+                SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_
                 FROM Item
                 WHERE Category = ?
             ');
@@ -93,6 +97,7 @@
                     $item['Model'],
                     $item['Condition'],
                     $item['Category'],
+                    $item['Stock'],
                     $item['Image_'] ?? "",
                     $item['Size_']
                 );
@@ -123,6 +128,7 @@
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
         }
+
 
         static function getFilteredItems(PDO $db, array $filters): array {
             $sql = 'SELECT * FROM Item WHERE 1';
@@ -162,11 +168,27 @@
                     $item['Model'],
                     $item['Condition'],
                     $item['Category'],
+                    $item['Stock'],
                     $item['Image_'] ?? "",
                     $item['Size_']
                 );
             }
             return $items;
+        }
+
+
+        static function getStockWithItemId(PDO $db, int $itemId): int {
+            $stmt = $db->prepare('
+                SELECT Stock
+                FROM Item
+                WHERE ItemId = ?
+            ');
+
+            $stmt->execute(array($itemId));
+            
+            if ($item = $stmt->fetch()) {
+                return $item['Stock'];
+            } else return null;
         }
         
 
@@ -175,16 +197,24 @@
             $maxId = $stmt->fetchColumn();
             return $maxId + 1;
         }
+
+
+        static function getUserItemIds(PDO $pdo, int $userId): array {
+            $stmt = $pdo->prepare('SELECT ItemId FROM SellerItem WHERE UserId = :userId');
+            $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $result ? $result : [];
+        }
     
-        public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, string $imageLink, int $size): void {
+
+        public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size): void {
             $stmt = $db->prepare('
-                INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Image_, Size_)
+                INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ');
-            $stmt->execute([$idItem, $name, $price, $brand, $model, $condition, $category, $imageLink, $size]);
+            $stmt->execute([$idItem, $name, $price, $brand, $model, $condition, $category, $stock, $imageLink, $size]);
         }
-        
-
     }
 
 ?>
