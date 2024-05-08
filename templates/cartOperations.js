@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     updateCart();
+                    updateSummary();
                 } else {
                     console.error("Error: " + xhr.status);
                 }
@@ -62,13 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
-
-
-
-function updateSubtotal(subtotal) {
-    var subtotalElement = document.getElementById("subtotal");
-    if (subtotalElement) {
-        subtotalElement.textContent = "Subtotal: $" + subtotal.toFixed(2);
+    function updateSummary() {
+        $.ajax({
+            url: '../actions/action_update_summary.php',
+            method: 'GET',
+            success: function(response) {
+                $('#summary').html(response); 
+            }
+        });
     }
-}
+});
