@@ -98,8 +98,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php
-function drawShoppingCart($pdo, $session) {
+function drawShoppingCart(PDO $pdo, Session $session) {
     ?>
+    
 
     <script defer src="../templates/cartOperations.js"></script>
 
@@ -126,13 +127,14 @@ function drawShoppingCart($pdo, $session) {
                             $item = Item::getItemWithId($pdo, $itemId); 
                             $quantity = ShoppingCart::getItemQuantityInCart($pdo, $userId, $itemId);
                             ?>
+
                             <div class="cart-item">
                                 <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
                                 <div class="item-details">
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
                                     </a>
-                                    <p class="detail"><?= $item->price ?> $ </p>  
+                                    <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
                                     <p class="detail"> Brand: <?= $item->brand ?></p>      
                                     <p class="detail"> Model: <?= $item->model ?></p>     
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
@@ -167,14 +169,70 @@ function drawShoppingCart($pdo, $session) {
 }
 ?>
 
+<?php
+    function getItemIdsInWishList(PDO $pdo, int $userId): array {
+        $stmt = $pdo->prepare('SELECT WishList.ItemId
+                        FROM WishList 
+                        WHERE WishList.BuyerId = :userId');
+        $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+        $itemIds = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $itemIds[] = $row['ItemId'];
+        }
+        return $itemIds;
+    }
+?>
 
 
-<?php function drawFavourites() { ?>
+<?php function drawFavourites(PDO $pdo, Session $session) { ?>
+    <script defer src="../templates/cartOperations.js"></script>
         <main>
             <h1 id= "myFavs" >Wish List</h1>
-                <section id="items">
+            <section id="items">
+                <?php
+                
+                $userId = $session->getUserId();
+                
+                if (!$userId) {
+                    echo "<p>Log in to view your wish list.</p>";
+
+                } else {
                     
-                </section>
+                    $itemIds = getItemIdsInWishList($pdo, $userId);
+
+                    if ($itemIds) { 
+
+                        foreach ($itemIds as $index => $itemId) : 
+                            $item = Item::getItemWithId($pdo, $itemId); 
+                            ?>
+
+                            <div class="list-item">
+                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
+                                <div class="item-list-details">
+                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
+                                        <p><?= $item->name ?></p>
+                                    </a>
+                                    <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
+                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
+                                    <p class="detail"> Model: <?= $item->model ?></p>     
+                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
+                                    <p class="detail"> Category: <?= $item->category ?></p>     
+                                    <p class="detail"> Size: <?= $item->size ?></p>
+                                    <p class="detail">
+                                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                    </p>
+
+                                </div>
+                            </div>
+                            <?php
+                        endforeach;
+                    } else {
+                        echo "<p>Your wish list is empty.</p>";
+                    }
+                }
+                ?>
+            </section>
         </main>
     </body>
     </html>

@@ -7,6 +7,7 @@
     require_once(__DIR__ . '/../database/get_database.php');
     require_once(__DIR__ . '/../templates/common.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
+    require_once(__DIR__ . '/../database/wishList.class.php');
     require_once(__DIR__ . '/../database/shoppingCart.class.php');
 
     $session = new Session();
@@ -18,7 +19,7 @@
         $pdo = getDatabaseConnection();
         $user = User::getUserWithId($pdo, $session->getUserId());
         $item = Item::getItemWithId($pdo, $itemId);
-        
+
         drawItem($pdo,$user->userId, $item);
     } else {
         echo "ID do item não fornecido.";

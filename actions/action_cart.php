@@ -14,8 +14,9 @@
         $pdo = getDatabaseConnection();
         
         $result = ShoppingCart::manageCartItem($pdo, $session->getUserId(), $itemId, $action);
-        
-        header('Location: ../pages/cart.php');
+
+        echo json_encode($result); 
+       
         exit();    
     } 
 

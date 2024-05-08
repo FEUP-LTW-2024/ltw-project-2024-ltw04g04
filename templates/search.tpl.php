@@ -16,7 +16,7 @@
                                 <p class="detail"> Category: <?= $item['category'] ?></p>     
                                 <p class="detail"> Size: <?= $item['size'] ?></p>
                         </div>
-                </div>
+                </div> 
                 </a>
             <?php } ?>
         </main>

@@ -27,18 +27,20 @@ function drawItem($pdo, $userId, $item) {
     $sellerProfileURL = $isSeller ? '/../pages/account.php' : '/../pages/seller.php';
     $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
 ?>
-
-<script src="../templates/cartOperations.js"></script>
-    <body>
+    <script src="../templates/cartOperations.js"></script>
+ 
         <main>
             <section id="item">
                 <div id="itemImg"><img src="imgs/itemTemplate.png" alt="Image of item"></div>  
                 <div id="containers">
                     <div id="itemContainer">
                         <h2><?= $item->name ?></h2>      
-                        <p> <?= $item->price ?> $ </p>  
+                        <p> <?= number_format($item->price, 2) ?> $ </p>  
                         <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
-
+                        <p class = "detail">
+                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                        Favourite</p>
+                        
                         <nav id="details">
                             <input type="checkbox" id="hamburger"> 
 
@@ -68,7 +70,6 @@ function drawItem($pdo, $userId, $item) {
 
             </section>
         </main> 
-    </body>
 <?php } ?>
 
 <?php
