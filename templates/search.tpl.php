@@ -17,7 +17,7 @@
                                 <p class="detail"> Size: <?= $item['size'] ?></p>
                                 <p class="detail"> In stock: <?= $item['stock'] ?></p>
                         </div>
-                </div>
+                </div> 
                 </a>
             <?php } ?>
         </main>

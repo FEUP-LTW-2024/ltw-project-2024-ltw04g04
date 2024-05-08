@@ -177,3 +177,9 @@ VALUES (4, 104);
 INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
 VALUES (1, 4, 101, 2);
 
+--Populate Wishlist table
+INSERT INTO Wishlist (WishListId, BuyerId, ItemId)
+VALUES (1, 4, 101, 2);
+
+
+
