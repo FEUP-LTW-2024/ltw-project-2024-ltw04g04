@@ -11,5 +11,5 @@
     $db = getDatabaseConnection();
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
-    drawPayment($db, $session);
+    drawPayAdress($db, $session);
 ?>

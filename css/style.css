@@ -904,11 +904,21 @@ nav#details {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);   
 }
 
 .payDiv {
     margin-bottom: 20px;
+}
+
+#payAdress {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+#payInfo {
+    margin-top: 50px;
+    border-top: 1.2px solid #999999;
 }
 
 input[type="text"] {
