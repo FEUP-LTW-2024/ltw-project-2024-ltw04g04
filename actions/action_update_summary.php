@@ -11,13 +11,13 @@
     if (!$userId) { ?>
         <h1>Order Summary</h1>
         <p id="subtotal">Subtotal: </p> 
-        <button onclick="checkout()">Checkout</button> 
+        
     <?php } else { 
         $subTotal = shoppingCart::calculateCartTotal($db);
         $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
         <h1>Order Summary</h1>
         <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
-        <button onclick="checkout()">Checkout</button>  
+        <button onclick="window.location.href = 'payment.php'">Checkout</button>  
     <?php } ?>
     
 <?php ?>

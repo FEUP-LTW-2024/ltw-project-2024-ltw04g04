@@ -1,10 +1,11 @@
 <?php 
     include_once 'account.tpl.php'; 
+    require_once(__DIR__ . '/../database/item.class.php');
 ?>
 
 
 <?php function drawSellerProfile(PDO $pdo, User $user, bool $isCurrentUser) { 
-    $items = getUserItemIds($pdo, $user->userId);
+    $items = Item::getUserItemIds($pdo, $user->userId);
     ?>
     <main>
         <section id="profile">
