@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawPayAdress(PDO $db, Session $session) { ?>
+<?php function drawDelivery(PDO $db, Session $session) { ?>
         <body>
             <main>
             <div class="payContainer">
-                <h1>Payment</h1>
+                <h1>Delivery</h1>
                 <div class="payForm">
                     <div id="payAdress">
-                        <button type="submit"> Use your account's information </button>
+                        <button id="accountAdressButton" type="submit"> Use your account's adress </button>
                         <p> or </p>
                     </div>
 
@@ -29,7 +29,7 @@
                             <input type="text" id="postal-code" name="postal-code" required>
                         </div>
                         <div class="payDiv">
-                            <button type="submit"> Continue </button>
+                            <button id="otherAdressButton" type="submit"> Continue </button>
                         </div>
 
                     </form>
@@ -42,7 +42,6 @@
 
 
 <?php function drawPayment(PDO $db, Session $session) { ?>
-        
     <body>
         <main>
         <div class="payContainer">
@@ -72,5 +71,4 @@
         </div>
         </main>
     </body>
-
 <?php } ?>

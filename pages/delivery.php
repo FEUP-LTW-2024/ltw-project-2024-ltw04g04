@@ -8,5 +8,5 @@
 
     $session = new Session();
     $db = getDatabaseConnection();
-    drawPayment($db, $session);
+    drawDelivery($db, $session);
 ?>
