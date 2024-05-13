@@ -1,4 +1,7 @@
-<?php declare(strict_types = 1); ?>
+<?php 
+declare(strict_types = 1); 
+require_once(__DIR__ . '/../database/user.class.php');
+?>
 
 <?php function drawPayment(PDO $db, Session $session) { ?>
     <script src="../templates/payment.js"></script>
@@ -12,7 +15,13 @@
 
                 <h2 class="subtitlePayment"> Delivery </h2>
                 <div id="payAdress">
-                    <?php ?>
+                    <?php
+                    if ($session->isLogin()) {
+                        $userId = $session->getUserId();
+                        $cond = User::adressIsComplete($db, $userId);
+                        echo "<script> accountAdressComplete = $cond; </script>";
+                    } 
+                    ?>
                     <button id="toggleAdressButton" class="toggle-button"> Use your account's adress </button>
                     <p> or </p>
                 </div>
@@ -41,7 +50,7 @@
                         <input type="text" id="card-number" name="card-number" required>
                     </div>
                     <div class="payDiv">
-                        <label for="expiration-date">Expiration Date:</label>
+                        <label for="expiration-date">Expiration Date (MM/AA):</label>
                         <input type="text" id="expiration-date" name="expiration-date" placeholder="MM/AA" required>
                     </div>
                     <div class="payDiv">

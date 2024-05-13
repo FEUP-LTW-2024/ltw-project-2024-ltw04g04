@@ -8,8 +8,9 @@
     
 
     $session = new Session();
-    $db = getDatabaseConnection();
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
+
+    $db = getDatabaseConnection();
     drawPayment($db, $session);
 ?>

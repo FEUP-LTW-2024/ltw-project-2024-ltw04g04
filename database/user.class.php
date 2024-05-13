@@ -63,7 +63,7 @@
       } else {
           return null;
       }
-  }  
+    }  
 
 
     static function getUserWithId(PDO $db, int $id) : User {
@@ -90,6 +90,22 @@
       } else return null;
     }
 
+    static function adressIsComplete(PDO $db, int $userId) {
+      $stmt = $db->prepare('SELECT Adress, City, Country, PostalCode FROM User WHERE UserId = ?');
+      $stmt->execute([$userId]);
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if ($user) {
+          if ($user['Adress'] && $user['City'] && $user['Country'] && $user['PostalCode']) {
+              return true; 
+          } else {
+              return false; 
+          }
+      } else {
+          return false;
+      }
+    }
+
     
     static function emailExists(PDO $db, string $email) {
       $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(Email) = ?');
@@ -105,7 +121,7 @@
       return $count > 0;
     }
 
-    static function upgradeUser(PDO $db, string $username_, string $name_, string $address_, string $city_, string $country_, string $postalCode_, int $id_) {
+    static function updateUser(PDO $db, string $username_, string $name_, string $address_, string $city_, string $country_, string $postalCode_, int $id_) {
       $stmt = $db->prepare('
         UPDATE User SET Username = ?, Name_ = ?, Adress = ?, City = ?, Country = ?, PostalCode = ?
         WHERE UserId = ?
