@@ -11,7 +11,7 @@
       public string $city;
       public string $country;
       public string $postalCode;
-      public bool $isAdmin; // Novo campo
+      public bool $isAdmin; 
 
       public function __construct(int $userId, string $username, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode, bool $isAdmin = false) {
           $this->userId = $userId;
@@ -24,6 +24,16 @@
           $this->country = $country;
           $this->postalCode = $postalCode;
           $this->isAdmin = $isAdmin; 
+      }
+
+      public function setIsAdmin(PDO $db, bool $isAdmin) {
+        $this->isAdmin = $isAdmin;
+        $stmt = $db->prepare('
+            UPDATE User 
+            SET IsAdmin = ?
+            WHERE UserId = ?
+        ');
+        $stmt->execute([$isAdmin ? true : false, $this->userId]);
       }
 
       static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
@@ -57,7 +67,7 @@
                   $user['City'] ?? "",
                   $user['Country'] ?? "",
                   $user['PostalCode'] ?? "",
-                  $user['IsAdmin'] === '1' // Converte para booleano
+                  $user['IsAdmin'] == true
               );
           } else {
               return null;
@@ -86,7 +96,7 @@
                   $user['City'] ?? "",
                   $user['Country'] ?? "",
                   $user['PostalCode'] ?? "",
-                  $user['IsAdmin'] === '0' 
+                  $user['IsAdmin'] == true
               );
           } else {
               return null;

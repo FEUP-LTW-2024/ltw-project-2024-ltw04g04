@@ -11,7 +11,7 @@
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
             <div id="userInfo">
-                <h1><?= $user->name ?></h1>
+                <h1><?= $user->name ?> <?php if ($user->isAdmin) : ?><img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"><?php endif; ?></h1>
                 <p><strong>Username:</strong> <?= $user->username ?></p>
                 <p><strong>Email:</strong> <?= $user->email ?></p>
                 <p><strong>City:</strong> <?= $user->city ?></p>

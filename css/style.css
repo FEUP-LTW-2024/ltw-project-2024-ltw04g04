@@ -40,6 +40,11 @@ header {
     }
 }
 
+.verified {
+    width: 30px;  
+    height: 30px;
+}
+
 #navbar div {
     margin: 0 10px;
 }
