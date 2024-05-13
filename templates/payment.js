@@ -1,4 +1,5 @@
-var accountAdress = false;
+var accountAdressSelected = false;
+var accountAdressComplete;
 
 document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.getElementById('toggleAdressButton');
@@ -6,32 +7,50 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleButton.addEventListener('click', function() {
         this.classList.toggle('selected');
         if (this.classList.contains('selected')) {
-            accountAdress = true;
+            accountAdressSelected = true;
         } else {
-            accountAdress = false;
+            accountAdressSelected = false;
         }
     });
 });
 
-document.getElementById("accountAdressButton").addEventListener("click", function() {
-    if ( true ) {
-        window.location.href = "...";
+function validatePaymentForm() {
+    if (accountAdressSelected) {
+        if (!accountAdressComplete) { 
+            // 'Your account information isn't complete'
+            return false;
+        }  
     } else {
-        console.log("Condição não cumprida.");
+        var adress = document.getElementById("adress").value;
+        var city = document.getElementById("city").value;
+        var country = document.getElementById("country").value;
+        var postalCode = document.getElementById("postal-code").value;
+
+        // 'Please fill out all the delivery form'
+        if (adress === "" || city === "" || country === "" || postalCode === "") {
+            return false;
+        }
     }
-});
 
+    var cardNumber = document.getElementById('card-number').value;
+    var expiryDate = document.getElementById('expiry-date').value;
+    var cvv = document.getElementById('cvv').value;
 
-document.getElementById("otherAdressButton").addEventListener("click", function() {
-    var adress = document.getElementById("adress").value;
-    var city = document.getElementById("city").value;
-    var country = document.getElementById("country").value;
-    var postalCode = document.getElementById("postal-code").value;
-
-    if (adress === "" || city === "" || country === "" || postalCode === "") {
-        window.location.href = "...";
-    } else {
-        console.log("Condição não cumprida.");
+    if (cardNumber.length !== 16) {
+        // 'Please enter a valid card number'
+        return false; 
     }
-});
+
+    if (expiryDate.length !== 5 || !expiryDate.match(/^\d{2}\/\d{2}$/)) {
+        // 'Please enter a valid expiration date in the format MM/YY'
+        return false; 
+    }
+
+    if (cvv.length !== 3) {
+        //'Please enter a valid CVV'
+        return false; 
+    }
+
+    return true;
+}
 

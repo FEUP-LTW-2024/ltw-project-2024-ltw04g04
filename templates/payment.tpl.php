@@ -17,22 +17,22 @@
                     <p> or </p>
                 </div>
 
-                <form action="action_process_payment.php" method="POST">    <!-- Criar action -->    
+                <form action="action_process_payment.php" method="POST" onsubmit="return validatePaymentForm()">    <!-- Criar action -->    
                     <div class="payDiv">
                         <label for="adress">Adress:</label>
-                        <input type="text" id="adress" name="adress" required>
+                        <input type="text" id="adress" name="adress">
                     </div>
                     <div class="payDiv">
                         <label for="city">City:</label>
-                        <input type="text" id="city" name="city" required>
+                        <input type="text" id="city" name="city">
                     </div>
                     <div class="payDiv">
                         <label for="country">Country:</label>
-                        <input type="text" id="country" name="country" required>
+                        <input type="text" id="country" name="country">
                     </div>
                     <div class="payDiv">
                         <label for="postal-code">Postal Code:</label>
-                        <input type="text" id="postal-code" name="postal-code" required>
+                        <input type="text" id="postal-code" name="postal-code">
                     </div>
 
                     <h2 class="subtitlePayment"> Payment Method </h2>
@@ -49,7 +49,7 @@
                         <input type="text" id="cvv" name="cvv" required>
                     </div>
                     <div class="payDiv">
-                        <button type="submit"> Pay now </button>
+                        <button type="submit"> Submit payment </button>
                     </div>
                 </form>
 
