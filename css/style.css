@@ -911,14 +911,15 @@ nav#details {
     margin-bottom: 20px;
 }
 
-#payAdress {
-    text-align: center;
-    padding-bottom: 10px;
+.subtitlePayment {
+    border-top: 1.2px solid #999999;
+    margin-top: 1.5em;
+    padding-top: 0.5em;
 }
 
-#payInfo {
-    margin-top: 50px;
-    border-top: 1.2px solid #999999;
+#payAdress {
+    text-align: center;
+    padding-bottom: 0.5em;
 }
 
 input[type="text"] {
@@ -927,4 +928,16 @@ input[type="text"] {
     border-radius: 5px;
     border: 1px solid #ccc;
     box-sizing: border-box;
+}
+
+.toggle-button {
+    padding: 10px 20px 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.toggle-button.selected {
+    background-color: #7bcfe8;
+    color: #fff;
 }

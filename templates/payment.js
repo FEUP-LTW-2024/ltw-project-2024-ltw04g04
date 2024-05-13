@@ -1,7 +1,20 @@
+var accountAdress = false;
 
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggleAdressButton');
+
+    toggleButton.addEventListener('click', function() {
+        this.classList.toggle('selected');
+        if (this.classList.contains('selected')) {
+            accountAdress = true;
+        } else {
+            accountAdress = false;
+        }
+    });
+});
 
 document.getElementById("accountAdressButton").addEventListener("click", function() {
-    if ( ) {
+    if ( true ) {
         window.location.href = "...";
     } else {
         console.log("Condição não cumprida.");

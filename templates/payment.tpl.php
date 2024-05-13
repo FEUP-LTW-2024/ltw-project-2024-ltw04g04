@@ -1,15 +1,19 @@
 <?php declare(strict_types = 1); ?>
 
 <?php function drawPayment(PDO $db, Session $session) { ?>
+    <script src="../templates/payment.js"></script>
     <body>
         <main>
             <div class="payContainer">
                 <h1>Payment</h1>
+                <div id="payInfo">
+                        <p> Value: </p>
+                </div>
 
                 <h2 class="subtitlePayment"> Delivery </h2>
                 <div id="payAdress">
                     <?php ?>
-                    <button id="accountAdressButton" type="submit"> Use your account's adress </button>
+                    <button id="toggleAdressButton" class="toggle-button"> Use your account's adress </button>
                     <p> or </p>
                 </div>
 
@@ -44,9 +48,6 @@
                         <label for="cvv">CVV:</label>
                         <input type="text" id="cvv" name="cvv" required>
                     </div>
-                    <div id="payInfo">
-                        <p> Value: </p>
-                    </div>
                     <div class="payDiv">
                         <button type="submit"> Pay now </button>
                     </div>
@@ -55,4 +56,5 @@
             </div>
         </main>
     </body>
+    
 <?php } ?>
