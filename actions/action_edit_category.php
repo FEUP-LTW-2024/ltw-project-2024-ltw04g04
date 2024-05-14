@@ -19,7 +19,7 @@ declare(strict_types = 1);
         $stmt = $db->prepare('INSERT INTO Category (CategoryName) VALUES (?)');
         $stmt->execute([$new_category_name]);
         
-        header('Location: ./admin_categories.php');
+        header('Location: ../pages/edit_category.php');
         exit();
     }
 
@@ -31,7 +31,7 @@ declare(strict_types = 1);
         $item_count = (int) $stmt->fetchColumn();
         
         if ($item_count === 0) {
-            $stmt = $db->prepare('DELETE FROM Category WHERE CategoryId = ?');
+            $stmt = $db->prepare('DELETE FROM Category WHERE CategoryName = ?');
             $stmt->execute([$category_id_to_delete]);
         } else {
 
@@ -41,4 +41,7 @@ declare(strict_types = 1);
 
     $stmt = $db->query('SELECT * FROM Category');
     $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    header('Location: ../pages/edit_category.php');
+    exit();
 ?>
