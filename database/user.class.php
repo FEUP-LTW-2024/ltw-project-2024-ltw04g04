@@ -2,94 +2,99 @@
   declare(strict_types = 1);
 
   class User {
-    public int $userId;
-    public string $username;
-    public string $name;
-    public string $email;
-    public string $password;
-    public string $address;
-    public string $city;
-    public string $country;
-    public string $postalCode;
-    
+      public int $userId;
+      public string $username;
+      public string $name;
+      public string $email;
+      public string $password;
+      public string $address;
+      public string $city;
+      public string $country;
+      public string $postalCode;
+      public bool $isAdmin; 
 
-    public function __construct(int $userId, string $username, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode) {
-      $this->userId = $userId;
-      $this->username = $username;
-      $this->name = $name;
-      $this->email = $email;
-      $this->password = $password;
-      $this->address = $address;
-      $this->city = $city;
-      $this->state = $state;
-      $this->country = $country;
-      $this->postalCode = $postalCode;
-    }
-
-
-    static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
-      $stmt = $db->prepare('
-        INSERT INTO User (Username, Name_, Email, Password_)
-        VALUES (?, ?, ?, ?)
-      ');
-
-      $stmt->execute(array( $username, $name, strtolower($email), sha1($password)));
-    }
-    
-
-    static function loginUser(PDO $db, string $email, string $password) : ?User {
-      $stmt = $db->prepare('
-          SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode
-          FROM User
-          WHERE Email = ? AND Password_ = ?
-      ');
-  
-      $stmt->execute(array(strtolower($email), sha1($password)));
-  
-      $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    
-      if ($user) {
-          return new User(
-              $user['UserId'],
-              $user['Username'],
-              $user['Name_'],
-              $user['Email'],
-              $user['Password_'],
-              $user['Adress'] ?? "",
-              $user['City'] ?? "",
-              $user['Country'] ?? "",
-              $user['PostalCode'] ?? ""
-          );
-      } else {
-          return null;
+      public function __construct(int $userId, string $username, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode, bool $isAdmin = false) {
+          $this->userId = $userId;
+          $this->username = $username;
+          $this->name = $name;
+          $this->email = $email;
+          $this->password = $password;
+          $this->address = $address;
+          $this->city = $city;
+          $this->country = $country;
+          $this->postalCode = $postalCode;
+          $this->isAdmin = $isAdmin; 
       }
-    }  
 
 
-    static function getUserWithId(PDO $db, int $id) : User {
-      $stmt = $db->prepare('
-        SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode
-        FROM User
-        WHERE UserId = ?
-      ');
+      static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
+          $stmt = $db->prepare('
+              INSERT INTO User (Username, Name_, Email, Password_)
+              VALUES (?, ?, ?, ?)
+          ');
 
-      $stmt->execute(array($id));
+          $stmt->execute(array($username, $name, strtolower($email), sha1($password)));
+      }
+
+      static function loginUser(PDO $db, string $email, string $password) : ?User {
+          $stmt = $db->prepare('
+              SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin
+              FROM User
+              WHERE Email = ? AND Password_ = ?
+          ');
+
+          $stmt->execute(array(strtolower($email), sha1($password)));
+
+          $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          if ($user) {
+              return new User(
+                  $user['UserId'],
+                  $user['Username'],
+                  $user['Name_'],
+                  $user['Email'],
+                  $user['Password_'],
+                  $user['Adress'] ?? "",
+                  $user['City'] ?? "",
+                  $user['Country'] ?? "",
+                  $user['PostalCode'] ?? "",
+                  $user['IsAdmin'] == true
+              );
+          } else {
+              return null;
+          }
+      }
+
+      static function getUserWithId(PDO $db, int $id) : ?User {
+          $stmt = $db->prepare('
+              SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin
+              FROM User
+              WHERE UserId = ?
+          ');
+
+          $stmt->execute(array($id));
+
+          $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+          if ($user) {
+              return new User(
+                  $user['UserId'],
+                  $user['Username'],
+                  $user['Name_'],
+                  $user['Email'],
+                  $user['Password_'],
+                  $user['Adress'] ?? "",
+                  $user['City'] ?? "",
+                  $user['Country'] ?? "",
+                  $user['PostalCode'] ?? "",
+                  $user['IsAdmin'] == true
+              );
+          } else {
+              return null;
+          }
+      }
+
       
-      if ($user = $stmt->fetch()) {
-        return new User(
-          $user['UserId'],
-          $user['Username'],
-          $user['Name_'],
-          $user['Email'],
-          $user['Password_'],
-          $user['Adress'] !== null ? $user['Adress'] : "",
-          $user['City'] !== null ? $user['City'] : "",
-          $user['Country'] !== null ? $user['Country'] : "",
-          $user['PostalCode'] !== null ? $user['PostalCode'] : ""
-        );
-      } else return null;
-    }
-
     static function adressIsComplete(PDO $db, int $userId) {
       $stmt = $db->prepare('SELECT Adress, City, Country, PostalCode FROM User WHERE UserId = ?');
       $stmt->execute([$userId]);
@@ -138,5 +143,17 @@
       $stmt->execute(array($username_, $name_, $address_, $city_, $country_, $postalCode_, $id_));
     }
 
+    public static function upgradeUserToAdmin(PDO $db, int $user_id) {
+      $stmt = $db->prepare('UPDATE User SET isAdmin = true WHERE userId = ?');
+      $stmt->execute([$user_id]);
+    }
+
+
+    public static function downgradeUser(PDO $db, int $user_id) {
+        $stmt = $db->prepare('UPDATE User SET isAdmin = false WHERE userId = ?');
+        $stmt->execute([$user_id]);
+    }
+
   }
+
 ?>

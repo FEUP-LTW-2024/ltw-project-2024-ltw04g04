@@ -40,6 +40,11 @@ header {
     }
 }
 
+.verified {
+    width: 30px;  
+    height: 30px;
+}
+
 #navbar div {
     margin: 0 10px;
 }
@@ -205,14 +210,16 @@ footer button {
     width: 75%; 
 }
 
-#summary button, #editButton, #addItemButto, .button-create-item {
+#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
     text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 20px;
     border-width: 1px;
@@ -726,7 +733,8 @@ nav#details {
     margin-left: 14%; 
 }
 
-#articles h2, #sellerItems h2, .creationHeader {
+#articles h2, #sellerItems h2, .creationHeader, .editCategory {
+    margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
     position: relative; 
@@ -876,7 +884,7 @@ nav#details {
     text-align: center;
 }
 
-.button-create-item:hover {
+.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -895,6 +903,7 @@ nav#details {
     border-radius: 50%;
 }
 
+<<<<<<< HEAD
 
 /* Payment */
 
@@ -940,4 +949,44 @@ input[type="text"] {
 .toggle-button.selected {
     background-color: #7bcfe8;
     color: #fff;
+=======
+/*Change categories  and admin properties*/
+
+.admin-text {
+    font-size: 14px;
+    color: #179CF0;
+    font-weight: bold;
+    font-style: italic;
+}
+
+
+.category-container {
+    margin: 3em auto; 
+    max-width: 30em; 
+    padding: 1.5em; 
+    border: 0.1em solid black; 
+}
+
+
+.button-delete-category, .button-add-category {
+    margin-left: 1em;
+    margin-top: 1em; 
+}
+
+.make-admin, .remove-admin  {
+    font-family: "Sulphur Point", sans-serif;
+    background-color: #BBE4F1;
+    color: #656363;
+    margin-top: 1em;
+    text-align: center;
+    display: inline-block;
+    width: 12%;
+    text-decoration: none;
+    font-size: 12px;
+    padding-top: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+    border-radius: 40%;
+    border: 5px solid #179CF0;
+>>>>>>> 985b7b6cf3c64ac729242920f8a14ee9e0c39e1d
 }

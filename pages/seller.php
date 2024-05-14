@@ -20,5 +20,5 @@
 
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
-    drawSellerProfile($pdo, $user, $isCurrentUser);
+    drawSellerProfile($session, $pdo, $user, $isCurrentUser);
 ?>
