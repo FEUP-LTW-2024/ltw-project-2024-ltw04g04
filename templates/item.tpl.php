@@ -38,7 +38,7 @@ function drawItem($pdo, $userId, $item) {
     <script src="../templates/cartOperations.js"></script>
         <main>
             <section id="item">
-                <div id="itemImg"><img src="imgs/itemTemplate.png" alt="Image of item"></div>  
+                <div id="itemImg"><img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>"></div>   
                 <div id="containers">
                     <div id="itemContainer">
                         <h2><?= $item->name ?></h2>      

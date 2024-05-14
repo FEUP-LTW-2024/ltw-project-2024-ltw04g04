@@ -2,6 +2,7 @@
     declare(strict_types = 1);
     require_once(__DIR__ . '/../database/shoppingCart.class.php');
     require_once(__DIR__ . '/../database/item.class.php');
+    require_once(__DIR__ . '/../database/insertImages.php');
 ?>
 
 
@@ -184,12 +185,13 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
                         foreach ($itemIds as $index => $itemId) : 
                             $item = Item::getItemWithId($pdo, $itemId); 
+                            //$item->imageLink = '/pages/imgs/imgsForitems/item1.jpg';
                             $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $itemId);
                             $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
                             ?>
 
                             <div class="list-item">
-                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
+                                <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
                                 <div class="item-list-details">
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
