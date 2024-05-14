@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1); ?>
+<?php declare(strict_types = 1); 
+ require_once(__DIR__ . '/../database/wishList.class.php');
+?>
 
 <?php
 function getSellerNamePD(PDO $pdo, $itemId) {
@@ -30,6 +32,8 @@ function drawItem($pdo, $userId, $item) {
     }
     $sellerProfileURL = $isSeller ? '/../pages/account.php' : '/../pages/seller.php';
     $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
+    $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $item->itemId);
+    $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
 ?>
     <script src="../templates/cartOperations.js"></script>
         <main>
@@ -41,8 +45,8 @@ function drawItem($pdo, $userId, $item) {
                         <p> <?= number_format($item->price, 2) ?> $ </p>    
                         <p> Available Stock: <?= $item->stock ?> </p>
                         <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
-                        <p class = "detail">
-                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                        <p class="detail">
+                            <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon" id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
                         Favourite</p>
                         
                         <nav id="details">
