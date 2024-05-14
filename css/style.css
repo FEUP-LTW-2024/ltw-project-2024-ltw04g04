@@ -21,11 +21,33 @@ a {
 }
 
 
-/* Estilos do Header */
+/* Header */
 header {
     padding: 20px;
     background-color: #BBE4F1;
     border-bottom: 1px solid #e7e7e7;
+    border-radius: 0px;
+}
+
+/* Footer */
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 60vh;
+}
+
+.content {
+    flex: 1;
+}
+
+footer {
+    background-color:rgb(189, 181, 181); 
+    position: relative;
+    bottom: 0;
+    padding: 10px;
+    margin-top: 2em;
+    text-align: center; 
 }
 
 /* Navbar */
@@ -149,7 +171,7 @@ main .productinfo  h1 {
 }
 
 /* Footer */
-footer {
+.customize {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 16px;
@@ -157,13 +179,13 @@ footer {
     position: relative;
 }
 
-footer p {
+.customize p {
     text-align: left; 
     margin-left: 30px; 
     margin-bottom: 40px; 
 }
 
-footer button {
+.customize button {
     font-family: "Sulphur Point", sans-serif;
     color: #656363;
     padding: 10px 20px; 
@@ -902,6 +924,53 @@ nav#details {
     background-color: #BBE4F1;
     border-radius: 50%;
 }
+
+/* Payment */
+
+.payContainer {
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);   
+}
+
+.payDiv {
+    margin-bottom: 20px;
+}
+
+.subtitlePayment {
+    border-top: 1.2px solid #999999;
+    margin-top: 1.5em;
+    padding-top: 0.5em;
+}
+
+#payAdress {
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.toggle-button {
+    padding: 10px 20px 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.toggle-button.selected {
+    background-color: #7bcfe8;
+    color: #fff;
+}
+
 
 /*Change categories  and admin properties*/
 

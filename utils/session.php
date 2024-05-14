@@ -31,7 +31,7 @@
 
     public function isAdmin(): bool {
       return isset($_SESSION['admin']) && $_SESSION['admin'] === true;
-  }
+    }
 
     public function setUserId(int $id) {
       $_SESSION['id'] = $id;

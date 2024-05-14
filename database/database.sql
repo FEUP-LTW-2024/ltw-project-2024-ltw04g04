@@ -229,8 +229,8 @@ INSERT INTO SellerItem (UserId, ItemId)
 VALUES (4, 104);
 
 --Populate ShoppingCart table
-INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
-VALUES (1, 4, 101, 2);
+--INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
+--VALUES (1, 4, 101, 2);
 
 --Populate Wishlist table
 INSERT INTO Wishlist (WishListId, BuyerId, ItemId)

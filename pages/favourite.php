@@ -12,4 +12,5 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
     drawFavourites($pdo, $session);
+    generateFooter();
 ?>
