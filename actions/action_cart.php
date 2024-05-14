@@ -1,25 +1,37 @@
 <?php
-    declare(strict_types = 1);
-    require_once(__DIR__ . '/../database/get_database.php');
-    require_once(__DIR__ . '/../utils/session.php');
-    require_once(__DIR__ . '/../database/shoppingCart.class.php');
+declare(strict_types = 1);
+require_once(__DIR__ . '/../database/get_database.php');
+require_once(__DIR__ . '/../utils/session.php');
+require_once(__DIR__ . '/../database/shoppingCart.class.php');
 
-    $session = new Session();
-    $db = getDatabaseConnection();
+$session = new Session();
+$db = getDatabaseConnection();
 
-    if (!$session->isLogin()) {
-        header('Location: ../pages/login.php');
-        exit();
-    }
+if (!$session->isLogin()) {
+    header('Location: ../pages/login.php');
+    exit();
+}
 
-    if (isset($_POST['itemId']) and isset($_POST['action'])) {
-        $itemId = $_POST['itemId'];
-        $action = $_POST['action'];
-        
+if (isset($_POST['itemId']) && isset($_POST['action'])) {
+    $itemId = intval($_POST['itemId']); 
+    $action = $_POST['action'];
+    
+    if ($action === 'add' || $action === 'remove' || $action === 'decrease' || $action == 'total') {
         $result = shoppingCart::manageCartItem($db, $session->getUserId(), $itemId, $action);
         
-        header('Location: ../pages/cart.php');
-        exit();    
-    } 
-
+        if ($result) {
+            header('Location: ../pages/cart.php');
+            exit();
+        } else {
+            header('Location: ../pages/error.php');
+            exit();
+        }
+    } else {
+        header('Location: ../pages/error.php');
+        exit();
+    }
+} else {
+    header('Location: ../pages/error.php');
+    exit();
+}
 ?>
