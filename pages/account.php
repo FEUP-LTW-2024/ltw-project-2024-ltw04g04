@@ -17,4 +17,5 @@
     $categories = getCategories();
     generateNavigationMenu($session,$categories);
     drawUserPage($pdo, $user, $editMode);
+    generateFooter();
 ?>

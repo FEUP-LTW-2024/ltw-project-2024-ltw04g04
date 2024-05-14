@@ -14,4 +14,5 @@
     generateNavigationMenu($session, $categories);
 
     sellingItem($pdo);
+    generateFooter();
 ?>

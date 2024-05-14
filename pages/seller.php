@@ -18,4 +18,5 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
     drawSellerProfile($session, $pdo, $user, $isCurrentUser);
+    generateFooter();
 ?>

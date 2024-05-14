@@ -29,4 +29,5 @@
     } else {
         echo "ID do item não fornecido.";
     }
+    generateFooter();
 ?>
