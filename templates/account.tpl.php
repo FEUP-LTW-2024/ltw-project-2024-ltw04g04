@@ -85,49 +85,53 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 <?php function drawShoppingCart($db, $session) { ?>
     <script defer src="../templates/cartOperations.js"></script>
 
-    <?php 
-        $userId = $session->getUserId(); 
-        $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
-    ?>
+    <?php $userId = $session->getUserId(); ?>
 
     <body>
         <main>
             <h1 id="myCart">My Shopping Cart</h1>
             <section id="shoppingCart">
                 <section id="items">
-                   <?php if ($itemIds) { 
-                        foreach ($itemIds as $index => $itemId) : 
-                            $item = Item::getItemWithId($db, $itemId); 
-                            $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
-                            ?>
-                            <div class="cart-item">
-                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
-                                <div class="item-details">
-                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                                        <p><?= $item->name ?></p>
-                                    </a>
-                                    <p class="detail"><?= $item->price ?> $ </p>  
-                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
-                                    <p class="detail"> Model: <?= $item->model ?></p>     
-                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
-                                    <p class="detail"> Category: <?= $item->category ?></p>          
-                                    <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail"> In stock: <?= $item->stock ?></p>
-                                    <div class="buttons-wrapper">
-                                        <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
-                                        <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
-                                        <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
+                   <?php if (!$userId) {
+                            echo "<p>Log in to view your shopping cart.</p>";
 
-                                        <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
-                                    </div> 
+                        } else {
+                            $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
 
-                                </div>
-                            </div>
-                            <?php
-                        endforeach;
-                    } else {
-                        echo "<p>Your shopping cart is empty.</p>";
-                    }
+                            if ($itemIds) { 
+                                foreach ($itemIds as $index => $itemId) : 
+                                    $item = Item::getItemWithId($db, $itemId); 
+                                    $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
+                                    ?>
+                                    <div class="cart-item">
+                                        <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
+                                        <div class="item-details">
+                                            <a href="../pages/item.php?id=<?= $item->itemId ?>">
+                                                <p><?= $item->name ?></p>
+                                            </a>
+                                            <p class="detail"><?= $item->price ?> $ </p>  
+                                            <p class="detail"> Brand: <?= $item->brand ?></p>      
+                                            <p class="detail"> Model: <?= $item->model ?></p>     
+                                            <p class="detail"> Condition: <?= $item->condition ?></p>      
+                                            <p class="detail"> Category: <?= $item->category ?></p>          
+                                            <p class="detail"> Size: <?= $item->size ?></p>
+                                            <p class="detail"> In stock: <?= $item->stock ?></p>
+                                            <div class="buttons-wrapper">
+                                                <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
+                                                <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
+                                                <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
+
+                                                <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
+                                            </div> 
+
+                                        </div>
+                                    </div>
+                                    <?php
+                                endforeach;
+                            } else {
+                                echo "<p>Your shopping cart is empty.</p>";
+                            }
+                        }
                     ?>
                 </section>
                 <section id="summary">
