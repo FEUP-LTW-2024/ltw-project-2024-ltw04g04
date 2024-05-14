@@ -82,34 +82,7 @@ function updateSubtotal(subtotal) {
     }
 }
 
-function updateHeartIconStyle(itemId) {
-    let heartIcon = document.getElementById('heart-icon');
-    let isInWishlist = localStorage.getItem('wishlist_' + itemId); 
-    if (isInWishlist === 'true') {
-        heartIcon.classList.add('in-wishlist');
-    } else {
-        heartIcon.classList.remove('in-wishlist');
-    }
-}
-
-function updateWishlistState(itemId, isInWishlist) {
-    localStorage.setItem('wishlist_' + itemId, isInWishlist); 
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    let heartIcon = document.getElementById('heart-icon');
-    if (heartIcon) {
-        let itemId = heartIcon.dataset.itemId; 
-        updateHeartIconStyle(itemId); 
-        heartIcon.addEventListener('click', function() {
-            let itemId = this.dataset.itemId;
-            toggleWishlist(itemId); 
-        });
-    } else {
-        console.error("Element with ID 'heart-icon' not found");
-    }
-});
-
+// Função para adicionar ou remover um item da lista de desejos
 function toggleWishlist(itemId) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/../actions/action_wish_list.php', true);
@@ -118,16 +91,41 @@ function toggleWishlist(itemId) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
             if (response.success) {
-                //alert(response.success);
-                updateWishlistState(itemId, response.isInWishlist);
-                updateHeartIconStyle(itemId);
+                updateHeartIconStyle(itemId, response.isInWishlist);
             } else {
                 alert(response.error);
             }
         }
     };
     xhr.send('itemId=' + encodeURIComponent(itemId));
-}; 
+}
+
+// Função para obter os IDs dos itens da lista de desejos
+function getItemIds() {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/../actions/action_get_item_ids.php', false); // Síncrono
+    xhr.send();
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        let response = JSON.parse(xhr.responseText);
+        return response.itemIds;
+    }
+    return [];
+}
+
+// Chamada inicial para atualizar o estilo do ícone do coração
+// para cada item na página após o carregamento da página
+window.onload = function() {
+    let itemIds = getItemIds();
+    itemIds.forEach(function(itemId) {
+        updateHeartIconStyle(itemId);
+    });
+};
+
+
+
+
+
+
 
 
 

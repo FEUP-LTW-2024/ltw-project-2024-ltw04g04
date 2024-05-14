@@ -155,9 +155,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
                                     <p class="detail">
-                                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
                                     </p>
-
                                 </div>
                             </div>
                             <?php
