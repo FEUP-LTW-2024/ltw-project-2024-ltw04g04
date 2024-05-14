@@ -127,7 +127,7 @@ INSERT INTO Category (CategoryId, CategoryName) VALUES (6, 'Clocks');
 
 -- Populate User table
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', '123 Main St', 'Anytown', 'USA', '12345', false);
+VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', '123 Main St', 'Anytown', 'USA', '12345', false);
 -- password123
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', 'c6ba91b90d922e159893f46c387e5dc1b3dc5c101a5a4522f03b987177a24a91', '456 Elm St', 'Othertown', 'USA', '67890', false);

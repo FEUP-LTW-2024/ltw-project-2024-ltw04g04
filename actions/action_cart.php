@@ -7,6 +7,11 @@
     $session = new Session();
     $db = getDatabaseConnection();
 
+    if (!$session->isLogin()) {
+        header('Location: ../pages/login.php');
+        exit();
+    }
+
     if (isset($_POST['itemId']) and isset($_POST['action'])) {
         $itemId = $_POST['itemId'];
         $action = $_POST['action'];

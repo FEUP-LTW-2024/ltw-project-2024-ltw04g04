@@ -17,10 +17,15 @@
     if (isset($_GET['id'])) {
         $itemId = (int)$_GET['id'];
         $pdo = getDatabaseConnection();
-        $user = User::getUserWithId($pdo, $session->getUserId());
         $item = Item::getItemWithId($pdo, $itemId);
+        if ($session->isLogin()) {
+            drawItem($pdo,$session->getUserId(), $item);
+        } else {
+            drawItem($pdo,-1, $item);
+        }
+        
 
-        drawItem($pdo,$user->userId, $item);
+        
     } else {
         echo "ID do item não fornecido.";
     }
