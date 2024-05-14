@@ -41,6 +41,9 @@
                             <div class="dropdown-content">
                                 <a href="account.php">Profile</a>
                                 <a href="/../actions/action_logout.php">Logout</a>
+                                <?php if ($session->isAdmin()) : ?>
+                                    <a href="edit_category.php">Change Categories </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php else : ?>

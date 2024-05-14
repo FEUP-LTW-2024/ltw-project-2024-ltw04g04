@@ -1,16 +1,38 @@
 <?php 
     include_once 'account.tpl.php'; 
+    require_once(__DIR__ . '/../database/item.class.php');
 ?>
 
 
-<?php function drawSellerProfile(PDO $pdo, User $user, bool $isCurrentUser) { 
-    $items = getUserItemIds($pdo, $user->userId);
+<?php function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurrentUser) { 
+    $items = Item::getUserItemIds($pdo, $user->userId);
     ?>
     <main>
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
             <div id="userInfo">
-                <h1><?= $user->name ?></h1>
+                <h1><?= $user->name ?> 
+                <?php if ($user->isAdmin) : ?>
+                    <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
+                    <span class="admin-text">Administrator</span>
+                <?php endif; ?>
+                <?php if ($session->isAdmin()) : ?>
+                    <?php if ($user->isAdmin) : ?>
+                        <form action="../actions/action_make_admin.php" method="post">
+                            <input type="hidden" name="user_id" value="<?= $user->userId ?>">
+                            <input type="hidden" name="action" value="remove_admin">
+                            <input type="submit" name="remove_admin" value="Remove Admin" class="remove-admin">
+                        </form>
+                    <?php else : ?>
+                        <form action="../actions/action_make_admin.php" method="post">
+                            <input type="hidden" name="user_id" value="<?= $user->userId ?>">
+                            <input type="hidden" name="action" value="make_admin">
+                            <input type="submit" name="make_admin" value="Make Admin" class="make-admin">
+                        </form>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                </h1>
                 <p><strong>Username:</strong> <?= $user->username ?></p>
                 <p><strong>Email:</strong> <?= $user->email ?></p>
                 <p><strong>City:</strong> <?= $user->city ?></p>

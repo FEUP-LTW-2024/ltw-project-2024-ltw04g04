@@ -21,6 +21,7 @@
                 $session->setUserName($user->name);
                 $session->setUserUsername($user->username);
                 $session->setPassword($user->password);
+                $session->setIsAdmin($user->isAdmin);
             } else {
                 $error = 'Invalid email or password';  
             }
