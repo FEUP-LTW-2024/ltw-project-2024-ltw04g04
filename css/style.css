@@ -884,7 +884,7 @@ nav#details {
     text-align: center;
 }
 
-.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove_admin:hover {
+.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -926,19 +926,19 @@ nav#details {
     margin-top: 1em; 
 }
 
-.make-admin, .remove_admin  {
+.make-admin, .remove-admin  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
     margin-top: 1em;
     text-align: center;
     display: inline-block;
-    width: 9%;
+    width: 12%;
     text-decoration: none;
     font-size: 12px;
     padding-top: 0;
     padding-bottom: 0;
     cursor: pointer;
-    border-radius: 40px;
-    border-width: 2px;
+    border-radius: 40%;
+    border: 5px solid #179CF0;
 }

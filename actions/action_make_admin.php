@@ -25,6 +25,6 @@
         }
     }
 
-    header('Location: ../pages/seller.php?user_id=' . $id);
+    header('Location: ../pages/seller.php?id=' . $id);
     exit();
 ?>
