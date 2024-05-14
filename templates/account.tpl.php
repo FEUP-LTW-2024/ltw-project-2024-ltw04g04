@@ -82,21 +82,65 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 
-<?php function drawShoppingCart($pdo, $session) { ?>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<?php function drawShoppingCart($db, $session) { ?>
     <script defer src="../templates/cartOperations.js"></script>
-    <script defer src="../templates/cart.js"></script>
 
+    <?php 
+        $userId = $session->getUserId(); 
+        $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
+    ?>
 
     <body>
         <main>
             <h1 id="myCart">My Shopping Cart</h1>
             <section id="shoppingCart">
                 <section id="items">
-                    <!-- Itens carregados via AJAX -->
+                   <?php if ($itemIds) { 
+                        foreach ($itemIds as $index => $itemId) : 
+                            $item = Item::getItemWithId($db, $itemId); 
+                            $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
+                            ?>
+                            <div class="cart-item">
+                                <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
+                                <div class="item-details">
+                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
+                                        <p><?= $item->name ?></p>
+                                    </a>
+                                    <p class="detail"><?= $item->price ?> $ </p>  
+                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
+                                    <p class="detail"> Model: <?= $item->model ?></p>     
+                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
+                                    <p class="detail"> Category: <?= $item->category ?></p>          
+                                    <p class="detail"> Size: <?= $item->size ?></p>
+                                    <p class="detail"> In stock: <?= $item->stock ?></p>
+                                    <div class="buttons-wrapper">
+                                        <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
+                                        <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
+                                        <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
+
+                                        <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
+                                    </div> 
+
+                                </div>
+                            </div>
+                            <?php
+                        endforeach;
+                    } else {
+                        echo "<p>Your shopping cart is empty.</p>";
+                    }
+                    ?>
                 </section>
                 <section id="summary">
-                    <!-- Summary carregado via AJAX -->
+                    <?php if (!$userId) { ?>
+                        <h1>Order Summary</h1>
+                        <p id="subtotal">Subtotal: </p>     
+                    <?php } else { 
+                        $subTotal = shoppingCart::calculateCartTotal($db);
+                        $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
+                        <h1>Order Summary</h1>
+                        <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
+                        <button onclick="window.location.href = 'payment.php'">Checkout</button>  
+                    <?php } ?>
                 </section>
             </section>
         </main>
@@ -140,6 +184,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
                         foreach ($itemIds as $index => $itemId) : 
                             $item = Item::getItemWithId($pdo, $itemId); 
+                            $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $itemId);
+                            $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
                             ?>
 
                             <div class="list-item">
@@ -154,8 +200,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail">
-                                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                    <p class="detail-heart">
+                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
                                     </p>
                                 </div>
                             </div>

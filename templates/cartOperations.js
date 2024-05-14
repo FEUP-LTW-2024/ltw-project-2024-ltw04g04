@@ -82,45 +82,34 @@ function updateSubtotal(subtotal) {
     }
 }
 
-// Função para adicionar ou remover um item da lista de desejos
+function updateHeartIconStyle(itemId, isInWishlist) {
+    let heartIcon = document.getElementById('heart-icon-' + itemId);
+    let iconSrc = isInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
+    heartIcon.src = iconSrc;
+}
+
 function toggleWishlist(itemId) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/../actions/action_wish_list.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
-            if (response.success) {
-                updateHeartIconStyle(itemId, response.isInWishlist);
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    alert(response.success);
+                    let isInWishlist = response.isInWishlist;
+                    updateHeartIconStyle(itemId, isInWishlist);
+                } else {
+                    alert(response.error);
+                }
             } else {
-                alert(response.error);
+                alert('Erro na requisição AJAX: ' + xhr.statusText);
             }
         }
     };
     xhr.send('itemId=' + encodeURIComponent(itemId));
 }
-
-// Função para obter os IDs dos itens da lista de desejos
-function getItemIds() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', '/../actions/action_get_item_ids.php', false); // Síncrono
-    xhr.send();
-    if (xhr.readyState === 4 && xhr.status === 200) {
-        let response = JSON.parse(xhr.responseText);
-        return response.itemIds;
-    }
-    return [];
-}
-
-// Chamada inicial para atualizar o estilo do ícone do coração
-// para cada item na página após o carregamento da página
-window.onload = function() {
-    let itemIds = getItemIds();
-    itemIds.forEach(function(itemId) {
-        updateHeartIconStyle(itemId);
-    });
-};
-
 
 
 
