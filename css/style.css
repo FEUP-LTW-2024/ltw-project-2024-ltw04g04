@@ -903,8 +903,6 @@ nav#details {
     border-radius: 50%;
 }
 
-<<<<<<< HEAD
-
 /* Payment */
 
 .payContainer {
@@ -949,7 +947,9 @@ input[type="text"] {
 .toggle-button.selected {
     background-color: #7bcfe8;
     color: #fff;
-=======
+}
+
+
 /*Change categories  and admin properties*/
 
 .admin-text {
@@ -988,5 +988,4 @@ input[type="text"] {
     cursor: pointer;
     border-radius: 40%;
     border: 5px solid #179CF0;
->>>>>>> 985b7b6cf3c64ac729242920f8a14ee9e0c39e1d
 }
