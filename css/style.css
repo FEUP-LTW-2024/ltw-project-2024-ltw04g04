@@ -884,7 +884,7 @@ nav#details {
     text-align: center;
 }
 
-.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover {
+.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove_admin:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -903,7 +903,15 @@ nav#details {
     border-radius: 50%;
 }
 
-/*Change categories */
+/*Change categories  and admin properties*/
+
+.admin-text {
+    font-size: 14px;
+    color: #179CF0;
+    font-weight: bold;
+    font-style: italic;
+}
+
 
 .category-container {
     margin: 3em auto; 
@@ -916,4 +924,21 @@ nav#details {
 .button-delete-category, .button-add-category {
     margin-left: 1em;
     margin-top: 1em; 
+}
+
+.make-admin, .remove_admin  {
+    font-family: "Sulphur Point", sans-serif;
+    background-color: #BBE4F1;
+    color: #656363;
+    margin-top: 1em;
+    text-align: center;
+    display: inline-block;
+    width: 9%;
+    text-decoration: none;
+    font-size: 12px;
+    padding-top: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+    border-radius: 40px;
+    border-width: 2px;
 }

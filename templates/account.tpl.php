@@ -13,7 +13,11 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
             <div id="userInfo">
-            <h1><?= $user->name ?> <?php if ($user->isAdmin) : ?><img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"><?php endif; ?></h1>
+            <h1><?= $user->name ?> 
+                <?php if ($user->isAdmin) : ?>
+                    <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
+                    <span class="admin-text">Administrator</span>
+                <?php endif; ?></h1>
                 <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
                     <h2>Profile</h2>
                     <?php if ($editMode) : ?>

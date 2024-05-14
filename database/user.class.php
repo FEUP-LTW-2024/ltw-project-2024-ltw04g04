@@ -26,16 +26,6 @@
           $this->isAdmin = $isAdmin; 
       }
 
-      public function setIsAdmin(PDO $db, bool $isAdmin) {
-        $this->isAdmin = $isAdmin;
-        $stmt = $db->prepare('
-            UPDATE User 
-            SET IsAdmin = ?
-            WHERE UserId = ?
-        ');
-        $stmt->execute([$isAdmin ? true : false, $this->userId]);
-      }
-
       static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
           $stmt = $db->prepare('
               INSERT INTO User (Username, Name_, Email, Password_)
@@ -125,6 +115,16 @@
 
           $stmt->execute(array($username_, $name_, $address_, $city_, $country_, $postalCode_, $id_));
       }
+
+      public static function upgradeUserToAdmin(PDO $db, int $user_id) {
+        $stmt = $db->prepare('UPDATE User SET isAdmin = true WHERE userId = ?');
+        $stmt->execute([$user_id]);
+    }
+
+    public static function downgradeUser(PDO $db, int $user_id) {
+        $stmt = $db->prepare('UPDATE User SET isAdmin = false WHERE userId = ?');
+        $stmt->execute([$user_id]);
+    }
   }
 
 ?>
