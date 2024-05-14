@@ -110,6 +110,11 @@ CREATE TABLE ChatMessage (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+CREATE TABLE Images (
+  id INTEGER PRIMARY KEY,
+  title VARCHAR NOT NULL
+);
+
 
 /*******************************************************************************
    Populate Tables
