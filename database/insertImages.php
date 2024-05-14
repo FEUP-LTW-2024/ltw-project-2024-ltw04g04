@@ -26,7 +26,8 @@ function processImage($pdo, $filePath, $title) {
 
     $id = $pdo->lastInsertId();
 
-    $originalFileName = "pages/imgs/imgsForItems/$id.jpg";
+    $directoryPath = dirname($filePath);  // Get the directory path from filePath
+    $originalFileName = "$directoryPath/$id.jpg";  
 
     imagejpeg($original, $originalFileName);
 
@@ -42,6 +43,22 @@ foreach ($images as $imagePath) {
     $title = basename($imagePath);  // a description for the image that gets stored, can be the path
     processImage($pdo, $imagePath, $title);
 }
+
+/* // Ensure the titles are provided in a corresponding manner, e.g., $_POST['titles'] as an array
+if (!isset($_POST['titles']) || !is_array($_POST['titles'])) {
+    die('No titles provided or titles are not in the correct format.');
+}
+
+$titles = $_POST['titles'];
+
+if (count($images) != count($titles)) {
+    die('The number of images and titles do not match.');
+}
+// Process each image
+foreach ($images as $index => $imagePath) {
+    $title = $titles[$index];  // Get the corresponding title
+    processImage($pdo, $imagePath, $title);
+}   */
 
 // -----------
 
