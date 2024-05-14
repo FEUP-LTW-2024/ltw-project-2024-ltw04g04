@@ -15,6 +15,7 @@
     
     Message::saveMessageToDatabase($db, $senderId, $receiverId, $message, $date, $time);
 
-    header("Location: ../pages/chat.php");
-    exit();
+    $redirectUrl = "../pages/chat.php?chat_id=$receiverId"; 
+    header("Location: $redirectUrl");
+    exit;
 ?>

@@ -29,10 +29,6 @@
       return isset($_SESSION['email']) ? $_SESSION['email'] : null;
     }
 
-    public function getChatId() : ?string {
-      return isset($_SESSION['chatId']) ? $_SESSION['chatId'] : null;
-    }
-
     public function isAdmin(): bool {
       return isset($_SESSION['admin']) && $_SESSION['admin'] === true;
     }
@@ -75,10 +71,6 @@
 
     public function setIsAdmin(bool $admin) {
       $_SESSION['admin'] = $admin;
-    }
-
-    public function setChatId(string $chatId) {
-      $_SESSION['chatId'] = $chatId;
     }
 
     public function addMessage(string $type, string $text) {

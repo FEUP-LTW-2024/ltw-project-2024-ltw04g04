@@ -9,11 +9,15 @@
             $userId = $session->getUserId();
             $users = Message::getUsersWithUserId($db, $userId);
 
-            $chatId = $session->getChatId();
-            if (!$chatId) {
+            if (isset($_GET['chat_id'])) {
+                $chatId = (int)$_GET['chat_id'];
+            } else {   
                 $chatId = $users[0];
-            } 
-            $name = User::getUserWithId($db, $chatId)->name;
+            }
+            
+            echo "<script> userId2 = $chatId; </script>";
+            $chatName = User::getUserWithId($db, $chatId)->name;
+            echo "<script> userName2 = $chatName; </script>";
             $messages = Message::getMessagesWithUserId($db, $userId, $chatId);
         }
     ?>
@@ -37,11 +41,11 @@
                     </div>
 
                     <div id="messageContainer">
-                        <h2 id="actualConv"> <?= $name ?> </h2>
+                        <h2 id="actualConv"> <?= $chatName ?> </h2>
                         <div id="messages">
                             <?php if (!empty($messages)) {
                                 foreach ($messages as $message) { ?>
-                                    <div class="message <?= ($message->senderId === $currentUserId ? 'userAt' : 'userTo') ?>" id="user<?= ($message->senderId === $currentUserId ? $message->receiverId : $message->senderId) ?>">
+                                    <div class="message <?= ($message->senderId === $userId ? 'userAt' : 'userTo') ?>" id="user<?= ($message->senderId === $userId ? $message->receiverId : $message->senderId) ?>">
                                     <p>Date: <?php echo $message->date ?> </p>
                                     <p>Time: <?php echo $message->time ?> </p>
                                     <p> <?php echo $message->message ?> </p>
@@ -49,11 +53,11 @@
                                     
                                 <?php }
                             } ?>
-                        </div>
+                    </div>
 
                         <form id="messageForm" action="../actions/action_send_message.php" method="post">
                             <input type="text" id="messageInput" name="message" placeholder="Enter your message...">
-                            <input type="hidden" id="userId2Input" name="user_id2" value="<?= $currentUser ?>">
+                            <input type="hidden" id="userId2Input" name="user_id2" value="<?= $chatId ?>">
                             <button type="submit" id="sendMessageButton">
                                 <img id="sendButton" src="../pages/imgs/send-icon.png" alt="Send message">
                             </button>

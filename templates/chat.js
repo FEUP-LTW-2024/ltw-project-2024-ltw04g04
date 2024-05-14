@@ -24,6 +24,22 @@ function changeConversation(userId, userName) {
         .catch(error => console.error('Error:', error));
 }
 
+function sendForm() {
+    // Pegar os valores do formulário
+    const message = document.getElementById('messageInput').value;
+    const userId2 = document.getElementById('userId2Input').value;
+
+    // Construir a URL com o ID do usuário como parâmetro de consulta
+    const url = '../actions/action_send_message.php?user_id2=' + userId2;
+
+    // Redirecionar a página para a URL construída
+    window.location.href = url;
+
+    // Retornar false para evitar o envio padrão do formulário
+    // O redirecionamento ocorre antes que o formulário seja enviado
+    return false;
+}
+
 /*
 document.addEventListener("DOMContentLoaded", function() {
     if (isLogin) {
