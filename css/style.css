@@ -903,6 +903,53 @@ nav#details {
     border-radius: 50%;
 }
 
+<<<<<<< HEAD
+
+/* Payment */
+
+.payContainer {
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);   
+}
+
+.payDiv {
+    margin-bottom: 20px;
+}
+
+.subtitlePayment {
+    border-top: 1.2px solid #999999;
+    margin-top: 1.5em;
+    padding-top: 0.5em;
+}
+
+#payAdress {
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.toggle-button {
+    padding: 10px 20px 10px 20px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.toggle-button.selected {
+    background-color: #7bcfe8;
+    color: #fff;
+=======
 /*Change categories  and admin properties*/
 
 .admin-text {
@@ -941,4 +988,5 @@ nav#details {
     cursor: pointer;
     border-radius: 40%;
     border: 5px solid #179CF0;
+>>>>>>> 985b7b6cf3c64ac729242920f8a14ee9e0c39e1d
 }
