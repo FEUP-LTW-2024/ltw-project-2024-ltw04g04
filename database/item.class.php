@@ -211,7 +211,7 @@
         public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size): void {
             $stmt = $db->prepare('
                 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ');
             $stmt->execute([$idItem, $name, $price, $brand, $model, $condition, $category, $stock, $imageLink, $size]);
         }

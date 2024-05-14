@@ -10,5 +10,6 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
     drawWelcomePage();
+    generateFooter();
 ?>
 

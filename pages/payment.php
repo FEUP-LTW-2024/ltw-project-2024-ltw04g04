@@ -13,4 +13,5 @@
 
     $db = getDatabaseConnection();
     drawPayment($db, $session);
+    generateFooter();
 ?>

@@ -12,6 +12,7 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
     drawShoppingCart($pdo, $session);
+    generateFooter();
 ?>
 
 

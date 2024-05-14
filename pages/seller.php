@@ -9,9 +9,6 @@
     $session = new Session();
     $pdo = getDatabaseConnection();
 
-    if (!$session->isLogin()) {
-        die(header('Location: /'));
-    }
 
     $userId = isset($_GET['id']) ? (int)$_GET['id'] : $session->getUserId();
     $user = User::getUserWithId($pdo, $userId);
@@ -21,4 +18,5 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
     drawSellerProfile($session, $pdo, $user, $isCurrentUser);
+    generateFooter();
 ?>

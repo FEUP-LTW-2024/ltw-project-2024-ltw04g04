@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    /*updateCart();
-                    updateSummary();*/
+                    updateCart();
+                    updateSummary();
                 } else {
                     console.error("Error: " + xhr.status);
                 }
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.send("itemId=" + itemId + "&action=" + action);
     }
     
-    /*
+    
     function updateCart() {
         fetch('../actions/action_update_cart.php')
             .then(response => response.text())
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .catch(error => console.error('Error:', error));
     }
-    */
+    
 });
 
 

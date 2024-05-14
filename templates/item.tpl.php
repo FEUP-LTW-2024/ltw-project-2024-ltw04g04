@@ -23,12 +23,15 @@ function getSellerId(PDO $pdo, int $itemId): int {
 
 <?php
 function drawItem($pdo, $userId, $item) { 
-    $isSeller = (int)getSellerId($pdo, $item->itemId) === $userId;
+    if ($userId == -1) {
+        $isSeller = false;
+    } else {
+        $isSeller = (int)getSellerId($pdo, $item->itemId) === $userId;
+    }
     $sellerProfileURL = $isSeller ? '/../pages/account.php' : '/../pages/seller.php';
     $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
 ?>
     <script src="../templates/cartOperations.js"></script>
- 
         <main>
             <section id="item">
                 <div id="itemImg"><img src="imgs/itemTemplate.png" alt="Image of item"></div>  

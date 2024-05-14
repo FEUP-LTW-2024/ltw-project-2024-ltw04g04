@@ -70,6 +70,20 @@
     </html>
 <?php } ?>
 
+<?php
+function generateFooter() {
+    ?>
+    <div class="page-container">
+    <div class="content">
+    </div>
+    <footer class="footer-container">
+        <p>&copy; <?php echo date("Y"); ?> Second Charm. All rights reserved.</p>
+    </footer>
+    <?php
+}
+?>
+
+
 <?php function drawHeaderForm(bool $login) { ?>
     <!DOCTYPE html>
     <html>
