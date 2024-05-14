@@ -51,25 +51,27 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.send("itemId=" + itemId + "&action=" + action);
     }
     
-    
     function updateCart() {
-        fetch('../actions/action_update_cart.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('items').innerHTML = data; 
-            })
-            .catch(error => console.error('Error:', error));
+        $.ajax({
+            url: '../actions/action_update_cart.php',
+            method: 'GET',
+            success: function(response) {
+                $('#items').html(response); // Atualize o conteúdo do carrinho
+            },
+            error: function(xhr, status, error) {
+                console.error("Error: " + error);
+            }
+        });
     }
-
     function updateSummary() {
-        fetch('../actions/action_update_summary.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('summary').innerHTML = data; 
-            })
-            .catch(error => console.error('Error:', error));
+        $.ajax({
+            url: '../actions/action_update_summary.php',
+            method: 'GET',
+            success: function(response) {
+                $('#summary').html(response); 
+            }
+        });
     }
-    
 });
 
 
@@ -80,52 +82,39 @@ function updateSubtotal(subtotal) {
     }
 }
 
-function updateHeartIconStyle(itemId) {
-    let heartIcon = document.getElementById('heart-icon');
-    let isInWishlist = localStorage.getItem('wishlist_' + itemId); 
-    if (isInWishlist === 'true') {
-        heartIcon.classList.add('in-wishlist');
-    } else {
-        heartIcon.classList.remove('in-wishlist');
-    }
+function updateHeartIconStyle(itemId, isInWishlist) {
+    let heartIcon = document.getElementById('heart-icon-' + itemId);
+    let iconSrc = isInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
+    heartIcon.src = iconSrc;
 }
-
-function updateWishlistState(itemId, isInWishlist) {
-    localStorage.setItem('wishlist_' + itemId, isInWishlist); 
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    let heartIcon = document.getElementById('heart-icon');
-    if (heartIcon) {
-        let itemId = heartIcon.dataset.itemId; 
-        updateHeartIconStyle(itemId); 
-        heartIcon.addEventListener('click', function() {
-            let itemId = this.dataset.itemId;
-            toggleWishlist(itemId); 
-        });
-    } else {
-        console.error("Element with ID 'heart-icon' not found");
-    }
-});
 
 function toggleWishlist(itemId) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/../actions/action_wish_list.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let response = JSON.parse(xhr.responseText);
-            if (response.success) {
-                //alert(response.success);
-                updateWishlistState(itemId, response.isInWishlist);
-                updateHeartIconStyle(itemId);
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    alert(response.success);
+                    let isInWishlist = response.isInWishlist;
+                    updateHeartIconStyle(itemId, isInWishlist);
+                } else {
+                    alert(response.error);
+                }
             } else {
-                alert(response.error);
+                alert('Erro na requisição AJAX: ' + xhr.statusText);
             }
         }
     };
     xhr.send('itemId=' + encodeURIComponent(itemId));
-}; 
+}
+
+
+
+
+
 
 
 

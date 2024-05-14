@@ -186,6 +186,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         foreach ($itemIds as $index => $itemId) : 
                             $item = Item::getItemWithId($pdo, $itemId); 
                             //$item->imageLink = '/pages/imgs/imgsForitems/item1.jpg';
+                            $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $itemId);
+                            $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
                             ?>
 
                             <div class="list-item">
@@ -200,10 +202,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Condition: <?= $item->condition ?></p>      
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
-                                    <p class="detail">
-                                        <img src="/../pages/imgs/heart-icon.png" alt="Favourite" id="heart-icon" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                    <p class="detail-heart">
+                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
                                     </p>
-
                                 </div>
                             </div>
                             <?php
