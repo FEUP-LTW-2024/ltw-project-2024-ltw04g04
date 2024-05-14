@@ -121,21 +121,21 @@ function generateFooter() {
 
 <?php function drawLoginForm() { ?>
     <form action="../actions/action_login.php" method="post">
-        Email: <input type="text" name="email"><br>
-        Password: <input type="password" name="password"><br>
-        <input type="submit" name="submit" value="Continue">
+        Email: <input type="text" name="email" required><br>
+        Password: <input type="password" name="password" required><br>
+        <input type="submit" name="submit" value="Login">
     </form>
     <p>Don’t have an account? <a href="signup.php">Sign up</a>.</p>
 <?php } ?>
 
 <?php function drawSignupForm() { ?>
     <form action="../actions/action_sign_up.php" method="post">
-        Your name: <input type="text" name="name"><br>
-        Username: <input type="text" name="username"><br>
-        Email: <input type="text" name="email"><br>
-        Password: <input type="password" name="password"><br>
-        Re-enter password: <input type="password" name="reenter_password"><br>
-        <input type="submit" name="submit" value="Continue">
+        Your name: <input type="text" name="name" required><br>
+        Username: <input type="text" name="username" required><br>
+        Email: <input type="text" name="email" required><br>
+        Password: <input type="password" name="password" required><br>
+        Re-enter password: <input type="password" name="reenter_password" required><br>
+        <input type="submit" name="submit" value="Sign up">
     </form>
     <p>Already have an account? <a href="login.php">Log in</a>.</p>
 <?php } ?>
