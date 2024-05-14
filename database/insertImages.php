@@ -7,7 +7,7 @@ $pdo = getDatabaseConnection();
 
 // Create separate folders for each type of images
 
-// Section where only images for items are handled, folder is called 'imgsForItems' ----
+// ---- Section where only images for items are handled, folder is called 'imgsForItems' ----
 
 if (!is_dir('pages/imgs')) mkdir('pages/imgs');
 if (!is_dir('pages/imgs/imgsForItems')) mkdir('pages/imgs/imgsForItems');
@@ -43,6 +43,26 @@ foreach ($images as $imagePath) {
     $title = basename($imagePath);  // a description for the image that gets stored, can be the path
     processImage($pdo, $imagePath, $title);
 }
+
+/*if (!is_dir('pages/imgs')) mkdir('pages/imgs');
+if (!is_dir('pages/imgs/imgsForItems')) mkdir('pages/imgs/imgsForItems');
+
+$original = @imagecreatefromjpeg($tempFileName);
+if (!$original) $original = @imagecreatefrompng($tempFileName);
+if (!$original) $original = @imagecreatefromgif($tempFileName);
+
+    if (!$original) die('Unknown image format!');
+
+    $stmt = $pdo->prepare("INSERT INTO Images (title) VALUES(?)");
+    $stmt->execute(array($_POST['title']));
+
+    $id = $pdo->lastInsertId();
+
+    $originalFileName = "pages/imgs/imgsForItems/$id.jpg";
+
+    imagejpeg($original, $originalFileName);
+
+    imagedestroy($original);*/
 
 /* // Ensure the titles are provided in a corresponding manner, e.g., $_POST['titles'] as an array
 if (!isset($_POST['titles']) || !is_array($_POST['titles'])) {
