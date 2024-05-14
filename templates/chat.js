@@ -11,7 +11,6 @@ function changeConversation(userId, userName) {
     userId2 = userId;
     userName2 = userName;
 
-    // Atualiza o valor do campo hidden
     document.getElementById('userId2Input').value = userId2;
 
     fetch(`../actions/action_load_messages.php?user_id2=${userId2}`)
@@ -24,23 +23,7 @@ function changeConversation(userId, userName) {
         .catch(error => console.error('Error:', error));
 }
 
-function sendForm() {
-    // Pegar os valores do formulário
-    const message = document.getElementById('messageInput').value;
-    const userId2 = document.getElementById('userId2Input').value;
 
-    // Construir a URL com o ID do usuário como parâmetro de consulta
-    const url = '../actions/action_send_message.php?user_id2=' + userId2;
-
-    // Redirecionar a página para a URL construída
-    window.location.href = url;
-
-    // Retornar false para evitar o envio padrão do formulário
-    // O redirecionamento ocorre antes que o formulário seja enviado
-    return false;
-}
-
-/*
 document.addEventListener("DOMContentLoaded", function() {
     if (isLogin) {
         function loadMessages() {
@@ -67,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(response => response.text())
             .then(data => {
-                document.getElementById('messageInput').value = '';  // Limpa o campo de mensagem após o envio
+                document.getElementById('messageInput').value = '';  
                 loadMessages();
             })
             .catch(error => console.error('Error:', error));
@@ -76,4 +59,3 @@ document.addEventListener("DOMContentLoaded", function() {
         setInterval(loadMessages, 5000);
     }  
 });
-*/

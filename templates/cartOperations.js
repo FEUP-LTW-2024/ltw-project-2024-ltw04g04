@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    updateCart();
-                    updateSummary();
+                    /*updateCart();
+                    updateSummary();*/
                 } else {
                     console.error("Error: " + xhr.status);
                 }
@@ -51,27 +51,25 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.send("itemId=" + itemId + "&action=" + action);
     }
     
+    /*
     function updateCart() {
-        $.ajax({
-            url: '../actions/action_update_cart.php',
-            method: 'GET',
-            success: function(response) {
-                $('#items').html(response); // Atualize o conteúdo do carrinho
-            },
-            error: function(xhr, status, error) {
-                console.error("Error: " + error);
-            }
-        });
+        fetch('../actions/action_update_cart.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('items').innerHTML = data; 
+            })
+            .catch(error => console.error('Error:', error));
     }
+
     function updateSummary() {
-        $.ajax({
-            url: '../actions/action_update_summary.php',
-            method: 'GET',
-            success: function(response) {
-                $('#summary').html(response); 
-            }
-        });
+        fetch('../actions/action_update_summary.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('summary').innerHTML = data; 
+            })
+            .catch(error => console.error('Error:', error));
     }
+    */
 });
 
 
