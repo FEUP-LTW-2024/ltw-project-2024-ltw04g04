@@ -13,5 +13,5 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
 
-    sellingItem($pdo);
+    editCategories($pdo); 
 ?>

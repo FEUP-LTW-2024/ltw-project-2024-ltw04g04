@@ -74,7 +74,9 @@ function drawItem($pdo, $userId, $item) {
 <?php } ?>
 
 <?php
-function sellingItem() {
+function sellingItem(PDO $pdo) {
+    $stmt = $pdo->query('SELECT CategoryName FROM Category');
+    $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
 ?>
    <main>
     <h2 class = "creationHeader">Create New Item</h2>
@@ -97,12 +99,9 @@ function sellingItem() {
             <label for="category">Category:</label><br>
             <select id="category" name="category" required>
                 <option value="">Select category</option>
-                <option value="Beads and bracelets">Beads and bracelets</option>
-                <option value="Earrings">Earrings</option>
-                <option value="Rings">Rings</option>
-                <option value="Necklaces">Necklaces</option>
-                <option value="Accessories">Accessories</option>
-                <option value="Clocks">Clocks</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
+                <?php endforeach; ?>
             </select><br><br>
 
             <label for="size">Size:</label><br>
@@ -112,6 +111,36 @@ function sellingItem() {
             <input type="text" id="stock" name="stock" required><br><br>
 
             <input type="submit" value="Create Item" class="button-create-item">
+        </form>
+    </main>
+
+    <?php
+}
+?>
+
+<?php
+function editCategories(PDO $pdo) {
+    $stmt = $pdo->query('SELECT CategoryName FROM Category');
+    $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+?>
+   <main>
+    <h2 class = "editCategory">Change categories</h2>
+        <form action="../actions/action_edit_category.php" method="post" class="category-container">
+            <h3>Delete Category</h3>
+            <label for="category_id_to_delete">Select category to delete:</label>
+            <select id="category_id_to_delete" name="category_id_to_delete">
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?php echo $category; ?>"><?php echo $category; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input type="submit" name="delete_category" value="Delete" class="button-delete-category">
+        </form>
+
+        <form action="../actions/action_edit_category.php" method="post" class="category-container">
+            <h3>Add New Category</h3>
+            <label for="new_category_name">New category name:</label>
+            <input type="text" id="new_category_name" name="new_category_name" required>
+            <input type="submit" name="add_category" value="Add" class="button-add-category">
         </form>
     </main>
 

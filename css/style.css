@@ -210,14 +210,16 @@ footer button {
     width: 75%; 
 }
 
-#summary button, #editButton, #addItemButto, .button-create-item {
+#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
     text-align: center;
+    padding-left: 1em;
+    padding-right: 1em;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 20px;
     border-width: 1px;
@@ -731,7 +733,8 @@ nav#details {
     margin-left: 14%; 
 }
 
-#articles h2, #sellerItems h2, .creationHeader {
+#articles h2, #sellerItems h2, .creationHeader, .editCategory {
+    margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
     position: relative; 
@@ -881,7 +884,7 @@ nav#details {
     text-align: center;
 }
 
-.button-create-item:hover {
+.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -898,4 +901,19 @@ nav#details {
 .in-wishlist {
     background-color: #BBE4F1;
     border-radius: 50%;
+}
+
+/*Change categories */
+
+.category-container {
+    margin: 3em auto; 
+    max-width: 30em; 
+    padding: 1.5em; 
+    border: 0.1em solid black; 
+}
+
+
+.button-delete-category, .button-add-category {
+    margin-left: 1em;
+    margin-top: 1em; 
 }
