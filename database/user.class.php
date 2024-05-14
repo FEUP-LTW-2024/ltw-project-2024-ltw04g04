@@ -106,6 +106,14 @@
       }
     }
 
+    static function getAdressInfo(PDO $db, int $userId): array {
+      $stmt = $db->prepare('SELECT Adress, City, Country, PostalCode FROM User WHERE UserId = ?');
+      $stmt->execute([$userId]);
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      return [$user['Adress'], $user['City'], $user['Country'], $user['PostalCode']];
+    }
+
     
     static function emailExists(PDO $db, string $email) {
       $stmt = $db->prepare('SELECT COUNT(*) FROM User WHERE lower(Email) = ?');

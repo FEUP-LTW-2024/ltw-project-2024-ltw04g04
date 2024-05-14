@@ -19,7 +19,11 @@ function validatePaymentForm() {
         if (!accountAdressComplete) { 
             // 'Your account information isn't complete'
             return false;
-        }  
+        }
+        document.getElementById("adress").value = "";  
+        document.getElementById("city").value = "";  
+        document.getElementById("country").value = "";  
+        document.getElementById("postal-code").value = "";  
     } else {
         var adress = document.getElementById("adress").value;
         var city = document.getElementById("city").value;

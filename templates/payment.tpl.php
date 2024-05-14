@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../database/user.class.php');
             <div class="payContainer">
                 <h1>Payment</h1>
                 <div id="payInfo">
-                        <p> Value: </p>
+                        <p> Subtotal: </p>
                 </div>
 
                 <h2 class="subtitlePayment"> Delivery </h2>
@@ -26,7 +26,7 @@ require_once(__DIR__ . '/../database/user.class.php');
                     <p> or </p>
                 </div>
 
-                <form action="action_process_payment.php" method="POST" onsubmit="return validatePaymentForm()">    <!-- Criar action -->    
+                <form action="../actions/action_process_payment.php" method="POST" onsubmit="return validatePaymentForm()">    <!-- Criar action -->    
                     <div class="payDiv">
                         <label for="adress">Adress:</label>
                         <input type="text" id="adress" name="adress">
@@ -65,5 +65,4 @@ require_once(__DIR__ . '/../database/user.class.php');
             </div>
         </main>
     </body>
-    
 <?php } ?>
