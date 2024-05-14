@@ -10,50 +10,54 @@ function scrollToBottom() {
 function changeConversation(userId, userName) {
     userId2 = userId;
     userName2 = userName;
-    $.ajax({
-        url: '../actions/action_load_messages.php',
-        method: 'GET',
-        data: { user_id2: userId2 },
-        success: function(data) {
-            $('#messages').html(data);
-            $('#actualConv').html(userName2);
+
+    // Atualiza o valor do campo hidden
+    document.getElementById('userId2Input').value = userId2;
+
+    fetch(`../actions/action_load_messages.php?user_id2=${userId2}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('messages').innerHTML = data;
+            document.getElementById('actualConv').innerHTML = userName2;
             scrollToBottom();
-        }
-    });
+        })
+        .catch(error => console.error('Error:', error));
 }
 
-
-$(document).ready(function() {  
+/*
+document.addEventListener("DOMContentLoaded", function() {
     if (isLogin) {
         function loadMessages() {
-            $.ajax({
-                url: '../actions/action_load_messages.php', 
-                type: 'GET',
-                data: { user_id2: userId2 },
-                success: function(response) {
-                    $('#messages').html(response);  // Atualiza o conteúdo da div com as mensagens
-                }
-            });
+            fetch(`../actions/action_load_messages.php?user_id2=${userId2}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('messages').innerHTML = data;
+                })
+                .catch(error => console.error('Error:', error));
         }
         loadMessages();
     
-        
-        $('#messageForm').submit(function(event) {
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
             event.preventDefault(); 
     
-            var message = $('#messageInput').val();
+            var message = document.getElementById('messageInput').value;
     
-            $.ajax({
-                url: '../actions/action_send_message.php', 
-                type: 'POST',
-                data: { message: message, user_id2: userId2 },
-                success: function(response) {
-                    $('#messageInput').val('');      // Limpa o campo de mensagem após o envio
-                    loadMessages();
-                }
-            });
+            fetch('../actions/action_send_message.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ message: message, user_id2: userId2 })
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('messageInput').value = '';  // Limpa o campo de mensagem após o envio
+                loadMessages();
+            })
+            .catch(error => console.error('Error:', error));
         });
     
         setInterval(loadMessages, 5000);
     }  
 });
+*/
