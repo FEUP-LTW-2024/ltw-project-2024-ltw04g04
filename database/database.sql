@@ -110,6 +110,11 @@ CREATE TABLE ChatMessage (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+CREATE TABLE Images (
+  id INTEGER PRIMARY KEY,
+  title VARCHAR NOT NULL
+);
+
 
 /*******************************************************************************
    Populate Tables
@@ -130,31 +135,31 @@ INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Count
 VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', '123 Main St', 'Anytown', 'USA', '12345', false);
 -- password123
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', 'c6ba91b90d922e159893f46c387e5dc1b3dc5c101a5a4522f03b987177a24a91', '456 Elm St', 'Othertown', 'USA', '67890', false);
+VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', '0c6f6845bb8c62b778e9147c272ac4b5bdb9ae71', '456 Elm St', 'Othertown', 'USA', '67890', false);
 -- password456
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '5efc2b017da4f7736d192a74dde5891369e0685d4d38f2a455b6fcdab282df9c', '789 Oak St', 'Another Town', 'USA', '45678', false);
+VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '7f6d5eea1bcef5ca6209d33b28e3aaeb3db26f24', '789 Oak St', 'Another Town', 'USA', '45678', false);
 -- password789
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '963c8b37b3615f3c7f88cbb0f6becff1ffe726f4', '101 Pine St', 'Someplace', 'USA', '89012', true);
 -- passwordabc
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', 'cb7136bb81e63b9dd98c4736bade626b6685d3a6a22129075416dd88afaf075d', '456 Oak St', 'Sometown', 'USA', '54321',  false);
+VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', 'd5c2dc0bcfd8899ba126be5e729d4f10796c0b90', '456 Oak St', 'Sometown', 'USA', '54321',  false);
 -- olaadeus23
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (6, 'markjohnson', 'Mark Johnson', 'mark.johnson@example.com', '71154ca37013e686b818dad0a16c584c8253d4ed892068cad81c5e9642e0c0c4', '789 Maple St', 'Anothertown', 'USA', '67890', false);
+VALUES (6, 'markjohnson', 'Mark Johnson', 'mark.johnson@example.com', '752f5000777f76d06aa11a8882b70cc620e4deac', '789 Maple St', 'Anothertown', 'USA', '67890', false);
 -- soufixe09
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (7, 'emilywilson', 'Emily Wilson', 'emily.wilson@example.com', '55729422f621f9d6fef830924ea4c74f3db4f3aac1017d4e98a8011fd5304130', '101 Pine St', 'Yetanothertown', 'USA', '12345', false);
+VALUES (7, 'emilywilson', 'Emily Wilson', 'emily.wilson@example.com', 'f0219e4ecd66ed0df03a14df8d0891f02c216a1b', '101 Pine St', 'Yetanothertown', 'USA', '12345', false);
 -- adeus5ola0
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (8, 'alexsmith', 'Alex Smith', 'alex.smith@example.com', 'bd09f7ad06c6ca58501394524cdddf77f50dbcc28df10f67fc7f06af329abf8b', '123 Elm St', 'Othertown', 'USA', '89012', false);
+VALUES (8, 'alexsmith', 'Alex Smith', 'alex.smith@example.com', '7375c583bb8ce9d2ff39b3ad224815a7c63ae0e6', '123 Elm St', 'Othertown', 'USA', '89012', false);
 -- girafas_bonitas5
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (9, 'sarahbrown', 'Sarah Brown', 'sarah.brown@example.com', 'd0430590a251acc9ed7744831a7a8a51705689cff6ba141f8bf82a15d9f5b415', '321 Cedar St', 'Somewhere', 'USA', '45678', false);
+VALUES (9, 'sarahbrown', 'Sarah Brown', 'sarah.brown@example.com', '507bb50fa8856af531bdcd68e552d2e57561a8e4', '321 Cedar St', 'Somewhere', 'USA', '45678', false);
 -- naogosto8gelado
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '1f4b817f73ca25b782ee67c5822f6ebcbd62c76b90bc3b5448bb17f0632f56db', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
+VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644c9f5e7b0062607c6677838fd0ee8399f5a7', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
 -- pretoebranc0
 
 
