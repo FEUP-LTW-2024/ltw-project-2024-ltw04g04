@@ -11,4 +11,5 @@
 
     $db = getDatabaseConnection();
     drawChat($db, $session);
+    generateFooter();
 ?>
