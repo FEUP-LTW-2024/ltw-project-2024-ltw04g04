@@ -5,6 +5,7 @@
 
 
 <?php function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurrentUser) { 
+
     $items = Item::getUserItemIds($pdo, $user->userId);
     ?>
     <main>
