@@ -174,7 +174,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     <script defer src="../templates/cartOperations.js"></script>
         <main>
             <h1 id= "myFavs" >Wish List</h1>
-            <section id="items">
+            <section id="items-list">
                 <?php
                 
                 $userId = $session->getUserId();
@@ -195,9 +195,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
                             ?>
 
-                            <div class="list-item">
+                            <div class="cart-item">
                                 <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
-                                <div class="item-list-details">
+                                <div class="item-details">
                                     <a href="../pages/item.php?id=<?= $item->itemId ?>">
                                         <p><?= $item->name ?></p>
                                     </a>
