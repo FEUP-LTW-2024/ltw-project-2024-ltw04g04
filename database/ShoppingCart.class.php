@@ -40,11 +40,11 @@
                         break;
                     
                     case 'decrease':
-                        return self::decreaseItemFromCart($db, $item_id);
+                        return self::decreaseItemFromCart($db,$buyerId, $item_id);
                         break;
 
                     case 'remove':
-                        return self::removeItemFromCart($db, $item_id);
+                        return self::removeItemFromCart($db,$buyerId, $item_id);
                         break;
                     
                     case 'total':
@@ -94,20 +94,23 @@
         }
         
 
-        static function decreaseItemFromCart($db, $item_id) {
+        static function decreaseItemFromCart($db, $buyerId, $item_id) {
             try {
-                $stmt = $db->prepare("SELECT Quantity FROM ShoppingCart WHERE ItemId = :item_id");
+                $stmt = $db->prepare("SELECT Quantity FROM ShoppingCart WHERE ItemId = :item_id AND BuyerId = :buyer_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+                $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                 $stmt->execute();
                 $quantity = $stmt->fetchColumn();
         
-                if($quantity > 1) {
-                    $stmt = $db->prepare("UPDATE ShoppingCart SET Quantity = Quantity - 1 WHERE ItemId = :item_id");
+                if ($quantity > 1) {
+                    $stmt = $db->prepare("UPDATE ShoppingCart SET Quantity = Quantity - 1 WHERE ItemId = :item_id AND BuyerId = :buyer_id");
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+                    $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                     $stmt->execute();
                 } else {
-                    $stmt = $db->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
+                    $stmt = $db->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id AND BuyerId = :buyer_id");
                     $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+                    $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                     $stmt->execute();
                 }
         
@@ -117,11 +120,13 @@
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
         }
+        
 
-        static function removeItemFromCart($db, $item_id) {
+        static function removeItemFromCart($db, $buyerId, $item_id) {
             try {
-                $stmt = $db->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id");
+                $stmt = $db->prepare("DELETE FROM ShoppingCart WHERE ItemId = :item_id AND BuyerId = :buyer_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
+                $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                 $stmt->execute();
         
                 return array('success' => 'Item removed from cart successfully');
@@ -129,7 +134,8 @@
             } catch (PDOException $e) {
                 return array('error' => 'Database error: ' . $e->getMessage());
             }
-        }       
+        }
+           
 
         static function calculateCartTotal(PDO $db, int $userId): float {
             try {

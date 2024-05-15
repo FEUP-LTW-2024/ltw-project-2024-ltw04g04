@@ -115,6 +115,30 @@ CREATE TABLE Images (
   title VARCHAR NOT NULL
 );
 
+CREATE TABLE Order (
+    OrderId INT AUTO_INCREMENT PRIMARY KEY,
+    UserId INT NOT NULL,
+    Adress VARCHAR(255),
+    City NVARCHAR(160),
+    Country NVARCHAR(160),
+    PostalCode NVARCHAR(160),
+    CardNumber NVARCHAR(160),
+    ExpirationDate VARCHAR(5),
+    cvv VARCHAR(4),
+    OrderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (UserId) REFERENCES User(UserId)
+);
+
+CREATE TABLE OrderItem (
+    OrderItemId INT AUTO_INCREMENT PRIMARY KEY,
+    OrderId INT NOT NULL,
+    ItemId INT NOT NULL,
+    Quantity INT,
+    Price DECIMAL(10, 2),
+    FOREIGN KEY (OrderId) REFERENCES Order(OrderId),
+    FOREIGN KEY (ItemId) REFERENCES Item(ItemId)
+);
+
 
 /*******************************************************************************
    Populate Tables
