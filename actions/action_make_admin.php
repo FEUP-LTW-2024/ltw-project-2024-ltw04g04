@@ -8,7 +8,7 @@
     $session = new Session();
     $db = getDatabaseConnection();
 
-    if (!$session->isAdmin()) {
+    if (!$session->isAdmin() or $_SESSION['csrf'] !== $_POST['csrf']) {
         header('Location: ../pages/error.php');
         exit();
     }

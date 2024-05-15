@@ -1,12 +1,15 @@
 <?php
   class Session {
-    //private array $messages;
 
     public function __construct() {
+      $domain = $_SERVER['HTTP_HOST'];
+      session_set_cookie_params(0, '/', $domain, true, true);
+
       session_start();
 
-      //$this->messages = isset($_SESSION['messages']) ? $_SESSION['messages'] : array();
-      //unset($_SESSION['messages']);
+      if (!isset($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = bin2hex(openssl_random_pseudo_bytes(32));
+      }
     }
 
     public function isLogin() : bool {
@@ -71,14 +74,6 @@
 
     public function setIsAdmin(bool $admin) {
       $_SESSION['admin'] = $admin;
-    }
-
-    public function addMessage(string $type, string $text) {
-      $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
-    }
-
-    public function getMessages() {
-      return $this->messages;
     }
   }
 ?>

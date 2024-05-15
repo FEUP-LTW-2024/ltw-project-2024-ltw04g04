@@ -33,21 +33,21 @@
               VALUES (?, ?, ?, ?)
           ');
 
-          $stmt->execute(array($username, $name, strtolower($email), sha1($password)));
+          $stmt->execute(array($username, $name, strtolower($email), $password));
       }
 
       static function loginUser(PDO $db, string $email, string $password) : ?User {
           $stmt = $db->prepare('
               SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin
               FROM User
-              WHERE Email = ? AND Password_ = ?
+              WHERE Email = ?
           ');
 
-          $stmt->execute(array(strtolower($email), sha1($password)));
+          $stmt->execute(array(strtolower($email)));
 
           $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-          if ($user) {
+          if ($user && password_verify($password, $user['Password_'])) {
               return new User(
                   $user['UserId'],
                   $user['Username'],

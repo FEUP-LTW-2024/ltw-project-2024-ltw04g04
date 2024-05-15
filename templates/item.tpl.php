@@ -88,6 +88,7 @@ function sellingItem(PDO $pdo) {
    <main>
     <h2 class = "creationHeader">Create New Item</h2>
         <form action="../actions/action_create_item.php" method="post" class="form-container">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>
 
@@ -133,6 +134,7 @@ function editCategories(PDO $pdo) {
    <main>
     <h2 class = "editCategory">Change categories</h2>
         <form action="../actions/action_edit_category.php" method="post" class="category-container">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <h3>Delete Category</h3>
             <label for="category_id_to_delete">Select category to delete:</label>
             <select id="category_id_to_delete" name="category_id_to_delete">
@@ -144,6 +146,7 @@ function editCategories(PDO $pdo) {
         </form>
 
         <form action="../actions/action_edit_category.php" method="post" class="category-container">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <h3>Add New Category</h3>
             <label for="new_category_name">New category name:</label>
             <input type="text" id="new_category_name" name="new_category_name" required>

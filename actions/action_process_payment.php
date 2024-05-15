@@ -45,6 +45,4 @@
     $pdfPath = __DIR__ . "/../docs/invoices/shipping_form_" . $session->getUserId() . ".pdf";
     $pdf->Output($pdfPath, 'F');
 
-    header("Location: ../docs/invoices/shipping_form_" . $session->getUserId() . ".pdf");
-    exit();
 ?>
