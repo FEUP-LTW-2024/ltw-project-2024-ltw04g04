@@ -13,7 +13,7 @@
         <p id="subtotal">Subtotal: </p> 
         
     <?php } else { 
-        $subTotal = shoppingCart::calculateCartTotal($db);
+        $subTotal = shoppingCart::calculateCartTotal($db, $userId);
         $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
         <h1>Order Summary</h1>
         <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 

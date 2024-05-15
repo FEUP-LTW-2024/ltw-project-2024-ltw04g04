@@ -131,11 +131,15 @@
             }
         }       
 
-        static function calculateCartTotal(PDO $db): float {
+        static function calculateCartTotal(PDO $db, int $userId): float {
             try {
-                $stmt = $db->prepare("SELECT SUM(i.Price * sc.Quantity) AS total_price 
-                                        FROM ShoppingCart sc 
-                                        INNER JOIN Item i ON sc.ItemId = i.ItemId");
+                $stmt = $db->prepare("
+                    SELECT SUM(i.Price * sc.Quantity) AS total_price 
+                    FROM ShoppingCart sc 
+                    INNER JOIN Item i ON sc.ItemId = i.ItemId
+                    WHERE buyerId = :buyerId
+                ");
+                $stmt->bindParam(':buyerId', $userId, PDO::PARAM_INT);
                 $stmt->execute();
                 $total = $stmt->fetchColumn();
                 
