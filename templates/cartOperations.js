@@ -1,5 +1,4 @@
 
-
 document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener("click", function(event) {
         if (event.target.classList.contains("increase-button")) {
@@ -106,19 +105,3 @@ function toggleWishlist(itemId) {
     };
     xhr.send('itemId=' + encodeURIComponent(itemId));
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

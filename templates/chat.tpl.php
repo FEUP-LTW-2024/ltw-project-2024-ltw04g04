@@ -1,16 +1,20 @@
 <?php declare(strict_types=1); ?>
 
-<?php function drawChat(PDO $db, Session $session) { ?>
+<?php function drawChat(PDO $db, Session $session, array $users, int $initialChat) { ?>
     <script src="../templates/chat.js"></script>
     
     <?php 
         if ($session->isLogin()) {
             echo "<script> isLogin = true; </script>";
             $userId = $session->getUserId();
-            $users = Message::getUsersWithUserId($db, $userId);
             
             if (!empty($users)) {
-                $chatId = $users[0];
+                if ($initialChat != -1) {
+                    $chatId = $initialChat;
+                } else {
+                    $chatId = $users[0];
+                }
+                
                 echo "<script> userId2 = $chatId; </script>";
                 $chatName = User::getUserWithId($db, $chatId)->name;
                 echo "<script> userName2 = $chatName; </script>";

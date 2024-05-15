@@ -10,6 +10,18 @@
     generateNavigationMenu($session, $categories);
 
     $db = getDatabaseConnection();
-    drawChat($db, $session);
+    $userId = $session->getUserId();
+
+    $users = Message::getUsersWithUserId($db, $userId);
+    $initialChat = -1;
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $chatId = (int)$_POST['chatId'];
+        $initialChat = $chatId;
+
+        if (!in_array($chatId, $users)) {
+            $users[] = $chatId;
+        }
+    }
+    drawChat($db, $session, $users, $initialChat);
     generateFooter();
 ?>
