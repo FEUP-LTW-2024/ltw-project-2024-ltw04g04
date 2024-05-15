@@ -1,6 +1,7 @@
 
 /* Error messsage for register*/
 
+
 document.addEventListener("DOMContentLoaded", function() {
     var errorPopup = document.getElementById("error-popup");
 
@@ -55,9 +56,53 @@ function toggleBox() {
     }
 }
 
-document.getElementById('filter').addEventListener('mouseover', showBox);
-document.getElementById('filter').addEventListener('mouseout', hideBox);
-document.getElementById('filter').addEventListener('click', toggleBox);
+var filterElement = document.getElementById('filter');
+if (filterElement) {
+    filterElement.addEventListener('mouseover', showBox);
+    filterElement.addEventListener('mouseout', hideBox);
+    filterElement.addEventListener('click', toggleBox);
+}
+
+
+
+function toggleMenu() {
+    var menu = document.getElementById("menu");
+    if (menu.style.maxHeight === "0px" || menu.style.maxHeight === "") {
+        menu.style.display = "flex";
+        menu.style.maxHeight = menu.scrollHeight + "px";
+    } else {
+        menu.style.maxHeight = "0px";
+        setTimeout(() => {
+            menu.style.display = "none";
+        }, 300); // Wait for the transition to end before setting display to none
+    }
+}
+
+
+/*function toggleMenu() {
+    var menu = document.getElementById("menu");
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
+}*/
+
+
+
+/*document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("hamburger-menu").addEventListener("click", function() {
+        var menu = document.getElementById("menu");
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    });
+});*/
+
+
+
 
 
 

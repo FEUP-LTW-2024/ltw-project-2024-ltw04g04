@@ -1,0 +1,112 @@
+/* Mobile first styles */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 10px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search {
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+#search input[type="text"] {
+    width: calc(100% - 50px); /* Adjusting for the padding */
+}
+
+#searchbar {
+    position: relative;
+}
+
+#searchbar img {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+#hamburger-menu {
+    display: block; /* Ensure the hamburger icon is displayed */
+    cursor: pointer;
+}
+
+#menu {
+    display: none; /* Hide menu by default on mobile */
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    background-color: #f8f8f8;
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
+}
+
+#menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#menu li {
+    margin: 10px 0;
+}
+
+/* Tablet and larger screens */
+@media (min-width: 600px) {
+    #navbar {
+        flex-direction: row;
+    }
+
+    #menu {
+        flex-direction: row;
+        max-height: none;
+    }
+
+    #menu li {
+        margin: 0 10px;
+    }
+}
+
+/* Desktop and larger screens */
+@media (min-width: 1024px) {
+    #hamburger-menu {
+        display: none; /* Hide hamburger icon on larger screens */
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    #logo {
+        width: 120px;
+        height: 100px;
+    }
+
+    #search input[type="text"] {
+        width: 80%;
+    }
+
+    #navbar div {
+        margin: 0 20px;
+    }
+
+    nav#menu a {
+        font-size: 1.2em;
+    }
+
+    nav#menu li {
+        margin: 0 20px;
+    }
+
+    #menu {
+        display: flex;
+    }
+}
