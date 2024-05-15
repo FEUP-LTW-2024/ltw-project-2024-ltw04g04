@@ -6,7 +6,7 @@
             <?php foreach ($items as $item) { ?>
                 <a href="../pages/item.php?id=<?= $item['itemId'] ?>">
                 <div class="cart-item">
-                    <img src="<?= $item['image'] ?>" alt="<?= $item['name'] ?>">
+                    <img src="<?= $item['imageLink'] ?>" alt="<?= $item['name'] ?>">
                         <div class="item-details"> 
                                 <p><?= $item['name'] ?></p>
                                 <p class="detail"><?= $item['price'] ?> $ </p>  
