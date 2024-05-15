@@ -8,7 +8,7 @@
     $db = getDatabaseConnection();
     $error = ''; 
 
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['submit']) && ($_SESSION['csrf'] === $_POST['csrf'])) {
         $username = htmlspecialchars(trim($_POST['username']));
         $name = htmlspecialchars(trim($_POST['name']));
         $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);

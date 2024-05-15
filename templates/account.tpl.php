@@ -19,6 +19,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     <span class="admin-text">Administrator</span>
                 <?php endif; ?></h1>
                 <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <h2>Profile</h2>
                     <?php if ($editMode) : ?>
                         <label for="username">Username</label>

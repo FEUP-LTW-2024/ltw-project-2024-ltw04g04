@@ -121,6 +121,7 @@ function generateFooter() {
 
 <?php function drawLoginForm() { ?>
     <form action="../actions/action_login.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         Email: <input type="text" name="email" required><br>
         Password: <input type="password" name="password" required><br>
         <input type="submit" name="submit" value="Login">
@@ -130,6 +131,7 @@ function generateFooter() {
 
 <?php function drawSignupForm() { ?>
     <form action="../actions/action_sign_up.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         Your name: <input type="text" name="name" required><br>
         Username: <input type="text" name="username" required><br>
         Email: <input type="text" name="email" required><br>

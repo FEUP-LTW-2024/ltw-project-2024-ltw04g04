@@ -8,7 +8,7 @@
     $db = getDatabaseConnection();
     $error = '';
     
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['submit']) && ($_SESSION['csrf'] === $_POST['csrf'])) {
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $error = 'Invalid email address.';
         } else {

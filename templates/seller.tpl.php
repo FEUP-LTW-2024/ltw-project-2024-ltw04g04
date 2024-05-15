@@ -20,12 +20,14 @@
                 <?php if ($session->isAdmin()) : ?>
                     <?php if ($user->isAdmin) : ?>
                         <form action="../actions/action_make_admin.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" name="user_id" value="<?= $user->userId ?>">
                             <input type="hidden" name="action" value="remove_admin">
                             <input type="submit" name="remove_admin" value="Remove Admin" class="remove-admin">
                         </form>
                     <?php else : ?>
                         <form action="../actions/action_make_admin.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" name="user_id" value="<?= $user->userId ?>">
                             <input type="hidden" name="action" value="make_admin">
                             <input type="submit" name="make_admin" value="Make Admin" class="make-admin">
