@@ -5,7 +5,6 @@
 
 
 <?php function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurrentUser) { 
-
     $items = Item::getUserItemIds($pdo, $user->userId);
     ?>
     <main>
@@ -36,6 +35,12 @@
                 <?php endif; ?>
 
                 </h1>
+                <?php if (!$isCurrentUser) : ?>
+                    <form action="../pages/chat.php" method="post">
+                        <input type="hidden" name="chatId" value="<?= $user->userId ?> ">
+                        <button id="newChatButton" type="submit"> Send message </button>
+                    </form>
+                <?php endif; ?>
                 <p><strong>Username:</strong> <?= $user->username ?></p>
                 <p><strong>Email:</strong> <?= $user->email ?></p>
                 <p><strong>City:</strong> <?= $user->city ?></p>
