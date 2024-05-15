@@ -26,7 +26,7 @@ require_once(__DIR__ . '/../database/user.class.php');
                     <p> or </p>
                 </div>
 
-                <form action="../actions/action_process_payment.php" method="POST" onsubmit="return validatePaymentForm()">    <!-- Criar action -->    
+                <form id="paymentForm" action="../actions/action_process_payment.php" method="GET" target="_blank" onsubmit="return openPrintWindow(event)">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <div class="payDiv">
                         <label for="adress">Adress:</label>

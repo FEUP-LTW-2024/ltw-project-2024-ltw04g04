@@ -1,31 +1,25 @@
-var accountAdressSelected = false;
-var accountAdressComplete;
+var accountAddressSelected = false;
+var accountAddressComplete; 
 
 document.addEventListener('DOMContentLoaded', function() {
     const toggleButton = document.getElementById('toggleAdressButton');
 
     toggleButton.addEventListener('click', function() {
         this.classList.toggle('selected');
-        if (this.classList.contains('selected')) {
-            accountAdressSelected = true;
-        } else {
-            accountAdressSelected = false;
-        }
+        accountAddressSelected = this.classList.contains('selected');
     });
 });
 
-function validatePaymentForm() {
-    if (accountAdressSelected) {
-        if (!accountAdressComplete) { 
-            alert("Your account information isn't complete");
-            return false;
-        }
-        document.getElementById("adress").value = "";  
-        document.getElementById("city").value = "";  
-        document.getElementById("country").value = "";  
-        document.getElementById("postal-code").value = "";  
-    } else {
-        var address = document.getElementById("adress").value;
+function validateAndSubmitForm(event) {
+    event.preventDefault();
+
+    if (accountAddressSelected && !accountAddressComplete) {
+        alert("Your account information isn't complete");
+        return false;
+    }
+
+    if (!accountAddressSelected) {
+        var address = document.getElementById("address").value;
         var city = document.getElementById("city").value;
         var country = document.getElementById("country").value;
         var postalCode = document.getElementById("postal-code").value;
@@ -55,19 +49,15 @@ function validatePaymentForm() {
         return false; 
     }
 
+    openPrintWindow();
+}
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '../actions/action_process_payment.php', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            window.location.href = 'account.php';
-        }
-    };
-    var formData = new FormData(document.querySelector('form'));
-    xhr.send(formData);
-
-    return false;
+function openPrintWindow() {
+    const form = document.getElementById('paymentForm');
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData).toString();
+    const printWindow = window.open('../actions/action_process_payment.php?' + params, '_blank');
+    printWindow.focus();
 }
 
 
