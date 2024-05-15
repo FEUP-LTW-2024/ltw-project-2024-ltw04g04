@@ -25,7 +25,7 @@
     $expirationDate = $_POST['expiration-date'];
     $cvv = $_POST['cvv'];
 
-    require_once __DIR__ . '/../../tcpdf/tcpdf.php';
+    require_once __DIR__ . '/../tcpdf/tcpdf.php';
    
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->SetCreator(PDF_CREATOR);
@@ -34,7 +34,6 @@
     $pdf->setPrintHeader(false);
     $pdf->setPrintFooter(false);
 
-    // Adicione o conteúdo do formulário de envio ao PDF
     $pdf->AddPage();
     $html = '<h1>Shipping Form</h1>';
     $html .= "<p>Address: $address</p>";
@@ -43,8 +42,9 @@
     $html .= "<p>Postal Code: $postalCode</p>";
     $pdf->writeHTML($html, true, false, true, false, '');
 
-    // Salve o PDF em uma pasta específica no servidor
-    $pdfPath = __DIR__ . "/../../docs/invoices/shipping_form_" . $session->getUserId() . ".pdf";
+    $pdfPath = __DIR__ . "/../docs/invoices/shipping_form_" . $session->getUserId() . ".pdf";
     $pdf->Output($pdfPath, 'F');
 
+    header("Location: ../docs/invoices/shipping_form_" . $session->getUserId() . ".pdf");
+    exit();
 ?>
