@@ -40,13 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault(); 
     
             var message = document.getElementById('messageInput').value;
-    
+            var csrfToken = document.querySelector('input[name="csrf"]').value;
+
             fetch('../actions/action_send_message.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: new URLSearchParams({ message: message, user_id2: userId2 })
+                body: new URLSearchParams({ message: message, user_id2: userId2, csrf: csrfToken})
             })
             .then(response => response.text())
             .then(data => {

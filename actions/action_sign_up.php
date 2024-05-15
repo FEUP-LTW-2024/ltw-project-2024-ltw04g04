@@ -8,10 +8,10 @@
     $db = getDatabaseConnection();
     $error = ''; 
 
-    if(isset($_POST['submit'])) {
-        $username = $_POST['username'];
-        $name = $_POST['name'];
-        $email = $_POST['email'];
+    if(isset($_POST['submit']) && ($_SESSION['csrf'] === $_POST['csrf'])) {
+        $username = htmlspecialchars(trim($_POST['username']));
+        $name = htmlspecialchars(trim($_POST['name']));
+        $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'];
         $reenterPassword = $_POST['reenter_password'];
     
@@ -26,7 +26,8 @@
         } else if ($password !== $reenterPassword) {
             $error = 'Passwords do not match.';
         } else {
-            User::registerUser($db, $username, $name, $email, $password);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT, ['cost' => 12]);
+            User::registerUser($db, $username, $name, $email, $hashedPassword);
         }
     }
 

@@ -7,7 +7,7 @@ require_once(__DIR__ . '/../database/item.class.php');
 $session = new Session();
 $db = getDatabaseConnection();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csrf'])) {
     $name = htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8');
     $price = intval($_POST['price']);
     $brand = htmlspecialchars($_POST['brand'], ENT_QUOTES, 'UTF-8');
