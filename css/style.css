@@ -911,18 +911,12 @@ nav#details {
     color: white;
 }
 
-#heart-icon {
-    width: 25px; 
-    height: auto; 
+.detail-heart .heart-icon, .heart-icon {
+    width: 30px;  
+    height: 30px;
     padding: 2px;
     cursor: pointer; 
-    margin-top: 3px;
     border: none;
-}
-
-.in-wishlist {
-    background-color: #BBE4F1;
-    border-radius: 50%;
 }
 
 /* Payment */
