@@ -118,6 +118,10 @@ function sellingItem(PDO $pdo) {
             <label for="stock">Stock:</label><br>
             <input type="text" id="stock" name="stock" required><br><br>
 
+            <label for="item_image">Select Image:</label><br>
+            <input type="file" id="item_image" name="item_image" accept="image/*" required><br><br>
+
+
             <input type="submit" value="Create Item" class="button-create-item">
         </form>
     </main>
