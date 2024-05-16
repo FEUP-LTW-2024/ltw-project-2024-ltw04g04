@@ -18,18 +18,11 @@
         }
         if (isset($_GET['size']) && is_array($_GET['size']) && count($_GET['size']) > 0) {
             $filters['size'] = $_GET['size'];
-        }
-        
-        if (!empty($filters)) {
-            $filteredItems = Item::getFilteredItems($db, $filters);
-            foreach ($$filteredItems as $item) {
-                echo "a";
-            }
-            echo "oi? ";
-            $query_string = http_build_query(['results' => $filteredItems]);
-            header("Location: ../pages/search.php?" . $query_string); 
-            exit;
-        }
-        
+        } 
+             
+        $filteredItems = Item::getFilteredItems($db, $filters);
+        $query_string = http_build_query(['results' => $filteredItems]);
+        header("Location: ../pages/search.php?" . $query_string); 
+        exit;
     }
 ?>
