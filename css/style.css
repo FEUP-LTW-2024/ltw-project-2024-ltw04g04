@@ -755,7 +755,7 @@ nav#details {
     margin-left: 14%; 
 }
 
-#articles h2, #sellerItems h2, .creationHeader, .editCategory {
+#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList  {
     margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
@@ -972,7 +972,7 @@ input[type="text"] {
 }
 
 
-/*Change categories  and admin properties*/
+/*Change categories -- admin properties*/
 
 .admin-text {
     font-size: 14px;
@@ -1027,4 +1027,80 @@ input[type="text"] {
         margin: auto;
         transform: translate(0, 0);
     }
+}
+
+/*List of users -- admin properties*/
+
+.usersList {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.user-link {
+    text-decoration: none;
+    color: inherit;
+    flex: 1 1 calc(33.33% - 1.25em); /* -20px */
+    box-sizing: border-box;
+    margin: 0.625em; /* 10px */
+}
+
+.users-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.user {
+    border: 1px solid #ddd;
+    border-radius: 0.5em; /* 8px */
+    padding: 0.625em; /* 10px */
+    text-align: center;
+    transition: transform 0.2s;
+    flex: 1 1 calc(33.33% - 1.25em); /* -20px */
+    box-sizing: border-box;
+    margin: 0.625em; /* 10px */
+}
+
+.user:hover {
+    transform: scale(1.05);
+}
+
+.user img {
+    width: 6.25em;
+    height: 6.25em; 
+    border-radius: 50%;
+    margin-bottom: 0.625em; 
+    transition: transform 0.6s ease; 
+}
+
+.user:hover img {
+    transform: rotate(360deg);
+}
+
+.user-details p {
+    margin-bottom: 5px;
+}
+
+.admin-action {
+    margin-top: 10px;
+}
+
+.admin-action input[type="submit"], .profile-button  {
+    font-family: "Sulphur Point", sans-serif;
+    background-color: #BBE4F1;
+    color: #656363;
+    margin-top: 1em;
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid #656363;
+}
+
+.admin-action input[type="submit"]:hover, .profile-button:hover {
+    background-color: #2092b5;
+    color: white;
 }

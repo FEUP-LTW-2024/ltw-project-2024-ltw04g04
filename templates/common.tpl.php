@@ -42,7 +42,7 @@
                                 <a href="account.php">Profile</a>
                                 <a href="/../actions/action_logout.php">Logout</a>
                                 <?php if ($session->isAdmin()) : ?>
-                                    <a href="admin_page.php">Change Categories </a>
+                                    <a href="admin_page.php">Admin Control Center</a>
                                 <?php endif; ?>
                             </div>
                         </div>
