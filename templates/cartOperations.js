@@ -92,7 +92,7 @@ function toggleWishlist(itemId) {
             if (xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
                 if (response.success) {
-                    alert(response.success);
+                    //alert(response.success);
                     let isInWishlist = response.isInWishlist;
                     updateHeartIconStyle(itemId, isInWishlist);
                 } else {

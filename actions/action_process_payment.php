@@ -1,48 +1,84 @@
 <?php
-    declare(strict_types = 1);
-    require_once(__DIR__ . '/../utils/session.php');
-    require_once(__DIR__ . '/../database/get_database.php');
-    require_once(__DIR__ . '/../database/user.class.php');
+declare(strict_types=1);
+require_once(__DIR__ . '/../utils/session.php');
+require_once(__DIR__ . '/../database/get_database.php');
+require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/ShoppingCart.class.php');
+require_once(__DIR__ . '/../database/database.sql');
 
-    $session = new Session();
-    $db = getDatabaseConnection();
+$session = new Session();
+$db = getDatabaseConnection();
+$userId =  $session->getUserId();
 
-    $address = $_POST['adress'];
-    $city = $_POST['city'];
-    $country = $_POST['country'];
-    $postalCode = $_POST['postal-code'];
-
+if ($_SESSION['csrf'] === $_GET['csrf']) {
+    $address = $_GET['address'] ?? '';
+    $city = $_GET['city'] ?? '';
+    $country = $_GET['country'] ?? '';
+    $postalCode = $_GET['postal-code'] ?? '';
 
     if ($address === "" || $city === "" || $country === "" || $postalCode === "") {
-        $addressInfo = User::getAdressInfo($db, $session->getUserId());
+        $addressInfo = User::getAdressInfo($db, $userId);
         $address = $addressInfo[0];
         $city = $addressInfo[1];
         $country = $addressInfo[2];
         $postalCode = $addressInfo[3];
     }
 
-    $cardNumber = $_POST['card-number'];
-    $expirationDate = $_POST['expiration-date'];
-    $cvv = $_POST['cvv'];
+    $cardNumber = $_GET['card-number'] ?? '';
+    $expirationDate = $_GET['expiration-date'] ?? '';
+    $cvv = $_GET['cvv'] ?? '';
 
-    require_once __DIR__ . '/../tcpdf/tcpdf.php';
-   
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    $pdf->SetCreator(PDF_CREATOR);
-    $pdf->SetTitle('Shipping Form');
-    $pdf->SetSubject('Shipping Form');
-    $pdf->setPrintHeader(false);
-    $pdf->setPrintFooter(false);
+    $paymentSuccess = true;
+    if ($paymentSuccess) {
+        try {
+        
+            $db->beginTransaction();
 
-    $pdf->AddPage();
-    $html = '<h1>Shipping Form</h1>';
-    $html .= "<p>Address: $address</p>";
-    $html .= "<p>City: $city</p>";
-    $html .= "<p>Country: $country</p>";
-    $html .= "<p>Postal Code: $postalCode</p>";
-    $pdf->writeHTML($html, true, false, true, false, '');
+            $stmt = $db->prepare('INSERT INTO Orders (UserId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, cvv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt->execute([$userId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
+            $stmt = $db->query('SELECT MAX(OrderId) FROM Orders');
+            $orderId = $stmt->fetchColumn();
+            if ($orderId == null)
+                $orderId = 0;
+            else 
+                $orderId = $orderId + 1;
+     
+            $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
+            foreach ($itemIds as $itemId) {
+                $item = Item::getItemWithId($db, $itemId);
+                $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
+                $price = $item->price;
 
-    $pdfPath = __DIR__ . "/../docs/invoices/shipping_form_" . $session->getUserId() . ".pdf";
-    $pdf->Output($pdfPath, 'F');
+                $stmt = $db->prepare('INSERT INTO OrderItem (OrderId, ItemId, Quantity, Price) VALUES (?, ?, ?, ?)');
+                $stmt->execute([$orderId, $itemId, $quantity, $price]);
 
+ 
+                $items = http_build_query([
+                    'name' => $item->name,
+                    'price' => $price,
+                    'id' => $itemId,
+                    'csrf' => $_GET['csrf'] // Usando $_GET para acessar os parâmetros
+                ]);
+                $url = "/../actions/action_shipping_form.php?$items";
+                echo "<script>window.open('$url', '_blank');</script>";
+
+
+            
+                shoppingCart::removeItemFromCart($db, $userId, $itemId);
+            }
+
+            $db->commit();
+            echo 'success';
+        } catch (Exception $e) {
+            $db->rollBack();
+            echo "Failed to process order: " . $e->getMessage();
+        }
+    } else {
+        echo "Payment processing failed.";
+    }
+} else {
+    echo "Invalid CSRF token.";
+}
 ?>
+
+

@@ -111,7 +111,7 @@
       }
     }
 
-    static function getAdressInfo(PDO $db, int $userId): array {
+    public static function getAddressInfo(PDO $db, int $userId): array {
       $stmt = $db->prepare('SELECT Adress, City, Country, PostalCode FROM User WHERE UserId = ?');
       $stmt->execute([$userId]);
       $user = $stmt->fetch(PDO::FETCH_ASSOC);
