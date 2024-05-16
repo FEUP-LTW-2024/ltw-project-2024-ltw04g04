@@ -35,8 +35,8 @@ function drawPayment(PDO $db, Session $session) {
 
                     <!-- Delivery Address -->
                     <div class="payDiv">
-                        <label for="adress">Address:</label>
-                        <input type="text" id="adress" name="adress">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address">
                     </div>
                     <div class="payDiv">
                         <label for="city">City:</label>

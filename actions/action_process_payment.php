@@ -12,10 +12,10 @@
     $userId = $session->getUserId();
 
     if ($_SESSION['csrf'] === $_POST['csrf']) {
-        $address = $_POST['address'] ?? '';
-        $city = $_POST['city'] ?? '';
-        $country = $_POST['country'] ?? '';
-        $postalCode = $_POST['postal-code'] ?? '';
+        $address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8') ?? "";
+        $city = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8') ?? "";
+        $country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8') ?? "";
+        $postalCode = htmlspecialchars($_POST['postal-code'], ENT_QUOTES, 'UTF-8') ?? "";
 
         if ($address === "" || $city === "" || $country === "" || $postalCode === "") {
             $addressInfo = User::getAddressInfo($db, $userId);
@@ -25,9 +25,9 @@
             $postalCode = $addressInfo[3];
         }
 
-        $cardNumber = $_POST['card-number'] ?? '';
-        $expirationDate = $_POST['expiration-date'] ?? '';
-        $cvv = $_POST['cvv'] ?? '';
+        $cardNumber = htmlspecialchars($_POST['card-number'], ENT_QUOTES, 'UTF-8');
+        $expirationDate = htmlspecialchars($_POST['expiration-date'], ENT_QUOTES, 'UTF-8');
+        $cvv = htmlspecialchars($_POST['cvv'], ENT_QUOTES, 'UTF-8');
 
 
         $db->beginTransaction();
@@ -55,4 +55,6 @@
         echo "Invalid CSRF token.";
     }
 
+    header('Location: ../pages/cart.php');
+    exit();
 ?>
