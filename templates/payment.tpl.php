@@ -30,13 +30,13 @@ function drawPayment(PDO $db, Session $session) {
                     <p>or</p>
                 </div>
 
-                <form id="paymentForm" action="../actions/action_process_payment.php" method="POST" target="_blank">
+                <form id="paymentForm" action="../actions/action_process_payment.php" method="POST" onsubmit="return validatePaymentForm()">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
                     <!-- Delivery Address -->
                     <div class="payDiv">
-                        <label for="adress">Address:</label>
-                        <input type="text" id="adress" name="adress">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address">
                     </div>
                     <div class="payDiv">
                         <label for="city">City:</label>
@@ -64,18 +64,6 @@ function drawPayment(PDO $db, Session $session) {
                         <label for="cvv">CVV:</label>
                         <input type="text" id="cvv" name="cvv" required>
                     </div>
-
-                    <?php
-                    if ($session->isLogin()) {
-                        $itemIds = shoppingCart::getItemIdsInCart($db,  $userId );
-                        foreach ($itemIds as $index => $itemId) {
-                            $item = Item::getItemWithId($db, $itemId);
-                            echo '<input type="hidden" name="items[' . $index . '][name]" value="' . $item->name . '">';
-                            echo '<input type="hidden" name="items[' . $index . '][price]" value="' . $item->price . '">';
-                            echo '<input type="hidden" name="items[' . $index . '][id]" value="' . $itemId . '">';
-                        }
-                    }
-                    ?>
 
                     <div class="payDiv">
                         <button type="submit">Submit payment</button>
