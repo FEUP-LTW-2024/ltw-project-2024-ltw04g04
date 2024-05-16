@@ -30,12 +30,12 @@
         }
 
 
-        public static function addOrder(int $orderId, int $itemId, int $quantity, int $buyerId, string $address, string $city, string $country, string $postalCode, string $cardNumber, string $expirationDate, string $cvv) {
+        public static function addOrder(int $itemId, int $quantity, int $buyerId, string $address, string $city, string $country, string $postalCode, string $cardNumber, string $expirationDate, string $cvv) {
             $stmt = $db->prepare('
-            INSERT INTO Orders (OrderId, ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            INSERT INTO Orders (ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
             
-            $stmt->execute([$orderId, $itemId, $quantity, $buyerId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
+            $stmt->execute([$itemId, $quantity, $buyerId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
         }
         
     }
