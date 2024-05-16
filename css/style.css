@@ -917,6 +917,12 @@ nav#details {
     padding: 2px;
     cursor: pointer; 
     border: none;
+    transition: transform 0.2s ease;
+}
+
+.detail-heart .heart-icon:hover,
+.heart-icon:hover {
+    transform: scale(1.2);
 }
 
 /* Payment */

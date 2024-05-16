@@ -7,12 +7,13 @@
     require_once(__DIR__ . '/../templates/search.tpl.php');
 
     $session = new Session();
+    $pdo = getDatabaseConnection();
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
 
     if (isset($_GET['results'])) {
         $results = $_GET['results'];
-        drawSearchItems($results);
+        drawSearchItems($pdo, $session, $results);
     } else {
         drawNoSearchItems();
     }
