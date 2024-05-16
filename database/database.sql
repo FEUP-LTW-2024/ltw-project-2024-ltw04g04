@@ -11,7 +11,6 @@ DROP TABLE IF EXISTS BuyerItem;
 DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS WishList;
 DROP TABLE IF EXISTS ChatMessage;
-DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS OrderItem;
 
 /*******************************************************************************
@@ -116,28 +115,24 @@ CREATE TABLE Images (
   title VARCHAR NOT NULL
 );
 
-CREATE TABLE Orders (
-    OrderId INT AUTO_INCREMENT PRIMARY KEY,
-    UserId INT NOT NULL,
-    Adress VARCHAR(255),
+CREATE TABLE OrderItem (
+    OrderId INTEGER,
+    ItemId INTEGER NOT NULL,
+    Quantity INTEGER,
+    BuyerId INTEGER NOT NULL,
+    Adress NVARCHAR(160),
     City NVARCHAR(160),
     Country NVARCHAR(160),
     PostalCode NVARCHAR(160),
     CardNumber NVARCHAR(160),
     ExpirationDate VARCHAR(5),
-    cvv VARCHAR(4),
+    CVV VARCHAR(3),
     OrderDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (UserId) REFERENCES User(UserId)
-);
-
-CREATE TABLE OrderItem (
-    OrderItemId INT AUTO_INCREMENT PRIMARY KEY,
-    OrderId INT NOT NULL,
-    ItemId INT NOT NULL,
-    Quantity INT,
-    Price DECIMAL(10, 2),
-    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
+    CONSTRAINT OrderId PRIMARY KEY (OrderId)
+    FOREIGN KEY (BuyerId) REFERENCES User(UserId)
+        ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ItemId) REFERENCES Item(ItemId)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 

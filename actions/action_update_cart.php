@@ -21,7 +21,7 @@
                 $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
                 ?>
                 <div class="cart-item">
-                    <img src="<?= $item->image ?>" alt="<?= $item->name ?>">
+                    <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
                     <div class="item-details">
                         <a href="../pages/item.php?id=<?= $item->itemId ?>">
                             <p><?= $item->name ?></p>

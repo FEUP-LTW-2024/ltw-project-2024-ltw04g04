@@ -28,6 +28,10 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
     $expirationDate = $_GET['expiration-date'] ?? '';
     $cvv = $_GET['cvv'] ?? '';
 
+
+    $db->beginTransaction();
+    
+
     $paymentSuccess = true;
     if ($paymentSuccess) {
         try {

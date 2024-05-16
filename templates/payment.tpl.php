@@ -65,18 +65,6 @@ function drawPayment(PDO $db, Session $session) {
                         <input type="text" id="cvv" name="cvv" required>
                     </div>
 
-                    <?php
-                    if ($session->isLogin()) {
-                        $itemIds = shoppingCart::getItemIdsInCart($db,  $userId );
-                        foreach ($itemIds as $index => $itemId) {
-                            $item = Item::getItemWithId($db, $itemId);
-                            echo '<input type="hidden" name="items[' . $index . '][name]" value="' . $item->name . '">';
-                            echo '<input type="hidden" name="items[' . $index . '][price]" value="' . $item->price . '">';
-                            echo '<input type="hidden" name="items[' . $index . '][id]" value="' . $itemId . '">';
-                        }
-                    }
-                    ?>
-
                     <div class="payDiv">
                         <button type="submit">Submit payment</button>
                     </div>
