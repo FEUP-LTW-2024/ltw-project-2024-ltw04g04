@@ -13,12 +13,12 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
     $country = $_GET['country'] ?? '';
     $postalCode = $_GET['postal-code'] ?? '';
 
-    if (empty($address) || empty($city) || empty($country) || empty($postalCode)) {
-        $addressInfo = User::getAddressInfo($db, $session->getUserId());
-        $address = $addressInfo['address'];
-        $city = $addressInfo['city'];
-        $country = $addressInfo['country'];
-        $postalCode = $addressInfo['postal_code'];
+    if ($address === "" || $city === "" || $country === "" || $postalCode === "") {
+        $addressInfo = User::getAdressInfo($db, $session->getUserId());
+        $address = $addressInfo[0];
+        $city = $addressInfo[1];
+        $country = $addressInfo[2];
+        $postalCode = $addressInfo[3];
     }
 
     $cardNumber = $_GET['card-number'] ?? '';
@@ -26,13 +26,12 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
     $cvv = $_GET['cvv'] ?? '';
 
     $paymentSuccess = true;
-
     if ($paymentSuccess) {
         try {
         
             $db->beginTransaction();
 
-            $stmt = $db->prepare('INSERT INTO Order (UserId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, cvv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+            $stmt = $db->prepare('INSERT INTO Orders (UserId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, cvv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
             $stmt->execute([$userId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
             $orderId = $db->lastInsertId();
 
@@ -51,10 +50,11 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
                     'name' => $item->name,
                     'price' => $price,
                     'id' => $itemId,
-                    'csrf' => $_POST['csrf']
+                    'csrf' => $_GET['csrf'] // Usando $_GET para acessar os parâmetros
                 ]);
-                $url = "../actions/action_shipping_form.php?$params";
+                $url = "/../actions/action_shipping_form.php?$params";
                 echo "<script>window.open('$url', '_blank');</script>";
+
 
             
                 shoppingCart::removeItemFromCart($db, $userId, $itemId);

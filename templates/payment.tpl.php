@@ -2,6 +2,7 @@
 declare(strict_types = 1); 
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/ShoppingCart.class.php');
+require_once(__DIR__ . '/../database/item.class.php');
 ?>
 
 <?php
@@ -29,7 +30,7 @@ function drawPayment(PDO $db, Session $session) {
                     <p>or</p>
                 </div>
 
-                <form id="paymentForm" action="../actions/action_process_payment.php" method="POST" target="_blank" onsubmit="return openPrintWindow(event)">
+                <form id="paymentForm" action="../actions/action_process_payment.php" method="POST" target="_blank">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
                     <!-- Delivery Address -->
@@ -66,7 +67,7 @@ function drawPayment(PDO $db, Session $session) {
 
                     <?php
                     if ($session->isLogin()) {
-                        $itemIds = shoppingCart::getItemIdsInCart($db, $session->getUserId());
+                        $itemIds = shoppingCart::getItemIdsInCart($db,  $userId );
                         foreach ($itemIds as $index => $itemId) {
                             $item = Item::getItemWithId($db, $itemId);
                             echo '<input type="hidden" name="items[' . $index . '][name]" value="' . $item->name . '">';

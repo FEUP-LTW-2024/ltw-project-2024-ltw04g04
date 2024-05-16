@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS BuyerItem;
 DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS WishList;
 DROP TABLE IF EXISTS ChatMessage;
-
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS OrderItem;
 
 /*******************************************************************************
    Create Tables
@@ -115,7 +116,7 @@ CREATE TABLE Images (
   title VARCHAR NOT NULL
 );
 
-CREATE TABLE Order (
+CREATE TABLE Orders (
     OrderId INT AUTO_INCREMENT PRIMARY KEY,
     UserId INT NOT NULL,
     Adress VARCHAR(255),
@@ -135,7 +136,7 @@ CREATE TABLE OrderItem (
     ItemId INT NOT NULL,
     Quantity INT,
     Price DECIMAL(10, 2),
-    FOREIGN KEY (OrderId) REFERENCES Order(OrderId),
+    FOREIGN KEY (OrderId) REFERENCES Orders(OrderId),
     FOREIGN KEY (ItemId) REFERENCES Item(ItemId)
 );
 
