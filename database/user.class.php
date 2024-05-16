@@ -154,6 +154,12 @@
         $stmt->execute([$user_id]);
     }
 
+    public static function getAllUsersExceptCurrent(PDO $db, int $currentUserId): array {
+        $stmt = $db->prepare('SELECT * FROM User WHERE UserId != ?');
+        $stmt->execute([$currentUserId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
   }
 
 ?>

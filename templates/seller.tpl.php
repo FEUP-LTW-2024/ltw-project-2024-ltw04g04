@@ -7,7 +7,7 @@
 <?php function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurrentUser) { 
     $items = Item::getUserItemIds($pdo, $user->userId);
     ?>
-    <main>
+    
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
             <div id="userInfo">

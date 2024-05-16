@@ -225,3 +225,45 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     </html>
 <?php } ?>
 
+
+<?php
+function usersList(PDO $pdo, Session $session) {
+    $users = User::getAllUsersExceptCurrent($pdo, $session->getUserId());
+?>
+    <main>
+        <h2 class="usersList">List of Sellers</h2>
+        <div class="users-container">
+            <?php foreach ($users as $user): ?>
+                <div class="user">
+                    <img src="../pages/imgs/user-icon.png" alt="User Icon">
+                    <div class="user-details">
+                        <p>Name: <?= $user['Name_'] ?></p>
+                        <p>Username: <?= $user['Username'] ?></p>
+                        <div class="admin-action">
+                            <?php if ($user->isAdmin) : ?>
+                                <form action="../actions/action_make_admin.php" method="post">
+                                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                    <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">
+                                    <input type="hidden" name="action" value="remove_admin">
+                                    <input type="submit" name="remove_admin" value="Remove Admin" class="remove-admin">
+                                </form>
+                            <?php else : ?>
+                                <form action="../actions/action_make_admin.php" method="post">
+                                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                    <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">
+                                    <input type="hidden" name="action" value="make_admin">
+                                    <input type="submit" name="make_admin" value="Make Admin" class="make-admin">
+                                </form>
+                            <?php endif; ?>
+                        </div>
+                        <a href="../pages/seller.php?id=<?= $user['UserId'] ?>" class="profile-button">Profile</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </main>
+<?php
+}
+?>
+
+
