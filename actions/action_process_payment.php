@@ -3,31 +3,31 @@
     require_once(__DIR__ . '/../utils/session.php');
     require_once(__DIR__ . '/../database/get_database.php');
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/order.class.php');
     require_once(__DIR__ . '/../database/ShoppingCart.class.php');
-    require_once(__DIR__ . '/../database/database.sql');
 
     $session = new Session();
     $db = getDatabaseConnection();
-    $userId =  $session->getUserId();
+    $userId = $session->getUserId();
 
-    if ($_SESSION['csrf'] === $_GET['csrf']) {
-        $address = $_GET['address'] ?? '';
-        $city = $_GET['city'] ?? '';
-        $country = $_GET['country'] ?? '';
-        $postalCode = $_GET['postal-code'] ?? '';
+    if ($_SESSION['csrf'] === $_POST['csrf']) {
+        $address = $_POST['address'] ?? '';
+        $city = $_POST['city'] ?? '';
+        $country = $_POST['country'] ?? '';
+        $postalCode = $_POST['postal-code'] ?? '';
 
         if ($address === "" || $city === "" || $country === "" || $postalCode === "") {
-            $addressInfo = User::getAdressInfo($db, $userId);
+            $addressInfo = User::getAddressInfo($db, $userId);
             $address = $addressInfo[0];
             $city = $addressInfo[1];
             $country = $addressInfo[2];
             $postalCode = $addressInfo[3];
         }
 
-        $cardNumber = $_GET['card-number'] ?? '';
-        $expirationDate = $_GET['expiration-date'] ?? '';
-        $cvv = $_GET['cvv'] ?? '';
+        $cardNumber = $_POST['card-number'] ?? '';
+        $expirationDate = $_POST['expiration-date'] ?? '';
+        $cvv = $_POST['cvv'] ?? '';
 
 
         $db->beginTransaction();
@@ -38,9 +38,9 @@
                 $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
 
                 shoppingCart::removeItemFromCart($db, $userId, $itemId);
-                // UPDATE ITEM STOCK
+                item::updateStock($db, $itemId, $quantity);
 
-                Order::addOrder($itemId, $quantity, $userId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv);
+                Order::addOrder($db, $itemId, $quantity, $userId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv);
             }
 
             $db->commit();

@@ -30,9 +30,9 @@
         }
 
 
-        public static function addOrder(int $itemId, int $quantity, int $buyerId, string $address, string $city, string $country, string $postalCode, string $cardNumber, string $expirationDate, string $cvv) {
+        public static function addOrder(PDO $db, int $itemId, int $quantity, int $buyerId, string $address, string $city, string $country, string $postalCode, string $cardNumber, string $expirationDate, string $cvv) {
             $stmt = $db->prepare('
-            INSERT INTO Orders (ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV) 
+            INSERT INTO OrderItem (ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
             
             $stmt->execute([$itemId, $quantity, $buyerId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);

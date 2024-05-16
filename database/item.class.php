@@ -206,6 +206,14 @@
             $result = $stmt->fetchAll(PDO::FETCH_COLUMN);
             return $result ? $result : [];
         }
+
+
+        static function updateStock(PDO $db, int $itemId, int $diffQuantity): void {
+            $stmt = $db->prepare("UPDATE Item SET Stock = Stock - :diff_quantity WHERE ItemId = :item_id");
+            $stmt->bindParam(':diff_quantity', $diffQuantity, PDO::PARAM_INT);
+            $stmt->bindParam(':item_id', $itemId, PDO::PARAM_INT);
+            $stmt->execute();
+        }
     
 
         public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size): void {

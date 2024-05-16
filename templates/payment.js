@@ -9,30 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
         accountAdressSelected = this.classList.contains('selected');
     });
 
-    document.getElementById('paymentForm').onsubmit = function(event) {
-        event.preventDefault();
-        if (!validatePaymentForm()) return false;
-
-        const form = this;
-        const formData = new FormData(form);
-
-        fetch('../actions/action_process_payment.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(() => {
-            const items = formData.getAll('items');
-            items.forEach(item => {
-                const itemParams = new URLSearchParams(item).toString();
-                const printWindow = window.open('../actions/action_shipping_form.php?' + itemParams, '_blank', 'width=600,height=400');
-                printWindow.focus();
-            });
-            console.log(items);
-        })
-        .catch(error => console.error('Error:', error));
-
-        return false;
-    };
 });
 
 

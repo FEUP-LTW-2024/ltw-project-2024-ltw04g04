@@ -30,7 +30,7 @@ function drawPayment(PDO $db, Session $session) {
                     <p>or</p>
                 </div>
 
-                <form id="paymentForm" action="../actions/action_process_payment.php" method="POST" target="_blank">
+                <form id="paymentForm" action="../actions/action_process_payment.php" method="POST" onsubmit="return validatePaymentForm()">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
                     <!-- Delivery Address -->
