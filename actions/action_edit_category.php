@@ -21,7 +21,7 @@ declare(strict_types = 1);
             $stmt = $db->prepare('INSERT INTO Category (CategoryName) VALUES (?)');
             $stmt->execute([$new_category_name]);
             
-            header('Location: ../pages/edit_category.php');
+            header('Location: ../pages/admin_page.php');
             exit();
         }
 
@@ -45,6 +45,6 @@ declare(strict_types = 1);
         $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    header('Location: ../pages/edit_category.php');
+    header('Location: ../pages/admin_page.php');
     exit();
 ?>
