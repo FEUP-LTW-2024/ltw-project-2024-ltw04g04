@@ -67,6 +67,16 @@ if (filterElement) {
 
 function toggleMenu() {
     var menu = document.getElementById("menu");
+    if (menu.classList.contains("show")) {
+        menu.classList.remove("show");
+    } else {
+        menu.classList.add("show");
+    }
+}
+
+
+/*function toggleMenu() {
+    var menu = document.getElementById("menu");
     if (menu.style.maxHeight === "0px" || menu.style.maxHeight === "") {
         menu.style.display = "flex";
         menu.style.maxHeight = menu.scrollHeight + "px";
@@ -76,7 +86,7 @@ function toggleMenu() {
             menu.style.display = "none";
         }, 300); // Wait for the transition to end before setting display to none
     }
-}
+}*7
 
 
 /*function toggleMenu() {
