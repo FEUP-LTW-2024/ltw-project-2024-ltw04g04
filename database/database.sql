@@ -77,7 +77,7 @@ CREATE TABLE BuyerItem
 );
 
 CREATE TABLE ShoppingCart (
-    ShoppingCartId INTEGER,
+    ShoppingCartId INT AUTO_INCREMENT PRIMARY KEY DEFAULT 1,
     BuyerId INTEGER,
     ItemId INTEGER NOT NULL,
     Quantity INTEGER NOT NULL DEFAULT 1,

@@ -3,9 +3,12 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../utils/session.php');
 require_once(__DIR__ . '/../database/get_database.php');
 require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/ShoppingCart.class.php');
+require_once(__DIR__ . '/../database/database.sql');
 
 $session = new Session();
 $db = getDatabaseConnection();
+$userId =  $session->getUserId();
 
 if ($_SESSION['csrf'] === $_GET['csrf']) {
     $address = $_GET['address'] ?? '';
@@ -14,7 +17,7 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
     $postalCode = $_GET['postal-code'] ?? '';
 
     if ($address === "" || $city === "" || $country === "" || $postalCode === "") {
-        $addressInfo = User::getAdressInfo($db, $session->getUserId());
+        $addressInfo = User::getAdressInfo($db, $userId);
         $address = $addressInfo[0];
         $city = $addressInfo[1];
         $country = $addressInfo[2];
@@ -33,8 +36,12 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
 
             $stmt = $db->prepare('INSERT INTO Orders (UserId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, cvv) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
             $stmt->execute([$userId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
-            $orderId = $db->lastInsertId();
-
+            $stmt = $db->query('SELECT MAX(OrderId) FROM Orders');
+            $orderId = $stmt->fetchColumn();
+            if ($orderId == null)
+                $orderId = 0;
+            else 
+                $orderId = $orderId + 1;
      
             $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
             foreach ($itemIds as $itemId) {
@@ -46,13 +53,13 @@ if ($_SESSION['csrf'] === $_GET['csrf']) {
                 $stmt->execute([$orderId, $itemId, $quantity, $price]);
 
  
-                $params = http_build_query([
+                $items = http_build_query([
                     'name' => $item->name,
                     'price' => $price,
                     'id' => $itemId,
                     'csrf' => $_GET['csrf'] // Usando $_GET para acessar os parâmetros
                 ]);
-                $url = "/../actions/action_shipping_form.php?$params";
+                $url = "/../actions/action_shipping_form.php?$items";
                 echo "<script>window.open('$url', '_blank');</script>";
 
 
