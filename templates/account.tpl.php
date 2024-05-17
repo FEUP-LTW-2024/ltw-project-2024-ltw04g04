@@ -10,7 +10,7 @@
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
-    $orders = Order::getUserOrders($pdo, $user->userId); // Obtém as ordens do usuário
+    $orders = Order::getUserOrders($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">

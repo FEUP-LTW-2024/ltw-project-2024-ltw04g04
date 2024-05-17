@@ -15,7 +15,7 @@
     <body>
         <header>
             <nav id="navbar">
-                <div><a href="index.php"><img id="logo" src="imgs/logo.png"  alt="Logo"></a></div>
+                <div id="logo-container"><a href="index.php"><img id="logo" src="imgs/logo.png"  alt="Logo"></a></div>
                 <div id="search">
                     <form action="../actions/action_search.php" method="get">
                         <div id="searchbar">
@@ -60,8 +60,8 @@
             </nav>
         </header>
         <nav id="menu">
-            <input type="checkbox" id="hamburger"> 
-            <label class="hamburger" for="hamburger"></label>
+            <input type="checkbox" id="hamburgerCommon"> 
+            <label class="hamburgerCommon" for="hamburgerCommon"></label>
             <ul>
                 <?php foreach ($categories as $category) : ?>
                     <li><a href="../actions/action_items_category.php?category=<?php echo urlencode($category['CategoryName']); ?>"><?php echo $category['CategoryName']; ?></a></li>

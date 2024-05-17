@@ -1,24 +1,58 @@
 /* Responsive Design */
 
-@media (max-width: 60em) {
+@media (max-width: 50em) {
     #editButton {
         align-self: flex-center; 
-    }
-    
-}
-@media (max-width: 40em) {
-    #editButton {
-        align-self: flex-center; 
+
     }
 
-    #menu .hamburger {
+    #navbar {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    #logo-container {
+        flex-basis: 50%;
+    }
+    
+    #search {
+        flex-basis: 50%;
+    }
+    
+    #account,
+    #favourite,
+    #cart,
+    #chatMsg {
+        align-self: flex-start;  
+        flex-basis: 15%;
+        order: 3;
+    }
+    
+    #filter-container {
+        flex-basis: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        order: 2;
+    }
+    
+    #filter {
+        margin-left: 2em;
+    }
+    
+        
+}
+
+@media (max-width: 40em) {
+
+    #menu .hamburgerCommon {
         display: block;
         background-color: #f8f8f8;
         color:#A4DAEA;
         padding: 1em;
       }
     
-      #menu .hamburger:before {
+      #menu .hamburgerCommon:before {
         content:'\2630';
       }
     
@@ -29,13 +63,13 @@
         color: white;
       }
     
-      #hamburger:checked + .hamburger + ul li{
+      #hamburgerCommon:checked + .hamburgerCommon + ul li{
         max-height: 1em;
         padding: 1em;
         opacity: 1;
       }
     
-      #hamburger:checked + .hamburger:before {
+      #hamburgerCommon:checked + .hamburgerCommon:before {
         content:'\2715';
       }
     
@@ -54,6 +88,8 @@
         border-bottom: solid 5px white;
         background-color: #A4DAEA;
     }
-    
+    main .productinfo {
+        display: none;
+    }
 }
 
