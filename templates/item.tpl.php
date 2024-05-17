@@ -25,6 +25,7 @@ function getSellerId(PDO $pdo, int $itemId): int {
 
 <?php
 function drawItem($pdo, $userId, $item) { 
+    $session = new Session();
     if ($userId == -1) {
         $isSeller = false;
     } else {
@@ -44,10 +45,12 @@ function drawItem($pdo, $userId, $item) {
                         <h2><?= $item->name ?></h2>      
                         <p> <?= number_format($item->price, 2) ?> $ </p>    
                         <p> Available Stock: <?= $item->stock ?> </p>
-                        <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
-                        <p class="detail">
+                        <?php if ($item->stock != 0 && $session->isLogin()) {?>
+                            <button type="button" id="addItemToCart" data-item-id="<?= $item->itemId ?>">Add to shopping cart</button>
+                            <p class="detail">
                             <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon" id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
-                        Favourite</p>
+                            Favourite </p>
+                        <?php }?>
                         
                         <nav id="details">
                             <input type="checkbox" id="hamburger"> 

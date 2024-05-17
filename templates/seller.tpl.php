@@ -11,7 +11,16 @@
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
             <div id="userInfo">
-                <h1><?= $user->name ?> 
+                <div id="userHeader">
+                    <h1><?= $user->name ?> </h1>
+                    <?php if (!$isCurrentUser && $session->isLogin()) : ?>
+                        <form action="../pages/chat.php" method="post">
+                            <input type="hidden" name="chatId" value="<?= $user->userId ?> ">
+                            <button id="newChatButton" type="submit"> Send message </button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+
                 <?php if ($user->isAdmin) : ?>
                     <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
                     <span class="admin-text">Administrator</span>
@@ -32,15 +41,9 @@
                             <input type="submit" name="make_admin" value="Make Admin" class="make-admin">
                         </form>
                     <?php endif; ?>
-                <?php endif; ?>
-
-                </h1>
-                <?php if (!$isCurrentUser) : ?>
-                    <form action="../pages/chat.php" method="post">
-                        <input type="hidden" name="chatId" value="<?= $user->userId ?> ">
-                        <button id="newChatButton" type="submit"> Send message </button>
-                    </form>
-                <?php endif; ?>
+                <?php endif; ?>   
+                
+                
                 <p><strong>Username:</strong> <?= $user->username ?></p>
                 <p><strong>Email:</strong> <?= $user->email ?></p>
                 <p><strong>City:</strong> <?= $user->city ?></p>
@@ -48,6 +51,7 @@
                 <?php if ($isCurrentUser) : ?>
                     <a href="account.php?edit" id="editButton">Edit</a>
                 <?php endif; ?>
+                
             </div>
         </section>
 

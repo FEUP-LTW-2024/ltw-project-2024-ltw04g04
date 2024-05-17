@@ -344,10 +344,21 @@ a#editButton {
     border: 1px solid black; 
 }
 
+/* User - Seller */
 
 #userInfo {
     flex-grow: 1;
     margin-left: 20px;
+}
+
+#userHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#newChatButton {
+    margin-left: 2em;
 }
 
 #userInfo h2 {
@@ -470,6 +481,8 @@ a#editButton {
 }
 
 
+
+
 nav#details {
     [type = checkbox] {
         display: none;
@@ -520,6 +533,11 @@ nav#details {
 #bar label {
     margin-top: 15px;
     flex: 1;
+}
+
+.sold-out {
+    font-weight: bold; 
+    color: rgb(172, 30, 30); 
 }
 
 

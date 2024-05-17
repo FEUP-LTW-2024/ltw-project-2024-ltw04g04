@@ -2,8 +2,7 @@
   class Session {
 
     public function __construct() {
-      $domain = $_SERVER['HTTP_HOST'];
-      session_set_cookie_params(0, '/', $domain, true, true);
+      session_set_cookie_params(0, '/');
 
       session_start();
 
