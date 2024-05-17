@@ -2,6 +2,7 @@
     declare(strict_types = 1);
     require_once(__DIR__ . '/../database/shoppingCart.class.php');
     require_once(__DIR__ . '/../database/item.class.php');
+    require_once(__DIR__ . '/../database/order.class.php');
     require_once(__DIR__ . '/../database/insertImages.php');
 ?>
 
@@ -9,16 +10,18 @@
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
+    $orders = Order::getUserOrders($pdo, $user->userId); // Obtém as ordens do usuário
 ?>
     <main>
         <section id="profile">
             <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
             <div id="userInfo">
-            <h1><?= $user->name ?> 
-                <?php if ($user->isAdmin) : ?>
-                    <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
-                    <span class="admin-text">Administrator</span>
-                <?php endif; ?></h1>
+                <h1><?= $user->name ?> 
+                    <?php if ($user->isAdmin) : ?>
+                        <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
+                        <span class="admin-text">Administrator</span>
+                    <?php endif; ?>
+                </h1>
                 <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <h2>Profile</h2>
@@ -38,7 +41,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <label for="postal_code">Postal Code</label>
                         <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
                         <button type="submit" id="editButton">Save</button>
-                        
                     <?php else : ?>
                         <p><strong>Username:</strong> <?= $user->username ?></p>
                         <p><strong>Name:</strong> <?= $user->name ?></p>
@@ -49,23 +51,38 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <p><strong>Postal Code:</strong> <?= $user->postalCode ?></p>
                         <a href="?edit" id="editButton">Edit</a>
                     <?php endif; ?>
-
                 </form>
             </div>
         </section>
         
         <section id="articles">
             <?php if (count($items) > 0) : ?>
-                <h2>My arcticles</h2>
+                <h2>My articles</h2>
                 <div class="itemGrid">
                     <?php foreach ($items as $index => $i) : ?>
-                        <?php $item = Item::getItemWithId($pdo, $i); ?>
+                        <?php 
+                        $item = Item::getItemWithId($pdo, $i); 
+                        $hasOrder = false;
+                        ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
                             <a href="item.php?id=<?= $item->itemId ?>">
                                 <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
                             </a>
                             <h3><?= $item->name ?></h3>
                             <p><?= $item->price ?> $</p>
+
+                            <?php foreach ($orders as $order) : ?>
+                                <?php if ($order['ItemId'] == $item->itemId) : ?>
+                                    <?php 
+                                    $hasOrder = true; 
+                                    ?>
+                                    <a href="/../actions/action_shipping_form.php?order_id=<?= $order['OrderId'] ?>&item_id=<?= $item->itemId ?>" target="_blank">View Shipping Form</a>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
+                            <?php if (!$hasOrder) : ?>
+                                <p>No orders for this item yet.</p>
+                            <?php endif; ?>
                         </article>
                     <?php endforeach; ?>
                     <article class="articleItem">
@@ -81,6 +98,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
         </section>
     </main>
 <?php } ?>
+
+
+
 
 
 
