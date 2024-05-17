@@ -10,7 +10,6 @@
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
-    $orders = Order::getUserOrders($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">
@@ -71,16 +70,19 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             <h3><?= $item->name ?></h3>
                             <p><?= $item->price ?> $</p>
 
-                            <?php foreach ($orders as $order) : ?>
-                                <?php if ($order['ItemId'] == $item->itemId) : ?>
-                                    <?php 
-                                    $hasOrder = true; 
-                                    ?>
-                                    <a href="/../actions/action_shipping_form.php?order_id=<?= $order['OrderId'] ?>&item_id=<?= $item->itemId ?>" target="_blank">View Shipping Form</a>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <?php 
+                                $numOrder = 1;
+                                $orderIds = Order::getOrderIds($pdo, $i); 
+                                foreach ($orderIds as $orderId) { ?>
+                                    <form action="../actions/action_shipping_form.php" method="post">
+                                        <input type="hidden" name="orderId" value="<?= $orderId?>">
+                                        <button id="orderButton" type="submit"> Order <?= $numOrder?> </button>
+                                    </form>
+                            <?php 
+                                    $numOrder = $numOrder + 1; 
+                                } ?>
 
-                            <?php if (!$hasOrder) : ?>
+                            <?php if (empty($orderIds)) : ?>
                                 <p>No orders for this item yet.</p>
                             <?php endif; ?>
                         </article>

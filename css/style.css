@@ -1144,3 +1144,11 @@ input[type="text"] {
     background-color: #2092b5;
     color: white;
 }
+
+
+/* Order */
+#orderButton {
+    border: 1px solid #A4DAEA;
+    border-radius: 4px;
+    padding: 1em 1.5em 1em 1.5em;
+}
