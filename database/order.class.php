@@ -37,6 +37,15 @@
             
             $stmt->execute([$itemId, $quantity, $buyerId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
         }
+
+        public static function getUserOrders(PDO $db, int $userId): array {
+            $stmt = $db->prepare('
+                SELECT * 
+                FROM OrderItem 
+                WHERE BuyerId = ?');
+            $stmt->execute([$userId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         
     }
 
