@@ -9,8 +9,8 @@ $pdo = getDatabaseConnection();
 
 // ---- Section where only images for items are handled, folder is called 'imgsForItems' ----
 
-if (!is_dir('pages/imgs')) mkdir('pages/imgs');
-if (!is_dir('pages/imgs/imgsForItems')) mkdir('pages/imgs/imgsForItems');
+//if (!is_dir('pages/imgs')) mkdir('pages/imgs');
+//if (!is_dir('pages/imgs/imgsForItems')) mkdir('pages/imgs/imgsForItems');
 
 
 function processImage($pdo, $filePath, $title) {
@@ -35,7 +35,7 @@ function processImage($pdo, $filePath, $title) {
 }
 
 
-$imageDir = 'pages/imgs/imgsForItems';
+$imageDir = __DIR__ . 'pages/imgs/imgsForItems';
 $images = glob("$imageDir/*.{jpg,png,gif}", GLOB_BRACE);
 
 foreach ($images as $imagePath) {
