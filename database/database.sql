@@ -76,10 +76,11 @@ CREATE TABLE BuyerItem
 );
 
 CREATE TABLE ShoppingCart (
-    ShoppingCartId INT AUTO_INCREMENT PRIMARY KEY DEFAULT 1,
+    ShoppingCartId INTEGER,
     BuyerId INTEGER,
     ItemId INTEGER NOT NULL,
     Quantity INTEGER NOT NULL DEFAULT 1,
+    CONSTRAINT ShoppingCartId PRIMARY KEY (ShoppingCartId)
     FOREIGN KEY (BuyerId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ItemId) REFERENCES Item (ItemId)

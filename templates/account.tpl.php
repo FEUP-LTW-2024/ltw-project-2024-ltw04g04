@@ -101,9 +101,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 
-
-
-
 <?php function drawShoppingCart($db, $session) { ?>
     <script defer src="../templates/cartOperations.js"></script>
 
