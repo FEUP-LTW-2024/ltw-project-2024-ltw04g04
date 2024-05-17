@@ -16,17 +16,6 @@
         $item = Item::getItemWithId($db, $order->itemId);
         $buyer = User::getUserWithId($db, $order->buyerId);
 
-        /*
-        $buyerName = $buyer->name;
-        $buyerEmail = $buyer->email;
-        //$itemName = ;
-        $itemPrice = htmlspecialchars($item['price']);
-        $address = ;
-        $city = ;
-        $country = ;
-        $postalCode = htmlspecialchars($order['PostalCode']);
-        */
-
     } else {
         header('Location: ../pages/account.php');
         exit();
@@ -41,48 +30,90 @@
         body {
             font-family: Arial, sans-serif;
         }
-        .label {
-            width: 80mm;
-            height: 100mm;
-            border: 1px solid #000;
-            padding: 10px;
-            margin: auto;
+        
+        .shipping-form {
+            max-width: auto;
+            margin: 0;
+            padding: 1em 2em 1.5em 2em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
+
+        .shipping-form h1 {
+            text-align: center;
+            margin-bottom: 1em;
+        }
+
+        .ship-div {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1.3em;
+        }
+
+        .ship-div h3 {
+            margin-bottom: 10px;
+        }
+
+        .shipping {
+            margin-bottom: 0.6em;
+        }
+
+        #printButton, #goBackButton {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #00B4D8;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #printButton:hover, #goBackButton:hover {
+            background-color: #0077B6;
+        }
+
+        .no-print {
+            display: none;
+        }
+
         @media print {
-            .label {
-                width: 80mm;
-                height: 100mm;
-                border: 1px solid #000;
-                padding: 10px;
-                margin: auto;
-            }
-            body {
-                margin: 0;
-                padding: 0;
-            }
-            
             .no-print {
-                display: none;
+                display: none !important;
             }
         }
     </style>
 </head>
 <body>
     <div class="shipping-form">
-        <h1>Shipping Label</h1>
-
-        <p><strong>Address:</strong> <?= $order->address ?></p>
-        <p><strong>City:</strong> <?= $order->city ?></p>
-        <p><strong>Country:</strong> <?= $order->country ?></p>
-        <p><strong>Postal Code:</strong> <?= $order->postalCode ?></p>
+        <h1>Shipping Form</h1>
         
-        <p><strong>Item:</strong> <?= $item->name ?></p>
-        <p><strong>Quantity:</strong> <?= $order->quantity ?></p>
-        <p><strong>Total price:</strong> <?= ($order->quantity * $item->price) ?>$ </p>
+        <div class="ship-div">
+            <h3> Customer </h3>
+            <p class="shipping"><strong>Name:</strong> <?= $buyer->name ?></p>
+            <p class="shipping"><strong>Email:</strong> <?= $buyer->email ?></p>
+        </div>
 
-        <button id="printButton" class="no-print"> Print Shipping Form </button>
-        <button id="goBackButton" class="no-print"> Go back </button>
+        <div class="ship-div">
+            <h3> Delivery Information </h3>
+            <p class="shipping"><strong>Address:</strong> <?= $order->address ?></p>
+            <p class="shipping"><strong>City:</strong> <?= $order->city ?></p>
+            <p class="shipping"><strong>Country:</strong> <?= $order->country ?></p>
+            <p class="shipping"><strong>Postal Code:</strong> <?= $order->postalCode ?></p>
+        </div>
+        
+        <h3> Purchase Details </h3>
+        <p class="shipping"><strong>Item:</strong> <?= $item->name ?></p>
+        <p class="shipping"><strong>Quantity:</strong> <?= $order->quantity ?></p>
+        <p class="shipping"><strong>Total price:</strong> <?= ($order->quantity * $item->price) ?>$ </p>
+
     </div>
+
+    <button id="printButton" class="no-print"> Print Shipping Form </button>
+    <button id="goBackButton" class="no-print"> Go back </button>
+    
     <script>
         document.getElementById('printButton').addEventListener('click', function() {
             window.print();
