@@ -10,7 +10,7 @@
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
-    $orders = Order::getUserOrders($pdo, $user->userId); // Obtém as ordens do usuário
+    $orders = Order::getUserOrders($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">
@@ -42,6 +42,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
                         <button type="submit" id="editButton">Save</button>
                     <?php else : ?>
+                        <a href="?edit" id="editButton">Edit</a>
                         <p><strong>Username:</strong> <?= $user->username ?></p>
                         <p><strong>Name:</strong> <?= $user->name ?></p>
                         <p><strong>Email:</strong> <?= $user->email ?></p>
@@ -49,7 +50,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <p><strong>Address:</strong> <?= $user->address ?></p>
                         <p><strong>Country:</strong> <?= $user->country ?></p>
                         <p><strong>Postal Code:</strong> <?= $user->postalCode ?></p>
-                        <a href="?edit" id="editButton">Edit</a>
                     <?php endif; ?>
                 </form>
             </div>
@@ -98,9 +98,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
         </section>
     </main>
 <?php } ?>
-
-
-
 
 
 
@@ -169,6 +166,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     <?php } ?>
                 </section>
             </section>
+            
         </main>
     </body>
     
@@ -260,7 +258,7 @@ function usersList(PDO $pdo, Session $session) {
                         <p>Name: <?= $user['Name_'] ?></p>
                         <p>Username: <?= $user['Username'] ?></p>
                         <div class="admin-action">
-                            <?php if ($user->isAdmin) : ?>
+                            <?php if ($user['IsAdmin']) : ?>
                                 <form action="../actions/action_make_admin.php" method="post">
                                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                     <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">

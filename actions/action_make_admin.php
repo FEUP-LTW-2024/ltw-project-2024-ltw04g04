@@ -14,7 +14,6 @@
     }
 
     if (isset($_POST['user_id']) && isset($_POST['action'])) {
-        $id = $_POST['user_id'];
         $user_id = intval($_POST['user_id']);
         $action = $_POST['action'];
 
@@ -25,6 +24,9 @@
         }
     }
 
-    header('Location: ../pages/seller.php?id=' . $id);
+  
+    $referer = $_SERVER['HTTP_REFERER'] ?? '../pages/index.php';
+    header('Location: ' . $referer);
     exit();
 ?>
+

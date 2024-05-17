@@ -65,14 +65,14 @@
         
         static function addItemToCart($db, $buyerId, $item_id) {
             try {
-                $stock = Item::getStockWithItemId($db, $item_id);
                 
-                // Verificar se o item já está no carrinho do comprador específico
                 $stmt = $db->prepare("SELECT * FROM ShoppingCart WHERE ItemId = :item_id AND buyerId = :buyer_id");
                 $stmt->bindParam(':item_id', $item_id, PDO::PARAM_INT);
                 $stmt->bindParam(':buyer_id', $buyerId, PDO::PARAM_INT);
                 $stmt->execute();
                 $existing_item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                $stock = Item::getStockWithItemId($db, $item_id);
         
                 if ($existing_item) {
                     $quantity = $existing_item['Quantity'];
