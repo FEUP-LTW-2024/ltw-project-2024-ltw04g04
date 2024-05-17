@@ -1,5 +1,23 @@
 /* Responsive Design */
 
+@media (max-width: 60em) {
+    #shoppingCart {
+        display: block;
+    }
+    #summary {
+        float: none; 
+        width: 100%; 
+        padding:0.5em;
+        order: 2;
+    }
+
+    #items {
+        float: none; 
+        width: 100%; 
+        order: 1;
+    }
+}
+
 @media (max-width: 50em) {
     #editButton {
         align-self: flex-center; 
@@ -92,4 +110,5 @@
         display: none;
     }
 }
+
 

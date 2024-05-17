@@ -233,7 +233,7 @@ main .productinfo  h1 {
 #summary {
     text-align: center;
     border: 1px solid #000;
-    padding: 2em; 
+    padding: 1em; 
     margin-bottom: auto;
 
     h1 {
@@ -246,7 +246,7 @@ main .productinfo  h1 {
 
 #items {
     float: left;
-    width: 75%; 
+    width: 85%; 
 }
 
 #summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category  {
@@ -751,8 +751,9 @@ nav#details {
 .item-details .detail-quantity {
     margin-left: 25em;
     padding: 1px;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    font-size: xx-small;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
     border: 1px solid black;
     border-radius: 10px;
     background-color: #BBE4F1;
