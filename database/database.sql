@@ -188,43 +188,64 @@ VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (101, 'Sapphire Bracelet', 29, 'Blue Jewelers', 'SB2024', 'New', 'Beads and bracelets', 1, '/../pages/imgs/imgsForItems/item1.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (102, 'Emerald Earrings', 5, 'Green Gems', 'EE2024', 'Used', 'Earrings', 3, '/../pages/imgs/imgsForItems/item1.jpg', 8);
+VALUES (102, 'Emerald Earrings', 5, 'Green Gems', 'EE2024', 'Used', 'Earrings', 3, '/../pages/imgs/imgsForItems/item2.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (103, 'Amethyst Ring', 25, 'Purple Jewelry', 'AR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item1.jpg', 9);
+VALUES (103, 'Amethyst Ring', 25, 'Purple Jewelry', 'AR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item3.jpg', 9);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (104, 'Topaz Necklace', 30, 'Golden Treasures', 'TN2024', 'Used', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item1.jpg', 10);
+VALUES (104, 'Topaz Necklace', 30, 'Golden Treasures', 'TN2024', 'Used', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item4.jpg', 10);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (105, 'Diamond Necklace', 500, 'Diamonds Inc.', 'DN2024', 'New', 'Necklaces', 10, '/../pages/imgs/imgsForItems/item1.jpg', 1);
+VALUES (105, 'Diamond Necklace', 500, 'Diamonds Inc.', 'DN2024', 'New', 'Necklaces', 10, '/../pages/imgs/imgsForItems/item5.jpg', 1);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (106, 'Gold Bracelet', 350, 'Gold Empire', 'GB2024', 'New', 'Beads and bracelets', 5, '/../pages/imgs/imgsForItems/item1.jpg', 2);
+VALUES (106, 'Gold Bracelet', 350, 'Gold Empire', 'GB2024', 'New', 'Beads and bracelets', 5, '/../pages/imgs/imgsForItems/item6.jpg', 2);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (107, 'Silver Earrings', 80, 'Silver Works', 'SE2024', 'New', 'Earrings', 8, '/../pages/imgs/imgsForItems/item1.jpg', 3);
+VALUES (107, 'Silver Earrings', 80, 'Silver Works', 'SE2024', 'New', 'Earrings', 8, '/../pages/imgs/imgsForItems/item7.jpg', 3);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (108, 'Ruby Ring', 300, 'Gemstone Jewelry', 'RR2024', 'New', 'Rings', 3, '/../pages/imgs/imgsForItems/item1.jpg', 4);
+VALUES (108, 'Ruby Ring', 300, 'Gemstone Jewelry', 'RR2024', 'New', 'Rings', 3, '/../pages/imgs/imgsForItems/item8.jpg', 4);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (109, 'Pearl Necklace', 200, 'Pearl Paradise', 'PN2024', 'New', 'Necklaces', 6, '/../pages/imgs/imgsForItems/item1.jpg', 5);
+VALUES (109, 'Pearl Necklace', 200, 'Pearl Paradise', 'PN2024', 'New', 'Necklaces', 6, '/../pages/imgs/imgsForItems/item9.jpg', 5);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (110, 'Leather Watch', 150, 'Watch Co.', 'LW2024', 'New', 'Clocks', 4, '/../pages/imgs/imgsForItems/item1.jpg', 6);
+VALUES (110, 'Leather Watch', 150, 'Watch Co.', 'LW2024', 'New', 'Clocks', 4, '/../pages/imgs/imgsForItems/item10.jpg', 6);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (111, 'Sapphire Pendant', 180, 'Blue Stone Creations', 'SP2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item1.jpg', 10);
+VALUES (111, 'Sapphire Pendant', 180, 'Blue Stone Creations', 'SP2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item11.jpg', 10);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (112, 'Emerald Brooch', 90, 'Emerald Designs', 'EB2024', 'New', 'Accessories', 3, '/../pages/imgs/imgsForItems/item1.jpg', 8);
+VALUES (112, 'Emerald Brooch', 90, 'Emerald Designs', 'EB2024', 'New', 'Accessories', 3, '/../pages/imgs/imgsForItems/item12.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (113, 'Gold Bangle', 220, 'Golden Touch', 'GB2024', 'New', 'Beads and bracelets', 1, '/../pages/imgs/imgsForItems/item1.jpg', 7);
+VALUES (113, 'Gold Bangle', 220, 'Golden Touch', 'GB2024', 'New', 'Beads and bracelets', 1, '/../pages/imgs/imgsForItems/item13.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (114, 'Diamond Pendant Necklace', 300, 'Diamond Dreams', 'DPN2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item1.jpg', 10);
+VALUES (114, 'Diamond Pendant Necklace', 300, 'Diamond Dreams', 'DPN2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item14.jpg', 10);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (115, 'Diamond Stud Earrings', 150, 'Luxury Jewels', 'DSE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item1.jpg', 8);
+VALUES (115, 'Diamond Stud Earrings', 150, 'Luxury Jewels', 'DSE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item15.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (116, 'Pearl Necklace', 80, 'Ocean Pearls', 'PN2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item1.jpg', 10);
+VALUES (116, 'Pearl Necklace', 80, 'Ocean Pearls', 'PN2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item16.jpg', 10);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (117, 'Ruby Bracelet', 100, 'Red Gemstones', 'RB2024', 'New', 'Beads and bracelets', 1, '/../pages/imgs/imgsForItems/item1.jpg', 7);
+VALUES (117, 'Ruby Bracelet', 100, 'Red Gemstones', 'RB2024', 'New', 'Beads and bracelets', 1, '/../pages/imgs/imgsForItems/item17.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (118, 'Gold Chain', 200, 'Golden Creations', 'GC2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item1.jpg', 10);
+VALUES (118, 'Gold Chain', 200, 'Golden Creations', 'GC2024', 'New', 'Necklaces', 5, '/../pages/imgs/imgsForItems/item18.jpg', 10);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (119, 'Silver Hoop Earrings', 50, 'Silver Treasures', 'SHE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item1.jpg', 8);
+VALUES (119, 'Silver Hoop Earrings', 50, 'Silver Treasures', 'SHE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item19.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (120, 'Opal Ring', 120, 'Opal Jewelry Co.', 'OR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item1.jpg', 9);
+VALUES (120, 'Opal Ring', 120, 'Opal Jewelry Co.', 'OR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item20.jpg', 9);
+
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (121, 'Turquoise Bracelet', 45, 'Turquoise Treasures', 'TB2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item21.jpg', 7);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (122, 'Onyx Earrings', 60, 'Black Jewelers', 'OE2024', 'New', 'Earrings', 6, '/../pages/imgs/imgsForItems/item22.jpg', 8);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (123, 'Sapphire Ring', 250, 'Blue Gems', 'SR2024', 'New', 'Rings', 3, '/../pages/imgs/imgsForItems/item23.jpg', 9);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (124, 'Emerald Pendant', 150, 'Emerald Elegance', 'EP2024', 'New', 'Necklaces', 2, '/../pages/imgs/imgsForItems/item24.jpg', 10);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (125, 'Quartz Watch', 80, 'Timeless Watches', 'QW2024', 'Used', 'Clocks', 5, '/../pages/imgs/imgsForItems/item25.jpg', 6);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (126, 'Silver Bracelet', 55, 'Silver Treasures', 'SB2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item26.jpg', 7);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (127, 'Gold Earrings', 100, 'Golden Touch', 'GE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item27.jpg', 8);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (128, 'Platinum Ring', 600, 'Platinum Jewels', 'PR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item28.jpg', 9);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (129, 'Pearl Bracelet', 75, 'Pearl Treasures', 'PB2024', 'New', 'Beads and bracelets', 3, '/../pages/imgs/imgsForItems/item29.jpg', 7);
+INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+VALUES (130, 'Topaz Earrings', 90, 'Gemstone Elegance', 'TE2024', 'New', 'Earrings', 5, '/../pages/imgs/imgsForItems/item30.jpg', 8);
 
 
 
