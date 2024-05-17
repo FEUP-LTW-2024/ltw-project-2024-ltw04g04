@@ -29,7 +29,7 @@ header {
     border-radius: 0px;
 }
 
-/* Footer */
+/* Last section on index */
 
 .page-container {
     display: flex;
@@ -80,7 +80,7 @@ footer {
     flex-grow: 1;
     input[type="text"] {
         font-family: "Sulphur Point", sans-serif;
-        width: 80%; 
+        width: 90%; 
         height: 30px; 
         border-radius: 12px;
         background-color:rgb(189, 181, 181);    
@@ -110,6 +110,10 @@ body>header a:link, body>header a:visited {
     color: white
 }
 
+#hamburgerCommon, .hamburgerCommon {
+    display: none;
+  }
+
 /* Menu */
 nav#menu {
     background-color: #f8f8f8;
@@ -129,12 +133,19 @@ nav#menu ul {
     padding: 0;
 }
 
-nav#menu li {
-    display: inline;
+#menu ul {
+    display: flex;
+    flex-direction: row;
+}
+  
+#menu li {
+    display: block;
+    flex: 1;
     margin-right: 10px;
     text-align: center;
-    padding : 1em;
+    padding : 0.2em;
 }
+
 
 nav#menu li:hover{
     list-style-type: none;
@@ -148,16 +159,22 @@ nav#menu li:hover{
 main img {
     width: 100%;
     height: auto;
+    display: block; 
+    position: relative;
 }
 
 main .productinfo {
-    width: 23em;
-    margin-bottom: 0em;
     position: absolute;
-    top: 16em;
-    left: 7em;
+    bottom: 0;
+    left: 0;
+    font-size: 1.5vw;
+    width: 100%;
+    padding: 5em;
+    box-sizing: border-box; 
     text-align: center;
+    background-color: rgba(255, 255, 255, 0.);
 }
+
 
 main .productinfo  h1 {
     font-family: "Sulphur Point", sans-serif;
@@ -166,17 +183,14 @@ main .productinfo  h1 {
     font-size: xx-large;
 }
 
-#jewels {
-    position: relative;
-}
-
 /* Footer */
 .customize {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 16px;
     border: 0.5px solid #656363; 
-    position: relative;
+    margin-top: 1em;
+    
 }
 
 .customize p {
@@ -193,9 +207,12 @@ main .productinfo  h1 {
     border-radius: 8px;
     border-width: 1px;
     cursor: pointer;
-    position: absolute; 
-    bottom: 60px; 
-    right: 80px;
+    text-align: center;
+}
+
+.customize button:hover {
+    background-color: #2092b5;
+    color: white;
 }
 
 /* Cart and Favourites */
@@ -216,7 +233,7 @@ main .productinfo  h1 {
 #summary {
     text-align: center;
     border: 1px solid #000;
-    padding: 15px; 
+    padding: 1em; 
     margin-bottom: auto;
 
     h1 {
@@ -229,7 +246,7 @@ main .productinfo  h1 {
 
 #items {
     float: left;
-    width: 75%; 
+    width: 85%; 
 }
 
 #summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category  {
@@ -303,7 +320,7 @@ main .productinfo  h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px;
+    padding: 2em;
     border-bottom: 1px solid #ccc;
     position:relative;
 }
@@ -324,18 +341,22 @@ main .productinfo  h1 {
     border-bottom: 1px solid #000;
 }
 
+.notEdit {
+    display: flex;
+    flex-direction: column;
+}
+
+.notEdit p {
+    align-self: right;
+}
 
 #editButton {
-    padding: 2px 50px; 
+    align-self: flex-end; 
+    margin-right: 5em;
+    padding: 5px 50px; 
     border: 1px solid #000;
 }
 
-a#editButton {
-    align-self: flex-end;
-    position: relative;
-    right: 12em;
-    bottom: 24em;
-}
 
 #avatar img {
     width: 100%;
@@ -730,8 +751,9 @@ nav#details {
 .item-details .detail-quantity {
     margin-left: 25em;
     padding: 1px;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    font-size: xx-small;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
     border: 1px solid black;
     border-radius: 10px;
     background-color: #BBE4F1;

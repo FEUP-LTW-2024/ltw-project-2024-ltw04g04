@@ -20,7 +20,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
 
     // Verifica se um arquivo foi enviado
     if(isset($_FILES["item_image"]) && $_FILES["item_image"]["error"] == 0) {
-        $imageDir = 'pages/imgs/imgsForItems/';
+        $imageDir = '../pages/imgs/imgsForItems/';
         $targetFile = $imageDir . basename($_FILES["item_image"]["name"]);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
         
@@ -35,27 +35,21 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
         $uniqueFilename = uniqid() . '_' . $_FILES["item_image"]["name"];
         $targetFile = $imageDir . $uniqueFilename;
 
+
         if (move_uploaded_file($_FILES["item_image"]["tmp_name"], $targetFile)) {
-            $imagePath = $uniqueFilename;
+            $imagePath = '/' . $imageDir . $_FILES["item_image"]["name"];
+            echo "<p>$imagePath</p>";
 
-            // Insira o item no banco de dados com o caminho da imagem
-            $nextItemId = Item::getNextItemId($db);
-            $newItem = new Item($nextItemId, $name, $price, $brand, $model, $condition, $category, $stock, $imagePath, $size);
-            $success = $newItem->insertItemInDatabase($db, $nextItemId, $name, $price, $brand, $model, $condition, $category, $stock, $imagePath, $size);
+            $id = Item::insertItemInDatabase($db, $name, $price, $brand, $model, $condition, $category, $stock, $imagePath, $size);
 
-            // Se a inserção for bem-sucedida, redirecione para a página de conta
-            if ($success) {
-                $stmt = $db->prepare('
-                    INSERT INTO SellerItem (UserId, ItemId)
-                    VALUES (?, ?)
+            
+            $stmt = $db->prepare('
+                INSERT INTO SellerItem (UserId, ItemId)
+                VALUES (?, ?)               
                 ');
-                $stmt->execute([$session->getUserId(), $nextItemId]);
-                header('Location: ../pages/account.php');
-                exit();
-            } else {
-                header('Location: ../pages/error.php');
-                exit();
-            }
+            $stmt->execute([$session->getUserId(), $id]);
+            header('Location: ../pages/account.php');
+            exit();
         } else {
             echo "Desculpe, ocorreu um erro ao carregar o arquivo.";
         }

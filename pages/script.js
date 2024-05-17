@@ -55,6 +55,8 @@ function toggleBox() {
     }
 }
 
+
+
 document.getElementById('filter').addEventListener('mouseover', showBox);
 document.getElementById('filter').addEventListener('mouseout', hideBox);
 document.getElementById('filter').addEventListener('click', toggleBox);

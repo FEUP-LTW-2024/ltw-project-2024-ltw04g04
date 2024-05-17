@@ -10,7 +10,7 @@
         </section>
         <section class = "customize">
             <p><br>SecondCharm to your liking with a touch of elegance.</br> Follow your favorite brands and discover the items that match your style.</p>
-            <button>Customize</button>
+            <a href="account.php"><button>Customize</button></a>
         </section>
     </main>
 </body>

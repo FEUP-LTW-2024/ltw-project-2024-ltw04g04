@@ -90,7 +90,7 @@ function sellingItem(PDO $pdo) {
 ?>
    <main>
     <h2 class = "creationHeader">Create New Item</h2>
-        <form action="../actions/action_create_item.php" method="post" class="form-container">
+        <form action="../actions/action_create_item.php" method="post" enctype="multipart/form-data" class="form-container">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name" required><br><br>

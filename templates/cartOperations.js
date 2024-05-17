@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function() {
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
+                    console.log(xhr.status);
                     updateCart();
                     updateSummary();
                 } else {
