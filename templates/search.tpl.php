@@ -23,7 +23,12 @@
                                 <p class="detail"> Condition: <?= $item['condition'] ?></p>      
                                 <p class="detail"> Category: <?= $item['category'] ?></p>     
                                 <p class="detail"> Size: <?= $item['size'] ?></p>
-                                <p class="detail"> In stock: <?= $item['stock'] ?></p>
+                                <p class="detail"> In stock: 
+                                    <?php if ($item['stock'] == 0): ?> <span class="sold-out">Sold out</span>
+                                    <?php else: ?> <?= $item['stock'] ?>
+                                    <?php endif; ?>
+                                </p>
+
                                 <p class="detail-heart">
                                         <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item['itemId']; ?>" onclick="toggleWishlist(<?php echo $item['itemId']; ?>)">
                                 </p>
