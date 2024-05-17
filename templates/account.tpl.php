@@ -76,7 +76,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                 foreach ($orderIds as $orderId) { ?>
                                     <form action="../actions/action_shipping_form.php" method="post">
                                         <input type="hidden" name="orderId" value="<?= $orderId?>">
-                                        <button type="submit"> Order <?= $numOrder?> </button>
+                                        <button id="orderButton" type="submit"> Order <?= $numOrder?> </button>
                                     </form>
                             <?php 
                                     $numOrder = $numOrder + 1; 
