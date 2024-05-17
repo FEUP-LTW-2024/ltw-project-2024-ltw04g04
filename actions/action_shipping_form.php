@@ -1,44 +1,36 @@
 <?php
-    /*
     declare(strict_types = 1);
     require_once(__DIR__ . '/../utils/session.php');
     require_once(__DIR__ . '/../database/get_database.php');
-    require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../database/item.class.php');
+    require_once(__DIR__ . '/../database/order.class.php');
 
-    function drawShippingForm (PDO $db, int $orderId) {
+    $session = new Session();
+    $db = getDatabaseConnection();
 
+    if (isset($_POST['orderId'])) {
+        $orderId = filter_input(INPUT_POST, 'orderId', FILTER_VALIDATE_INT);
+
+        $order = Order::getOrderwithId($db, $orderId);
+        $item = Item::getItemWithId($db, $order->itemId);
+        $buyer = User::getUserWithId($db, $order->buyerId);
+
+        /*
+        $buyerName = $buyer->name;
+        $buyerEmail = $buyer->email;
+        //$itemName = ;
+        $itemPrice = htmlspecialchars($item['price']);
+        $address = ;
+        $city = ;
+        $country = ;
+        $postalCode = htmlspecialchars($order['PostalCode']);
+        */
+
+    } else {
+        header('Location: ../pages/account.php');
+        exit();
     }
-    if (!isset($_GET['order_id']) || !isset($_GET['item_id'])) {
-        die('Order ID and Item ID required');
-    }
-
-    $orderId = (int)$_GET['order_id'];
-    $itemId = (int)$_GET['item_id'];
-
-    $orderStmt = $pdo->prepare('SELECT * FROM OrderItem WHERE OrderId = ?');
-    $orderStmt->execute([$orderId]);
-    $order = $orderStmt->fetch();
-
-    if (!$order) {
-        die('Order not found');
-    }
-
-    $itemStmt = $pdo->prepare('SELECT * FROM Item WHERE ItemId = ?');
-    $itemStmt->execute([$itemId]);
-    $item = $itemStmt->fetch();
-
-    if (!$item) {
-        die('Item not found');
-    }
-
-    $itemName = htmlspecialchars($item['name']);
-    $itemPrice = htmlspecialchars($item['price']);
-    $address = htmlspecialchars($order['Address']);
-    $city = htmlspecialchars($order['City']);
-    $country = htmlspecialchars($order['Country']);
-    $postalCode = htmlspecialchars($order['PostalCode']);
-    */
 ?>
 
 <!DOCTYPE html>
@@ -68,24 +60,37 @@
                 margin: 0;
                 padding: 0;
             }
+            
+            .no-print {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <div class='label'>
-        <h2>Shipping Label</h2>
-        <p><strong>Item:</strong> <?= $itemName ?></p>
-        <p><strong>Price:</strong> <?= $itemPrice ?></p>
-        <p><strong>Address:</strong> <?= $address ?></p>
-        <p><strong>City:</strong> <?= $city ?></p>
-        <p><strong>Country:</strong> <?= $country ?></p>
-        <p><strong>Postal Code:</strong> <?= $postalCode ?></p>
+    <div class="shipping-form">
+        <h1>Shipping Label</h1>
+
+        <p><strong>Address:</strong> <?= $order->address ?></p>
+        <p><strong>City:</strong> <?= $order->city ?></p>
+        <p><strong>Country:</strong> <?= $order->country ?></p>
+        <p><strong>Postal Code:</strong> <?= $order->postalCode ?></p>
+        
+        <p><strong>Item:</strong> <?= $item->name ?></p>
+        <p><strong>Quantity:</strong> <?= $order->quantity ?></p>
+        <p><strong>Total price:</strong> <?= ($order->quantity * $item->price) ?>$ </p>
+
+        <button id="printButton" class="no-print"> Print Shipping Form </button>
+        <button id="goBackButton" class="no-print"> Go back </button>
     </div>
     <script>
-        window.print();
-        window.onafterprint = function() {
-            window.close();
-        };
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('goBackButton').addEventListener('click', function() {
+            window.location.href = "../pages/account.php";
+        });
     </script>
 </body>
 </html>
