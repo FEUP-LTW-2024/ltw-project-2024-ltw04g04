@@ -216,12 +216,18 @@
         }
     
 
-        public function insertItemInDatabase(PDO $db, int $idItem, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size): void {
+        static public function insertItemInDatabase(PDO $db, string $name, int $price, string $brand, string $model, string $condition, string $category, int $stock, string $imageLink, int $size): int {
             $stmt = $db->prepare('
-                INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO Item (Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ');
-            $stmt->execute([$idItem, $name, $price, $brand, $model, $condition, $category, $stock, $imageLink, $size]);
+            $stmt->execute([$name, $price, $brand, $model, $condition, $category, $stock, $imageLink, $size]);
+            $stmt = $db->prepare('
+                SELECT ItemId FROM Item WHERE Name_ = ?
+            ');
+            $stmt->execute([$name]);
+            $item = $stmt->fetch();
+            return $item['ItemId'];  
         }
     }
 
