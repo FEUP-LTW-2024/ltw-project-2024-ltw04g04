@@ -1,38 +1,44 @@
 <?php
-require_once(__DIR__ . '/../utils/session.php');
-require_once(__DIR__ . '/../database/get_database.php');
-require_once(__DIR__ . '/../database/item.class.php');
-require_once(__DIR__ . '/../database/user.class.php');
+    /*
+    declare(strict_types = 1);
+    require_once(__DIR__ . '/../utils/session.php');
+    require_once(__DIR__ . '/../database/get_database.php');
+    require_once(__DIR__ . '/../database/item.class.php');
+    require_once(__DIR__ . '/../database/user.class.php');
 
-if (!isset($_GET['order_id']) || !isset($_GET['item_id'])) {
-    die('Order ID and Item ID required');
-}
+    function drawShippingForm (PDO $db, int $orderId) {
 
-$orderId = (int)$_GET['order_id'];
-$itemId = (int)$_GET['item_id'];
+    }
+    if (!isset($_GET['order_id']) || !isset($_GET['item_id'])) {
+        die('Order ID and Item ID required');
+    }
 
-$orderStmt = $pdo->prepare('SELECT * FROM OrderItem WHERE OrderId = ?');
-$orderStmt->execute([$orderId]);
-$order = $orderStmt->fetch();
+    $orderId = (int)$_GET['order_id'];
+    $itemId = (int)$_GET['item_id'];
 
-if (!$order) {
-    die('Order not found');
-}
+    $orderStmt = $pdo->prepare('SELECT * FROM OrderItem WHERE OrderId = ?');
+    $orderStmt->execute([$orderId]);
+    $order = $orderStmt->fetch();
 
-$itemStmt = $pdo->prepare('SELECT * FROM Item WHERE ItemId = ?');
-$itemStmt->execute([$itemId]);
-$item = $itemStmt->fetch();
+    if (!$order) {
+        die('Order not found');
+    }
 
-if (!$item) {
-    die('Item not found');
-}
+    $itemStmt = $pdo->prepare('SELECT * FROM Item WHERE ItemId = ?');
+    $itemStmt->execute([$itemId]);
+    $item = $itemStmt->fetch();
 
-$itemName = htmlspecialchars($item['name']);
-$itemPrice = htmlspecialchars($item['price']);
-$address = htmlspecialchars($order['Address']);
-$city = htmlspecialchars($order['City']);
-$country = htmlspecialchars($order['Country']);
-$postalCode = htmlspecialchars($order['PostalCode']);
+    if (!$item) {
+        die('Item not found');
+    }
+
+    $itemName = htmlspecialchars($item['name']);
+    $itemPrice = htmlspecialchars($item['price']);
+    $address = htmlspecialchars($order['Address']);
+    $city = htmlspecialchars($order['City']);
+    $country = htmlspecialchars($order['Country']);
+    $postalCode = htmlspecialchars($order['PostalCode']);
+    */
 ?>
 
 <!DOCTYPE html>

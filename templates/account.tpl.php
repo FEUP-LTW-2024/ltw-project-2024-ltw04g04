@@ -71,14 +71,18 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             <p><?= $item->price ?> $</p>
 
                             <?php 
-                                $orders = Order::getItemOrders($pdo, $i); 
-                                foreach ($orders as $order) {
-                                    //echo "a";
-                                }
-                            
-                            ?>
+                                $numOrder = 1;
+                                $orderIds = Order::getOrderIds($pdo, $i); 
+                                foreach ($orderIds as $orderId) { ?>
+                                    <form action="../actions/action_shipping_form.php" method="post">
+                                        <input type="hidden" name="orderId" value="<?= $orderId?>">
+                                        <button type="submit"> Order <?= $numOrder?> </button>
+                                    </form>
+                            <?php 
+                                    $numOrder = $numOrder + 1; 
+                                } ?>
 
-                            <?php if (empty($orders)) : ?>
+                            <?php if (empty($orderIds)) : ?>
                                 <p>No orders for this item yet.</p>
                             <?php endif; ?>
                         </article>

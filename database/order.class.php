@@ -40,6 +40,56 @@
             $stmt->execute([$itemId, $quantity, $buyerId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
         }
 
+
+        public static function getOrderwithId(PDO $db, int $orderId): Order {
+            $stmt = $db->prepare('
+                SELECT OrderId, ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV, OrderDate
+                FROM OrderItem
+                WHERE OrderId = ?
+            ');
+            $stmt->execute([$orderId]);
+
+            $order = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($order) {
+                return new Order(
+                    $order['OrderId'],
+                    $order['ItemId'],
+                    $order['Quantity'],
+                    $order['BuyerId'],
+                    $order['Adress'],
+                    $order['City'],
+                    $order['Country'],
+                    $order['PostalCode'],
+                    $order['CardNumber'],
+                    $order['ExpirationDate'], 
+                    $order['CVV'], 
+                    $order['OrderDate']
+                );
+            } else {
+                return null;
+            }
+        }
+
+
+        public static function getOrderIds(PDO $db, int $itemId): array {
+            $orders = [];
+            $stmt = $db->prepare('
+                SELECT OrderId, ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV, OrderDate
+                FROM OrderItem
+                WHERE ItemId = ?
+            ');
+            $stmt->execute([$itemId]);
+            
+            while ($order = $stmt->fetch()) {
+                $orders[] = $order['OrderId'];
+            }
+            return $orders;
+        }
+
+
+
+        /*
         public static function getItemOrders(PDO $db, int $itemId): array {
 
             $orders = [];
@@ -68,6 +118,7 @@
             }
             return $orders;
         }
+        */
         
     }
 
