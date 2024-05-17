@@ -166,6 +166,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     <?php } ?>
                 </section>
             </section>
+            
         </main>
     </body>
     
@@ -257,7 +258,7 @@ function usersList(PDO $pdo, Session $session) {
                         <p>Name: <?= $user['Name_'] ?></p>
                         <p>Username: <?= $user['Username'] ?></p>
                         <div class="admin-action">
-                            <?php if ($user->isAdmin) : ?>
+                            <?php if ($user['IsAdmin']) : ?>
                                 <form action="../actions/action_make_admin.php" method="post">
                                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                     <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">
