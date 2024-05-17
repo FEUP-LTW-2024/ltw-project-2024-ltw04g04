@@ -13,9 +13,10 @@
         public string $cardNumber;
         public string $expirationDate;
         public string $cvv;
+        public string $orderDate;
 
 
-        public function __construct(int $orderId, int $itemId, int $quantity, int $buyerId, string $address, string $city, string $country, string $postalCode, string $cardNumber, string $expirationDate, string $cvv) {
+        public function __construct(int $orderId, int $itemId, int $quantity, int $buyerId, string $address, string $city, string $country, string $postalCode, string $cardNumber, string $expirationDate, string $cvv, string $orderDate) {
             $this->orderId = $orderId;
             $this->itemId = $itemId;
             $this->quantity = $quantity;
@@ -27,6 +28,7 @@
             $this->cardNumber = $cardNumber; 
             $this->expirationDate = $expirationDate; 
             $this->cvv = $cvv; 
+            $this->orderDate = $orderDate;
         }
 
 
@@ -38,13 +40,33 @@
             $stmt->execute([$itemId, $quantity, $buyerId, $address, $city, $country, $postalCode, $cardNumber, $expirationDate, $cvv]);
         }
 
-        public static function getUserOrders(PDO $db, int $userId): array {
+        public static function getItemOrders(PDO $db, int $itemId): array {
+
+            $orders = [];
             $stmt = $db->prepare('
-                SELECT * 
-                FROM OrderItem 
-                WHERE BuyerId = ?');
-            $stmt->execute([$userId]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                SELECT OrderId, ItemId, Quantity, BuyerId, Adress, City, Country, PostalCode, CardNumber, ExpirationDate, CVV, OrderDate
+                FROM OrderItem
+                WHERE ItemId = ?
+            ');
+            $stmt->execute([$itemId]);
+            
+            while ($order = $stmt->fetch()) {
+                $orders[] = new Order(
+                    $order['OrderId'],
+                    $order['ItemId'],
+                    $order['Quantity'],
+                    $order['BuyerId'],
+                    $order['Adress'],
+                    $order['City'],
+                    $order['Country'],
+                    $order['PostalCode'],
+                    $order['CardNumber'],
+                    $order['ExpirationDate'], 
+                    $order['CVV'], 
+                    $order['OrderDate']
+                );
+            }
+            return $orders;
         }
         
     }
