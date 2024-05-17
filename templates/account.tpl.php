@@ -42,6 +42,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
                         <button type="submit" id="editButton">Save</button>
                     <?php else : ?>
+                        <a href="?edit" id="editButton">Edit</a>
                         <p><strong>Username:</strong> <?= $user->username ?></p>
                         <p><strong>Name:</strong> <?= $user->name ?></p>
                         <p><strong>Email:</strong> <?= $user->email ?></p>
@@ -49,7 +50,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <p><strong>Address:</strong> <?= $user->address ?></p>
                         <p><strong>Country:</strong> <?= $user->country ?></p>
                         <p><strong>Postal Code:</strong> <?= $user->postalCode ?></p>
-                        <a href="?edit" id="editButton">Edit</a>
                     <?php endif; ?>
                 </form>
             </div>

@@ -110,6 +110,10 @@ body>header a:link, body>header a:visited {
     color: white
 }
 
+#hamburger, .hamburger {
+    display: none;
+  }
+
 /* Menu */
 nav#menu {
     background-color: #f8f8f8;
@@ -129,12 +133,19 @@ nav#menu ul {
     padding: 0;
 }
 
-nav#menu li {
-    display: inline;
+#menu ul {
+    display: flex;
+    flex-direction: row;
+}
+  
+#menu li {
+    display: block;
+    flex: 1;
     margin-right: 10px;
     text-align: center;
-    padding : 1em;
+    padding : 0.2em;
 }
+
 
 nav#menu li:hover{
     list-style-type: none;
@@ -303,7 +314,7 @@ main .productinfo  h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px;
+    padding: 2em;
     border-bottom: 1px solid #ccc;
     position:relative;
 }
@@ -324,18 +335,22 @@ main .productinfo  h1 {
     border-bottom: 1px solid #000;
 }
 
+.notEdit {
+    display: flex;
+    flex-direction: column;
+}
+
+.notEdit p {
+    align-self: right;
+}
 
 #editButton {
-    padding: 2px 50px; 
+    align-self: flex-end; 
+    margin-right: 5em;
+    padding: 5px 50px; 
     border: 1px solid #000;
 }
 
-a#editButton {
-    align-self: flex-end;
-    position: relative;
-    right: 12em;
-    bottom: 24em;
-}
 
 #avatar img {
     width: 100%;

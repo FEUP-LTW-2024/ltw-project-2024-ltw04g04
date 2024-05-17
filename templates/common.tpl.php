@@ -9,6 +9,7 @@
     <html>
     <head>
         <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/responsive.css">
         <link rel="icon" type="image/x-icon" href="imgs/logo.png">
     </head>
     <body>
@@ -59,6 +60,8 @@
             </nav>
         </header>
         <nav id="menu">
+            <input type="checkbox" id="hamburger"> 
+            <label class="hamburger" for="hamburger"></label>
             <ul>
                 <?php foreach ($categories as $category) : ?>
                     <li><a href="../actions/action_items_category.php?category=<?php echo urlencode($category['CategoryName']); ?>"><?php echo $category['CategoryName']; ?></a></li>
