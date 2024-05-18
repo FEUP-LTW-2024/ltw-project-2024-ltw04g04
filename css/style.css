@@ -699,6 +699,10 @@ nav#details {
     position: relative; 
 }
 
+.cart-item:hover {
+    background-color:rgb(226, 226, 226) ;
+}
+
 
 .cart-item::after, .list-item::after {
     content: "";
