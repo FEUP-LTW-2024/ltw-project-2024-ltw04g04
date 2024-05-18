@@ -26,21 +26,18 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
         echo "O estoque deve ser maior que zero.";
         exit();
     }
-    
-    // Verifica se um arquivo foi enviado
+   
     if(isset($_FILES["item_image"]) && $_FILES["item_image"]["error"] == 0) {
         $imageDir = '../pages/imgs/imgsForItems/';
         $targetFile = $imageDir . basename($_FILES["item_image"]["name"]);
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-        
-        // Verifica o tipo de arquivo
+
         $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
         if (!in_array($imageFileType, $allowedExtensions)) {
             echo "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
             exit();
         }
 
-        // Gera um nome de arquivo único para evitar colisões
         $uniqueFilename = uniqid() . '_' . $_FILES["item_image"]["name"];
         $targetFile = $imageDir . $uniqueFilename;
 
