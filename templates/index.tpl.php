@@ -58,7 +58,7 @@ function displayRandomItems(PDO $pdo) {
         <div class="scroll-container">
             <div class="scroll-wrapper">
                 <?php foreach ($firstHalf as $item): ?>
-                    <div class="item">
+                    <a href="item.php?id=<?= $item->itemId ?>" class="item">
                         <img src="<?= $item->imageLink ?>" alt="Item Image">
                         <div class="item-details">
                             <p><?= $item->name ?></p>
@@ -70,14 +70,14 @@ function displayRandomItems(PDO $pdo) {
                             <p>Stock: <?= $item->stock ?></p>
                             <p>Size: <?= $item->size ?></p>
                         </div>
-                    </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
         </div>
         <div class="scroll-container">
             <div class="scroll-wrapper">
                 <?php foreach ($secondHalf as $item): ?>
-                    <div class="item">
+                    <a href="item.php?id=<?= $item->itemId ?>" class="item">
                         <img src="<?= $item->imageLink ?>" alt="Item Image">
                         <div class="item-details">
                             <p><?= $item->name ?></p>
@@ -89,7 +89,7 @@ function displayRandomItems(PDO $pdo) {
                             <p>Stock: <?= $item->stock ?></p>
                             <p>Size: <?= $item->size ?></p>
                         </div>
-                    </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -97,5 +97,6 @@ function displayRandomItems(PDO $pdo) {
 <?php
 }
 ?>
+
 
 
