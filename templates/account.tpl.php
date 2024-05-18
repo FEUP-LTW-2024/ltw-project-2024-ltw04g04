@@ -26,7 +26,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
             </div>
             
             <div id="userInfo">
-                <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
+                <form action="../actions/action_edit_profile.php" enctype="multipart/form-data" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <h2>Profile</h2>
                     <?php if ($editMode) : ?>
@@ -44,6 +44,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <input type="text" id="country" name="country" value="<?= $user->country ?>">
                         <label for="postal_code">Postal Code</label>
                         <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
+                        <label for="profile_image">Select Profile Image:</label>
+                        <input type="file" id="profile_image" name="profile_image" accept="image/*">
                         <button type="submit" id="editButton">Save</button>
                     <?php else : ?>
                         <a href="?edit" id="editButton">Edit</a>

@@ -389,6 +389,13 @@ main .productinfo  h1 {
     margin-left: 20px;
 }
 
+#sellerInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+}
+
 #userHeader {
     display: flex;
     align-items: center;

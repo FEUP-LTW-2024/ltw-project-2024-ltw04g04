@@ -147,6 +147,15 @@
       $stmt->execute(array($username_, $name_, $address_, $city_, $country_, $postalCode_, $id_));
     }
 
+    static function updateUserProfileImage(PDO $db, string $imageLink, int $userId) {
+        $stmt = $db->prepare('
+          UPDATE User SET ProfileImage = ?
+          WHERE UserId = ?
+        ');
+  
+        $stmt->execute(array($imageLink, $userId));
+      }
+
     public static function upgradeUserToAdmin(PDO $db, int $user_id) {
       $stmt = $db->prepare('UPDATE User SET isAdmin = true WHERE userId = ?');
       $stmt->execute([$user_id]);
