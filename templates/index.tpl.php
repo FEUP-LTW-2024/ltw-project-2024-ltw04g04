@@ -30,8 +30,8 @@ function topSellers(PDO $pdo) {
                 <div class="seller">
                     <img src="../pages/imgs/user-icon.png" alt="User Icon">
                     <div class="user-details">
-                        <p>Name: <?= htmlspecialchars($user->name) ?></p>
-                        <p>Username: <?= htmlspecialchars($user->username) ?></p>
+                        <p><?= htmlspecialchars($user->name) ?></p>
+                        <p>@<?= htmlspecialchars($user->username) ?></p>
                         <div class="rating-container-top">
                             <?php for ($i = 1; $i <= 5; $i++): ?>
                                 <div class="star <?= $i <= $averageRating ? 'filled' : '' ?>"></div>
@@ -49,19 +49,19 @@ function topSellers(PDO $pdo) {
 
 <?php
 function displayRandomItems(PDO $pdo) {
-    $items = Item::getRandomItems($pdo, 10);
+    $items = Item::getRandomItems($pdo);
     $firstHalf = array_slice($items, 0, 5);
-    $secondHalf = array_slice($items, 5, 5);
+    $secondHalf = array_slice($items, 5, 9);
 ?>
     <main>
-        <h2 class="itemsList">10 Random Items</h2>
+        <h2 class="itemsList">Recomendations</h2>
         <div class="scroll-container">
             <div class="scroll-wrapper">
                 <?php foreach ($firstHalf as $item): ?>
                     <div class="item">
                         <img src="<?= $item->imageLink ?>" alt="Item Image">
                         <div class="item-details">
-                            <p>Name: <?= $item->name ?></p>
+                            <p><?= $item->name ?></p>
                             <p>Price: <?= $item->price ?></p>
                             <p>Brand: <?= $item->brand ?></p>
                             <p>Model: <?= $item->model ?></p>
@@ -80,7 +80,7 @@ function displayRandomItems(PDO $pdo) {
                     <div class="item">
                         <img src="<?= $item->imageLink ?>" alt="Item Image">
                         <div class="item-details">
-                            <p>Name: <?= $item->name ?></p>
+                            <p><?= $item->name ?></p>
                             <p>Price: <?= $item->price ?></p>
                             <p>Brand: <?= $item->brand ?></p>
                             <p>Model: <?= $item->model ?></p>
@@ -97,4 +97,5 @@ function displayRandomItems(PDO $pdo) {
 <?php
 }
 ?>
+
 

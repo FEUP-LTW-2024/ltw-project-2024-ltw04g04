@@ -22,6 +22,17 @@ a {
 
 
 /* Header */
+
+#jewels {
+    opacity: 0.7; 
+    transition: opacity 0.3s ease; 
+}
+
+#jewels:hover {
+    opacity: 1; 
+}
+
+
 header {
     padding: 20px;
     background-color: #BBE4F1;
@@ -34,7 +45,7 @@ header {
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 30vh;
+    min-height: 55vh;
 }
 
 .content {
@@ -228,7 +239,7 @@ main img {
     width: 85%; 
 }
 
-#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category
+#summary button, #editButton, #addItemButton, .button-create-item, .button-add-category, .button-delete-category,
 .button-add-brand, .button-delete-brand , .button-delete-condition, .button-add-condition,
 .button-delete-model, .button-add-model, .button-delete-size, .button-add-size, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
@@ -777,7 +788,7 @@ nav#details {
 }
 
 #articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList,
-.editCondition, .editBrand, .editModel, .editSize  {
+.editCondition, .editBrand, .editModel, .editSize, .itemsList  {
     margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
@@ -1218,5 +1229,9 @@ input[type="text"] {
 .scroll-container::-webkit-scrollbar-thumb {
     background-color: #ccc;
     border-radius: 10px;
+}
+
+.scroll-wrapper .item-details p {
+    font-size: 1vw; 
 }
 
