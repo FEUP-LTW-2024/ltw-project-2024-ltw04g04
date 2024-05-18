@@ -5,6 +5,10 @@ PRAGMA FOREIGN_KEYS = ON;
 
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Condition;
+DROP TABLE IF EXISTS Size_;
+DROP TABLE IF EXISTS Model;
+DROP TABLE IF EXISTS Brand;
 DROP TABLE IF EXISTS Item;
 DROP TABLE IF EXISTS SellerItem;
 DROP TABLE IF EXISTS BuyerItem;
@@ -39,6 +43,34 @@ CREATE TABLE Category
     CONSTRAINT CategoryId PRIMARY KEY (CategoryId)
 );
 
+CREATE TABLE Size_
+(
+    SizeId INTEGER,
+    SizeVal INTEGER UNIQUE NOT NULL,
+    CONSTRAINT SizeId PRIMARY KEY (SizeId)
+);
+
+CREATE TABLE Model
+(
+    ModelId INTEGER,
+    ModelName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT ModelId PRIMARY KEY (ModelId)
+);
+
+CREATE TABLE Brand
+(
+    BrandId INTEGER,
+    BrandName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT BrandId PRIMARY KEY (BrandId)
+);
+
+CREATE TABLE Condition
+(
+    ConditionId INTEGER,
+    ConditionName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT ConditionId PRIMARY KEY (ConditionId)
+);
+
 CREATE TABLE Item
 (
     ItemId INTEGER NOT NULL,
@@ -51,8 +83,15 @@ CREATE TABLE Item
     Stock INTEGER NOT NULL,
     Image_ TEXT,
     Size_ INTEGER NOT NULL,
-    CONSTRAINT ItemId PRIMARY KEY (ItemId)
+    CONSTRAINT ItemId PRIMARY KEY (ItemId),
     FOREIGN KEY (Category) REFERENCES Category (CategoryName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Brand) REFERENCES Brand (BrandName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Condition) REFERENCES Condition (ConditionName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Size_) REFERENCES Size_ (SizeId)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE SellerItem
@@ -149,6 +188,17 @@ INSERT INTO Category (CategoryId, CategoryName) VALUES (3, 'Rings');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (4, 'Necklaces');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (5, 'Accessories');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (6, 'Clocks');
+
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (1, 1);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (2, 2);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (3, 3);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (4, 4);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (5, 5);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (6, 6);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (7, 7);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (8, 8);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (9, 9);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (10, 10);
 
 
 -- Populate User table

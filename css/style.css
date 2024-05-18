@@ -159,8 +159,7 @@ nav#menu li:hover{
 main img {
     width: 100%;
     height: auto;
-    display: block; 
-    position: relative;
+    
 }
 
 main .productinfo {
@@ -668,8 +667,6 @@ nav#details {
 }
 
 
-
-
 /* Filter */
 .arrow {
     font-size: 40px;
@@ -1076,13 +1073,7 @@ input[type="text"] {
     margin-bottom: 20px;
 }
 
-.user-link {
-    text-decoration: none;
-    color: inherit;
-    flex: 1 1 calc(33.33% - 1.25em); /* -20px */
-    box-sizing: border-box;
-    margin: 0.625em; /* 10px */
-}
+
 
 .users-container {
     display: flex;
@@ -1092,13 +1083,13 @@ input[type="text"] {
 
 .user {
     border: 1px solid #ddd;
-    border-radius: 0.5em; /* 8px */
-    padding: 0.625em; /* 10px */
+    border-radius: 0.5em; 
+    padding: 0.625em; 
     text-align: center;
     transition: transform 0.2s;
-    flex: 1 1 calc(33.33% - 1.25em); /* -20px */
+    flex: 1 1 calc(33.33% - 1.25em); 
     box-sizing: border-box;
-    margin: 0.625em; /* 10px */
+    margin: 0.625em;
 }
 
 .user:hover {

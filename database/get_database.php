@@ -44,4 +44,12 @@
         $models = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $models;
     }
+
+    function getConditions() : array {
+        $db = getDatabaseConnection();
+
+        $stmt = $db->query('SELECT DISTINCT Condition FROM Item');
+        $conditions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $conditions;
+    }
 ?>

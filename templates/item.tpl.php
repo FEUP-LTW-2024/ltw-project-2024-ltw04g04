@@ -87,7 +87,12 @@ function drawItem($pdo, $userId, $item) {
 function sellingItem(PDO $pdo) {
     $stmt = $pdo->query('SELECT CategoryName FROM Category');
     $categories = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    $sizes = getSizes();
+    $conditions = getConditions();
+    $models = getModels();
+    $brands = getBrands();  
 ?>
+     <script src="createItem.js"></script>
    <main>
     <h2 class = "creationHeader">Create New Item</h2>
         <form action="../actions/action_create_item.php" method="post" enctype="multipart/form-data" class="form-container">
@@ -99,13 +104,28 @@ function sellingItem(PDO $pdo) {
             <input type="number" id="price" name="price" min="0" required><br><br>
 
             <label for="brand">Brand:</label><br>
-            <input type="text" id="brand" name="brand" required><br><br>
+            <select id="brand" name="brand" required>
+                <option value="">Select brand</option>
+                <?php foreach ($brands as $brand): ?>
+                    <option value="<?php echo $brand['Brand']; ?>"><?php echo $brand['Brand']; ?></option>
+                <?php endforeach; ?>
+            </select><br><br>
 
             <label for="model">Model:</label><br>
-            <input type="text" id="model" name="model" required><br><br>
+            <select id="model" name="model" required>
+                <option value="">Select model</option>
+                <?php foreach ($models as $model): ?>
+                    <option value="<?php echo $model['Model']; ?>"><?php echo $model['Model']; ?></option>
+                <?php endforeach; ?>
+            </select><br><br>
 
             <label for="condition">Condition:</label><br>
-            <input type="text" id="condition" name="condition" required><br><br>
+            <select id="condition" name="condition" required>
+                <option value="">Select condition</option>
+                <?php foreach ($conditions as $condition): ?>
+                    <option value="<?php echo $condition['Condition']; ?>"><?php echo $condition['Condition']; ?></option>
+                <?php endforeach; ?>
+            </select><br><br>
 
             <label for="category">Category:</label><br>
             <select id="category" name="category" required>
@@ -116,7 +136,12 @@ function sellingItem(PDO $pdo) {
             </select><br><br>
 
             <label for="size">Size:</label><br>
-            <input type="text" id="size" name="size" required><br><br>
+            <select id="size" name="size" required>
+                <option value="">Select size</option>
+                <?php foreach ($sizes as $size): ?>
+                    <option value="<?php echo $size['Size_']; ?>"><?php echo $size['Size_']; ?></option>
+                <?php endforeach; ?>
+            </select><br><br>
 
             <label for="stock">Stock:</label><br>
             <input type="text" id="stock" name="stock" required><br><br>
