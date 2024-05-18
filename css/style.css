@@ -634,7 +634,7 @@ nav#details {
 }
 
 #messages {
-    max-height: 330px; 
+    height: 330px; 
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;

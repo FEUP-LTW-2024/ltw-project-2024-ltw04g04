@@ -71,14 +71,30 @@ function drawItem($pdo, $userId, $item) {
                     <div id="sellerContainer">
                         <div id="sellerImg"><img src="imgs/user-icon.png" alt="Image of icon account"></div>
                         <h3><?= htmlspecialchars(getSellerNamePD($pdo, $item->itemId), ENT_QUOTES, 'UTF-8') ?></h3>
-                        <form action="<?= $sellerProfileURL ?>" method="get">
-                            <input type="hidden" name="id" value="<?= $sellerIdValue ?>">
+                        <form id="toSellerPage" action="<?= $sellerProfileURL ?>" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="seller-id" value="<?= $sellerIdValue ?>">
                             <button type="submit" id="accountSeller">></button>
                         </form>
                     </div>
-
                 </div>
 
+                <script>
+                    document.getElementById('toSellerPage').addEventListener('submit', function(event) {
+                        event.preventDefault(); 
+
+                        const formData = new FormData(this);
+
+                        fetch('../actions/action_process_seller.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => {
+                            window.location.href = '<?= $sellerProfileURL ?>';
+                        })
+                        .catch(error => console.error('Erro:', error));
+                    });
+                </script>
             </section>
         </main> 
 <?php } ?>
