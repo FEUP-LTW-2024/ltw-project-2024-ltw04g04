@@ -76,10 +76,11 @@ CREATE TABLE BuyerItem
 );
 
 CREATE TABLE ShoppingCart (
-    ShoppingCartId INT AUTO_INCREMENT PRIMARY KEY DEFAULT 1,
+    ShoppingCartId INTEGER,
     BuyerId INTEGER,
     ItemId INTEGER NOT NULL,
     Quantity INTEGER NOT NULL DEFAULT 1,
+    CONSTRAINT ShoppingCartId PRIMARY KEY (ShoppingCartId)
     FOREIGN KEY (BuyerId) REFERENCES User (UserId)
         ON DELETE NO ACTION ON UPDATE NO ACTION,
     FOREIGN KEY (ItemId) REFERENCES Item (ItemId)
@@ -225,7 +226,6 @@ INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock
 VALUES (119, 'Silver Hoop Earrings', 50, 'Silver Treasures', 'SHE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item19.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (120, 'Opal Ring', 120, 'Opal Jewelry Co.', 'OR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item20.jpg', 9);
-
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (121, 'Turquoise Bracelet', 45, 'Turquoise Treasures', 'TB2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item21.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
