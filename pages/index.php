@@ -8,8 +8,10 @@
 
     $session = new Session();
     $categories = getCategories();
+    $pdo = getDatabaseConnection();
     generateNavigationMenu($session, $categories);
     drawWelcomePage();
+    topSellers($pdo);
     generateFooter();
 ?>
 

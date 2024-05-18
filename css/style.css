@@ -34,7 +34,7 @@ header {
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 60vh;
+    min-height: 30vh;
 }
 
 .content {
@@ -160,26 +160,6 @@ main img {
     width: 100%;
     height: auto;
     
-}
-
-main .productinfo {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-size: 1.5vw;
-    width: 100%;
-    padding: 5em;
-    box-sizing: border-box; 
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.);
-}
-
-
-main .productinfo  h1 {
-    font-family: "Sulphur Point", sans-serif;
-    font-weight: 700;
-    margin-bottom: 0;
-    font-size: xx-large;
 }
 
 /* Footer */
@@ -1089,11 +1069,21 @@ input[type="text"] {
     margin: 0.625em;
 }
 
-.user:hover {
+.seller {
+    border: 1px solid #ddd;
+    border-radius: 0.5em; 
+    padding: 0.625em; 
+    text-align: center;
+    transition: transform 0.2s; 
+    box-sizing: border-box;
+    margin: 0.625em;
+}
+
+.user:hover, .seller:hover {
     transform: scale(1.05);
 }
 
-.user img {
+.user img, .seller img {
     width: 6.25em;
     height: 6.25em; 
     border-radius: 50%;
@@ -1156,8 +1146,8 @@ input[type="text"] {
 .rating-container label {
     cursor: pointer;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%; 
     margin-right: 5px;
     background-color: #ccc;
@@ -1166,11 +1156,28 @@ input[type="text"] {
 .rating-container label:hover,
 .rating-container label:hover ~ label {
     background-color: #ffdc50; 
+    border-bottom: 20px solid #ffdc50; 
 }
 
-.rating-container input[type="radio"]:checked ~ label {
+.rating-container input[type="radio"]:checked ~ label, .star.filled {
     background-color: #ffdc50; 
+    border-bottom: 20px solid #ffdc50; 
 }
 
+.star {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid #ccc;
+    position: relative;
+    margin-right: 5px; 
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating-container-top {
+    direction: ltr;
+    display: flex;
+}
 
 
