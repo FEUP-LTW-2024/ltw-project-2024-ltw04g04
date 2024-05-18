@@ -10,7 +10,6 @@
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
-    $orders = Order::getUserOrders($pdo, $user->userId); // Obtém as ordens do usuário
 ?>
     <main>
         <section id="profile">
@@ -42,6 +41,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
                         <button type="submit" id="editButton">Save</button>
                     <?php else : ?>
+                        <a href="?edit" id="editButton">Edit</a>
                         <p><strong>Username:</strong> <?= $user->username ?></p>
                         <p><strong>Name:</strong> <?= $user->name ?></p>
                         <p><strong>Email:</strong> <?= $user->email ?></p>
@@ -49,7 +49,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <p><strong>Address:</strong> <?= $user->address ?></p>
                         <p><strong>Country:</strong> <?= $user->country ?></p>
                         <p><strong>Postal Code:</strong> <?= $user->postalCode ?></p>
-                        <a href="?edit" id="editButton">Edit</a>
                     <?php endif; ?>
                 </form>
             </div>
@@ -71,16 +70,19 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             <h3><?= $item->name ?></h3>
                             <p><?= $item->price ?> $</p>
 
-                            <?php foreach ($orders as $order) : ?>
-                                <?php if ($order['ItemId'] == $item->itemId) : ?>
-                                    <?php 
-                                    $hasOrder = true; 
-                                    ?>
-                                    <a href="/../actions/action_shipping_form.php?order_id=<?= $order['OrderId'] ?>&item_id=<?= $item->itemId ?>" target="_blank">View Shipping Form</a>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <?php 
+                                $numOrder = 1;
+                                $orderIds = Order::getOrderIds($pdo, $i); 
+                                foreach ($orderIds as $orderId) { ?>
+                                    <form action="../actions/action_shipping_form.php" method="post">
+                                        <input type="hidden" name="orderId" value="<?= $orderId?>">
+                                        <button id="orderButton" type="submit"> Order <?= $numOrder?> </button>
+                                    </form>
+                            <?php 
+                                    $numOrder = $numOrder + 1; 
+                                } ?>
 
-                            <?php if (!$hasOrder) : ?>
+                            <?php if (empty($orderIds)) : ?>
                                 <p>No orders for this item yet.</p>
                             <?php endif; ?>
                         </article>
@@ -98,9 +100,6 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
         </section>
     </main>
 <?php } ?>
-
-
-
 
 
 
@@ -169,6 +168,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     <?php } ?>
                 </section>
             </section>
+            
         </main>
     </body>
     
@@ -260,7 +260,7 @@ function usersList(PDO $pdo, Session $session) {
                         <p>Name: <?= $user['Name_'] ?></p>
                         <p>Username: <?= $user['Username'] ?></p>
                         <div class="admin-action">
-                            <?php if ($user->isAdmin) : ?>
+                            <?php if ($user['IsAdmin']) : ?>
                                 <form action="../actions/action_make_admin.php" method="post">
                                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                     <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">
