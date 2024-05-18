@@ -13,15 +13,19 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 ?>
     <main>
         <section id="profile">
-            <div id="avatar"><img src="<?= $user->profileImage ?>" alt="User Profile Image"></div>
-            
-            <div id="userInfo">
+            <div id="userHeader">
+                <img id="avatar" src="<?= $user->profileImage ?>" alt="User Profile Image">
                 <h1><?= $user->name ?> 
                     <?php if ($user->isAdmin) : ?>
-                        <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
-                        <span class="admin-text">Administrator</span>
+                        <div class="admin-info">
+                        <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified">
+                        <span class="admin-text">Administrator </span>
+                        </div>
                     <?php endif; ?>
                 </h1>
+            </div>
+            
+            <div id="userInfo">
                 <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <h2>Profile</h2>

@@ -9,7 +9,7 @@
     ?>
     
         <section id="profile">
-            <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
+        <div id="avatar"><img src="<?= $user->profileImage ?>" alt="User Profile Image"></div>
             <div id="userInfo">
                 <div id="userHeader">
                     <h1><?= $user->name ?> </h1>
