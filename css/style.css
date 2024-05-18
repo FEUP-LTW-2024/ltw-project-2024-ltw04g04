@@ -22,6 +22,17 @@ a {
 
 
 /* Header */
+
+#jewels {
+    opacity: 0.7; 
+    transition: opacity 0.3s ease; 
+}
+
+#jewels:hover {
+    opacity: 1; 
+}
+
+
 header {
     padding: 20px;
     background-color: #BBE4F1;
@@ -34,7 +45,7 @@ header {
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 60vh;
+    min-height: 55vh;
 }
 
 .content {
@@ -162,26 +173,6 @@ main img {
     
 }
 
-main .productinfo {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-size: 1.5vw;
-    width: 100%;
-    padding: 5em;
-    box-sizing: border-box; 
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.);
-}
-
-
-main .productinfo  h1 {
-    font-family: "Sulphur Point", sans-serif;
-    font-weight: 700;
-    margin-bottom: 0;
-    font-size: xx-large;
-}
-
 /* Footer */
 .customize {
     background-color: #f8f8f8;
@@ -248,9 +239,9 @@ main .productinfo  h1 {
     width: 85%; 
 }
 
-#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category
+#summary button, #editButton, #addItemButton, .button-create-item, .button-add-category, .button-delete-category,
 .button-add-brand, .button-delete-brand , .button-delete-condition, .button-add-condition,
-.button-delete-model, .button-add-model, .button-delete-size, .button-add-size  {
+.button-delete-model, .button-add-model, .button-delete-size, .button-add-size, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -699,6 +690,10 @@ nav#details {
     position: relative; 
 }
 
+.cart-item:hover {
+    background-color:rgb(226, 226, 226) ;
+}
+
 
 .cart-item::after, .list-item::after {
     content: "";
@@ -793,7 +788,7 @@ nav#details {
 }
 
 #articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList,
-.editCondition, .editBrand, .editModel, .editSize  {
+.editCondition, .editBrand, .editModel, .editSize, .itemsList  {
     margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
@@ -946,7 +941,8 @@ nav#details {
 
 .button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover,
 .button-add-brand:hover, .button-delete-brand:hover,.button-add-model:hover, .button-delete-model:hover,
-.button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover {
+.button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover,
+#ratingButton:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -1041,16 +1037,16 @@ input[type="text"] {
     margin-top: 1em; 
 }
 
-.make-admin, .remove-admin  {
+.make-admin, .remove-admin, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
-    margin-top: 1em;
+    margin-top: 0.5em;
     text-align: center;
     display: inline-block;
-    width: 12%;
     text-decoration: none;
     font-size: 12px;
+    width: 8em;
     padding-top: 0;
     padding-bottom: 0;
     cursor: pointer;
@@ -1064,8 +1060,6 @@ input[type="text"] {
     text-align: center;
     margin-bottom: 20px;
 }
-
-
 
 .users-container {
     display: flex;
@@ -1084,11 +1078,21 @@ input[type="text"] {
     margin: 0.625em;
 }
 
-.user:hover {
+.seller, .item {
+    border: 1px solid #ddd;
+    border-radius: 0.5em; 
+    padding: 0.625em; 
+    text-align: center;
+    transition: transform 0.2s; 
+    box-sizing: border-box;
+    margin: 0.625em;
+}
+
+.user:hover, .seller:hover, .item:hover {
     transform: scale(1.05);
 }
 
-.user img {
+.user img, .seller img {
     width: 6.25em;
     height: 6.25em; 
     border-radius: 50%;
@@ -1135,3 +1139,99 @@ input[type="text"] {
     border-radius: 4px;
     padding: 1em 1.5em 1em 1.5em;
 }
+
+/* Rating */
+
+.rating-container {
+    text-align: left;
+    direction: rtl;
+    display: inline-block;
+}
+
+.rating-container input[type="radio"] {
+    display: none;
+}
+
+.rating-container label {
+    cursor: pointer;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%; 
+    margin-right: 5px;
+    background-color: #ccc;
+}
+
+.rating-container label:hover,
+.rating-container label:hover ~ label {
+    background-color: #ffdc50; 
+    border-bottom: 20px solid #ffdc50; 
+}
+
+.rating-container input[type="radio"]:checked ~ label, .star.filled {
+    background-color: #ffdc50; 
+    border-bottom: 20px solid #ffdc50; 
+}
+
+.star {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid #ccc;
+    position: relative;
+    margin-right: 5px; 
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating-container-top {
+    direction: ltr;
+    display: flex;
+}
+
+/* Random items */
+
+.scroll-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    margin-bottom: 3em; 
+}
+
+.scroll-wrapper {
+    display: flex;
+    width: max-content;
+}
+
+.item {
+    display: inline-block;
+    width: 20%; 
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+}
+
+.item-details {
+    text-align: center;
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.scroll-wrapper .item-details p {
+    font-size: 1vw; 
+}
+

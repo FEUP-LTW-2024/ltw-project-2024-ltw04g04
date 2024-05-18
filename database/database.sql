@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS WishList;
 DROP TABLE IF EXISTS ChatMessage;
 DROP TABLE IF EXISTS OrderItem;
+DROP TABLE IF EXISTS SellerRating;
 
 /*******************************************************************************
    Create Tables
@@ -175,6 +176,17 @@ CREATE TABLE OrderItem (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+CREATE TABLE SellerRating (
+    RatingId INTEGER PRIMARY KEY,
+    SellerId INTEGER NOT NULL,
+    RaterId INTEGER NOT NULL,
+    Rating INTEGER NOT NULL CHECK(Rating >= 1 AND Rating <= 5),
+    FOREIGN KEY (SellerId) REFERENCES User(UserId)
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+    FOREIGN KEY (RaterId) REFERENCES User(UserId)
+        ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
 
 /*******************************************************************************
    Populate Tables
@@ -189,6 +201,7 @@ INSERT INTO Category (CategoryId, CategoryName) VALUES (4, 'Necklaces');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (5, 'Accessories');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (6, 'Clocks');
 
+-- Populate Size table
 INSERT INTO Size_ (SizeId, SizeVal) VALUES (1, 1);
 INSERT INTO Size_ (SizeId, SizeVal) VALUES (2, 2);
 INSERT INTO Size_ (SizeId, SizeVal) VALUES (3, 3);
@@ -231,6 +244,40 @@ VALUES (9, 'sarahbrown', 'Sarah Brown', 'sarah.brown@example.com', '507bb50fa885
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644c9f5e7b0062607c6677838fd0ee8399f5a7', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
 -- pretoebranc0
+
+-- Populate Rating table
+INSERT INTO SellerRating (RatingId, SellerId, RaterId, Rating)
+VALUES (1, 1, 2, 4),
+       (2, 1, 3, 5),
+       (3, 1, 4, 3),
+       (4, 2, 1, 5),
+       (5, 2, 3, 4),
+       (6, 2, 5, 4),
+       (7, 3, 1, 3),
+       (8, 3, 2, 4),
+       (9, 3, 6, 2),
+       (10, 4, 1, 5),
+       (11, 4, 2, 4),
+       (12, 4, 3, 4),
+       (13, 5, 1, 3),
+       (14, 5, 4, 4),
+       (15, 5, 7, 5),
+       (16, 6, 1, 4),
+       (17, 6, 2, 3),
+       (18, 6, 8, 4),
+       (19, 7, 1, 5),
+       (20, 7, 3, 4),
+       (21, 7, 5, 3),
+       (22, 8, 1, 4),
+       (23, 8, 2, 5),
+       (24, 8, 9, 3),
+       (25, 9, 1, 4),
+       (26, 9, 3, 3),
+       (27, 9, 10, 5),
+       (28, 10, 1, 3),
+       (29, 10, 4, 4),
+       (30, 10, 6, 2);
+
 
 -- Populando Condition
 INSERT INTO Condition (ConditionId, ConditionName)

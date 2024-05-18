@@ -160,6 +160,27 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getSellerAverageRating(PDO $pdo, int $userId) {
+        $stmt = $pdo->prepare('SELECT AVG(Rating) as averageRating FROM SellerRating WHERE SellerId = ?');
+        $stmt->execute([$userId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? round($result['averageRating'], 2) : 'No ratings';
+    }
+
+    public static function getTopSellers(PDO $pdo, $limit = 5): array  {
+        $query = "SELECT SellerId, AVG(rating) AS average_rating
+                  FROM SellerRating
+                  GROUP BY SellerId
+                  ORDER BY average_rating DESC
+                  LIMIT :limit";
+    
+        $statement = $pdo->prepare($query);
+        $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $statement->execute();
+    
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
   }
 
 ?>

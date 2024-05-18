@@ -216,7 +216,6 @@ function editBrands(PDO $pdo) {
             <input type="submit" name="add_brand" value="Add" class="button-add-brand">
         </form>
     </main>
-
     <?php
 }
 ?>
