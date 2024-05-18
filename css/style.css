@@ -248,7 +248,9 @@ main .productinfo  h1 {
     width: 85%; 
 }
 
-#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category  {
+#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category
+.button-add-brand, .button-delete-brand , .button-delete-condition, .button-add-condition,
+.button-delete-model, .button-add-model, .button-delete-size, .button-add-size  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -792,7 +794,8 @@ nav#details {
     margin-left: 14%; 
 }
 
-#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList  {
+#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList,
+.editCondition, .editBrand, .editModel, .editSize  {
     margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
@@ -943,7 +946,9 @@ nav#details {
     text-align: center;
 }
 
-.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover {
+.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover,
+.button-add-brand:hover, .button-delete-brand:hover,.button-add-model:hover, .button-delete-model:hover,
+.button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -1019,7 +1024,9 @@ input[type="text"] {
 }
 
 
-.category-container {
+.category-container, .brand-container,
+.condition-container, .model-container,
+.size-container {
     margin: 3em auto; 
     max-width: 30em; 
     padding: 1.5em; 
@@ -1027,7 +1034,11 @@ input[type="text"] {
 }
 
 
-.button-delete-category, .button-add-category {
+.button-delete-category, .button-add-category,
+.button-delete-brand, .button-add-brand,
+.button-delete-condition, .button-add-condition,
+.button-delete-model, .button-add-model,
+.button-delete-size, .button-add-size    {
     margin-left: 1em;
     margin-top: 1em; 
 }

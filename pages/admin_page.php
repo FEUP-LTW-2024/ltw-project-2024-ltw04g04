@@ -15,6 +15,10 @@
     generateNavigationMenu($session, $categories);
 
     usersList($pdo, $session);
-    editCategories($pdo); 
+    editCategories($pdo);
+    editBrands($pdo);  
+    editConditions($pdo); 
+    editModels($pdo); 
+    editSizes($pdo); 
     generateFooter();
 ?>
