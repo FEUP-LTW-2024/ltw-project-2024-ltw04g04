@@ -1,6 +1,7 @@
 <?php 
     declare(strict_types = 1); 
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../database/item.class.php');
 ?>
 
 <?php function drawWelcomePage() { ?>
@@ -46,4 +47,54 @@ function topSellers(PDO $pdo) {
 }
 ?>
 
+<?php
+function displayRandomItems(PDO $pdo) {
+    $items = Item::getRandomItems($pdo, 10);
+    $firstHalf = array_slice($items, 0, 5);
+    $secondHalf = array_slice($items, 5, 5);
+?>
+    <main>
+        <h2 class="itemsList">10 Random Items</h2>
+        <div class="scroll-container">
+            <div class="scroll-wrapper">
+                <?php foreach ($firstHalf as $item): ?>
+                    <div class="item">
+                        <img src="<?= $item->imageLink ?>" alt="Item Image">
+                        <div class="item-details">
+                            <p>Name: <?= $item->name ?></p>
+                            <p>Price: <?= $item->price ?></p>
+                            <p>Brand: <?= $item->brand ?></p>
+                            <p>Model: <?= $item->model ?></p>
+                            <p>Condition: <?= $item->condition ?></p>
+                            <p>Category: <?= $item->category ?></p>
+                            <p>Stock: <?= $item->stock ?></p>
+                            <p>Size: <?= $item->size ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="scroll-container">
+            <div class="scroll-wrapper">
+                <?php foreach ($secondHalf as $item): ?>
+                    <div class="item">
+                        <img src="<?= $item->imageLink ?>" alt="Item Image">
+                        <div class="item-details">
+                            <p>Name: <?= $item->name ?></p>
+                            <p>Price: <?= $item->price ?></p>
+                            <p>Brand: <?= $item->brand ?></p>
+                            <p>Model: <?= $item->model ?></p>
+                            <p>Condition: <?= $item->condition ?></p>
+                            <p>Category: <?= $item->category ?></p>
+                            <p>Stock: <?= $item->stock ?></p>
+                            <p>Size: <?= $item->size ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </main>
+<?php
+}
+?>
 

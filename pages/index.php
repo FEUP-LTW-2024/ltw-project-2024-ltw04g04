@@ -12,6 +12,7 @@
     generateNavigationMenu($session, $categories);
     drawWelcomePage();
     topSellers($pdo);
+    displayRandomItems($pdo);
     generateFooter();
 ?>
 

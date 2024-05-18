@@ -1050,8 +1050,6 @@ input[type="text"] {
     margin-bottom: 20px;
 }
 
-
-
 .users-container {
     display: flex;
     flex-wrap: wrap;
@@ -1069,7 +1067,7 @@ input[type="text"] {
     margin: 0.625em;
 }
 
-.seller {
+.seller, .item {
     border: 1px solid #ddd;
     border-radius: 0.5em; 
     padding: 0.625em; 
@@ -1079,7 +1077,7 @@ input[type="text"] {
     margin: 0.625em;
 }
 
-.user:hover, .seller:hover {
+.user:hover, .seller:hover, .item:hover {
     transform: scale(1.05);
 }
 
@@ -1180,4 +1178,45 @@ input[type="text"] {
     display: flex;
 }
 
+/* Random items */
+
+.scroll-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    margin-bottom: 3em; 
+}
+
+.scroll-wrapper {
+    display: flex;
+    width: max-content;
+}
+
+.item {
+    display: inline-block;
+    width: 20%; 
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+}
+
+.item-details {
+    text-align: center;
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
 

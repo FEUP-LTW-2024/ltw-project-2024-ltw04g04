@@ -229,6 +229,30 @@
             $item = $stmt->fetch();
             return $item['ItemId'];  
         }
+
+        public static function getRandomItems(PDO $db, int $limit = 10): array {
+            $stmt = $db->query('SELECT ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_
+                                FROM Item
+                                ORDER BY RANDOM()
+                                LIMIT ' . $limit);
+    
+            $items = [];
+            while ($item = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $items[] = new Item(
+                    $item['ItemId'],
+                    $item['Name_'],
+                    $item['Price'],
+                    $item['Brand'],
+                    $item['Model'],
+                    $item['Condition'],
+                    $item['Category'],
+                    $item['Stock'],
+                    $item['Image_'] ?? "",
+                    $item['Size_']
+                );
+            }
+            return $items;
+        }
     }
 
 ?>
