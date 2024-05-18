@@ -8,8 +8,11 @@
 
     $session = new Session();
     $categories = getCategories();
+    $pdo = getDatabaseConnection();
     generateNavigationMenu($session, $categories);
     drawWelcomePage();
+    topSellers($pdo);
+    displayRandomItems($pdo);
     generateFooter();
 ?>
 

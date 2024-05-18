@@ -18,8 +18,16 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
     $stock = filter_input(INPUT_POST, 'stock', FILTER_VALIDATE_INT);
     $size = filter_input(INPUT_POST, 'size', FILTER_VALIDATE_INT);
 
-
-
+    if (strlen($name) < 5) {
+        echo "O nome deve ter pelo menos 5 caracteres.";
+        exit();
+    }
+    
+    if ($stock <= 0) {
+        echo "O estoque deve ser maior que zero.";
+        exit();
+    }
+    
     if(isset($_FILES["item_image"]) && $_FILES["item_image"]["error"] == 0) {
         $imageDir = '../pages/imgs/imgsForItems/';
         $targetFile = $imageDir . basename($_FILES["item_image"]["name"]);
@@ -51,10 +59,10 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
             header('Location: ../pages/account.php');
             exit();
         } else {
-            echo "Desculpe, ocorreu um erro ao carregar o arquivo.";
+            echo "Sorry, error in upload archive.";
         }
     } else {
-        echo "Nenhum arquivo de imagem enviado ou ocorreu um erro durante o upload.";
+        echo "No image files uploaded or an error occurred while uploading.";
     }
 
 } else {

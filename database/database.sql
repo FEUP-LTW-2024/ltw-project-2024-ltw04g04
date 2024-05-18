@@ -5,6 +5,10 @@ PRAGMA FOREIGN_KEYS = ON;
 
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Condition;
+DROP TABLE IF EXISTS Size_;
+DROP TABLE IF EXISTS Model;
+DROP TABLE IF EXISTS Brand;
 DROP TABLE IF EXISTS Item;
 DROP TABLE IF EXISTS SellerItem;
 DROP TABLE IF EXISTS BuyerItem;
@@ -12,6 +16,7 @@ DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS WishList;
 DROP TABLE IF EXISTS ChatMessage;
 DROP TABLE IF EXISTS OrderItem;
+DROP TABLE IF EXISTS SellerRating;
 
 /*******************************************************************************
    Create Tables
@@ -40,6 +45,34 @@ CREATE TABLE Category
     CONSTRAINT CategoryId PRIMARY KEY (CategoryId)
 );
 
+CREATE TABLE Model
+(
+    ModelId INTEGER,
+    ModelName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT ModelId PRIMARY KEY (ModelId)
+);
+
+CREATE TABLE Brand
+(
+    BrandId INTEGER,
+    BrandName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT BrandId PRIMARY KEY (BrandId)
+);
+
+CREATE TABLE Condition
+(
+    ConditionId INTEGER,
+    ConditionName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT ConditionId PRIMARY KEY (ConditionId)
+);
+
+CREATE TABLE Size_
+(
+    SizeId INTEGER,
+    SizeVal INTEGER UNIQUE NOT NULL,
+    CONSTRAINT SizeId PRIMARY KEY (SizeId)
+);
+
 CREATE TABLE Item
 (
     ItemId INTEGER NOT NULL,
@@ -52,8 +85,15 @@ CREATE TABLE Item
     Stock INTEGER NOT NULL,
     Image_ TEXT,
     Size_ INTEGER NOT NULL,
-    CONSTRAINT ItemId PRIMARY KEY (ItemId)
+    CONSTRAINT ItemId PRIMARY KEY (ItemId),
     FOREIGN KEY (Category) REFERENCES Category (CategoryName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Brand) REFERENCES Brand (BrandName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Condition) REFERENCES Condition (ConditionName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Size_) REFERENCES Size_ (SizeVal)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE SellerItem
@@ -137,6 +177,17 @@ CREATE TABLE OrderItem (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+CREATE TABLE SellerRating (
+    RatingId INTEGER PRIMARY KEY,
+    SellerId INTEGER NOT NULL,
+    RaterId INTEGER NOT NULL,
+    Rating INTEGER NOT NULL CHECK(Rating >= 1 AND Rating <= 5),
+    FOREIGN KEY (SellerId) REFERENCES User(UserId)
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+    FOREIGN KEY (RaterId) REFERENCES User(UserId)
+        ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
 
 /*******************************************************************************
    Populate Tables
@@ -151,6 +202,17 @@ INSERT INTO Category (CategoryId, CategoryName) VALUES (4, 'Necklaces');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (5, 'Accessories');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (6, 'Clocks');
 
+-- Populate Size table
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (1, 1);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (2, 2);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (3, 3);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (4, 4);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (5, 5);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (6, 6);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (7, 7);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (8, 8);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (9, 9);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (10, 10);
 
 -- Populate User table
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
@@ -184,6 +246,131 @@ INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Count
 VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644c9f5e7b0062607c6677838fd0ee8399f5a7', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
 -- pretoebranc0
 
+-- Populate Rating table
+INSERT INTO SellerRating (RatingId, SellerId, RaterId, Rating)
+VALUES (1, 1, 2, 4),
+       (2, 1, 3, 5),
+       (3, 1, 4, 3),
+       (4, 2, 1, 5),
+       (5, 2, 3, 4),
+       (6, 2, 5, 4),
+       (7, 3, 1, 3),
+       (8, 3, 2, 4),
+       (9, 3, 6, 2),
+       (10, 4, 1, 5),
+       (11, 4, 2, 4),
+       (12, 4, 3, 4),
+       (13, 5, 1, 3),
+       (14, 5, 4, 4),
+       (15, 5, 7, 5),
+       (16, 6, 1, 4),
+       (17, 6, 2, 3),
+       (18, 6, 8, 4),
+       (19, 7, 1, 5),
+       (20, 7, 3, 4),
+       (21, 7, 5, 3),
+       (22, 8, 1, 4),
+       (23, 8, 2, 5),
+       (24, 8, 9, 3),
+       (25, 9, 1, 4),
+       (26, 9, 3, 3),
+       (27, 9, 10, 5),
+       (28, 10, 1, 3),
+       (29, 10, 4, 4),
+       (30, 10, 6, 2);
+
+
+-- Populando Condition
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (1, 'New');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (2, 'Used');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (3, 'Refurbished');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (4, 'Like New');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (5, 'Damaged');
+
+-- Populando Brand
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (1, 'Blue Jewelers');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (2, 'Green Gems');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (3, 'Purple Jewelry');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (4, 'Golden Treasures');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (5, 'Diamonds Inc.');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (6, 'Gold Empire');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (7, 'Silver Works');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (8, 'Gemstone Jewelry');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (9, 'Pearl Paradise');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (10, 'Watch Co.');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (11, 'Blue Stone Creations');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (12, 'Emerald Designs');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (13, 'Golden Touch');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (14, 'Diamond Dreams');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (15, 'Luxury Jewels');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (16, 'Ocean Pearls');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (17, 'Red Gemstones');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (18, 'Golden Creations');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (19, 'Silver Treasures');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (20, 'Opal Jewelry Co.');
+
+-- Populando Model
+INSERT INTO Model (ModelId, ModelName)
+VALUES (1, 'SB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (2, 'EE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (3, 'AR2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (4, 'TN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (5, 'DN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (6, 'GB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (7, 'SE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (8, 'RR2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (9, 'PN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (10, 'LW2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (11, 'SP2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (12, 'EB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (13, 'DPN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (14, 'DSE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (16, 'RB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (17, 'GC2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (18, 'SHE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (19, 'OR2024');
 
 
 --Populate Item table

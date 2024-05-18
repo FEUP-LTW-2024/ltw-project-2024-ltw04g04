@@ -84,7 +84,10 @@ function updateHeartIconStyle(itemId, isInWishlist) {
     heartIcon.src = iconSrc;
 }
 
-function toggleWishlist(itemId) {
+function toggleWishlist(event, itemId) {
+    event.preventDefault();
+    event.stopPropagation(); 
+
     let xhr = new XMLHttpRequest();
     xhr.open('POST', '/../actions/action_wish_list.php', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -106,3 +109,4 @@ function toggleWishlist(itemId) {
     };
     xhr.send('itemId=' + encodeURIComponent(itemId));
 }
+

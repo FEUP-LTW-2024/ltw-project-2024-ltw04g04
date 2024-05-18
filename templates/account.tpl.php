@@ -10,6 +10,7 @@
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
+    $averageRating = User::getSellerAverageRating($pdo, $user->userId);
 ?>
     <main>
         <section id="profile">
@@ -56,6 +57,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <p><strong>Address:</strong> <?= $user->address ?></p>
                         <p><strong>Country:</strong> <?= $user->country ?></p>
                         <p><strong>Postal Code:</strong> <?= $user->postalCode ?></p>
+                        <p><strong>My Average Rating:</strong> <?= $averageRating ?> / 5</p>
                     <?php endif; ?>
                 </form>
             </div>
@@ -235,7 +237,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                                     <p class="detail"> Category: <?= $item->category ?></p>     
                                     <p class="detail"> Size: <?= $item->size ?></p>
                                     <p class="detail-heart">
-                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(event, <?php echo $item->itemId; ?>)">
                                     </p>
                                 </div>
                             </div>
