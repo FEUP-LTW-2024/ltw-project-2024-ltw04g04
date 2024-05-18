@@ -28,6 +28,26 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
                 <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"><br>
                 <span class="admin-text">Administrator</span>
             <?php endif; ?>
+            <?php if (!$isCurrentUser && $session->isLogin()) : ?>
+                <form action="../actions/action_rating.php" method="post">
+                    <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
+                    <input type="hidden" name="seller_id" value="<?= htmlspecialchars($user->userId) ?>">
+                    <label for="rating"></label>
+                    <div class="rating-container">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label class="star"for="star5"></label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label class="star" for="star4"></label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label class="star" for="star3"></label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label class="star" for="star2"></label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label class="star" for="star1"></label>
+                    </div>
+                    <input id="ratingButton" type="submit" value="Submit Rating">
+                </form>
+            <?php endif; ?>
             <?php if ($session->isAdmin()) : ?>
                 <?php if ($user->isAdmin) : ?>
                     <form action="../actions/action_make_admin.php" method="post">
@@ -45,27 +65,12 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
                     </form>
                 <?php endif; ?>
             <?php endif; ?>
-
             <p><strong>Username:</strong> <?= htmlspecialchars($user->username) ?></p>
             <p><strong>Email:</strong> <?= htmlspecialchars($user->email) ?></p>
             <p><strong>City:</strong> <?= htmlspecialchars($user->city) ?></p>
             <p><strong>Country:</strong> <?= htmlspecialchars($user->country) ?></p>
             <p><strong>Average Rating:</strong> <?= htmlspecialchars($averageRating) ?> / 5</p>
-            <?php if (!$isCurrentUser && $session->isLogin()) : ?>
-                <form action="../actions/action_rating.php" method="post">
-                    <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
-                    <input type="hidden" name="seller_id" value="<?= htmlspecialchars($user->userId) ?>">
-                    <label for="rating">Rate this seller:</label>
-                    <select name="rating" id="rating" required>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                    <input type="submit" value="Submit Rating">
-                </form>
-            <?php endif; ?>
+            
             <?php if ($isCurrentUser) : ?>
                 <a href="account.php?edit" id="editButton">Edit</a>
             <?php endif; ?>

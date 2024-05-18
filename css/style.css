@@ -250,7 +250,7 @@ main .productinfo  h1 {
 
 #summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category
 .button-add-brand, .button-delete-brand , .button-delete-condition, .button-add-condition,
-.button-delete-model, .button-add-model, .button-delete-size, .button-add-size  {
+.button-delete-model, .button-add-model, .button-delete-size, .button-add-size, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -950,7 +950,8 @@ nav#details {
 
 .button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover,
 .button-add-brand:hover, .button-delete-brand:hover,.button-add-model:hover, .button-delete-model:hover,
-.button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover {
+.button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover,
+#ratingButton:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -1045,16 +1046,16 @@ input[type="text"] {
     margin-top: 1em; 
 }
 
-.make-admin, .remove-admin  {
+.make-admin, .remove-admin, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
-    margin-top: 1em;
+    margin-top: 0.5em;
     text-align: center;
     display: inline-block;
-    width: 12%;
     text-decoration: none;
     font-size: 12px;
+    width: 8em;
     padding-top: 0;
     padding-bottom: 0;
     cursor: pointer;
@@ -1142,25 +1143,34 @@ input[type="text"] {
 
 /* Rating */
 
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+.rating-container {
+    text-align: left;
+    direction: rtl;
+    display: inline-block;
 }
 
-.rating input[type="radio"] {
+.rating-container input[type="radio"] {
     display: none;
 }
 
-.rating label {
-    font-size: 2em;
-    color: #ddd;
+.rating-container label {
     cursor: pointer;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    margin-right: 5px;
+    background-color: #ccc;
 }
 
-.rating input[type="radio"]:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
-    color: #f5b301;
+.rating-container label:hover,
+.rating-container label:hover ~ label {
+    background-color: #ffdc50; 
 }
+
+.rating-container input[type="radio"]:checked ~ label {
+    background-color: #ffdc50; 
+}
+
+
 
