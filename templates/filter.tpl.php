@@ -31,8 +31,8 @@
                     <label>Size:</label>
                     <?php foreach ($sizes as $size) : ?>
                         <label class="size-checkbox">
-                            <input type="checkbox" name="size[]" value="<?php echo $size['Size_']; ?>">
-                            <?php echo $size['Size_']; ?>
+                            <input type="checkbox" name="size[]" value="<?php echo $size['SizeVal']; ?>">
+                            <?php echo $size['SizeVal']; ?>
                         </label>
                     <?php endforeach; ?>
                 </div>
@@ -44,7 +44,7 @@
                     <select id="model-filter" name="model">
                         <option value="">Any model</option>
                         <?php foreach ($models as $model) : ?>
-                            <option value="<?php echo $model['Model']; ?>"><?php echo $model['Model']; ?></option>
+                            <option value="<?php echo $model['ModelName']; ?>"><?php echo $model['ModelName']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -56,7 +56,7 @@
                     <select id="brand-filter" name="brand"> <
                         <option value="">Any brand</option>
                         <?php foreach ($brands as $brand) : ?>
-                            <option value="<?php echo $brand['Brand']; ?>"><?php echo $brand['Brand']; ?></option>
+                            <option value="<?php echo $brand['BrandName']; ?>"><?php echo $brand['BrandName']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

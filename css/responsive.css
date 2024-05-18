@@ -16,6 +16,18 @@
         width: 100%; 
         order: 1;
     }
+
+    #item {
+        display: block;
+        flex-direction: column;
+        padding: 1em;
+        justify-content: center;
+    }
+
+    #itemImg {
+        margin-right: 3em;
+    }
+    
 }
 
 @media (max-width: 50em) {
@@ -68,39 +80,39 @@
         background-color: #f8f8f8;
         color:#A4DAEA;
         padding: 1em;
-      }
+    }
     
-      #menu .hamburgerCommon:before {
+    #menu .hamburgerCommon:before {
         content:'\2630';
-      }
+    }
     
-      #menu ul {
+    #menu ul {
         flex-direction: column;
         margin: 0;
         padding: 0;
         color: white;
-      }
+    }
     
-      #hamburgerCommon:checked + .hamburgerCommon + ul li{
+    #hamburgerCommon:checked + .hamburgerCommon + ul li{
         max-height: 1em;
         padding: 1em;
         opacity: 1;
-      }
+    }
     
-      #hamburgerCommon:checked + .hamburgerCommon:before {
+    #hamburgerCommon:checked + .hamburgerCommon:before {
         content:'\2715';
-      }
+    }
     
-      #menu li {
+    #menu li {
         max-height: 0;
         padding: 0 1em;
         background-color: #edeff0;
         text-align: left;
         opacity: 0;
         transition: all .3s ease-in-out;
-      }
+    }
 
-      nav#menu li:hover{
+    nav#menu li:hover{
         list-style-type: none;
         transition: .5s;
         border-bottom: solid 5px white;
@@ -109,6 +121,8 @@
     main .productinfo {
         display: none;
     }
+
+    
 }
 
 
