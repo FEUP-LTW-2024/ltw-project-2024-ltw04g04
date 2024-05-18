@@ -160,6 +160,13 @@
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getSellerAverageRating(PDO $pdo, int $userId) {
+        $stmt = $pdo->prepare('SELECT AVG(Rating) as averageRating FROM SellerRating WHERE SellerId = ?');
+        $stmt->execute([$userId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? round($result['averageRating'], 2) : 'No ratings';
+    }
+
   }
 
 ?>

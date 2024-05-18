@@ -1139,3 +1139,28 @@ input[type="text"] {
     border-radius: 4px;
     padding: 1em 1.5em 1em 1.5em;
 }
+
+/* Rating */
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    font-size: 2em;
+    color: #ddd;
+    cursor: pointer;
+}
+
+.rating input[type="radio"]:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+    color: #f5b301;
+}
+
