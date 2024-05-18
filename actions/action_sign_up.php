@@ -3,14 +3,15 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../database/get_database.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../utils/session.php');
+require_once(__DIR__ . '/../utils/utils.php');
 
 $session = new Session();
 $db = getDatabaseConnection();
 $error = '';
 
 if (isset($_POST['submit']) && ($_SESSION['csrf'] === $_POST['csrf'])) {
-    $username = htmlspecialchars(trim($_POST['username']));
-    $name = htmlspecialchars(trim($_POST['name']));
+    $username = cleanInput($_POST['username']);
+    $name = cleanInput($_POST['name']);
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
     $reenterPassword = $_POST['reenter_password'];
@@ -40,3 +41,4 @@ if ($error !== '') {
     exit();
 }
 ?>
+

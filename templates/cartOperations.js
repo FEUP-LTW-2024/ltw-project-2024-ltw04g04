@@ -103,7 +103,7 @@ function toggleWishlist(event, itemId) {
                     alert(response.error);
                 }
             } else {
-                alert('Erro na requisição AJAX: ' + xhr.statusText);
+                alert('Error in AJAX acquisition: ' + xhr.statusText);
             }
         }
     };
