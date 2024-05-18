@@ -107,7 +107,7 @@ function sellingItem(PDO $pdo) {
             <select id="brand" name="brand" required>
                 <option value="">Select brand</option>
                 <?php foreach ($brands as $brand): ?>
-                    <option value="<?php echo $brand['Brand']; ?>"><?php echo $brand['Brand']; ?></option>
+                    <option value="<?php echo $brand['BrandName']; ?>"><?php echo $brand['BrandName']; ?></option>
                 <?php endforeach; ?>
             </select><br><br>
 
@@ -115,7 +115,7 @@ function sellingItem(PDO $pdo) {
             <select id="model" name="model" required>
                 <option value="">Select model</option>
                 <?php foreach ($models as $model): ?>
-                    <option value="<?php echo $model['Model']; ?>"><?php echo $model['Model']; ?></option>
+                    <option value="<?php echo $model['ModelName']; ?>"><?php echo $model['ModelName']; ?></option>
                 <?php endforeach; ?>
             </select><br><br>
 
@@ -123,7 +123,7 @@ function sellingItem(PDO $pdo) {
             <select id="condition" name="condition" required>
                 <option value="">Select condition</option>
                 <?php foreach ($conditions as $condition): ?>
-                    <option value="<?php echo $condition['Condition']; ?>"><?php echo $condition['Condition']; ?></option>
+                    <option value="<?php echo $condition['ConditionName']; ?>"><?php echo $condition['ConditionName']; ?></option>
                 <?php endforeach; ?>
             </select><br><br>
 
@@ -139,7 +139,7 @@ function sellingItem(PDO $pdo) {
             <select id="size" name="size" required>
                 <option value="">Select size</option>
                 <?php foreach ($sizes as $size): ?>
-                    <option value="<?php echo $size['Size_']; ?>"><?php echo $size['Size_']; ?></option>
+                    <option value="<?php echo $size['SizeVal']; ?>"><?php echo $size['SizeVal']; ?></option>
                 <?php endforeach; ?>
             </select><br><br>
 

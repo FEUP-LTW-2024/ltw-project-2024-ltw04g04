@@ -24,7 +24,7 @@
     function getSizes() : array {
         $db = getDatabaseConnection();
 
-        $stmt = $db->query('SELECT DISTINCT Size_ FROM Item');
+        $stmt = $db->query('SELECT SizeVal FROM Size_');
         $sizes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $sizes;
     }
@@ -32,7 +32,7 @@
     function getBrands() : array {
         $db = getDatabaseConnection();
 
-        $stmt = $db->query('SELECT DISTINCT Brand FROM Item');
+        $stmt = $db->query('SELECT BrandName FROM Brand');
         $brands = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $brands;
     }
@@ -40,7 +40,7 @@
     function getModels() : array {
         $db = getDatabaseConnection();
 
-        $stmt = $db->query('SELECT DISTINCT Model FROM Item');
+        $stmt = $db->query('SELECT ModelName FROM Model');
         $models = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $models;
     }
@@ -48,7 +48,7 @@
     function getConditions() : array {
         $db = getDatabaseConnection();
 
-        $stmt = $db->query('SELECT DISTINCT Condition FROM Item');
+        $stmt = $db->query('SELECT ConditionName FROM Condition');
         $conditions = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $conditions;
     }

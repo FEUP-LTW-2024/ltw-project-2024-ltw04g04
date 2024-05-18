@@ -43,13 +43,6 @@ CREATE TABLE Category
     CONSTRAINT CategoryId PRIMARY KEY (CategoryId)
 );
 
-CREATE TABLE Size_
-(
-    SizeId INTEGER,
-    SizeVal INTEGER UNIQUE NOT NULL,
-    CONSTRAINT SizeId PRIMARY KEY (SizeId)
-);
-
 CREATE TABLE Model
 (
     ModelId INTEGER,
@@ -71,6 +64,13 @@ CREATE TABLE Condition
     CONSTRAINT ConditionId PRIMARY KEY (ConditionId)
 );
 
+CREATE TABLE Size_
+(
+    SizeId INTEGER,
+    SizeVal INTEGER UNIQUE NOT NULL,
+    CONSTRAINT SizeId PRIMARY KEY (SizeId)
+);
+
 CREATE TABLE Item
 (
     ItemId INTEGER NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE Item
         ON DELETE NO ACTION ON UPDATE NO ACTION
     FOREIGN KEY (Condition) REFERENCES Condition (ConditionName)
         ON DELETE NO ACTION ON UPDATE NO ACTION
-    FOREIGN KEY (Size_) REFERENCES Size_ (SizeId)
+    FOREIGN KEY (Size_) REFERENCES Size_ (SizeVal)
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
@@ -200,7 +200,6 @@ INSERT INTO Size_ (SizeId, SizeVal) VALUES (8, 8);
 INSERT INTO Size_ (SizeId, SizeVal) VALUES (9, 9);
 INSERT INTO Size_ (SizeId, SizeVal) VALUES (10, 10);
 
-
 -- Populate User table
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', '123 Main St', 'Anytown', 'USA', '12345', false);
@@ -233,6 +232,97 @@ INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Count
 VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644c9f5e7b0062607c6677838fd0ee8399f5a7', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
 -- pretoebranc0
 
+-- Populando Condition
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (1, 'New');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (2, 'Used');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (3, 'Refurbished');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (4, 'Like New');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (5, 'Damaged');
+
+-- Populando Brand
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (1, 'Blue Jewelers');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (2, 'Green Gems');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (3, 'Purple Jewelry');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (4, 'Golden Treasures');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (5, 'Diamonds Inc.');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (6, 'Gold Empire');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (7, 'Silver Works');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (8, 'Gemstone Jewelry');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (9, 'Pearl Paradise');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (10, 'Watch Co.');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (11, 'Blue Stone Creations');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (12, 'Emerald Designs');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (13, 'Golden Touch');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (14, 'Diamond Dreams');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (15, 'Luxury Jewels');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (16, 'Ocean Pearls');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (17, 'Red Gemstones');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (18, 'Golden Creations');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (19, 'Silver Treasures');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (20, 'Opal Jewelry Co.');
+
+-- Populando Model
+INSERT INTO Model (ModelId, ModelName)
+VALUES (1, 'SB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (2, 'EE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (3, 'AR2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (4, 'TN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (5, 'DN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (6, 'GB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (7, 'SE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (8, 'RR2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (9, 'PN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (10, 'LW2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (11, 'SP2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (12, 'EB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (13, 'DPN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (14, 'DSE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (16, 'RB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (17, 'GC2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (18, 'SHE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (19, 'OR2024');
 
 
 --Populate Item table
