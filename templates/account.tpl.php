@@ -13,7 +13,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 ?>
     <main>
         <section id="profile">
-            <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
+            <div id="avatar"><img src="<?= $user->profileImage ?>" alt="User Profile Image"></div>
+            
             <div id="userInfo">
                 <h1><?= $user->name ?> 
                     <?php if ($user->isAdmin) : ?>
