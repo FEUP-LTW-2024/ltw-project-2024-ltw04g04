@@ -14,8 +14,9 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
     $model = htmlspecialchars($_POST['model'], ENT_QUOTES, 'UTF-8');
     $condition = htmlspecialchars($_POST['condition'], ENT_QUOTES, 'UTF-8');
     $category = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8');
-    $stock = intval($_POST['stock']);
-    $size = intval($_POST['size']);
+    
+    $stock = filter_input(INPUT_POST, 'stock', FILTER_VALIDATE_INT);
+    $size = filter_input(INPUT_POST, 'size', FILTER_VALIDATE_INT);
 
 
     // Verifica se um arquivo foi enviado
@@ -28,6 +29,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
         $allowedExtensions = array('jpg', 'jpeg', 'png', 'gif');
         if (!in_array($imageFileType, $allowedExtensions)) {
             echo "Apenas arquivos JPG, JPEG, PNG e GIF são permitidos.";
+            //header ?
             exit();
         }
 
@@ -37,8 +39,7 @@ if (($_SERVER["REQUEST_METHOD"] == "POST") && ($_SESSION['csrf'] === $_POST['csr
 
 
         if (move_uploaded_file($_FILES["item_image"]["tmp_name"], $targetFile)) {
-            $imagePath = '/' . $imageDir . $_FILES["item_image"]["name"];
-            echo "<p>$imagePath</p>";
+            $imagePath = '/' . $targetFile;
 
             $id = Item::insertItemInDatabase($db, $name, $price, $brand, $model, $condition, $category, $stock, $imagePath, $size);
 
