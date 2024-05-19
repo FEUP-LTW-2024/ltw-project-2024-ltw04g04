@@ -347,10 +347,6 @@ main img {
     margin-right: 2em;
 }
 
-.profilePic {
-    border-radius: 50%; 
-}
-
 #userHeader {
     margin: 1em 2em 2em 2em;
 }
@@ -553,7 +549,9 @@ main img {
 }
 
 #sellerImg {
-    width: 5em;
+    border-radius: 50%;
+    width:5em;
+    height:5em;
 }
 
 
