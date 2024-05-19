@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         addToCartButton.addEventListener("click", function() {
             var itemId = this.getAttribute("data-item-id");
             addItemToCart(itemId);
+            window.location.href = "../pages/cart.php";
         });
     }
 

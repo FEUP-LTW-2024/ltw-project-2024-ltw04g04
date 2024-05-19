@@ -402,6 +402,15 @@ main img {
     margin-left: 20px;
 }
 
+#userInfo label {
+    margin-top: 0.5em;
+}
+
+#userInfo input {
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+}
+
 #sellerInfo {
     display: flex;
     align-items: center;
@@ -496,6 +505,10 @@ main img {
     margin: 2em 1em 2em 2em;
 }
 
+#itemImg img{
+    border: 1px solid black; 
+}
+
 #containers {
     display: flex;
     flex-direction: column;
@@ -548,10 +561,11 @@ main img {
     justify-content: space-between;
 }
 
-#sellerImg {
-    border-radius: 50%;
-    width:5em;
-    height:5em;
+#sellerImg img {
+    width: 5em;
+    height: 5em;
+    border-radius: 50%; 
+    border: 1px solid black; 
 }
 
 
@@ -1048,7 +1062,7 @@ nav#details {
     padding-bottom: 0.5em;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"] {
     width: 100%;
     padding: 10px;
     border-radius: 5px;

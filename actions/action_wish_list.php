@@ -11,7 +11,7 @@
     $userId = $session->getUserId();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['itemId'])) {
-        $itemId = cleanInput(intval($_POST['itemId']));
+        $itemId = cleanIntInput(intval($_POST['itemId']));
 
         $isItemInWishlist = WishList::isItemInWishList($db, $userId, $itemId);
 

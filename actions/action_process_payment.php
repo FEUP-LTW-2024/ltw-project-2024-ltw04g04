@@ -17,6 +17,15 @@
         $city = cleanInput($_POST['city']);
         $country = cleanInput($_POST['country']);
         $postalCode = cleanInput($_POST['postal-code']);
+
+        if ($address === "" || $city === "" || $country === "" || $postalCode === "") {
+            $addressInfo = User::getAddressInfo($db, $userId);
+            $address = $addressInfo[0];
+            $city = $addressInfo[1];
+            $country = $addressInfo[2];
+            $postalCode = $addressInfo[3];
+        }
+
         $cardNumber = cleanInput($_POST['card-number']);
         $expirationDate = cleanInput($_POST['expiration-date']);
         $cvv = cleanInput($_POST['cvv']);
