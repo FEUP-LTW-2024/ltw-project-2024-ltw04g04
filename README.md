@@ -22,7 +22,7 @@ You can find here details about our website.
 
 ## Domain Model
 <p align="center">
-  <img src="docs/uml/domain_model.png" alt="Sprint 0">
+  <img src="docs/uml/domain-model2.png" alt="Sprint 0">
 </p>
 
 ## Features
