@@ -88,6 +88,8 @@ CREATE TABLE Item
     CONSTRAINT ItemId PRIMARY KEY (ItemId),
     FOREIGN KEY (Category) REFERENCES Category (CategoryName)
         ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Model) REFERENCES Model (ModelName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
     FOREIGN KEY (Brand) REFERENCES Brand (BrandName)
         ON DELETE NO ACTION ON UPDATE NO ACTION
     FOREIGN KEY (Condition) REFERENCES Condition (ConditionName)
@@ -235,36 +237,36 @@ INSERT INTO Size_ (SizeId, SizeVal) VALUES (9, 9);
 INSERT INTO Size_ (SizeId, SizeVal) VALUES (10, 10);
 
 -- Populate User table
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', '$2y$12$M.LBS3MI2km/1ygZqPgON.6xGYu1EFpjWtQJ6bHeciwgRoW9ytZ4K', '123 Main St', 'Anytown', 'USA', '12345', false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_, ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', '$2y$12$M.LBS3MI2km/1ygZqPgON.6xGYu1EFpjWtQJ6bHeciwgRoW9ytZ4K','/../pages/imgs/imgsForProfile/user1.jpg', '123 Main St', 'Anytown', 'USA', '12345', false);
 -- Jooe1996
 
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', '$2y$12$u6KWrcQy6dni8OuGkGELEe1Ar5ZmTlF05pOh/tpH3EYhicYE8Qzjm', '456 Elm St', 'Othertown', 'USA', '67890', false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_,ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', '$2y$12$u6KWrcQy6dni8OuGkGELEe1Ar5ZmTlF05pOh/tpH3EYhicYE8Qzjm','/../pages/imgs/imgsForProfile/user2.jpg', '456 Elm St', 'Othertown', 'USA', '67890', false);
 -- password456
 
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '$2y$12$psmZQiJrw6G9IYpHncAiRu46sgkMtNa1gRXsEvBLIOwB9Uai8lHhu', '789 Oak St', 'Another Town', 'USA', '45678', false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_,ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '$2y$12$psmZQiJrw6G9IYpHncAiRu46sgkMtNa1gRXsEvBLIOwB9Uai8lHhu','/../pages/imgs/imgsForProfile/user3.jpg', '789 Oak St', 'Another Town', 'USA', '45678', false);
 -- password789
 
 INSERT INTO User (UserId, Username, Name_, Email, Password_, ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '$2y$12$UhzD/36MRpktux7yj63RhuBaKi9/r1bHhBP7HhjAlNYC8TbPaHimy', '/../pages/imgs/imgsForProfile/cat.jpg', '101 Pine St', 'Someplace', 'USA', '89012', true);
 -- passwordabc
 
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', '$2y$12$mYIREu6jvIP4dMBhbAA6huVIn0I.0Gynw8Lk3wexZoDgIVoefdi0i', '456 Oak St', 'Sometown', 'USA', '54321',  false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_,ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', '$2y$12$mYIREu6jvIP4dMBhbAA6huVIn0I.0Gynw8Lk3wexZoDgIVoefdi0i','/../pages/imgs/imgsForProfile/user5.jpg', '456 Oak St', 'Sometown', 'USA', '54321',  false);
 -- olaadeus23
 
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (6, 'markjohnson', 'Mark Johnson', 'mark.johnson@example.com', '$2y$12$uNRNrA884zEjsZUEsZdTQOgbIXd.YuoZngYq8FjUrNjNp1qFNr7Zy', '789 Maple St', 'Anothertown', 'USA', '67890', false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_,ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (6, 'markjohnson', 'Mark Johnson', 'mark.johnson@example.com', '$2y$12$uNRNrA884zEjsZUEsZdTQOgbIXd.YuoZngYq8FjUrNjNp1qFNr7Zy','/../pages/imgs/imgsForProfile/user6.jpg', '789 Maple St', 'Anothertown', 'USA', '67890', false);
 -- soufixe09
 
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (7, 'emilywilson', 'Emily Wilson', 'emily.wilson@example.com', '$2y$12$SBmPTty8/CwWvzGMa3TIk.MUmpSTpiRNbbArfzQeBB3MDPd7TrW2K', '101 Pine St', 'Yetanothertown', 'USA', '12345', false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_,ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (7, 'emilywilson', 'Emily Wilson', 'emily.wilson@example.com', '$2y$12$SBmPTty8/CwWvzGMa3TIk.MUmpSTpiRNbbArfzQeBB3MDPd7TrW2K','/../pages/imgs/imgsForProfile/user7.jpg', '101 Pine St', 'Yetanothertown', 'USA', '12345', false);
 -- adeUs5ola0
 
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (8, 'alexsmith', 'Alex Smith', 'alex.smith@example.com', '$2y$12$omlp4.V8W/8tmABj0.9EJO2kwfFPGCx0j.mH9qErszFxjE0DL2E..', '123 Elm St', 'Othertown', 'USA', '89012', false);
+INSERT INTO User (UserId, Username, Name_, Email, Password_,ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (8, 'alexsmith', 'Alex Smith', 'alex.smith@example.com', '$2y$12$omlp4.V8W/8tmABj0.9EJO2kwfFPGCx0j.mH9qErszFxjE0DL2E..','/../pages/imgs/imgsForProfile/user8.jpg', '123 Elm St', 'Othertown', 'USA', '89012', false);
 -- girafas_bonitas5
 
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
@@ -458,8 +460,7 @@ VALUES (126, 'Silver Bracelet', 55, 'Silver Works', 'SE2024', 'New', 'Beads and 
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (127, 'Gold Earrings', 100, 'Golden Touch', 'GB2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item27.jpg', 8);
 
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (129, 'Pearl Bracelet', 75, 'Pearl Paradise', 'PB2024', 'New', 'Beads and bracelets', 3, '/../pages/imgs/imgsForItems/item29.jpg', 7);
+
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (130, 'Topaz Earrings', 90, 'Golden Treasures', 'TN2024', 'New', 'Earrings', 5, '/../pages/imgs/imgsForItems/item30.jpg', 8);
 
@@ -475,24 +476,36 @@ INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, T
 VALUES (3, 4, 2, 'tudo bem amigo?', '27/4/2024', '19h40');
 
 --Populate SellerItem table
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (1, 101);
-/*
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (2, 102);
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (3, 103);
-*/
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (4, 104);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 101);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 130);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 127);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 102);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (3, 103);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 104);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 105);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 106);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 126);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 125);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 124);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 123);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 107);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 108);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (6, 109);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (6, 122);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (7, 121);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (7, 110);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (7, 111);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (8, 112);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (8, 120);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (8, 119);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 118);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 113);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 114);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 115);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (10, 117);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (10, 116);
 
---Populate ShoppingCart table
---INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
---VALUES (1, 4, 101, 2);
 
 --Populate Wishlist table
 INSERT INTO Wishlist (WishListId, BuyerId, ItemId)
 VALUES (1, 4, 101);
-
-
-

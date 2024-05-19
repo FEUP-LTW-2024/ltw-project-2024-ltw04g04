@@ -194,6 +194,20 @@
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getOrdersBySeller(PDO $pdo, int $sellerId) {
+      $stmt = $pdo->prepare('
+          SELECT o.OrderId, o.ItemId, o.Quantity, o.BuyerId, i.Name_ AS ItemName, u.Name_ AS BuyerName
+          FROM OrderItem o
+          JOIN Item i ON o.ItemId = i.ItemId
+          JOIN User u ON o.BuyerId = u.UserId
+          JOIN SellerItem si ON i.ItemId = si.ItemId
+          WHERE si.UserId = ?
+      ');
+      $stmt->execute([$sellerId]);
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+  
+  
   }
 
 ?>

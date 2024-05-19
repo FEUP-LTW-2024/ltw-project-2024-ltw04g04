@@ -111,3 +111,32 @@ function toggleWishlist(event, itemId) {
     xhr.send('itemId=' + encodeURIComponent(itemId));
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.delete-order').forEach(button => {
+        button.addEventListener('click', () => {
+            const orderId = button.getAttribute('data-order-id');
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            fetch('../actions/action_delete_order.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ order_id: orderId, csrf_token: csrfToken }) // Inclui o CSRF no corpo da solicitação
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById(`order-${orderId}`).remove();
+                } else {
+                    alert('Failed to delete order');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+});
+
+
