@@ -16,28 +16,28 @@
             exit();
         }
 
-        if (isset($_POST['add_category'])) {
-            $new_category_name = cleanInput($_POST['new_category_name']);
+        if (isset($_POST['add_condition'])) {
+            $new_condition_name = cleanInput($_POST['new_condition_name']);
 
-            $stmt = $db->prepare('INSERT INTO Category (CategoryName) VALUES (?)');
-            $stmt->execute([$new_category_name]);
+            $stmt = $db->prepare('INSERT INTO Condition(ConditionName) VALUES (?)');
+            $stmt->execute([$new_condition_name]);
 
             header('Location: ../pages/admin_page.php');
             exit();
         }
 
-        if (isset($_POST['delete_category'])) {
-            $category_id_to_delete = cleanInput($_POST['category_id_to_delete']);
+        if (isset($_POST['delete_condition'])) {
+            $condition_id_to_delete = cleanInput($_POST['condition_id_to_delete']);
 
-            $stmt = $db->prepare('DELETE FROM Item WHERE Category = ?');
-            $stmt->execute([$category_id_to_delete]);
+            $stmt = $db->prepare('DELETE FROM Item WHERE Condition = ?');
+            $stmt->execute([$condition_id_to_delete]);
 
-            $stmt = $db->prepare('DELETE FROM Category WHERE CategoryName = ?');
-            $stmt->execute([$category_id_to_delete]);
+            $stmt = $db->prepare('DELETE FROM Condition WHERE ConditionName = ?');
+            $stmt->execute([$condition_id_to_delete]);
         }
 
-        $stmt = $db->query('SELECT * FROM Category');
-        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $db->query('SELECT * FROM Condition');
+        $conditions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         header('Location: ../pages/admin_page.php');
         exit();
@@ -46,4 +46,3 @@
     header('Location: ../pages/admin_page.php');
     exit();
 ?>
-

@@ -52,6 +52,3 @@ function validatePaymentForm() {
 
     return true;
 }
-
-
-

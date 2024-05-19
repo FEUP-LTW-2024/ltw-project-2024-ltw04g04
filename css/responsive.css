@@ -16,6 +16,27 @@
         width: 100%; 
         order: 1;
     }
+
+    #item {
+        display: block;
+        flex-direction: column;
+        padding: 1em;
+        justify-content: center;
+    }
+
+    #itemImg {
+        margin-right: 3em;
+    }
+
+    .item {
+        width: 40%; 
+    }
+    
+    #sellerInfo {
+        margin-left: 2em;
+        flex-direction: column; 
+        align-items: flex-start; 
+    }
 }
 
 @media (max-width: 50em) {
@@ -31,10 +52,12 @@
     
     #logo-container {
         flex-basis: 50%;
+        padding-left:33%;
     }
     
-    #search {
+    #search {  
         flex-basis: 50%;
+        padding-bottom: 1em;
     }
     
     #account,
@@ -47,18 +70,15 @@
     }
     
     #filter-container {
-        flex-basis: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        flex-basis: 30%;
+        align-self: flex-end;  
         order: 2;
+        padding-bottom: 1em;
     }
     
     #filter {
         margin-left: 2em;
-    }
-    
-        
+    } 
 }
 
 @media (max-width: 40em) {
@@ -68,47 +88,56 @@
         background-color: #f8f8f8;
         color:#A4DAEA;
         padding: 1em;
-      }
+    }
     
-      #menu .hamburgerCommon:before {
+    #menu .hamburgerCommon:before {
         content:'\2630';
-      }
+    }
     
-      #menu ul {
+    #menu ul {
         flex-direction: column;
         margin: 0;
         padding: 0;
         color: white;
-      }
+    }
     
-      #hamburgerCommon:checked + .hamburgerCommon + ul li{
+    #hamburgerCommon:checked + .hamburgerCommon + ul li{
         max-height: 1em;
         padding: 1em;
         opacity: 1;
-      }
+    }
     
-      #hamburgerCommon:checked + .hamburgerCommon:before {
+    #hamburgerCommon:checked + .hamburgerCommon:before {
         content:'\2715';
-      }
+    }
     
-      #menu li {
+    #menu li {
         max-height: 0;
         padding: 0 1em;
         background-color: #edeff0;
         text-align: left;
         opacity: 0;
         transition: all .3s ease-in-out;
-      }
+    }
 
-      nav#menu li:hover{
+    nav#menu li:hover{
         list-style-type: none;
         transition: .5s;
         border-bottom: solid 5px white;
         background-color: #A4DAEA;
     }
-    main .productinfo {
-        display: none;
+
+
+    #userHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 2em 3em 2em 3em;
+    }  
+
+    #newChatButton {
+        margin: 0; 
     }
+    
 }
 
 

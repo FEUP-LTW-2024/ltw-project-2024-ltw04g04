@@ -22,6 +22,17 @@ a {
 
 
 /* Header */
+
+#jewels {
+    opacity: 0.7; 
+    transition: opacity 0.3s ease; 
+}
+
+#jewels:hover {
+    opacity: 1; 
+}
+
+
 header {
     padding: 20px;
     background-color: #BBE4F1;
@@ -34,7 +45,7 @@ header {
 .page-container {
     display: flex;
     flex-direction: column;
-    min-height: 60vh;
+    min-height: 55vh;
 }
 
 .content {
@@ -78,6 +89,7 @@ footer {
 
 #search {
     flex-grow: 1;
+    position: relative;
     input[type="text"] {
         font-family: "Sulphur Point", sans-serif;
         width: 90%; 
@@ -87,6 +99,28 @@ footer {
         border: 1px solid #ffffff;
     }
 }
+
+#suggestions {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 86%;
+    background-color: #fff;
+    border-top: none;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: #e7e7e7;
+    margin:1px;
+}
+
 
 #search img {
     position: absolute;
@@ -159,44 +193,21 @@ nav#menu li:hover{
 main img {
     width: 100%;
     height: auto;
-    display: block; 
-    position: relative;
-}
-
-main .productinfo {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-size: 1.5vw;
-    width: 100%;
-    padding: 5em;
-    box-sizing: border-box; 
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.);
-}
-
-
-main .productinfo  h1 {
-    font-family: "Sulphur Point", sans-serif;
-    font-weight: 700;
-    margin-bottom: 0;
-    font-size: xx-large;
+    
 }
 
 /* Footer */
 .customize {
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 1em 2.5em 1em 2.5em;
     border-radius: 16px;
     border: 0.5px solid #656363; 
     margin-top: 1em;
-    
+
 }
 
 .customize p {
     text-align: left; 
-    margin-left: 30px; 
-    margin-bottom: 40px; 
 }
 
 .customize button {
@@ -249,7 +260,9 @@ main .productinfo  h1 {
     width: 85%; 
 }
 
-#summary button, #editButton, #addItemButto, .button-create-item, .button-add-category, .button-delete-category  {
+#summary button, #editButton, #addItemButton, .button-create-item, .button-add-category, .button-delete-category,
+.button-add-brand, .button-delete-brand , .button-delete-condition, .button-add-condition,
+.button-delete-model, .button-add-model, .button-delete-size, .button-add-size, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -318,11 +331,35 @@ main .productinfo  h1 {
 #profile {
     font-family: "Sulphur Point", sans-serif;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between; 
     padding: 2em;
+    width: auto;
     border-bottom: 1px solid #ccc;
     position:relative;
+}
+
+#avatar {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%; 
+    border: 1px solid black; 
+    margin-right: 2em;
+}
+
+#userHeader {
+    margin: 1em 2em 2em 2em;
+}
+
+
+.admin-info {
+    display: flex;
+    align-items: center; 
+    margin-top: 5px; 
+}
+
+.admin-text {
+    margin-left: 5px;
 }
 
 
@@ -333,7 +370,7 @@ main .productinfo  h1 {
 .editForm, .notEdit {
     border: 1px solid #000;
     padding: 2em;
-    margin: 1em;
+    margin: 1em 0 1em 0;
 }
 
 .editForm h2 {
@@ -358,18 +395,18 @@ main .productinfo  h1 {
 }
 
 
-#avatar img {
-    width: 100%;
-    height: 20em;
-    border-radius: 50%; 
-    border: 1px solid black; 
-}
-
 /* User - Seller */
 
 #userInfo {
     flex-grow: 1;
     margin-left: 20px;
+}
+
+#sellerInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
 }
 
 #userHeader {
@@ -395,11 +432,25 @@ main .productinfo  h1 {
     margin-bottom: 5px;
 }
 
-#userInfo form input {
-    margin-bottom: 20px;
+#ratingInfo {
+    margin-top: 1em;
+}
+
+#ratingInfo form {
+    display: flex;
+    align-items: center; /* Centraliza verticalmente o conteúdo */
+}
+
+
+#ratingInfo form input {
+    margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+
+#ratingButton {
+    margin-left:2em;
 }
 
 /* Articles Section */
@@ -500,8 +551,6 @@ main .productinfo  h1 {
 #sellerImg {
     width: 5em;
 }
-
-
 
 
 nav#details {
@@ -610,7 +659,7 @@ nav#details {
 }
 
 #messages {
-    max-height: 330px; 
+    height: 330px; 
     overflow-y: auto;
     border: 1px solid #ccc;
     padding: 10px;
@@ -668,8 +717,6 @@ nav#details {
 }
 
 
-
-
 /* Filter */
 .arrow {
     font-size: 40px;
@@ -700,6 +747,10 @@ nav#details {
     margin-bottom: 20px;
     padding: 1em;
     position: relative; 
+}
+
+.cart-item:hover {
+    background-color:rgb(226, 226, 226) ;
 }
 
 
@@ -788,14 +839,15 @@ nav#details {
     display: block; 
     text-align: center; 
     margin: 0 auto;
-    margin-top: 1em;
+    margin-top: 3em;
+    margin-left: 3.3em;
+    margin-right: 2em;
     padding: 2em; 
     border: 1px solid black;
-    width: 77%;
-    margin-left: 14%; 
 }
 
-#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList  {
+#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList,
+.editCondition, .editBrand, .editModel, .editSize, .itemsList  {
     margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
     text-align: center;
@@ -946,7 +998,10 @@ nav#details {
     text-align: center;
 }
 
-.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover {
+.button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover,
+.button-add-brand:hover, .button-delete-brand:hover,.button-add-model:hover, .button-delete-model:hover,
+.button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover,
+#ratingButton:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -1022,7 +1077,9 @@ input[type="text"] {
 }
 
 
-.category-container {
+.category-container, .brand-container,
+.condition-container, .model-container,
+.size-container {
     margin: 3em auto; 
     max-width: 30em; 
     padding: 1.5em; 
@@ -1030,21 +1087,25 @@ input[type="text"] {
 }
 
 
-.button-delete-category, .button-add-category {
+.button-delete-category, .button-add-category,
+.button-delete-brand, .button-add-brand,
+.button-delete-condition, .button-add-condition,
+.button-delete-model, .button-add-model,
+.button-delete-size, .button-add-size    {
     margin-left: 1em;
     margin-top: 1em; 
 }
 
-.make-admin, .remove-admin  {
+.make-admin, .remove-admin, #ratingButton  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
-    margin-top: 1em;
+    margin-top: 0.5em;
     text-align: center;
     display: inline-block;
-    width: 12%;
     text-decoration: none;
     font-size: 12px;
+    width: 8em;
     padding-top: 0;
     padding-bottom: 0;
     cursor: pointer;
@@ -1052,36 +1113,11 @@ input[type="text"] {
     border: 5px solid #179CF0;
 }
 
-/*Shipping form*/
-
-@media print {
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    .label {
-        width: 80mm;
-        height: 100mm;
-        border: 1px solid #000;
-        padding: 10px;
-        margin: auto;
-        transform: translate(0, 0);
-    }
-}
-
 /*List of users -- admin properties*/
 
 .usersList {
     text-align: center;
     margin-bottom: 20px;
-}
-
-.user-link {
-    text-decoration: none;
-    color: inherit;
-    flex: 1 1 calc(33.33% - 1.25em); /* -20px */
-    box-sizing: border-box;
-    margin: 0.625em; /* 10px */
 }
 
 .users-container {
@@ -1092,20 +1128,30 @@ input[type="text"] {
 
 .user {
     border: 1px solid #ddd;
-    border-radius: 0.5em; /* 8px */
-    padding: 0.625em; /* 10px */
+    border-radius: 0.5em; 
+    padding: 0.625em; 
     text-align: center;
     transition: transform 0.2s;
-    flex: 1 1 calc(33.33% - 1.25em); /* -20px */
+    flex: 1 1 calc(33.33% - 1.25em); 
     box-sizing: border-box;
-    margin: 0.625em; /* 10px */
+    margin: 0.625em;
 }
 
-.user:hover {
+.seller, .item {
+    border: 1px solid #ddd;
+    border-radius: 0.5em; 
+    padding: 0.625em; 
+    text-align: center;
+    transition: transform 0.2s; 
+    box-sizing: border-box;
+    margin: 0.625em;
+}
+
+.user:hover, .seller:hover, .item:hover {
     transform: scale(1.05);
 }
 
-.user img {
+.user img, .seller img {
     width: 6.25em;
     height: 6.25em; 
     border-radius: 50%;
@@ -1125,7 +1171,7 @@ input[type="text"] {
     margin-top: 10px;
 }
 
-.admin-action input[type="submit"], .profile-button  {
+.admin-action input[type="submit"], #profile-button  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -1140,7 +1186,7 @@ input[type="text"] {
     border: 1px solid #656363;
 }
 
-.admin-action input[type="submit"]:hover, .profile-button:hover {
+.admin-action input[type="submit"]:hover, #profile-button:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -1152,3 +1198,117 @@ input[type="text"] {
     border-radius: 4px;
     padding: 1em 1.5em 1em 1.5em;
 }
+
+/* Rating */
+
+.rating-container {
+    text-align: left;
+    direction: rtl;
+    display: inline-block;
+}
+
+.rating-container input[type="radio"] {
+    display: none;
+}
+
+.rating-container label {
+    cursor: pointer;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%; 
+    margin-right: 5px;
+    background-color: #ccc;
+}
+
+.rating-container label:hover,
+.rating-container label:hover ~ label {
+    background-color: #ffdc50; 
+    border-bottom: 20px solid #ffdc50; 
+}
+
+.rating-container input[type="radio"]:checked ~ label, .star.filled {
+    background-color: #ffdc50; 
+    border-bottom: 20px solid #ffdc50; 
+}
+
+.star {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid #ccc;
+    position: relative;
+    margin-right: 5px; 
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.rating-container-top {
+    direction: ltr;
+    display: flex;
+}
+
+/* Random items */
+
+.scroll-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    margin-bottom: 3em; 
+}
+
+.scroll-wrapper {
+    display: flex;
+    width: max-content;
+}
+
+.item {
+    display: inline-block;
+    width: 20%; 
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+}
+
+.item-details {
+    text-align: center;
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+}
+
+.scroll-wrapper .item-details p {
+    font-size: 1vw; 
+}
+
+/* Error page */
+
+.error-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 100px auto;
+    background-color: #A4DAEA;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.error-container h1 {
+    color: #ff4141;
+}
+
+

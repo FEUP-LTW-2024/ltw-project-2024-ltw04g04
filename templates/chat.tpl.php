@@ -1,7 +1,7 @@
 <?php declare(strict_types=1); ?>
 
 <?php function drawChat(PDO $db, Session $session, array $users, int $initialChat) { ?>
-    <script src="../templates/chat.js"></script>
+    <script src="../javascript/chat.js"></script>
     
     <?php 
         if ($session->isLogin()) {

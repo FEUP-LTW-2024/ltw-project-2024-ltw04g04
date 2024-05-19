@@ -9,9 +9,9 @@
     $session = new Session();
     $pdo = getDatabaseConnection();
 
-
-    $userId = isset($_GET['id']) ? (int)$_GET['id'] : $session->getUserId();
+    $userId = isset($_SESSION['seller-id']) ? (int)$_SESSION['seller-id'] : $session->getUserId();
     $user = User::getUserWithId($pdo, $userId);
+    
 
     $isCurrentUser = $userId === $session->getUserId();
 

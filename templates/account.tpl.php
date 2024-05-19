@@ -4,24 +4,32 @@
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/order.class.php');
     require_once(__DIR__ . '/../database/insertImages.php');
+    require_once(__DIR__ . '/../utils/utils.php');
 ?>
 
 
 <?php 
 function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
+    $averageRating = User::getSellerAverageRating($pdo, $user->userId);
 ?>
+    <script defer src="../javascript/itemRedirect.js"></script>
     <main>
         <section id="profile">
-            <div id="avatar"><img src="imgs/avatar.png" alt="User Avatar"></div>
-            <div id="userInfo">
+            <div id="userHeader">
+                <img id="avatar" src="<?= $user->profileImage ?>" alt="User Profile Image">
                 <h1><?= $user->name ?> 
                     <?php if ($user->isAdmin) : ?>
-                        <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified"></br>
-                        <span class="admin-text">Administrator</span>
+                        <div class="admin-info">
+                        <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified">
+                        <span class="admin-text">Administrator </span>
+                        </div>
                     <?php endif; ?>
                 </h1>
-                <form action="../actions/action_edit_profile.php" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
+            </div>
+            
+            <div id="userInfo">
+                <form action="../actions/action_edit_profile.php" enctype="multipart/form-data" method="post" class="<?= $editMode ? 'editForm' : 'notEdit' ?>">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <h2>Profile</h2>
                     <?php if ($editMode) : ?>
@@ -39,6 +47,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <input type="text" id="country" name="country" value="<?= $user->country ?>">
                         <label for="postal_code">Postal Code</label>
                         <input type="text" id="postal_code" name="postal_code" value="<?= $user->postalCode ?>">
+                        <label for="profile_image">Select Profile Image:</label>
+                        <input type="file" id="profile_image" name="profile_image" accept="image/*">
                         <button type="submit" id="editButton">Save</button>
                     <?php else : ?>
                         <a href="?edit" id="editButton">Edit</a>
@@ -49,6 +59,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         <p><strong>Address:</strong> <?= $user->address ?></p>
                         <p><strong>Country:</strong> <?= $user->country ?></p>
                         <p><strong>Postal Code:</strong> <?= $user->postalCode ?></p>
+                        <p><strong>My Average Rating:</strong> <?= $averageRating ?> / 5</p>
                     <?php endif; ?>
                 </form>
             </div>
@@ -64,9 +75,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         $hasOrder = false;
                         ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
-                            <a href="item.php?id=<?= $item->itemId ?>">
-                                <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
-                            </a>
+                            <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
+                            
                             <h3><?= $item->name ?></h3>
                             <p><?= $item->price ?> $</p>
 
@@ -104,7 +114,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php function drawShoppingCart($db, $session) { ?>
-    <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../javascript/cartOperations.js"></script>
+    <script defer src="../javascript/itemRedirect.js"></script>
 
     <?php $userId = $session->getUserId(); ?>
 
@@ -120,31 +131,30 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
 
                             if ($itemIds) { 
-                                foreach ($itemIds as $index => $itemId) : 
+                                foreach ($itemIds as $index => $itemId) :
+                                    $itemId = (int)cleanInput($itemId); 
                                     $item = Item::getItemWithId($db, $itemId); 
                                     $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
                                     ?>
                                     <div class="cart-item">
-                                        <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
+                                        <img src="<?= cleanInput($item->imageLink) ?>" alt="<?= cleanInput($item->name) ?>" onclick="redirectToItemPage(<?php echo $item->itemId ?>, '<?php echo $_SESSION['csrf']; ?>')">
                                         <div class="item-details">
-                                            <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                                                <p><?= $item->name ?></p>
-                                            </a>
-                                            <p class="detail"><?= $item->price ?> $ </p>  
-                                            <p class="detail"> Brand: <?= $item->brand ?></p>      
-                                            <p class="detail"> Model: <?= $item->model ?></p>     
-                                            <p class="detail"> Condition: <?= $item->condition ?></p>      
-                                            <p class="detail"> Category: <?= $item->category ?></p>          
-                                            <p class="detail"> Size: <?= $item->size ?></p>
-                                            <p class="detail"> In stock: <?= $item->stock ?></p>
+                                            <p onclick="redirectToItemPage(<?php echo $item->itemId ?>, '<?php echo $_SESSION['csrf']; ?>')"><?= cleanInput($item->name) ?></p>
+                                            <p class="detail"><?= cleanInput(intval($item->price)) ?> $ </p>
+                                            <p class="detail"> Brand: <?= cleanInput($item->brand) ?></p>
+                                            <p class="detail"> Model: <?= cleanInput($item->model) ?></p>
+                                            <p class="detail"> Condition: <?= cleanInput($item->condition) ?></p>
+                                            <p class="detail"> Category: <?= cleanInput($item->category) ?></p>
+                                            <p class="detail"> Size: <?= cleanInput(intval($item->size)) ?></p>
+                                            <p class="detail"> In stock: <?= cleanInput(intval($item->stock)) ?></p>
+                                            
                                             <div class="buttons-wrapper">
-                                                <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
-                                                <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
-                                                <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
+                                                <button class="increase-button" data-item-id="<?php echo  $itemId; ?>">+</button>
+                                                <button class="decrease-button" data-item-id="<?php echo  $itemId; ?>">-</button>
+                                                <button class="remove-button" data-item-id="<?php echo  $itemId; ?>">Remove</button>
 
-                                                <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
-                                            </div> 
-
+                                                <p class="detail-quantity"> Quantity: <?= cleanInput(intval($quantity)) ?></p>
+                                            </div>
                                         </div>
                                     </div>
                                     <?php
@@ -159,12 +169,13 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     <?php if (!$userId) { ?>
                         <h1>Order Summary</h1>
                         <p id="subtotal">Subtotal: </p>     
-                    <?php } else { 
-                        $subTotal = shoppingCart::calculateCartTotal($db, $userId);
-                        $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
-                        <h1>Order Summary</h1>
-                        <p id="subtotal">Subtotal: <?= $subTotalFormatted ?></p> 
-                        <button onclick="window.location.href = 'payment.php'">Checkout</button>  
+                        <?php } else {
+                            $userId = (int)cleanInput($userId);
+                            $subTotal = shoppingCart::calculateCartTotal($db, $userId);
+                            $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
+                            <h1>Order Summary</h1>
+                            <p id="subtotal">Subtotal: <?= cleanInput($subTotalFormatted) ?></p> 
+                            <button onclick="window.location.href = 'payment.php'">Checkout</button>  
                     <?php } ?>
                 </section>
             </section>
@@ -191,7 +202,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php function drawFavourites(PDO $pdo, Session $session) { ?>
-    <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../javascript/cartOperations.js"></script>
+    <script defer src="../javascript/itemRedirect.js"></script>
         <main>
             <h1 id= "myFavs" >Wish List</h1>
             <section id="items-list">
@@ -209,6 +221,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                     if ($itemIds) { 
 
                         foreach ($itemIds as $index => $itemId) : 
+                            $itemId = (int)cleanInput($itemId);
                             $item = Item::getItemWithId($pdo, $itemId); 
                             //$item->imageLink = '/pages/imgs/imgsForitems/item1.jpg';
                             $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $itemId);
@@ -216,19 +229,18 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             ?>
 
                             <div class="cart-item">
-                                <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
+                                <img src="<?= cleanInput($item->imageLink) ?>" alt="<?= cleanInput($item->name) ?>" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
                                 <div class="item-details">
-                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                                        <p><?= $item->name ?></p>
-                                    </a>
-                                    <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
-                                    <p class="detail"> Brand: <?= $item->brand ?></p>      
-                                    <p class="detail"> Model: <?= $item->model ?></p>     
-                                    <p class="detail"> Condition: <?= $item->condition ?></p>      
-                                    <p class="detail"> Category: <?= $item->category ?></p>     
-                                    <p class="detail"> Size: <?= $item->size ?></p>
+                                    <p onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')"><?= $item->name ?></p>
+                                    <p class="detail"> <?= cleanInput(number_format($item->price, 2)) ?> $</p>  
+                                    <p class="detail"> Brand: <?= cleanInput($item->brand) ?></p>      
+                                    <p class="detail"> Model: <?= cleanInput($item->model) ?></p>     
+                                    <p class="detail"> Condition: <?= cleanInput($item->condition) ?></p>      
+                                    <p class="detail"> Category: <?= cleanInput($item->category) ?></p>     
+                                    <p class="detail"> Size: <?= cleanInput(intval($item->size)) ?></p>
+
                                     <p class="detail-heart">
-                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(<?php echo $item->itemId; ?>)">
+                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class = "heart-icon "id="heart-icon-<?php echo $item->itemId; ?>" onclick="toggleWishlist(event, <?php echo $item->itemId; ?>)">
                                     </p>
                                 </div>
                             </div>
@@ -253,7 +265,8 @@ function usersList(PDO $pdo, Session $session) {
     <main>
         <h2 class="usersList">List of Sellers</h2>
         <div class="users-container">
-            <?php foreach ($users as $user): ?>
+            <?php foreach ($users as $user):
+                $userId = (int)cleanInput($user['UserId']); ?>
                 <div class="user">
                     <img src="../pages/imgs/user-icon.png" alt="User Icon">
                     <div class="user-details">
@@ -276,7 +289,12 @@ function usersList(PDO $pdo, Session $session) {
                                 </form>
                             <?php endif; ?>
                         </div>
-                        <a href="../pages/seller.php?id=<?= $user['UserId'] ?>" class="profile-button">Profile</a>
+
+                        <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="seller-id" value="<?= $sellerIdValue ?>">
+                            <button type="submit" class="profile-button"> Profile </button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>

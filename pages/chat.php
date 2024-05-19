@@ -6,14 +6,17 @@
     require_once(__DIR__ . '/../templates/chat.tpl.php');
 
     $session = new Session();
+    $db = getDatabaseConnection();
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
 
-    $db = getDatabaseConnection();
-    $userId = $session->getUserId();
+    if ($session->isLogin()) {
+        $userId = $session->getUserId();
+        $users = Message::getUsersWithUserId($db, $userId);
+    } else {
+        $users = [];
+    }
 
-    $users = Message::getUsersWithUserId($db, $userId);
-    $initialChat = -1;
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $chatId = (int)$_POST['chatId'];
         $initialChat = $chatId;
@@ -21,7 +24,10 @@
         if (!in_array($chatId, $users)) {
             $users[] = $chatId;
         }
+    } else {
+        $initialChat = -1;
     }
+    
     drawChat($db, $session, $users, $initialChat);
     generateFooter();
 ?>

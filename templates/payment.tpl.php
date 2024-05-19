@@ -8,24 +8,25 @@ require_once(__DIR__ . '/../database/item.class.php');
 <?php
 function drawPayment(PDO $db, Session $session) {
     ?>
-    <script src="../templates/payment.js"></script>
+    <script src="../javascript/payment.js"></script>
     <body>
+        <?php
+            if ($session->isLogin()) {
+                $userId = $session->getUserId();
+                $cond = User::adressIsComplete($db, $userId);
+                echo "<script> accountAdressComplete = $cond; </script>";
+                $subTotal = shoppingCart::calculateCartTotal($db, $userId);
+            }
+        ?>
         <main>
             <div class="payContainer">
                 <h1>Payment</h1>
                 <div id="payInfo">
-                    <p>Subtotal: </p>
+                    <p>Subtotal: <?= $subTotal ?> $ </p>
                 </div>
 
                 <h2 class="subtitlePayment">Delivery</h2>
                 <div id="payAdress">
-                    <?php
-                    if ($session->isLogin()) {
-                        $userId = $session->getUserId();
-                        $cond = User::adressIsComplete($db, $userId);
-                        echo "<script> accountAdressComplete = $cond; </script>";
-                    }
-                    ?>
                     <button id="toggleAdressButton" class="toggle-button">Use your account's address</button>
                     <p>or</p>
                 </div>

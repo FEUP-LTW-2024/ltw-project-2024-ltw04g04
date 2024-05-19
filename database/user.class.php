@@ -7,18 +7,20 @@
       public string $name;
       public string $email;
       public string $password;
+      public string $profileImage;
       public string $address;
       public string $city;
       public string $country;
       public string $postalCode;
       public bool $isAdmin; 
 
-      public function __construct(int $userId, string $username, string $name, string $email, string $password, string $address, string $city, string $country, string $postalCode, bool $isAdmin = false) {
+      public function __construct(int $userId, string $username, string $name, string $email, string $password, string $profileImage, string $address, string $city, string $country, string $postalCode, bool $isAdmin = false) {
           $this->userId = $userId;
           $this->username = $username;
           $this->name = $name;
           $this->email = $email;
           $this->password = $password;
+          $this->profileImage = $profileImage;
           $this->address = $address;
           $this->city = $city;
           $this->country = $country;
@@ -38,7 +40,7 @@
 
       static function loginUser(PDO $db, string $email, string $password) : ?User {
           $stmt = $db->prepare('
-              SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin
+              SELECT UserId, Username, Name_, Email, Password_, ProfileImage, Adress, City, Country, PostalCode, IsAdmin
               FROM User
               WHERE Email = ?
           ');
@@ -54,6 +56,7 @@
                   $user['Name_'],
                   $user['Email'],
                   $user['Password_'],
+                  $user['ProfileImage'] ?? ('/../pages/imgs/user-icon.png'),
                   $user['Adress'] ?? "",
                   $user['City'] ?? "",
                   $user['Country'] ?? "",
@@ -67,7 +70,7 @@
 
       static function getUserWithId(PDO $db, int $id) : ?User {
           $stmt = $db->prepare('
-              SELECT UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin
+              SELECT UserId, Username, Name_, Email, Password_, ProfileImage, Adress, City, Country, PostalCode, IsAdmin
               FROM User
               WHERE UserId = ?
           ');
@@ -83,6 +86,7 @@
                   $user['Name_'],
                   $user['Email'],
                   $user['Password_'],
+                  $user['ProfileImage'] ?? ('/../pages/imgs/user-icon.png'),
                   $user['Adress'] ?? "",
                   $user['City'] ?? "",
                   $user['Country'] ?? "",
@@ -143,6 +147,15 @@
       $stmt->execute(array($username_, $name_, $address_, $city_, $country_, $postalCode_, $id_));
     }
 
+    static function updateUserProfileImage(PDO $db, string $imageLink, int $userId) {
+        $stmt = $db->prepare('
+          UPDATE User SET ProfileImage = ?
+          WHERE UserId = ?
+        ');
+  
+        $stmt->execute(array($imageLink, $userId));
+      }
+
     public static function upgradeUserToAdmin(PDO $db, int $user_id) {
       $stmt = $db->prepare('UPDATE User SET isAdmin = true WHERE userId = ?');
       $stmt->execute([$user_id]);
@@ -158,6 +171,27 @@
         $stmt = $db->prepare('SELECT * FROM User WHERE UserId != ?');
         $stmt->execute([$currentUserId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getSellerAverageRating(PDO $pdo, int $userId) {
+        $stmt = $pdo->prepare('SELECT AVG(Rating) as averageRating FROM SellerRating WHERE SellerId = ?');
+        $stmt->execute([$userId]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? round($result['averageRating'], 2) : 'No ratings';
+    }
+
+    public static function getTopSellers(PDO $pdo, $limit = 5): array  {
+        $query = "SELECT SellerId, AVG(rating) AS average_rating
+                  FROM SellerRating
+                  GROUP BY SellerId
+                  ORDER BY average_rating DESC
+                  LIMIT :limit";
+    
+        $statement = $pdo->prepare($query);
+        $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $statement->execute();
+    
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
   }
