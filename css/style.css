@@ -1004,7 +1004,7 @@ nav#details {
 .button-create-item:hover, .button-add-category:hover, .button-delete-category:hover, .make-admin:hover, .remove-admin:hover,
 .button-add-brand:hover, .button-delete-brand:hover,.button-add-model:hover, .button-delete-model:hover,
 .button-add-condition:hover, .button-delete-size:hover,.button-add-size:hover, .button-delete-size:hover,
-#ratingButton:hover {
+#ratingButton:hover, .profile-button:hover {
     background-color: #2092b5;
     color: white;
 }
@@ -1099,7 +1099,7 @@ input[type="text"] {
     margin-top: 1em; 
 }
 
-.make-admin, .remove-admin, #ratingButton  {
+.make-admin, .remove-admin, #ratingButton, .user .profile-button  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -1174,7 +1174,7 @@ input[type="text"] {
     margin-top: 10px;
 }
 
-.admin-action input[type="submit"], #profile-button  {
+.admin-action input[type="submit"], .user .profile-button  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -1189,7 +1189,7 @@ input[type="text"] {
     border: 1px solid #656363;
 }
 
-.admin-action input[type="submit"]:hover, #profile-button:hover {
+.admin-action input[type="submit"]:hover, .profile-button:hover {
     background-color: #2092b5;
     color: white;
 }

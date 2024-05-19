@@ -175,7 +175,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
                             <h1>Order Summary</h1>
                             <p id="subtotal">Subtotal: <?= cleanInput($subTotalFormatted) ?></p> 
-                            <button onclick="window.location.href = 'payment.php'">Checkout</button>  
+                            <?php if ( $subTotal != 0) {?> <button onclick="window.location.href = 'payment.php'">Checkout</button> <?php } ?> 
                     <?php } ?>
                 </section>
             </section>
@@ -266,9 +266,11 @@ function usersList(PDO $pdo, Session $session) {
         <h2 class="usersList">List of Sellers</h2>
         <div class="users-container">
             <?php foreach ($users as $user):
-                $userId = (int)cleanInput($user['UserId']); ?>
+                $userId = (int)cleanInput($user['UserId']);
+                $current = User::getUserWithId($pdo, $userId);
+                ?>
                 <div class="user">
-                    <img src="../pages/imgs/user-icon.png" alt="User Icon">
+                    <div class = "profilePic"><img src="<?= $current->profileImage ?>" alt="User Icon"></div>
                     <div class="user-details">
                         <p>Name: <?= $user['Name_'] ?></p>
                         <p>Username: <?= $user['Username'] ?></p>
@@ -292,7 +294,7 @@ function usersList(PDO $pdo, Session $session) {
 
                         <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
                             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                            <input type="hidden" name="seller-id" value="<?= $sellerIdValue ?>">
+                            <input type="hidden" name="seller-id" value="<?= $userId ?>">
                             <button type="submit" class="profile-button"> Profile </button>
                         </form>
                     </div>

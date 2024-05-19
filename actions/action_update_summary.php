@@ -19,7 +19,7 @@
         $subTotalFormatted =  number_format($subTotal, 2) . '$'; ?>
         <h1>Order Summary</h1>
         <p id="subtotal">Subtotal: <?= cleanInput($subTotalFormatted) ?></p> 
-        <button onclick="window.location.href = 'payment.php'">Checkout</button>  
+        <?php if ( $subTotal != 0) {?> <button onclick="window.location.href = 'payment.php'">Checkout</button> <?php } ?> 
     <?php 
     } 
 ?>

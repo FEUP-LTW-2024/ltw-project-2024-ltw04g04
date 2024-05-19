@@ -14,12 +14,12 @@
     if ($user) {
       $new_username = cleanInput($_POST['username']);
       $new_name = cleanInput($_POST['name']);
-      $new_address = cleanInput($_POST['address']);
+      $new_address = (string)cleanInput($_POST['address']);
       $new_city = cleanInput($_POST['city']);
       $new_country = cleanInput($_POST['country']);
       $new_postalCode = cleanInput($_POST['postal_code']);
 
-      User::updateUser($db, $new_username, $new_name, $new_adress, $new_city, $new_country, $new_postalCode, $user->userId);
+      User::updateUser($db, $new_username, $new_name, $new_address, $new_city, $new_country, $new_postalCode, $user->userId);
 
       $session->setUserName($new_name);
       $session->setUserUsername($new_username);
