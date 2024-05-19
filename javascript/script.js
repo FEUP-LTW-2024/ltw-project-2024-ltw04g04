@@ -1,10 +1,10 @@
 
-/* Error messsage for register*/
+/* Error messsage for register */
 
 document.addEventListener("DOMContentLoaded", function() {
     var errorPopup = document.getElementById("error-popup");
 
-    if (errorPopup) { // Check if element exists
+    if (errorPopup) {
         if (errorPopup.innerText.trim() !== "") {
             var errorButton = document.createElement("button");
             errorButton.classList.add("error-button");
@@ -56,17 +56,6 @@ function toggleBox() {
 }
 
 
-
 document.getElementById('filter').addEventListener('mouseover', showBox);
 document.getElementById('filter').addEventListener('mouseout', hideBox);
 document.getElementById('filter').addEventListener('click', toggleBox);
-
-
-
-
-
-
-
-
-
-

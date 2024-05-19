@@ -4,7 +4,7 @@
 ?>
 
 <?php function drawSearchItems(PDO $pdo, Session $session,array $items) { ?>
-    <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../javascript/cartOperations.js"></script>
     <body>
         <main>
             <?php foreach ($items as $item) { 

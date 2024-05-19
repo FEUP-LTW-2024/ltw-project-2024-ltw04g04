@@ -1150,7 +1150,7 @@ input[type="text"] {
     margin-top: 10px;
 }
 
-.admin-action input[type="submit"], .profile-button  {
+.admin-action input[type="submit"], #profile-button  {
     font-family: "Sulphur Point", sans-serif;
     background-color: #BBE4F1;
     color: #656363;
@@ -1165,7 +1165,7 @@ input[type="text"] {
     border: 1px solid #656363;
 }
 
-.admin-action input[type="submit"]:hover, .profile-button:hover {
+.admin-action input[type="submit"]:hover, #profile-button:hover {
     background-color: #2092b5;
     color: white;
 }

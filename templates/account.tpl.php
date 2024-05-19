@@ -113,7 +113,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php function drawShoppingCart($db, $session) { ?>
-    <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../javascript/cartOperations.js"></script>
 
     <?php $userId = $session->getUserId(); ?>
 
@@ -200,7 +200,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 
 <?php function drawFavourites(PDO $pdo, Session $session) { ?>
-    <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../javascript/cartOperations.js"></script>
         <main>
             <h1 id= "myFavs" >Wish List</h1>
             <section id="items-list">

@@ -8,7 +8,7 @@ require_once(__DIR__ . '/../database/item.class.php');
 <?php
 function drawPayment(PDO $db, Session $session) {
     ?>
-    <script src="../templates/payment.js"></script>
+    <script src="../javascript/payment.js"></script>
     <body>
         <main>
             <div class="payContainer">

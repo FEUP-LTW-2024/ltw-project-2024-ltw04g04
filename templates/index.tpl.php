@@ -37,7 +37,11 @@ function topSellers(PDO $pdo) {
                                 <div class="star <?= $i <= $averageRating ? 'filled' : '' ?>"></div>
                             <?php endfor; ?>
                         </div>
-                        <a href="../pages/seller.php?id=<?= $user->userId ?>" class="profile-button">Profile</a>
+                        <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="seller-id" value="<?= $user->userId ?>">
+                            <button id="profile-button" type="submit">Profile</button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>
