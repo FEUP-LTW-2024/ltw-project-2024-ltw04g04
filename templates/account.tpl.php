@@ -12,6 +12,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
     $items = Item::getUserItemIds($pdo, $user->userId);
     $averageRating = User::getSellerAverageRating($pdo, $user->userId);
 ?>
+    <script defer src="../javascript/itemRedirect.js"></script>
     <main>
         <section id="profile">
             <div id="userHeader">
@@ -73,9 +74,8 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                         $hasOrder = false;
                         ?>
                         <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
-                            <a href="item.php?id=<?= $item->itemId ?>">
-                                <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image">
-                            </a>
+                            <img src="<?= $item->imageLink ?>" class="articleImage" alt="Item Image" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
+                            
                             <h3><?= $item->name ?></h3>
                             <p><?= $item->price ?> $</p>
 
@@ -201,6 +201,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 
 <?php function drawFavourites(PDO $pdo, Session $session) { ?>
     <script defer src="../javascript/cartOperations.js"></script>
+    <script defer src="../javascript/itemRedirect.js"></script>
         <main>
             <h1 id= "myFavs" >Wish List</h1>
             <section id="items-list">
@@ -225,11 +226,9 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
                             ?>
 
                             <div class="cart-item">
-                                <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
+                                <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
                                 <div class="item-details">
-                                    <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                                        <p><?= $item->name ?></p>
-                                    </a>
+                                    <p onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')"><?= $item->name ?></p>
                                     <p class="detail"> <?= number_format($item->price, 2) ?> $</p>  
                                     <p class="detail"> Brand: <?= $item->brand ?></p>      
                                     <p class="detail"> Model: <?= $item->model ?></p>     

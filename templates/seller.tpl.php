@@ -10,7 +10,7 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
     $items = Item::getUserItemIds($pdo, $user->userId);
     $averageRating = User::getSellerAverageRating($pdo, $user->userId);
     ?>
-    
+        <script defer src="../javascript/itemRedirect.js"></script>
         <section id="profile">
                 <div id="userHeader">
                     <img id="avatar" src="<?= $user->profileImage ?>" alt="User Profile Image">
@@ -69,9 +69,7 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
                 <?php foreach ($items as $index => $i) : ?>
                     <?php $item = Item::getItemWithId($pdo, $i); ?>
                     <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
-                        <a href="item.php?id=<?= htmlspecialchars($item->itemId) ?>">
-                            <img src="<?= htmlspecialchars($item->imageLink) ?>" class="articleImage" alt="Item Image">
-                        </a>
+                        <img src="<?= htmlspecialchars($item->imageLink) ?>" class="articleImage" alt="Item Image" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
                         <h3><?= htmlspecialchars($item->name) ?></h3>
                         <p><?= htmlspecialchars($item->price) ?> $</p>
                     </article>
