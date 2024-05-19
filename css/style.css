@@ -99,6 +99,28 @@ footer {
     }
 }
 
+#suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%; 
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 200px; 
+    overflow-y: auto; 
+}
+
+.suggestion {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    background-color: #f0f0f0;
+}
+
+
 #search img {
     position: absolute;
     height: 20px;
@@ -1234,4 +1256,22 @@ input[type="text"] {
 .scroll-wrapper .item-details p {
     font-size: 1vw; 
 }
+
+/* Error page */
+
+.error-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 100px auto;
+    background-color: #A4DAEA;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.error-container h1 {
+    color: #ff4141;
+}
+
 

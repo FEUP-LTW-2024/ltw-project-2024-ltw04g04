@@ -18,10 +18,12 @@
                 <div id="logo-container"><a href="index.php"><img id="logo" src="imgs/logo.png"  alt="Logo"></a></div>
                 <div id="search">
                     <form action="../actions/action_search.php" method="get">
-                        <div id="searchbar">
-                            <input type="text" name="query" placeholder="Search...">
-                            <img src="imgs/search-icon.svg">
-                        </div>
+                    <div id="searchbar">
+                        <input type="text" name="query" id="searchInput" placeholder="Search...">
+                        <img src="imgs/search-icon.svg">
+                    </div>
+                    <div id="suggestions"></div>
+
                     </form>
                 </div>
 
@@ -144,4 +146,19 @@ function generateFooter() {
     </form>
     <p>Already have an account? <a href="login.php">Log in</a>.</p>
 <?php } ?>
+
+<?php
+function showErrorPage() {
+    ?>
+    <body>
+        <main>
+            <div class="error-container">
+                <h1>Oops! Something went wrong.</h1>
+            </div>
+        </main>
+    </body>
+    <?php
+}
+?>
+
 
