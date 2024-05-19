@@ -19,18 +19,34 @@
             die('Invalid rating value.');
         }
 
-        $stmt = $pdo->prepare('INSERT INTO SellerRating (SellerId, RaterId, Rating) VALUES (?, ?, ?)');
-        if ($stmt->execute([$sellerId, $raterId, $rating])) {
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit();
+        $stmt = $pdo->prepare('SELECT * FROM SellerRating WHERE SellerId = ? AND RaterId = ?');
+        $stmt->execute([$sellerId, $raterId]);
+        $existingEntry = $stmt->fetch();
+
+        if ($existingEntry) {
+            $stmt = $pdo->prepare('UPDATE SellerRating SET Rating = ? WHERE SellerId = ? AND RaterId = ?');
+            if ($stmt->execute([$rating, $sellerId, $raterId])) {
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            } else {
+                header('Location: ../pages/error.php');
+                exit();
+            }
         } else {
-            header('Location: ../pages/error.php');
-            exit();
+            $stmt = $pdo->prepare('INSERT INTO SellerRating (SellerId, RaterId, Rating) VALUES (?, ?, ?)');
+            if ($stmt->execute([$sellerId, $raterId, $rating])) {
+                header('Location: ' . $_SERVER['HTTP_REFERER']);
+                exit();
+            } else {
+                header('Location: ../pages/error.php');
+                exit();
+            }
         }
     }
 
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     exit();
 ?>
+
 
 

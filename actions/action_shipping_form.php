@@ -11,7 +11,7 @@ $session = new Session();
 $db = getDatabaseConnection();
 
 if (isset($_POST['orderId'])) {
-    $orderId = cleanInput($_POST['orderId']);
+    $orderId = (int)cleanInput($_POST['orderId']);
 
     if (!is_numeric($orderId) || $orderId <= 0) {
         header('Location: ../pages/account.php');

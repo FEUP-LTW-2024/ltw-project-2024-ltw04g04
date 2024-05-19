@@ -15,7 +15,7 @@
     }
 
     if (isset($_POST['user_id']) && isset($_POST['action'])) {
-        $user_id = cleanInput(intval($_POST['user_id']));
+        $user_id = (int)cleanInput(intval($_POST['user_id']));
         $action = cleanInput($_POST['action']); 
 
         if ($action === 'make_admin') {
