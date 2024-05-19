@@ -262,6 +262,7 @@ function drawUserPage(PDO $pdo, User $user, bool $editMode) {
 function usersList(PDO $pdo, Session $session) {
     $users = User::getAllUsersExceptCurrent($pdo, $session->getUserId());
 ?>
+    <script defer src="../javascript/admin.js"></script>
     <main>
         <h2 class="usersList">List of Users</h2>
         <div class="users-container">
@@ -269,25 +270,25 @@ function usersList(PDO $pdo, Session $session) {
                 $userId = (int)cleanInput($user['UserId']);
                 $current = User::getUserWithId($pdo, $userId);
                 ?>
-                <div class="user">
-                    <div class = "profilePic"><img src="<?= $current->profileImage ?>" alt="User Icon"></div>
+                <div class="user" id="user-<?= $user['UserId'] ?>">
+                    <div class="profilePic">
+                        <img src="<?= $current->profileImage ?>" alt="User Icon">
+                    </div>
                     <div class="user-details">
                         <p>Name: <?= $user['Name_'] ?></p>
                         <p>Username: <?= $user['Username'] ?></p>
                         <div class="admin-action">
                             <?php if ($user['IsAdmin']) : ?>
-                                <form action="../actions/action_make_admin.php" method="post">
+                                <form class="admin-form" data-action="remove_admin">
                                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                     <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">
-                                    <input type="hidden" name="action" value="remove_admin">
-                                    <input type="submit" name="remove_admin" value="Remove Admin" class="remove-admin">
+                                    <input type="submit" value="Remove Admin" class="remove-admin">
                                 </form>
                             <?php else : ?>
-                                <form action="../actions/action_make_admin.php" method="post">
+                                <form class="admin-form" data-action="make_admin">
                                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                                     <input type="hidden" name="user_id" value="<?= $user['UserId'] ?>">
-                                    <input type="hidden" name="action" value="make_admin">
-                                    <input type="submit" name="make_admin" value="Make Admin" class="make-admin">
+                                    <input type="submit" value="Make Admin" class="make-admin">
                                 </form>
                             <?php endif; ?>
                         </div>
