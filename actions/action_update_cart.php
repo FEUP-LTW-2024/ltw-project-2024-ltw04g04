@@ -26,11 +26,10 @@
                 $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
                 ?>
                 <div class="cart-item">
-                    <img src="<?= cleanInput($item->imageLink) ?>" alt="<?= cleanInput($item->name) ?>">
+
+                <img src="<?= cleanInput($item->imageLink) ?>" alt="<?= cleanInput($item->name) ?>" onclick="redirectToItemPage(<?php echo $item->itemId ?>, '<?php echo $_SESSION['csrf']; ?>')">
                     <div class="item-details">
-                        <a href="../pages/item.php?id=<?= cleanInput(intval($item->itemId)) ?>">
-                            <p><?= cleanInput($item->name) ?></p>
-                        </a>
+                        <p onclick="redirectToItemPage(<?php echo $item->itemId ?>, '<?php echo $_SESSION['csrf']; ?>')"><?= cleanInput($item->name) ?></p>
                         <p class="detail"><?= cleanInput(intval($item->price)) ?> $ </p>
                         <p class="detail"> Brand: <?= cleanInput($item->brand) ?></p>
                         <p class="detail"> Model: <?= cleanInput($item->model) ?></p>
@@ -38,6 +37,7 @@
                         <p class="detail"> Category: <?= cleanInput($item->category) ?></p>
                         <p class="detail"> Size: <?= cleanInput(intval($item->size)) ?></p>
                         <p class="detail"> In stock: <?= cleanInput(intval($item->stock)) ?></p>
+                        
                         <div class="buttons-wrapper">
                             <button class="increase-button" data-item-id="<?php echo  $itemId; ?>">+</button>
                             <button class="decrease-button" data-item-id="<?php echo  $itemId; ?>">-</button>

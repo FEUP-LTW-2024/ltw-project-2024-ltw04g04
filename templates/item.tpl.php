@@ -33,12 +33,11 @@ function drawItem($pdo, $userId, $item) {
     } else {
         $isSeller = (int)getSellerId($pdo, $item->itemId) === $userId;
     }
-    $sellerProfileURL = $isSeller ? '/../pages/account.php' : '/../pages/seller.php';
     $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
     $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $item->itemId);
     $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
 ?>
-    <script src="../templates/cartOperations.js"></script>
+    <script src="../javascript/cartOperations.js"></script>
         <main>
             <section id="item">
                 <div id="itemImg"><img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>"></div>   
@@ -72,15 +71,14 @@ function drawItem($pdo, $userId, $item) {
 
                     <div id="sellerContainer">
                         <div id="sellerImg"><img src="imgs/user-icon.png" alt="Image of icon account"></div>
-                        <h3><?= cleanInput(getSellerNamePD($pdo, $item->itemId), ENT_QUOTES, 'UTF-8') ?></h3>
-                        <form action="<?= $sellerProfileURL ?>" method="get">
-                            <input type="hidden" name="id" value="<?= $sellerIdValue ?>">
+                        <h3><?= cleanInput(getSellerNamePD($pdo, $item->itemId)) ?></h3>
+                        <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="seller-id" value="<?= $sellerIdValue ?>">
                             <button type="submit" id="accountSeller">></button>
                         </form>
                     </div>
-
                 </div>
-
             </section>
         </main> 
 <?php } ?>
@@ -202,7 +200,7 @@ function editBrands(PDO $pdo) {
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <h3>Delete Brand</h3>
             <label for="brand_id_to_delete">Select brand to delete:</label>
-            <select id="brand_id_to_delete" name="category_id_to_delete">
+            <select id="brand_id_to_delete" name="brand_id_to_delete">
                 <?php foreach ($brands as $brand): ?>
                     <option value="<?php echo $brand; ?>"><?php echo $brand; ?></option>
                 <?php endforeach; ?>
@@ -214,7 +212,7 @@ function editBrands(PDO $pdo) {
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <h3>Add New Brand</h3>
             <label for="new_brand_name">New brand name:</label>
-            <input type="text" id="new_brand_name" name="new_category_name" required>
+            <input type="text" id="new_brand_name" name="new_brand_name" required>
             <input type="submit" name="add_brand" value="Add" class="button-add-brand">
         </form>
     </main>

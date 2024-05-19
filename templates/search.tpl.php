@@ -4,7 +4,8 @@
 ?>
 
 <?php function drawSearchItems(PDO $pdo, Session $session,array $items) { ?>
-    <script defer src="../templates/cartOperations.js"></script>
+    <script defer src="../javascript/cartOperations.js"></script>
+    <script defer src="../javascript/itemRedirect.js"></script>
     <body>
         <main>
             <?php foreach ($items as $item) { 
@@ -12,8 +13,8 @@
                 $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $item['itemId']);
                 $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
                 ?>
-                <a href="../pages/item.php?id=<?= $item['itemId'] ?>">
-                <div class="cart-item">
+                
+                <div class="cart-item" onclick="redirectToItemPage(<?php echo $item['itemId']; ?>, '<?php echo $_SESSION['csrf']; ?>')">
                     <img src="<?= $item['imageLink'] ?>" alt="<?= $item['name'] ?>">
                         <div class="item-details"> 
                                 <p><?= $item['name'] ?></p>
@@ -30,12 +31,15 @@
                                 </p>
 
                                 <p class="detail-heart">
-                                    <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class="heart-icon" id="heart-icon-<?php echo $item['itemId']; ?>" onclick="toggleWishlist(event, <?php echo $item['itemId']; ?>)">
+                                    <?php if ($session->isLogin()) {?>
+                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class="heart-icon" id="heart-icon-<?php echo $item['itemId']; ?>" onclick="toggleWishlist(event, <?php echo $item['itemId']; ?>)">
+                                    <?php } ?>
                                 </p>
                         </div>
                 </div> 
-                </a>
+                
             <?php } ?>
+            
         </main>
     </body>
 <?php } ?>

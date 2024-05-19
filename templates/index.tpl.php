@@ -8,8 +8,8 @@
     <main>
         <img id="jewels" src="imgs/jewels.jpg" alt="Jewelry">
         <section class = "customize">
-            <p><br>SecondCharm to your liking with a touch of elegance.</br> Follow your favorite brands and discover the items that match your style.</p>
-            <a href="account.php"><button>Customize</button></a>
+            <p>SecondCharm to your liking with a touch of elegance.</p>
+            <p> Follow your favorite brands and discover the items that match your style. </p>
         </section>
     </main>
 </body>
@@ -37,7 +37,11 @@ function topSellers(PDO $pdo) {
                                 <div class="star <?= $i <= $averageRating ? 'filled' : '' ?>"></div>
                             <?php endfor; ?>
                         </div>
-                        <a href="../pages/seller.php?id=<?= $user->userId ?>" class="profile-button">Profile</a>
+                        <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="seller-id" value="<?= $user->userId ?>">
+                            <button id="profile-button" type="submit">Profile</button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -53,12 +57,13 @@ function displayRandomItems(PDO $pdo) {
     $firstHalf = array_slice($items, 0, 5);
     $secondHalf = array_slice($items, 5, 9);
 ?>
+    <script defer src="../javascript/itemRedirect.js"></script>
     <main>
         <h2 class="itemsList">Recomendations</h2>
         <div class="scroll-container">
             <div class="scroll-wrapper">
                 <?php foreach ($firstHalf as $item): ?>
-                    <a href="item.php?id=<?= $item->itemId ?>" class="item">
+                    <div class="item" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
                         <img src="<?= $item->imageLink ?>" alt="Item Image">
                         <div class="item-details">
                             <p><?= $item->name ?></p>
@@ -70,14 +75,14 @@ function displayRandomItems(PDO $pdo) {
                             <p>Stock: <?= $item->stock ?></p>
                             <p>Size: <?= $item->size ?></p>
                         </div>
-                    </a>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>
         <div class="scroll-container">
             <div class="scroll-wrapper">
                 <?php foreach ($secondHalf as $item): ?>
-                    <a href="item.php?id=<?= $item->itemId ?>" class="item">
+                    <div class="item" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
                         <img src="<?= $item->imageLink ?>" alt="Item Image">
                         <div class="item-details">
                             <p><?= $item->name ?></p>
@@ -89,7 +94,7 @@ function displayRandomItems(PDO $pdo) {
                             <p>Stock: <?= $item->stock ?></p>
                             <p>Size: <?= $item->size ?></p>
                         </div>
-                    </a>
+                    </div>
                 <?php endforeach; ?>
             </div>
         </div>

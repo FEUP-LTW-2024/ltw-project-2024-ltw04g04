@@ -1,9 +1,13 @@
 
+<<<<<<< HEAD:javascript/script.js
+/* Error messsage for register */
+=======
+>>>>>>> 04b8e9e2b8839a3c2e678a2b8138c0f0d2676358:pages/script.js
 
 document.addEventListener("DOMContentLoaded", function() {
     var errorPopup = document.getElementById("error-popup");
 
-    if (errorPopup) { // Check if element exists
+    if (errorPopup) {
         if (errorPopup.innerText.trim() !== "") {
             var errorButton = document.createElement("button");
             errorButton.classList.add("error-button");
@@ -56,6 +60,9 @@ function toggleBox() {
 
 document.getElementById('filter').addEventListener('mouseover', showBox);
 document.getElementById('filter').addEventListener('mouseout', hideBox);
+<<<<<<< HEAD:javascript/script.js
+document.getElementById('filter').addEventListener('click', toggleBox);
+=======
 document.getElementById('filter').addEventListener('click', toggleBox);
 
 
@@ -101,3 +108,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+>>>>>>> 04b8e9e2b8839a3c2e678a2b8138c0f0d2676358:pages/script.js

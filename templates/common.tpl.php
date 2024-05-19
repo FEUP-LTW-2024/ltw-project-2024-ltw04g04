@@ -70,7 +70,7 @@
                 <?php endforeach; ?>
             </ul>
         </nav>
-        <script src="script.js"></script>
+        <script src="../javascript/script.js"></script>
     </body>
     </html>
 <?php } ?>
@@ -119,7 +119,7 @@ function generateFooter() {
                 else drawSignupForm();
                 ?>
             </section>
-            <script src="script.js"></script>
+            <script src="../javascript/script.js"></script>
         </body>
     </html>
 <?php } ?>

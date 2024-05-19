@@ -14,8 +14,8 @@
     $categories = getCategories();
     generateNavigationMenu($session, $categories);
 
-    if (isset($_GET['id'])) {
-        $itemId = (int)$_GET['id'];
+    if (isset($_SESSION['item-id'])) {
+        $itemId = (int)$_SESSION['item-id'];
         $pdo = getDatabaseConnection();
         $item = Item::getItemWithId($pdo, $itemId);
         if ($session->isLogin()) {
@@ -24,10 +24,8 @@
             drawItem($pdo,-1, $item);
         }
         
-
-        
     } else {
-        echo "ID do item não fornecido.";
+        echo "Item not found.";
     }
     generateFooter();
 ?>
