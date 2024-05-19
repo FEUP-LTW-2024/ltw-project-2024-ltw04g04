@@ -430,8 +430,7 @@ VALUES (126, 'Silver Bracelet', 55, 'Silver Works', 'SE2024', 'New', 'Beads and 
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (127, 'Gold Earrings', 100, 'Golden Touch', 'GB2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item27.jpg', 8);
 
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (129, 'Pearl Bracelet', 75, 'Pearl Paradise', 'PB2024', 'New', 'Beads and bracelets', 3, '/../pages/imgs/imgsForItems/item29.jpg', 7);
+
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (130, 'Topaz Earrings', 90, 'Golden Treasures', 'TN2024', 'New', 'Earrings', 5, '/../pages/imgs/imgsForItems/item30.jpg', 8);
 
@@ -449,8 +448,6 @@ VALUES (3, 4, 2, 'tudo bem amigo?', '27/4/2024', '19h40');
 --Populate SellerItem table
 INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 101);
 INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 130);
-INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 129);
-INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 128);
 INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 127);
 INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 102);
 INSERT INTO SellerItem (UserId, ItemId) VALUES (3, 103);
