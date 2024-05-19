@@ -89,6 +89,7 @@ footer {
 
 #search {
     flex-grow: 1;
+    position: relative;
     input[type="text"] {
         font-family: "Sulphur Point", sans-serif;
         width: 90%; 
@@ -101,14 +102,13 @@ footer {
 
 #suggestions {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 4px);
     left: 0;
-    width: 100%; 
+    width: 86%;
     background-color: #fff;
-    border: 1px solid #ccc;
     border-top: none;
-    max-height: 200px; 
-    overflow-y: auto; 
+    max-height: 200px;
+    overflow-y: auto;
 }
 
 .suggestion {
@@ -117,7 +117,8 @@ footer {
 }
 
 .suggestion:hover {
-    background-color: #f0f0f0;
+    background-color: #e7e7e7;
+    margin:1px;
 }
 
 

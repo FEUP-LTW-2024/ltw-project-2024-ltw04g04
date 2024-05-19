@@ -68,24 +68,22 @@ document.addEventListener("DOMContentLoaded", function() {
         var query = searchInput.value.trim();
 
         if (query === '') {
-            suggestionsDiv.innerHTML = ''; // Clear suggestions if the query is empty
+            suggestionsDiv.innerHTML = ''; 
             return;
         }
 
-        // Send the query to the server to fetch suggestions
         fetch('../actions/action_search_suggestions.php?query=' + encodeURIComponent(query))
         .then(response => response.json())
         .then(data => {
-            console.log(data); // Debugging: Log the data received from the server
-            suggestionsDiv.innerHTML = ''; // Clear previous suggestions
+            console.log(data); 
+            suggestionsDiv.innerHTML = ''; 
             data.forEach(function(suggestion) {
                 var suggestionElement = document.createElement('div');
                 suggestionElement.textContent = suggestion;
                 suggestionElement.classList.add('suggestion');
                 suggestionElement.addEventListener('click', function() {
-                    // When a suggestion is clicked, fill the search input with that suggestion
                     searchInput.value = suggestion;
-                    suggestionsDiv.innerHTML = ''; // Clear suggestions
+                    suggestionsDiv.innerHTML = ''; 
                 });
                 suggestionsDiv.appendChild(suggestionElement);
             });
