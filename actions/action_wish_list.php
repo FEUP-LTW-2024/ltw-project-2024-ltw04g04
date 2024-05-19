@@ -3,6 +3,7 @@
     require_once(__DIR__ . '/../database/get_database.php');
     require_once(__DIR__ . '/../utils/session.php');
     require_once(__DIR__ . '/../database/wishList.class.php');
+    require_once(__DIR__ . '/../utils/utils.php');
 
     $session = new Session();
     $db = getDatabaseConnection();
@@ -10,7 +11,7 @@
     $userId = $session->getUserId();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['itemId'])) {
-        $itemId = intval($_POST['itemId']);
+        $itemId = cleanInput(intval($_POST['itemId']));
 
         $isItemInWishlist = WishList::isItemInWishList($db, $userId, $itemId);
 

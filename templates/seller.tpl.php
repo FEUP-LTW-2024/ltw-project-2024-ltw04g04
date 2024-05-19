@@ -2,6 +2,7 @@
     include_once 'account.tpl.php'; 
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../utils/utils.php');
 ?>
 
 
@@ -14,7 +15,7 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
         <section id="profile">
                 <div id="userHeader">
                     <img id="avatar" src="<?= $user->profileImage ?>" alt="User Profile Image">
-                    <h1><?= $user->name ?> 
+                    <h1><?= cleanInput($user->name) ?> 
                         <?php if ($user->isAdmin) : ?>
                             <div class="admin-info">
                             <img src="/../pages/imgs/verified-icon.png" alt="Verified" id="verified" class="verified">
@@ -24,25 +25,25 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
                     </h1>
                     <?php if (!$isCurrentUser && $session->isLogin()) : ?>
                         <form action="../pages/chat.php" method="post">
-                            <input type="hidden" name="chatId" value="<?= $user->userId ?> ">
+                            <input type="hidden" name="chatId" value="<?= (int)cleanInput($user->userId) ?> ">
                             <button id="newChatButton" type="submit"> Send message </button>
                         </form>
                     <?php endif; ?>
                 </div>
 
                 <div id="sellerInfo">
-                    <p><strong>Username:</strong> <?= htmlspecialchars($user->username) ?></p>
-                    <p><strong>Email:</strong> <?= htmlspecialchars($user->email) ?></p>
-                    <p><strong>City:</strong> <?= htmlspecialchars($user->city) ?></p>
-                    <p><strong>Country:</strong> <?= htmlspecialchars($user->country) ?></p>
-                    <p><strong>Average Rating:</strong> <?= htmlspecialchars($averageRating) ?> / 5</p>
+                    <p><strong>Username:</strong> <?= cleanInput($user->username) ?></p>
+                    <p><strong>Email:</strong> <?= cleanInput($user->email) ?></p>
+                    <p><strong>City:</strong> <?= cleanInput($user->city) ?></p>
+                    <p><strong>Country:</strong> <?= cleanInput($user->country) ?></p>
+                    <p><strong>Average Rating:</strong> <?= (float)cleanInput($averageRating) ?> / 5</p>
                 </div>
                 
             <div id="ratingInfo">
                 <?php if (!$isCurrentUser && $session->isLogin()) : ?>
                     <form action="../actions/action_rating.php" method="post">
                         <input type="hidden" name="csrf" value="<?= $_SESSION['csrf'] ?>">
-                        <input type="hidden" name="seller_id" value="<?= htmlspecialchars($user->userId) ?>">
+                        <input type="hidden" name="seller_id" value="<?= cleanInput($user->userId) ?>">
                         <label for="rating"></label>
                         <div class="rating-container">
                             <input type="radio" id="star5" name="rating" value="5">
@@ -69,9 +70,9 @@ function drawSellerProfile(Session $session, PDO $pdo, User $user, bool $isCurre
                 <?php foreach ($items as $index => $i) : ?>
                     <?php $item = Item::getItemWithId($pdo, $i); ?>
                     <article class="articleItem<?= ($index % 3 == 2) ? ' lastInRow' : '' ?>">
-                        <img src="<?= htmlspecialchars($item->imageLink) ?>" class="articleImage" alt="Item Image" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
-                        <h3><?= htmlspecialchars($item->name) ?></h3>
-                        <p><?= htmlspecialchars($item->price) ?> $</p>
+                        <img src="<?= cleanInput($item->imageLink) ?>" class="articleImage" alt="Item Image" onclick="redirectToItemPage(<?php echo $item->itemId; ?>, '<?php echo $_SESSION['csrf']; ?>')">
+                        <h3><?= cleanInput($item->name) ?></h3>
+                        <p><?= cleanInput($item->price) ?> $</p>
                     </article>
                 <?php endforeach; ?>
             </div>

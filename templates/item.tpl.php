@@ -1,5 +1,7 @@
-<?php declare(strict_types = 1); 
- require_once(__DIR__ . '/../database/wishList.class.php');
+<?php 
+    declare(strict_types = 1); 
+    require_once(__DIR__ . '/../database/wishList.class.php');
+    require_once(__DIR__ . '/../utils/utils.php');
 ?>
 
 <?php
@@ -69,7 +71,7 @@ function drawItem($pdo, $userId, $item) {
 
                     <div id="sellerContainer">
                         <div id="sellerImg"><img src="imgs/user-icon.png" alt="Image of icon account"></div>
-                        <h3><?= htmlspecialchars(getSellerNamePD($pdo, $item->itemId), ENT_QUOTES, 'UTF-8') ?></h3>
+                        <h3><?= cleanInput(getSellerNamePD($pdo, $item->itemId)) ?></h3>
                         <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
                             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" name="seller-id" value="<?= $sellerIdValue ?>">

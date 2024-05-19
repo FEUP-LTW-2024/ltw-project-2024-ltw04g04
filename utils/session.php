@@ -51,10 +51,6 @@
       $_SESSION['email'] = $email;
     }
 
-    public function setPassword(string $password) {
-      $_SESSION['password'] = $password;
-    }
-
     public function setCountry(string $country) {
       $_SESSION['country'] = $country;
     }
