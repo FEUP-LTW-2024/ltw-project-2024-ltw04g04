@@ -36,6 +36,7 @@ function drawItem($pdo, $userId, $item) {
     $sellerIdValue = $isSeller ? $userId : (int)getSellerId($pdo, $item->itemId);
     $isItemInWishlist = WishList::isItemInWishList($pdo, $userId, $item->itemId);
     $heartIconSrc = $isItemInWishlist ? '/../pages/imgs/heart-icon-painted.png' : '/../pages/imgs/heart-icon.png';
+    $current = User::getUserWithId($pdo, $sellerIdValue);
 ?>
     <script src="../javascript/cartOperations.js"></script>
         <main>
@@ -70,7 +71,7 @@ function drawItem($pdo, $userId, $item) {
                     </div>
 
                     <div id="sellerContainer">
-                        <div id="sellerImg"><img src="imgs/user-icon.png" alt="Image of icon account"></div>
+                        <div class = "profilePic" id="sellerImg"><img img src="<?= $current->profileImage ?>" alt="Image of icon account"></div>
                         <h3><?= cleanInput(getSellerNamePD($pdo, $item->itemId)) ?></h3>
                         <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
                             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">

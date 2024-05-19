@@ -266,9 +266,11 @@ function usersList(PDO $pdo, Session $session) {
         <h2 class="usersList">List of Sellers</h2>
         <div class="users-container">
             <?php foreach ($users as $user):
-                $userId = (int)cleanInput($user['UserId']); ?>
+                $userId = (int)cleanInput($user['UserId']);
+                $current = User::getUserWithId($pdo, $userId);
+                ?>
                 <div class="user">
-                    <img src="../pages/imgs/user-icon.png" alt="User Icon">
+                    <div class = "profilePic"><img src="<?= $current->profileImage ?>" alt="User Icon"></div>
                     <div class="user-details">
                         <p>Name: <?= $user['Name_'] ?></p>
                         <p>Username: <?= $user['Username'] ?></p>
