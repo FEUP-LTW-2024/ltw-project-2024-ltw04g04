@@ -427,8 +427,7 @@ INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock
 VALUES (126, 'Silver Bracelet', 55, 'Silver Works', 'SE2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item26.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (127, 'Gold Earrings', 100, 'Golden Touch', 'GB2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item27.jpg', 8);
-INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (128, 'Platinum Ring', 600, 'Platinum Jewels', 'PR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item28.jpg', 9);
+
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (129, 'Pearl Bracelet', 75, 'Pearl Paradise', 'PB2024', 'New', 'Beads and bracelets', 3, '/../pages/imgs/imgsForItems/item29.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)

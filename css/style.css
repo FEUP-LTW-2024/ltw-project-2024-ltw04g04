@@ -347,6 +347,10 @@ main img {
     margin-right: 2em;
 }
 
+.profilePic {
+    border-radius: 50%; 
+}
+
 #userHeader {
     margin: 1em 2em 2em 2em;
 }
