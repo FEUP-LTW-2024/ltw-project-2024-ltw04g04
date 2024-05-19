@@ -402,6 +402,15 @@ main img {
     margin-left: 20px;
 }
 
+#userInfo label {
+    margin-top: 0.5em;
+}
+
+#userInfo input {
+    margin-top: 0.5em;
+    margin-bottom: 2em;
+}
+
 #sellerInfo {
     display: flex;
     align-items: center;
@@ -494,6 +503,10 @@ main img {
 #itemImg {
     flex: 1;
     margin: 2em 1em 2em 2em;
+}
+
+#itemImg img{
+    border: 1px solid black; 
 }
 
 #containers {
@@ -1049,7 +1062,7 @@ nav#details {
     padding-bottom: 0.5em;
 }
 
-input[type="text"] {
+input[type="text"], input[type="email"] {
     width: 100%;
     padding: 10px;
     border-radius: 5px;

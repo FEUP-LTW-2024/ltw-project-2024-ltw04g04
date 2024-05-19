@@ -236,35 +236,45 @@ INSERT INTO Size_ (SizeId, SizeVal) VALUES (10, 10);
 
 -- Populate User table
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', '123 Main St', 'Anytown', 'USA', '12345', false);
--- password123
+VALUES (1, 'johnydoe', 'John Doe', 'john@example.com', '$2y$12$M.LBS3MI2km/1ygZqPgON.6xGYu1EFpjWtQJ6bHeciwgRoW9ytZ4K', '123 Main St', 'Anytown', 'USA', '12345', false);
+-- Jooe1996
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', '0c6f6845bb8c62b778e9147c272ac4b5bdb9ae71', '456 Elm St', 'Othertown', 'USA', '67890', false);
+VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', '$2y$12$u6KWrcQy6dni8OuGkGELEe1Ar5ZmTlF05pOh/tpH3EYhicYE8Qzjm', '456 Elm St', 'Othertown', 'USA', '67890', false);
 -- password456
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '7f6d5eea1bcef5ca6209d33b28e3aaeb3db26f24', '789 Oak St', 'Another Town', 'USA', '45678', false);
+VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '$2y$12$psmZQiJrw6G9IYpHncAiRu46sgkMtNa1gRXsEvBLIOwB9Uai8lHhu', '789 Oak St', 'Another Town', 'USA', '45678', false);
 -- password789
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '$2y$12$UhzD/36MRpktux7yj63RhuBaKi9/r1bHhBP7HhjAlNYC8TbPaHimy', '/../pages/imgs/imgsForProfile/cat.jpg', '101 Pine St', 'Someplace', 'USA', '89012', true);
 -- passwordabc
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', 'd5c2dc0bcfd8899ba126be5e729d4f10796c0b90', '456 Oak St', 'Sometown', 'USA', '54321',  false);
+VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', '$2y$12$mYIREu6jvIP4dMBhbAA6huVIn0I.0Gynw8Lk3wexZoDgIVoefdi0i', '456 Oak St', 'Sometown', 'USA', '54321',  false);
 -- olaadeus23
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (6, 'markjohnson', 'Mark Johnson', 'mark.johnson@example.com', '752f5000777f76d06aa11a8882b70cc620e4deac', '789 Maple St', 'Anothertown', 'USA', '67890', false);
+VALUES (6, 'markjohnson', 'Mark Johnson', 'mark.johnson@example.com', '$2y$12$uNRNrA884zEjsZUEsZdTQOgbIXd.YuoZngYq8FjUrNjNp1qFNr7Zy', '789 Maple St', 'Anothertown', 'USA', '67890', false);
 -- soufixe09
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (7, 'emilywilson', 'Emily Wilson', 'emily.wilson@example.com', 'f0219e4ecd66ed0df03a14df8d0891f02c216a1b', '101 Pine St', 'Yetanothertown', 'USA', '12345', false);
--- adeus5ola0
+VALUES (7, 'emilywilson', 'Emily Wilson', 'emily.wilson@example.com', '$2y$12$SBmPTty8/CwWvzGMa3TIk.MUmpSTpiRNbbArfzQeBB3MDPd7TrW2K', '101 Pine St', 'Yetanothertown', 'USA', '12345', false);
+-- adeUs5ola0
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (8, 'alexsmith', 'Alex Smith', 'alex.smith@example.com', '7375c583bb8ce9d2ff39b3ad224815a7c63ae0e6', '123 Elm St', 'Othertown', 'USA', '89012', false);
+VALUES (8, 'alexsmith', 'Alex Smith', 'alex.smith@example.com', '$2y$12$omlp4.V8W/8tmABj0.9EJO2kwfFPGCx0j.mH9qErszFxjE0DL2E..', '123 Elm St', 'Othertown', 'USA', '89012', false);
 -- girafas_bonitas5
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (9, 'sarahbrown', 'Sarah Brown', 'sarah.brown@example.com', '507bb50fa8856af531bdcd68e552d2e57561a8e4', '321 Cedar St', 'Somewhere', 'USA', '45678', false);
+VALUES (9, 'sarahbrown', 'Sarah Brown', 'sarah.brown@example.com', '$2y$12$YiETOsqls8mk1zbyP5AG5uausnnr5jcyoNnrjTvN7dWiYD8gEMjPe', '321 Cedar St', 'Somewhere', 'USA', '45678', false);
 -- naogosto8gelado
+
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644c9f5e7b0062607c6677838fd0ee8399f5a7', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
+VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '$2y$12$0AdjcyrjwQaB6yd7Apa61ObuRiblm2j0HlvT9igGblp57fF.ddFDS', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
 -- pretoebranc0
+
 
 -- Populate Rating table
 INSERT INTO SellerRating (RatingId, SellerId, RaterId, Rating)

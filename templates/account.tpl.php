@@ -263,7 +263,7 @@ function usersList(PDO $pdo, Session $session) {
     $users = User::getAllUsersExceptCurrent($pdo, $session->getUserId());
 ?>
     <main>
-        <h2 class="usersList">List of Sellers</h2>
+        <h2 class="usersList">List of Users</h2>
         <div class="users-container">
             <?php foreach ($users as $user):
                 $userId = (int)cleanInput($user['UserId']);
