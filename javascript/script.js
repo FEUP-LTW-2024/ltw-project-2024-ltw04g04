@@ -55,9 +55,12 @@ function toggleBox() {
 }
 
 
-document.getElementById('filter').addEventListener('mouseover', showBox);
-document.getElementById('filter').addEventListener('mouseout', hideBox);
-document.getElementById('filter').addEventListener('click', toggleBox);
+const filterElement = document.getElementById('filter');
+if (filterElement) {
+    filterElement.addEventListener('mouseover', showBox);
+    filterElement.addEventListener('mouseout', hideBox);
+    filterElement.addEventListener('click', toggleBox);
+}
 
 
 
@@ -65,33 +68,38 @@ document.addEventListener("DOMContentLoaded", function() {
     var searchInput = document.getElementById('searchInput');
     var suggestionsDiv = document.getElementById('suggestions');
 
-    searchInput.addEventListener('input', function() {
-        var query = searchInput.value.trim();
+    if (searchInput && suggestionsDiv) {
+        searchInput.addEventListener('input', function() {
+            var query = searchInput.value.trim();
 
-        if (query === '') {
-            suggestionsDiv.innerHTML = ''; 
-            return;
-        }
+            if (query === '') {
+                suggestionsDiv.innerHTML = ''; 
+                return;
+            }
 
-        fetch('../actions/action_search_suggestions.php?query=' + encodeURIComponent(query))
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); 
-            suggestionsDiv.innerHTML = ''; 
-            data.forEach(function(suggestion) {
-                var suggestionElement = document.createElement('div');
-                suggestionElement.textContent = suggestion;
-                suggestionElement.classList.add('suggestion');
-                suggestionElement.addEventListener('click', function() {
-                    searchInput.value = suggestion;
+            fetch('../actions/action_search_suggestions.php?query=' + encodeURIComponent(query))
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); 
                     suggestionsDiv.innerHTML = ''; 
-                });
-                suggestionsDiv.appendChild(suggestionElement);
-            });
-        })
-        .catch(error => console.error('Error fetching suggestions:', error));
-    });
+                    data.forEach(function(suggestion) {
+                        var suggestionElement = document.createElement('div');
+                        suggestionElement.textContent = suggestion;
+                        suggestionElement.classList.add('suggestion');
+                        suggestionElement.addEventListener('click', function() {
+                            searchInput.value = suggestion;
+                            suggestionsDiv.innerHTML = ''; 
+                        });
+                        suggestionsDiv.appendChild(suggestionElement);
+                    });
+                })
+                .catch(error => console.error('Error fetching suggestions:', error));
+        });
+    } else {
+        console.error('searchInput or suggestionsDiv not found in the DOM.');
+    }
 });
+
 
 
 

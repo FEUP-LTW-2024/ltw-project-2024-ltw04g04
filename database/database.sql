@@ -88,6 +88,8 @@ CREATE TABLE Item
     CONSTRAINT ItemId PRIMARY KEY (ItemId),
     FOREIGN KEY (Category) REFERENCES Category (CategoryName)
         ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Model) REFERENCES Model (ModelName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
     FOREIGN KEY (Brand) REFERENCES Brand (BrandName)
         ON DELETE NO ACTION ON UPDATE NO ACTION
     FOREIGN KEY (Condition) REFERENCES Condition (ConditionName)
@@ -445,16 +447,37 @@ INSERT INTO ChatMessage (ChatMessageId, SenderId, ReceiverId, Message_, Date_, T
 VALUES (3, 4, 2, 'tudo bem amigo?', '27/4/2024', '19h40');
 
 --Populate SellerItem table
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (1, 101);
-/*
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (2, 102);
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (3, 103);
-*/
-INSERT INTO SellerItem (UserId, ItemId)
-VALUES (4, 104);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 101);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 130);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (1, 129);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 128);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 127);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (2, 102);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (3, 103);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 104);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 105);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 106);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 126);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (4, 125);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 124);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 123);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 107);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (5, 108);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (6, 109);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (6, 122);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (7, 121);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (7, 110);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (7, 111);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (8, 112);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (8, 120);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (8, 119);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 118);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 113);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 114);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (9, 115);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (10, 117);
+INSERT INTO SellerItem (UserId, ItemId) VALUES (10, 116);
+
 
 --Populate ShoppingCart table
 --INSERT INTO ShoppingCart (ShoppingCartId, BuyerId, ItemId, Quantity)
