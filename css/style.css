@@ -347,10 +347,6 @@ main img {
     margin-right: 2em;
 }
 
-.profilePic {
-    border-radius: 50%; 
-}
-
 #userHeader {
     margin: 1em 2em 2em 2em;
 }
@@ -553,7 +549,9 @@ main img {
 }
 
 #sellerImg {
-    width: 5em;
+    border-radius: 50%;
+    width:5em;
+    height:5em;
 }
 
 
@@ -850,7 +848,7 @@ nav#details {
     border: 1px solid black;
 }
 
-#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList,
+#articles h2, #sellerItems h2, .creationHeader, .editCategory,.usersList, .usersOrdersList,
 .editCondition, .editBrand, .editModel, .editSize, .itemsList  {
     margin-top: 2em;
     font-family: "Sulphur Point", sans-serif;
@@ -1119,7 +1117,7 @@ input[type="text"] {
 
 /*List of users -- admin properties*/
 
-.usersList {
+.usersList, .usersOrdersList {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -1313,6 +1311,51 @@ input[type="text"] {
 
 .error-container h1 {
     color: #ff4141;
+}
+
+/* Orders Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+
+thead th {
+    background-color: #f2f2f2;
+    padding: 12px 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+.delete-order {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.delete-order:hover {
+    background-color: #ff1a1a;
+}
+
+
+td .delete-order {
+    text-align: center;
 }
 
 

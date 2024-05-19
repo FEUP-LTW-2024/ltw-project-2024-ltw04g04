@@ -71,7 +71,7 @@ function drawItem($pdo, $userId, $item) {
                     </div>
 
                     <div id="sellerContainer">
-                        <div class = "profilePic" id="sellerImg"><img img src="<?= $current->profileImage ?>" alt="Image of icon account"></div>
+                        <img id="sellerImg" src="<?= $current->profileImage ?>" alt="Image of icon account">
                         <h3><?= cleanInput(getSellerNamePD($pdo, $item->itemId)) ?></h3>
                         <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
                             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
