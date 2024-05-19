@@ -31,7 +31,9 @@
                                 </p>
 
                                 <p class="detail-heart">
-                                    <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class="heart-icon" id="heart-icon-<?php echo $item['itemId']; ?>" onclick="toggleWishlist(event, <?php echo $item['itemId']; ?>)">
+                                    <?php if ($session->isLogin()) {?>
+                                        <img src="<?php echo $heartIconSrc; ?>" alt="Favourite" class="heart-icon" id="heart-icon-<?php echo $item['itemId']; ?>" onclick="toggleWishlist(event, <?php echo $item['itemId']; ?>)">
+                                    <?php } ?>
                                 </p>
                         </div>
                 </div> 

@@ -198,7 +198,7 @@ function editBrands(PDO $pdo) {
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <h3>Delete Brand</h3>
             <label for="brand_id_to_delete">Select brand to delete:</label>
-            <select id="brand_id_to_delete" name="category_id_to_delete">
+            <select id="brand_id_to_delete" name="brand_id_to_delete">
                 <?php foreach ($brands as $brand): ?>
                     <option value="<?php echo $brand; ?>"><?php echo $brand; ?></option>
                 <?php endforeach; ?>
@@ -210,7 +210,7 @@ function editBrands(PDO $pdo) {
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <h3>Add New Brand</h3>
             <label for="new_brand_name">New brand name:</label>
-            <input type="text" id="new_brand_name" name="new_category_name" required>
+            <input type="text" id="new_brand_name" name="new_brand_name" required>
             <input type="submit" name="add_brand" value="Add" class="button-add-brand">
         </form>
     </main>

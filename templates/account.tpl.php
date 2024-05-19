@@ -284,7 +284,12 @@ function usersList(PDO $pdo, Session $session) {
                                 </form>
                             <?php endif; ?>
                         </div>
-                        <a href="../pages/seller.php?id=<?= $user['UserId'] ?>" class="profile-button">Profile</a>
+
+                        <form id="toSellerPage" action="../actions/action_process_seller.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                            <input type="hidden" name="seller-id" value="<?= $sellerIdValue ?>">
+                            <button type="submit" class="profile-button"> Profile </button>
+                        </form>
                     </div>
                 </div>
             <?php endforeach; ?>

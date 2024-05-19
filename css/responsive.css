@@ -52,10 +52,12 @@
     
     #logo-container {
         flex-basis: 50%;
+        padding-left:33%;
     }
     
-    #search {
+    #search {  
         flex-basis: 50%;
+        padding-bottom: 1em;
     }
     
     #account,
@@ -68,11 +70,10 @@
     }
     
     #filter-container {
-        flex-basis: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        flex-basis: 30%;
+        align-self: flex-end;  
         order: 2;
+        padding-bottom: 1em;
     }
     
     #filter {
