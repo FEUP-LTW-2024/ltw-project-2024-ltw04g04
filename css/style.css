@@ -176,17 +176,15 @@ main img {
 /* Footer */
 .customize {
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 1em 2.5em 1em 2.5em;
     border-radius: 16px;
     border: 0.5px solid #656363; 
     margin-top: 1em;
-    
+
 }
 
 .customize p {
     text-align: left; 
-    margin-left: 30px; 
-    margin-bottom: 40px; 
 }
 
 .customize button {

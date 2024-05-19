@@ -8,8 +8,8 @@
     <main>
         <img id="jewels" src="imgs/jewels.jpg" alt="Jewelry">
         <section class = "customize">
-            <p><br>SecondCharm to your liking with a touch of elegance.</br> Follow your favorite brands and discover the items that match your style.</p>
-            <a href="account.php"><button>Customize</button></a>
+            <p>SecondCharm to your liking with a touch of elegance.</p>
+            <p> Follow your favorite brands and discover the items that match your style. </p>
         </section>
     </main>
 </body>
