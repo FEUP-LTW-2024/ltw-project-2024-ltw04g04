@@ -5,6 +5,10 @@ PRAGMA FOREIGN_KEYS = ON;
 
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Category;
+DROP TABLE IF EXISTS Condition;
+DROP TABLE IF EXISTS Size_;
+DROP TABLE IF EXISTS Model;
+DROP TABLE IF EXISTS Brand;
 DROP TABLE IF EXISTS Item;
 DROP TABLE IF EXISTS SellerItem;
 DROP TABLE IF EXISTS BuyerItem;
@@ -12,6 +16,7 @@ DROP TABLE IF EXISTS ShoppingCart;
 DROP TABLE IF EXISTS WishList;
 DROP TABLE IF EXISTS ChatMessage;
 DROP TABLE IF EXISTS OrderItem;
+DROP TABLE IF EXISTS SellerRating;
 
 /*******************************************************************************
    Create Tables
@@ -24,6 +29,7 @@ CREATE TABLE User
     Name_ NVARCHAR(160)  NOT NULL,
     Email NVARCHAR(160)  NOT NULL,
     Password_ NVARCHAR(160)  NOT NULL,
+    ProfileImage TEXT,
     Adress NVARCHAR(160),
     City NVARCHAR(160),
     Country NVARCHAR(160),
@@ -39,10 +45,38 @@ CREATE TABLE Category
     CONSTRAINT CategoryId PRIMARY KEY (CategoryId)
 );
 
+CREATE TABLE Model
+(
+    ModelId INTEGER,
+    ModelName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT ModelId PRIMARY KEY (ModelId)
+);
+
+CREATE TABLE Brand
+(
+    BrandId INTEGER,
+    BrandName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT BrandId PRIMARY KEY (BrandId)
+);
+
+CREATE TABLE Condition
+(
+    ConditionId INTEGER,
+    ConditionName VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT ConditionId PRIMARY KEY (ConditionId)
+);
+
+CREATE TABLE Size_
+(
+    SizeId INTEGER,
+    SizeVal INTEGER UNIQUE NOT NULL,
+    CONSTRAINT SizeId PRIMARY KEY (SizeId)
+);
+
 CREATE TABLE Item
 (
     ItemId INTEGER NOT NULL,
-    Name_ INTEGER NOT NULL,
+    Name_ NVARCHAR(160)  NOT NULL,
     Price INTEGER NOT NULL, 
     Brand VARCHAR(50) NOT NULL,
     Model VARCHAR(50) NOT NULL,
@@ -51,8 +85,15 @@ CREATE TABLE Item
     Stock INTEGER NOT NULL,
     Image_ TEXT,
     Size_ INTEGER NOT NULL,
-    CONSTRAINT ItemId PRIMARY KEY (ItemId)
+    CONSTRAINT ItemId PRIMARY KEY (ItemId),
     FOREIGN KEY (Category) REFERENCES Category (CategoryName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Brand) REFERENCES Brand (BrandName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Condition) REFERENCES Condition (ConditionName)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
+    FOREIGN KEY (Size_) REFERENCES Size_ (SizeVal)
+        ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 CREATE TABLE SellerItem
@@ -136,6 +177,17 @@ CREATE TABLE OrderItem (
         ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
+CREATE TABLE SellerRating (
+    RatingId INTEGER PRIMARY KEY,
+    SellerId INTEGER NOT NULL,
+    RaterId INTEGER NOT NULL,
+    Rating INTEGER NOT NULL CHECK(Rating >= 1 AND Rating <= 5),
+    FOREIGN KEY (SellerId) REFERENCES User(UserId)
+        ON DELETE CASCADE ON UPDATE NO ACTION,
+    FOREIGN KEY (RaterId) REFERENCES User(UserId)
+        ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
 
 /*******************************************************************************
    Populate Tables
@@ -150,6 +202,17 @@ INSERT INTO Category (CategoryId, CategoryName) VALUES (4, 'Necklaces');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (5, 'Accessories');
 INSERT INTO Category (CategoryId, CategoryName) VALUES (6, 'Clocks');
 
+-- Populate Size table
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (1, 1);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (2, 2);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (3, 3);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (4, 4);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (5, 5);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (6, 6);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (7, 7);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (8, 8);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (9, 9);
+INSERT INTO Size_ (SizeId, SizeVal) VALUES (10, 10);
 
 -- Populate User table
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
@@ -161,8 +224,8 @@ VALUES (2, 'janesmith', 'Jane Smith', 'jane@example.com', '0c6f6845bb8c62b778e91
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (3, 'mick_jonh', 'Michael Johnson', 'michael@example.com', '7f6d5eea1bcef5ca6209d33b28e3aaeb3db26f24', '789 Oak St', 'Another Town', 'USA', '45678', false);
 -- password789
-INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
-VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '$2y$12$UhzD/36MRpktux7yj63RhuBaKi9/r1bHhBP7HhjAlNYC8TbPaHimy', '101 Pine St', 'Someplace', 'USA', '89012', true);
+INSERT INTO User (UserId, Username, Name_, Email, Password_, ProfileImage, Adress, City, Country, PostalCode, IsAdmin)
+VALUES (4, 'embrown', 'Emily Brown', 'emily@example.com', '$2y$12$UhzD/36MRpktux7yj63RhuBaKi9/r1bHhBP7HhjAlNYC8TbPaHimy', '/../pages/imgs/imgsForProfile/cat.jpg', '101 Pine St', 'Someplace', 'USA', '89012', true);
 -- passwordabc
 INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Country, PostalCode, IsAdmin)
 VALUES (5, 'janedoe', 'Jane Doe', 'jane.doe@example.com', 'd5c2dc0bcfd8899ba126be5e729d4f10796c0b90', '456 Oak St', 'Sometown', 'USA', '54321',  false);
@@ -183,7 +246,131 @@ INSERT INTO User (UserId, Username, Name_, Email, Password_, Adress, City, Count
 VALUES (10, 'michaeljones', 'Michael Jones', 'michael.jones@example.com', '0c644c9f5e7b0062607c6677838fd0ee8399f5a7', '567 Pineapple St', 'Anywhere', 'USA', '13579', '0');
 -- pretoebranc0
 
+-- Populate Rating table
+INSERT INTO SellerRating (RatingId, SellerId, RaterId, Rating)
+VALUES (1, 1, 2, 4),
+       (2, 1, 3, 5),
+       (3, 1, 4, 3),
+       (4, 2, 1, 5),
+       (5, 2, 3, 4),
+       (6, 2, 5, 4),
+       (7, 3, 1, 3),
+       (8, 3, 2, 4),
+       (9, 3, 6, 2),
+       (10, 4, 1, 5),
+       (11, 4, 2, 4),
+       (12, 4, 3, 4),
+       (13, 5, 1, 3),
+       (14, 5, 4, 4),
+       (15, 5, 7, 5),
+       (16, 6, 1, 4),
+       (17, 6, 2, 3),
+       (18, 6, 8, 4),
+       (19, 7, 1, 5),
+       (20, 7, 3, 4),
+       (21, 7, 5, 3),
+       (22, 8, 1, 4),
+       (23, 8, 2, 5),
+       (24, 8, 9, 3),
+       (25, 9, 1, 4),
+       (26, 9, 3, 3),
+       (27, 9, 10, 5),
+       (28, 10, 1, 3),
+       (29, 10, 4, 4),
+       (30, 10, 6, 2);
 
+
+-- Populando Condition
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (1, 'New');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (2, 'Used');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (3, 'Refurbished');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (4, 'Like New');
+INSERT INTO Condition (ConditionId, ConditionName)
+VALUES (5, 'Damaged');
+
+-- Populando Brand
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (1, 'Blue Jewelers');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (2, 'Green Gems');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (3, 'Purple Jewelry');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (4, 'Golden Treasures');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (5, 'Diamonds Inc.');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (6, 'Gold Empire');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (7, 'Silver Works');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (8, 'Gemstone Jewelry');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (9, 'Pearl Paradise');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (10, 'Watch Co.');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (11, 'Blue Stone Creations');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (12, 'Emerald Designs');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (13, 'Golden Touch');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (14, 'Diamond Dreams');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (15, 'Luxury Jewels');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (16, 'Ocean Pearls');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (17, 'Red Gemstones');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (18, 'Golden Creations');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (19, 'Silver Treasures');
+INSERT INTO Brand (BrandId, BrandName)
+VALUES (20, 'Opal Jewelry Co.');
+
+-- Populando Model
+INSERT INTO Model (ModelId, ModelName)
+VALUES (1, 'SB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (2, 'EE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (3, 'AR2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (4, 'TN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (5, 'DN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (6, 'GB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (7, 'SE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (8, 'RR2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (9, 'PN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (10, 'LW2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (11, 'SP2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (12, 'EB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (13, 'DPN2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (14, 'DSE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (16, 'RB2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (17, 'GC2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (18, 'SHE2024');
+INSERT INTO Model (ModelId, ModelName)
+VALUES (19, 'OR2024');
 
 --Populate Item table
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
@@ -227,25 +414,26 @@ VALUES (119, 'Silver Hoop Earrings', 50, 'Silver Treasures', 'SHE2024', 'New', '
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (120, 'Opal Ring', 120, 'Opal Jewelry Co.', 'OR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item20.jpg', 9);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (121, 'Turquoise Bracelet', 45, 'Turquoise Treasures', 'TB2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item21.jpg', 7);
+VALUES (121, 'Turquoise Bracelet', 45, 'Blue Jewelers', 'SB2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item21.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (122, 'Onyx Earrings', 60, 'Black Jewelers', 'OE2024', 'New', 'Earrings', 6, '/../pages/imgs/imgsForItems/item22.jpg', 8);
+VALUES (122, 'Onyx Earrings', 60, 'Green Gems', 'EE2024', 'New', 'Earrings', 6, '/../pages/imgs/imgsForItems/item22.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (123, 'Sapphire Ring', 250, 'Blue Gems', 'SR2024', 'New', 'Rings', 3, '/../pages/imgs/imgsForItems/item23.jpg', 9);
+VALUES (123, 'Sapphire Ring', 250, 'Blue Jewelers', 'SB2024', 'New', 'Rings', 3, '/../pages/imgs/imgsForItems/item23.jpg', 9);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (124, 'Emerald Pendant', 150, 'Emerald Elegance', 'EP2024', 'New', 'Necklaces', 2, '/../pages/imgs/imgsForItems/item24.jpg', 10);
+VALUES (124, 'Emerald Pendant', 150, 'Emerald Designs', 'EB2024', 'New', 'Necklaces', 2, '/../pages/imgs/imgsForItems/item24.jpg', 10);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (125, 'Quartz Watch', 80, 'Timeless Watches', 'QW2024', 'Used', 'Clocks', 5, '/../pages/imgs/imgsForItems/item25.jpg', 6);
+VALUES (125, 'Quartz Watch', 80, 'Watch Co.', 'LW2024', 'Used', 'Clocks', 5, '/../pages/imgs/imgsForItems/item25.jpg', 6);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (126, 'Silver Bracelet', 55, 'Silver Treasures', 'SB2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item26.jpg', 7);
+VALUES (126, 'Silver Bracelet', 55, 'Silver Works', 'SE2024', 'New', 'Beads and bracelets', 4, '/../pages/imgs/imgsForItems/item26.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (127, 'Gold Earrings', 100, 'Golden Touch', 'GE2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item27.jpg', 8);
+VALUES (127, 'Gold Earrings', 100, 'Golden Touch', 'GB2024', 'New', 'Earrings', 3, '/../pages/imgs/imgsForItems/item27.jpg', 8);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
 VALUES (128, 'Platinum Ring', 600, 'Platinum Jewels', 'PR2024', 'New', 'Rings', 2, '/../pages/imgs/imgsForItems/item28.jpg', 9);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (129, 'Pearl Bracelet', 75, 'Pearl Treasures', 'PB2024', 'New', 'Beads and bracelets', 3, '/../pages/imgs/imgsForItems/item29.jpg', 7);
+VALUES (129, 'Pearl Bracelet', 75, 'Pearl Paradise', 'PB2024', 'New', 'Beads and bracelets', 3, '/../pages/imgs/imgsForItems/item29.jpg', 7);
 INSERT INTO Item (ItemId, Name_, Price, Brand, Model, Condition, Category, Stock, Image_, Size_)
-VALUES (130, 'Topaz Earrings', 90, 'Gemstone Elegance', 'TE2024', 'New', 'Earrings', 5, '/../pages/imgs/imgsForItems/item30.jpg', 8);
+VALUES (130, 'Topaz Earrings', 90, 'Golden Treasures', 'TN2024', 'New', 'Earrings', 5, '/../pages/imgs/imgsForItems/item30.jpg', 8);
+
 
 
 
