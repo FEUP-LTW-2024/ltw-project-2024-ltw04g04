@@ -306,4 +306,47 @@ function usersList(PDO $pdo, Session $session) {
 }
 ?>
 
+<?php
+function usersOrdersList(PDO $pdo, Session $session) {
+    $users = User::getAllUsersExceptCurrent($pdo, $session->getUserId());
+    $csrfToken = $_SESSION['csrf'];
+?>
+    <script defer src="../javascript/cartOperations.js"></script>
+    <main>
+        <meta name="csrf-token" content="<?= $csrfToken ?>">
+        <h2 class="usersOrdersList">List of Users and Their Orders</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Order ID</th>
+                    <th>Item ID</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($users as $user):
+                    $userId = (int)cleanInput($user['UserId']);
+                    $orders = User::getOrdersBySeller($pdo, $userId);
+                    foreach ($orders as $order):
+                        ?>
+                        <tr id="order-<?= $order['OrderId'] ?>">
+                            <td><?= cleanInput($user['Name_']) ?></td>
+                            <td><?=  (int)cleanInput($order['OrderId']) ?></td>
+                            <td><?=  (int)cleanInput($order['ItemId']) ?></td>
+                            <td><?=  (int)cleanInput($order['Quantity']) ?></td>
+                            <td>
+                                <button class="delete-order" data-order-id="<?= (int)cleanInput($order['OrderId']) ?>">Delete Order</button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </main>
+<?php
+}
+?>
+
 

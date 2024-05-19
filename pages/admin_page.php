@@ -19,6 +19,7 @@
     editBrands($pdo);  
     editConditions($pdo); 
     editModels($pdo); 
-    editSizes($pdo); 
+    editSizes($pdo);
+    usersOrdersList($pdo, $session); 
     generateFooter();
 ?>
