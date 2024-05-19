@@ -33,6 +33,6 @@ if ($session->isAdmin() && $_SESSION['csrf'] === $_POST['csrf']) {
     }
 }
 
-echo json_encode(['success' => false, 'error' => 'Invalid parameters']);
+echo json_encode(['success' => false, 'error' => 'Invalid']);
 exit();
 ?>

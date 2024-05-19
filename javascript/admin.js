@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function updateUserInfo(userElement, user) {
-        const adminActionDiv = userElement.querySelector('.admin-action');
+        const adminAction = userElement.querySelector('.admin-action');
         const newAdminForm = document.createElement('form');
         newAdminForm.classList.add('admin-form');
         newAdminForm.setAttribute('data-action', user.isAdmin ? 'remove_admin' : 'make_admin');
@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
             <input type="submit" value="${user.isAdmin ? 'Remove Admin' : 'Make Admin'}" class="${user.isAdmin ? 'remove-admin' : 'make-admin'}">
         `;
 
-        adminActionDiv.innerHTML = '';
-        adminActionDiv.appendChild(newAdminForm);
+        adminAction.innerHTML = '';
+        adminAction.appendChild(newAdminForm);
 
         newAdminForm.addEventListener('submit', function (event) {
             event.preventDefault();
