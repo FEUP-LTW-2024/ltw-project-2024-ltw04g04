@@ -4,6 +4,7 @@
     require_once(__DIR__ . '/../database/get_database.php');
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/shoppingCart.class.php');
+    require_once(__DIR__ . '/../utils/utils.php');
 
     $db = getDatabaseConnection();
     $session = new Session();
@@ -13,41 +14,45 @@
         echo "<p>Log in to view your shopping cart.</p>";
 
     } else {
+        $userId = (int)cleanInput($userId);
+
         $itemIds = shoppingCart::getItemIdsInCart($db, $userId);
 
-        if ($itemIds) { 
-            foreach ($itemIds as $index => $itemId) : 
-                $item = Item::getItemWithId($db, $itemId); 
+        if ($itemIds) {
+            foreach ($itemIds as $index => $itemId) {
+                $itemId = (int)cleanInput($itemId);
+
+                $item = Item::getItemWithId($db, $itemId);
                 $quantity = shoppingCart::getItemQuantityInCart($db, $userId, $itemId);
                 ?>
                 <div class="cart-item">
-                    <img src="<?= $item->imageLink ?>" alt="<?= $item->name ?>">
+                    <img src="<?= cleanInput($item->imageLink) ?>" alt="<?= cleanInput($item->name) ?>">
                     <div class="item-details">
-                        <a href="../pages/item.php?id=<?= $item->itemId ?>">
-                            <p><?= $item->name ?></p>
+                        <a href="../pages/item.php?id=<?= cleanInput(intval($item->itemId)) ?>">
+                            <p><?= cleanInput($item->name) ?></p>
                         </a>
-                        <p class="detail"><?= $item->price ?> $ </p>  
-                        <p class="detail"> Brand: <?= $item->brand ?></p>      
-                        <p class="detail"> Model: <?= $item->model ?></p>     
-                        <p class="detail"> Condition: <?= $item->condition ?></p>      
-                        <p class="detail"> Category: <?= $item->category ?></p>          
-                        <p class="detail"> Size: <?= $item->size ?></p>
-                        <p class="detail"> In stock: <?= $item->stock ?></p>
+                        <p class="detail"><?= cleanInput(intval($item->price)) ?> $ </p>
+                        <p class="detail"> Brand: <?= cleanInput($item->brand) ?></p>
+                        <p class="detail"> Model: <?= cleanInput($item->model) ?></p>
+                        <p class="detail"> Condition: <?= cleanInput($item->condition) ?></p>
+                        <p class="detail"> Category: <?= cleanInput($item->category) ?></p>
+                        <p class="detail"> Size: <?= cleanInput(intval($item->size)) ?></p>
+                        <p class="detail"> In stock: <?= cleanInput(intval($item->stock)) ?></p>
                         <div class="buttons-wrapper">
-                            <button class="increase-button" data-item-id="<?php echo $item->itemId; ?>">+</button>
-                            <button class="decrease-button" data-item-id="<?php echo $item->itemId; ?>">-</button>
-                            <button class="remove-button" data-item-id="<?php echo $item->itemId; ?>">Remove</button>
+                            <button class="increase-button" data-item-id="<?php echo  $itemId; ?>">+</button>
+                            <button class="decrease-button" data-item-id="<?php echo  $itemId; ?>">-</button>
+                            <button class="remove-button" data-item-id="<?php echo  $itemId; ?>">Remove</button>
 
-                            <p class="detail-quantity"> Quantity: <?= $quantity ?></p>
-                        </div> 
-
+                            <p class="detail-quantity"> Quantity: <?= cleanInput(intval($quantity)) ?></p>
+                        </div>
                     </div>
                 </div>
                 <?php
-            endforeach;
+            }
         } else {
             echo "<p>Your shopping cart is empty.</p>";
         }
     }
 ?>
+
 
